@@ -5,4 +5,34 @@ body {
 
 * {
   scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+
+*:visited {
+  color: inherit;
+}
+
+:root {
+  /* colores basicos para el light theme */
+  --light-background1: #ebebeb;
+  --light-background2: #f0f0f0;
+  --light-background3: #f5f5f5;
+  --light-background4: #f9f9f9;
+  --light-background5: #fafafa;
+  --light-font1:  #333333;
+  --light-font2:  #3c3c3c;
+  --light-font3:  #404040;
+  --light-font4:  #444444;
+  --light-font5: #555555;
+ 
+  --dark-background1: #291321;
+  --dark-background2: #40162f;
+  --dark-background3: #551c3b;
+  --dark-background4: #1a1325;
+  --dark-background5: #24163a;
+  --dark-background6: #301c4d;
+  --dark-font1: #f3f3f3;
+  --dark-font2: #e0e0e0;
+  --dark-font3: #cbcbcb;
+
 }

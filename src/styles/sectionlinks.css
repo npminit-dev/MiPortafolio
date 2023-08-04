@@ -1,0 +1,39 @@
+#slinks_container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 150px;
+  height: 100%;
+}
+
+.slinks_linkcontainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  transition: .3s;
+}
+
+.slinks_linkcontainer:hover {
+  background-color: rgb(102, 101, 101);
+}
+
+.slinks_linkcontainer:hover > .slinks_link svg path {
+  color: var(--light-background1);
+}
+
+.slinks_link {
+  position: absolute;
+}
+
+.slinks_link svg {
+  height: 22px;
+  width: 22px;
+  color: var(--light-font1) !important
+}
+
+.slinks_link svg path {
+  transition-duration: .3s;
+}

@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const themeContext = createContext({});
 
@@ -15,12 +15,16 @@ const useTheme = () => {
 export default function ThemeContextProvider({ children }) {
 
   const [theme, setTheme, switchTheme] = useTheme();
+  const [wWidth, setWWidth] = useState(globalThis.innerWidth)
+
+  globalThis.onresize = () => setWWidth(globalThis.innerWidth)
 
   return <themeContext.Provider
     value={{
       theme,
       setTheme,
-      switchTheme
+      switchTheme,
+      wWidth
     }}>
     { children }
   </themeContext.Provider>
