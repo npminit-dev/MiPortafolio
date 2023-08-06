@@ -1,0 +1,130 @@
+#myphoto_container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  height: 300px;
+  width: 300px;
+  box-shadow: 0 0 10px grey;
+  clip-path: circle(50% at 50% 50%);
+  overflow: hidden;
+  background-color: var(--light-font3);
+  opacity: 0;
+  animation: myphoto_appear .5s ease-out forwards .7s;
+}
+
+#photo_container {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 95%;
+  width: 95%;
+  clip-path: circle(50% at 50% 50%);
+  overflow: hidden;
+  z-index: 100;
+}
+
+img {
+  position: absolute;
+}
+
+.myphoto_circle_container {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  height: 100%;
+  width: 100%;
+  border-radius: 100%;
+}
+
+#first {
+  animation: rotate_circle 6s infinite linear;
+}
+
+#second {
+  animation: rotate_circle 3s infinite linear;
+}
+
+#third {
+  animation: rotate_circle 2s infinite linear;
+}
+
+#fourth {
+  animation: rotate_circle 12s infinite linear;
+}
+
+#first .myphoto_circle {
+  position: absolute;
+  height: 80%;
+  width: 80%;
+  border-radius: 100%;
+  background-color: rgba(255, 0, 0, 0.55);
+}
+
+#second .myphoto_circle {
+  position: absolute;
+  height: 80%;
+  width: 80%;
+  border-radius: 100%;
+  background-color: rgba(0, 0, 255, 0.531);
+}
+
+#third .myphoto_circle {
+  position: absolute;
+  height: 80%;
+  width: 80%;
+  border-radius: 100%;
+  background-color: rgba(0, 128, 0, 0.504);
+}
+
+#fourth .myphoto_circle {
+  position: absolute;
+  height: 80%;
+  width: 80%;
+  border-radius: 100%;
+  background-color: rgba(255, 255, 0, 0.518);
+}
+
+/* animation and classes */
+
+.img_normalized {
+  animation: normalize_img .7s forwards;
+}
+
+
+@keyframes myphoto_appear {
+  from {
+    filter: grayscale(1);
+    opacity: 0;
+  }
+
+  to {
+    filter: grayscale(0); 
+    opacity: 1
+  }
+}
+
+
+@keyframes rotate_circle {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes normalize_img {
+  from {
+
+  }
+
+  to {
+    transform: translate(0px, 0px);
+  }
+}
+

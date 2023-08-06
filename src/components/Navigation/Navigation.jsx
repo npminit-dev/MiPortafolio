@@ -1,8 +1,10 @@
 import SectionsLinks from "./SectionsLinks";
 import { useContext, useEffect, useRef, useState } from "react";
-import { themeContext } from "../GlobalContext";
+import { globalContext } from "../GlobalContext";
 import '../../App.css'
 import '../../styles/navigation.css'
+import ThemeSwitcher from "../ThemeSwitcher";
+import AboutMe from "./AboutMe/AboutMe";
 
 const DELAY = 2500
 
@@ -17,7 +19,7 @@ const useTimer = (setVisible) => {
 }
 
 export default function Navigation() {
-  const { theme, switchTheme } = useContext(themeContext);
+  const { theme, switchTheme } = useContext(globalContext);
   const [visible, setVisible] = useState(true);
   const [resetTimer, clearTimer] = useTimer(setVisible);
 
@@ -31,7 +33,6 @@ export default function Navigation() {
     };
 
     const handleMouseMove = () => resetTimer();
-    const handleMouseLeave = () => clearTimer();
     
     const handleScroll = () => {
       if (!visible) setVisible(true);
@@ -40,13 +41,11 @@ export default function Navigation() {
 
     thresholdRef.current?.addEventListener('mouseenter', handleMouseEnter);
     navRef.current?.addEventListener('mousemove', handleMouseMove);
-    navRef.current?.addEventListener('mouseleave', handleMouseLeave);
     globalThis.addEventListener('scroll', handleScroll);
 
     return () => {
       thresholdRef.current?.removeEventListener('mouseenter', handleMouseEnter);
       navRef.current?.removeEventListener('mousemove', handleMouseMove);
-      navRef.current?.removeEventListener('mouseleave', handleMouseLeave);
       globalThis.removeEventListener('scroll', handleScroll);
     };
   }, [visible, resetTimer, clearTimer]);
@@ -55,108 +54,82 @@ export default function Navigation() {
     <>
       <nav id={'navigation'} 
         ref={navRef}
-        className={`${theme} ${visible ? 'navappear' : 'navdisappear'}`} >
+        className={`${theme}_nav ${visible ? 'navappear' : 'navdisappear'}`} >
         <span 
           id={'navigation_title'} 
           className={theme}>Mi portafolio</span>
         <SectionsLinks></SectionsLinks>
+        <ThemeSwitcher></ThemeSwitcher>
       </nav>
-      <div 
-        id='navigation_background'
-        className={`${visible ? 'navappear' : 'navdisappear'}`}
-      ></div>
+      
       <div 
         ref={thresholdRef}
         id='navigation_visible_threshold'
         
       ></div>
       <main>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
+        <div id="aboutme_flag"></div>
+        <AboutMe></AboutMe>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
       </main>
     </>
   )

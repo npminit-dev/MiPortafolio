@@ -2,19 +2,19 @@ import { IoPersonSharp } from 'react-icons/io5'
 import { PiProjectorScreenChartFill } from 'react-icons/pi'
 import { GiPathDistance } from 'react-icons/gi'
 import { useContext } from 'react'
-import { themeContext } from '../GlobalContext'
+import { globalContext } from '../GlobalContext'
 import '../../App.css'
 import '../../styles/sectionlinks.css'
 
 export default function SectionsLinks() {
 
-  const { theme } = useContext(themeContext)
+  const { theme } = useContext(globalContext)
 
   return (
     <div id='slinks_container' className={theme}>
       <span className={`slinks_linkcontainer ${theme}`}>
         <a 
-          href='' 
+          href='#aboutme_flag' 
           className='slinks_link'
           title='SOBRE MI'>
           <IoPersonSharp></IoPersonSharp>

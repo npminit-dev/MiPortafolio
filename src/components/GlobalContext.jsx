@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 
-export const themeContext = createContext({});
+export const globalContext = createContext({});
 
 const useTheme = () => {
   const [ theme, setTheme ] = useState('light')
@@ -19,7 +19,7 @@ export default function ThemeContextProvider({ children }) {
 
   globalThis.onresize = () => setWWidth(globalThis.innerWidth)
 
-  return <themeContext.Provider
+  return <globalContext.Provider
     value={{
       theme,
       setTheme,
@@ -27,7 +27,7 @@ export default function ThemeContextProvider({ children }) {
       wWidth
     }}>
     { children }
-  </themeContext.Provider>
+  </globalContext.Provider>
 }
 
 

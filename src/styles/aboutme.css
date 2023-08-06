@@ -1,0 +1,14 @@
+span {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 500;
+}
+
+#aboutme_container {
+  min-height: 80vh;
+  padding: 10px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: var(--light-background1);
+}

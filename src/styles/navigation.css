@@ -5,16 +5,11 @@
   width: 100vw;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 5px 15px;
+  justify-content: space-around;
+  padding: 5px 30px;
   box-shadow: 0 0 3px grey;
-}
-
-#navigation_background {
-  position: relative;
-  height: 45px;
-  width: 100vw;
-  z-index: -10;
+  background-color: var(--light-background3);
+  z-index: 300;
 }
 
 #navigation_visible_threshold {
@@ -26,13 +21,19 @@
   z-index: 100;
 }
 
-#navigation.light {
+#navigation.light_nav {
   background-color: var(--light-background3);
   color: var(--light-font1);
 }
 
 #navigation_title {
   color: var(--light-font1)
+}
+
+#aboutme_flag {
+  height: 20px;
+  width: 100vw;
+  background-color: var(--light-background1);
 }
 
 .navappear {
