@@ -2,15 +2,25 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  margin: 50px 0;
-  height: 250px;
-  width: 750px;
+  margin: 40px 0;
+  padding: 20px 25px;
+  height: min-content;
+  width: 700px;
+  min-height: 300px;
+  border-radius: 25px;
   overflow: hidden;
+  cursor: none;
 }
 
+#presentation_outer_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+}
 
 .lens {
-  position: relative;
+  position: absolute;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -21,6 +31,7 @@
   -webkit-backdrop-filter: invert(1);
   backdrop-filter: invert(1);
   border: 2px solid black;
+  z-index: 1000;
 }
 
 .lens_invisible {
@@ -28,11 +39,11 @@
 }
 
 .lens_in {
-  animation: lens_appear .3s ease-out forwards
+  animation: lens_appear .2s ease-out forwards
 }
 
 .lens_out {
-  animation: lens_disappear .3s ease-out forwards
+  animation: lens_disappear .2s ease-out forwards
 }
 
 #lanter_handler {
@@ -67,4 +78,29 @@
   to {
     filter: opacity(0)
   }
+}
+
+/* paragraph */
+
+.paragraph_container {
+  width: 100%;
+  height: min-content;
+  margin: 5px 0;
+  text-align: center;
+}
+
+.paragraph_letter_container {
+
+}
+
+.paragraph_letter-hide {
+  color: transparent;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 500;
+}
+
+.paragraph_letter-shown {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 500;
+  color: var(--light-font1)
 }

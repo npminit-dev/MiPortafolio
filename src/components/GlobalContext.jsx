@@ -12,19 +12,17 @@ const useTheme = () => {
   return [theme, setTheme, switchTheme]
 }
 
+
 export default function ThemeContextProvider({ children }) {
 
   const [theme, setTheme, switchTheme] = useTheme();
-  const [wWidth, setWWidth] = useState(globalThis.innerWidth)
 
-  globalThis.onresize = () => setWWidth(globalThis.innerWidth)
 
   return <globalContext.Provider
     value={{
       theme,
       setTheme,
       switchTheme,
-      wWidth
     }}>
     { children }
   </globalContext.Provider>

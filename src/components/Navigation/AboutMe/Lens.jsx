@@ -17,7 +17,7 @@ export default function Lens({ containerRef }) {
       const topDistance = containerRef.current.getBoundingClientRect().top + window.scrollY
       const X = Math.round((e.clientX + globalThis.scrollX) - leftDistance - (lensRef.current.offsetWidth / 2))
       const Y = Math.round((e.clientY + globalThis.scrollY) - topDistance - (lensRef.current.offsetHeight / 2))
-      lensRef.current.style.transform = `translate(${X}px,${Y}px)`
+      lensRef.current.style.transform = `translate(${X - 10}px,${Y - 18}px)`
     }
 
     containerRef.current.addEventListener('mouseenter', mouseEnterHandler)

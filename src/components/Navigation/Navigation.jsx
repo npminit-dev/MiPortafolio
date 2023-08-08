@@ -4,7 +4,6 @@ import { globalContext } from "../GlobalContext";
 import '../../App.css'
 import '../../styles/navigation.css'
 import ThemeSwitcher from "../ThemeSwitcher";
-import AboutMe from "./AboutMe/AboutMe";
 
 const DELAY = 2500
 
@@ -57,7 +56,7 @@ export default function Navigation() {
         className={`${theme}_nav ${visible ? 'navappear' : 'navdisappear'}`} >
         <span 
           id={'navigation_title'} 
-          className={theme}>Mi portafolio</span>
+          className={theme}>MI PORTAFOLIO</span>
         <SectionsLinks></SectionsLinks>
         <ThemeSwitcher></ThemeSwitcher>
       </nav>
@@ -65,72 +64,8 @@ export default function Navigation() {
       <div 
         ref={thresholdRef}
         id='navigation_visible_threshold'
-        
       ></div>
-      <main>
-        <div id="aboutme_flag"></div>
-        <AboutMe></AboutMe>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-      </main>
+    
     </>
   )
 }
