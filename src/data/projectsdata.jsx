@@ -23,7 +23,7 @@ export const projectsdata = [
     link: 'https://fluffy-snickerdoodle-8f13a1.netlify.app/',
     repo: 'https://github.com/npminit-dev/Vainilla-CRUD.git'
   },
-  {
+  {  
     name: 'RealTime Chat',
     info: 'Chat en tiempo real entre 2 pestañas con Vainilla y Service Workers',
     link: 'https://kaleidoscopic-muffin-fe5fc9.netlify.app/',
