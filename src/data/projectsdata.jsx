@@ -17,7 +17,7 @@ export const projectsdata = [
     link: 'https://melodious-licorice-c983f3.netlify.app/',
     repo: 'https://github.com/npminit-dev/BS5-React-CRUD.git'
   },
-  {
+  { 
     name: 'CRUD',
     info: 'CRUD con VainillaJS y IndexedDB',
     link: 'https://fluffy-snickerdoodle-8f13a1.netlify.app/',
