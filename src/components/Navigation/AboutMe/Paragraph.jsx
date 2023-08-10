@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
-import '../../../app.css'
-import '../../../styles/presentation.css'
+import '../../../app.scss'
+import '../../../styles/presentation.scss'
 import { v4 as uuidv4 } from 'uuid';
 
 export default function Paragraph({ content, i, status, setStatus, start }) {

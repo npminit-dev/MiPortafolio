@@ -1,4 +1,4 @@
-import './App.css'
+import './App.scss'
 import Navigation from './components/Navigation/Navigation'
 import AboutMe from './components/Navigation/AboutMe/AboutMe'
 import React from 'react'

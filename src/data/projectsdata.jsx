@@ -12,13 +12,13 @@ export const projectsdata = [
     repo: 'https://github.com/npminit-dev/BSLandingPage.git'
   },
   {
-    name: 'CRUD equipos de futbol',
+    name: 'Football teams CRUD',
     info: 'CRUD de equipos de futbol con React y Bootstrap5',
     link: 'https://melodious-licorice-c983f3.netlify.app/',
     repo: 'https://github.com/npminit-dev/BS5-React-CRUD.git'
   },
   { 
-    name: 'CRUD',
+    name: 'IndexedDB CRUD',
     info: 'CRUD con VainillaJS y IndexedDB',
     link: 'https://fluffy-snickerdoodle-8f13a1.netlify.app/',
     repo: 'https://github.com/npminit-dev/Vainilla-CRUD.git'

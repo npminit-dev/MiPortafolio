@@ -1,8 +1,7 @@
 import SectionsLinks from "./SectionsLinks";
-import { useContext, useEffect, useRef, useState } from "react";
-import { globalContext } from "../GlobalContext";
-import '../../App.css'
-import '../../styles/navigation.css'
+import { useEffect, useRef, useState } from "react";
+import '../../App.scss'
+import '../../styles/navigation.scss'
 import ThemeSwitcher from "../ThemeSwitcher";
 
 const DELAY = 2500
@@ -18,7 +17,7 @@ const useTimer = (setVisible) => {
 }
 
 export default function Navigation() {
-  const { theme, switchTheme } = useContext(globalContext);
+
   const [visible, setVisible] = useState(true);
   const [resetTimer, clearTimer] = useTimer(setVisible);
 
@@ -53,10 +52,8 @@ export default function Navigation() {
     <>
       <nav id={'navigation'} 
         ref={navRef}
-        className={`${theme}_nav ${visible ? 'navappear' : 'navdisappear'}`} >
-        <span 
-          id={'navigation_title'} 
-          className={theme}>MI PORTAFOLIO</span>
+        className={`${visible ? 'navappear' : 'navdisappear'}`} >
+        <span id={'navigation_title'}>MI PORTAFOLIO</span>
         <SectionsLinks></SectionsLinks>
         <ThemeSwitcher></ThemeSwitcher>
       </nav>

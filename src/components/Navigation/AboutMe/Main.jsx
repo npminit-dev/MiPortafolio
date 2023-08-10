@@ -1,11 +1,9 @@
-import { useContext, useState, useEffect, useRef } from "react";
-import { globalContext } from "../../GlobalContext";
-import '../../../App.css'
-import '../../../styles/main.css'
+import { useState, useEffect, useRef } from "react";
+import '../../../App.scss'
+import '../../../styles/main.scss'
 
 export default function Main() {
 
-  const { theme } = useContext(globalContext);
   const [ hovered, sethovered ] = useState(false)
   const mainRef = useRef(null)
 
@@ -31,15 +29,15 @@ export default function Main() {
 
 
   return (
-    <div id="main_container" ref={mainRef} className={`${theme}`}>
-      <span id="main_name" className={`${theme} ${hovered ? 'main_name_out' : 'main_name_in'}`}>
+    <div id="main_container" ref={mainRef}>
+      <span id="main_name" className={`${hovered ? 'main_name_out' : 'main_name_in'}`}>
         <span>JORGE</span>
         <span>BALSAMO</span>
       </span>
-      <div id="midline" className={`${theme}`}>
+      <div id="midline">
         <span className={`${hovered ? 'midline_out' : 'midline_in'}`}></span>
       </div>
-      <span id="main_role" className={`${theme} ${hovered ? 'main_role_out' : 'main_role_in'}`}>
+      <span id="main_role" className={`${hovered ? 'main_role_out' : 'main_role_in'}`}>
         <span>FRONT</span>
         <span>END</span>
         <span>DEV</span>

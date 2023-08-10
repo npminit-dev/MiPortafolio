@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
-import '../../../App.css'
-import '../../../styles/presentation.css'
+import '../../../App.scss'
+import '../../../styles/presentation.scss'
 import Lens from './Lens'
 import { paragraphs } from '../../../data/presentation'
 import Paragraph from './Paragraph'

@@ -1,5 +1,5 @@
-import '../../../App.css'
-import "../../../styles/aboutme.css";
+import '../../../App.scss'
+import "../../../styles/aboutme.scss";
 import Main from "./Main";
 import MyPhoto from "./MyPhoto";
 import Presentation from './Presentation'

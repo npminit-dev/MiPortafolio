@@ -1,11 +1,9 @@
-import { useContext, useRef, useState, useEffect } from 'react'
-import '../../../App.css'
-import '../../../styles/myphoto.css'
-import { globalContext } from '../../GlobalContext'
+import { useRef, useState, useEffect } from 'react'
+import '../../../App.scss'
+import '../../../styles/myphoto.scss'
 
 export default function MyPhoto() {
 
-  const { theme } = useContext(globalContext)
   const [ centeredImg, setCenteredImg ] = useState(true)
   const imgRef = useRef(null)
   const containerRef = useRef(null)
@@ -36,7 +34,7 @@ export default function MyPhoto() {
   }, [])
 
   return (
-    <div id='myphoto_container' className={`${theme}`} ref={containerRef}>
+    <div id='myphoto_container' ref={containerRef}>
       <span id='photo_container'>
         <img ref={imgRef} 
           src='https://i.ibb.co/NKZcnpZ/veridity-lasombradelenga-o.webp'

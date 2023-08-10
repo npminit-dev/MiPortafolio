@@ -1,17 +1,15 @@
-import '../../../App.css'
-import '../../../styles/presentation.css'
-import { useState, useEffect, useContext, useRef } from 'react'
-import { globalContext } from '../../GlobalContext';
+import '../../../App.scss'
+import '../../../styles/presentation.scss'
+import { useEffect, useRef } from 'react'
 
 export default function Lens({ containerRef }) {
 
-  const { theme } = useContext(globalContext)
   const lensRef = useRef();
 
   useEffect(() => {
 
-    const mouseEnterHandler = () => lensRef.current.classList = theme + ' lens lens_in'
-    const mouseLeaveHandler = () => lensRef.current.classList = theme + ' lens lens_out'
+    const mouseEnterHandler = () => lensRef.current.classList = ' lens lens_in'
+    const mouseLeaveHandler = () => lensRef.current.classList = ' lens lens_out'
     const mouseMoveHandler = (e) => {
       const leftDistance = containerRef.current.getBoundingClientRect().left + window.scrollX
       const topDistance = containerRef.current.getBoundingClientRect().top + window.scrollY
@@ -33,7 +31,7 @@ export default function Lens({ containerRef }) {
   }, [])
 
   return (
-    <div ref={lensRef} className={`${theme} lens lens_invisible`}>
+    <div ref={lensRef} className='lens lens_invisible'>
       <span id='lanter_handler'>
       </span>
     </div>
