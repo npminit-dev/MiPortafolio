@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
-import '../../../App.scss'
-import '../../../styles/presentation.scss'
+import '../../App.scss'
+import '../../styles/presentation.scss'
 import Lens from './Lens'
-import { paragraphs } from '../../../data/presentation'
+import { paragraphs } from '../../data/presentation'
 import Paragraph from './Paragraph'
 import { v4 as uuidv4 } from 'uuid';
 
@@ -14,12 +14,8 @@ export default function Presentation() {
   const containerRef = useRef(null)
 
   useEffect(() => {
-    setTimeout(() => setflag(true), 700)
+    setTimeout(() => setflag(true), 300)
   }, [])
-
-  useEffect(() => {
-    console.log(status)
-  }, [status])
 
   return (
     <div

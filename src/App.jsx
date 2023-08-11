@@ -1,31 +1,22 @@
 import './App.scss'
-import Navigation from './components/Navigation/Navigation'
-import AboutMe from './components/Navigation/AboutMe/AboutMe'
-import React from 'react'
+import AboutMe from './components/Main/AboutMe'
+import React, { useContext } from 'react'
+import ThemeSwitcher from './components/ThemeSwitcher'
+import Projects from './components/Projects/Projects'
+import { themeContext } from './components/ThemeContext'
 
 function App() {
 
+  const { theme } = useContext(themeContext)
+
   return (
-    <div>
-      <React.StrictMode>
-        <Navigation></Navigation>
-        <main>
-          <div id="aboutme_flag"></div>
-          <AboutMe></AboutMe>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-        </main>
-      </React.StrictMode>
-    </div>
+    <React.StrictMode>       
+      <main id='App' className={`${theme}`}>
+        <ThemeSwitcher></ThemeSwitcher>
+        <AboutMe></AboutMe>
+        <Projects></Projects>
+      </main>     
+    </React.StrictMode>
   )
 }
 

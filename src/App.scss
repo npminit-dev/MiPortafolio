@@ -1,3 +1,5 @@
+@use 'styles/_mixins.scss';
+
 body {
   margin: 0;
   font-family: 'Roboto Slab', serif;
@@ -11,6 +13,10 @@ body {
 
 *:visited {
   color: inherit;
+}
+
+#App {
+  @include mixins.app
 }
 
 :root {
@@ -36,4 +42,16 @@ body {
   --dark-font2: #e0e0e0;
   --dark-font3: #cbcbcb;
 
+}
+
+@font-face {
+  font-family: "matrixSymbols1";   /*Can be any text*/
+  src: local("matrixSymbols1"),
+    url("./fonts/matrix\ code\ nfi.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "matrixSymbols2";   /*Can be any text*/
+  src: local("matrixSymbols2"),
+    url("./fonts/matrix\ code\ nfi.otf") format("opentype");
 }

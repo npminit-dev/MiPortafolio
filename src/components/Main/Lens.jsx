@@ -1,5 +1,5 @@
-import '../../../App.scss'
-import '../../../styles/presentation.scss'
+import '../../App.scss'
+import '../../styles/presentation.scss'
 import { useEffect, useRef } from 'react'
 
 export default function Lens({ containerRef }) {

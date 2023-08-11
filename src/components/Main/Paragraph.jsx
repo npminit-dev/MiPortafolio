@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
-import '../../../app.scss'
-import '../../../styles/presentation.scss'
+import '../../app.scss'
+import '../../styles/presentation.scss'
 import { v4 as uuidv4 } from 'uuid';
 
 export default function Paragraph({ content, i, status, setStatus, start }) {
@@ -11,7 +11,7 @@ export default function Paragraph({ content, i, status, setStatus, start }) {
 
   const letterDelay = useCallback(() => {
     return new Promise(res => {
-      const timer = setTimeout(() => res(''), 20)
+      const timer = setTimeout(() => res(''), Math.random() * 20)
       setTimer(timer)
     })
   }, [])
@@ -42,14 +42,14 @@ export default function Paragraph({ content, i, status, setStatus, start }) {
           return ord
         })
       })
-    }, 1000)
+    }, i === 0 || i === status.length - 2 ? 1000 : 400)
     
     return () => clearTimeout(timer)
   }, [partial])
 
   return (
     <div className='paragraph_container'>
-      <span>
+      <p>
         { [...content].map((element, i) => {
           if(start === 'inactive') {
             return <span 
@@ -81,7 +81,7 @@ export default function Paragraph({ content, i, status, setStatus, start }) {
          
         })
         }
-      </span>
+      </p>
     </div>
   )
 }

@@ -1,68 +1,26 @@
+@use '_colors' as c;
+@use '_mixins' as mx;
 
-#ts_container {
-  position: relative;
-  height: 27px;
-  width: 54px;
-  overflow: hidden;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
-  z-index: 100;
-  clip-path: polygon(50% 100%, 0 0, 100% 0);
+#theme_s {
+  @include mx.centercontent;
+  height: 50px;
+  width: 50px;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+
+  &__icon-light {
+    @include mx.themeicon;
+    color: c.$light-font1;
+  }
+  
+  &__icon-dark {
+    @include mx.themeicon;
+    color: c.$light-background3;
+  }
 }
 
-#ts_turn {
-  height: 200%;
-  width: 100%;
-  position: absolute;
-  transition-duration: .5s;
-  animation-timing-function: ease-out;
-  cursor: pointer;
-}
 
-.light_switch {
-  transform: rotate(360deg);
-}
 
-.dark_switch {
-  transform: rotate(180deg);
-}
 
-#ts_light {
-  position: absolute;
-  display: inline-flex;
-  height: 100%;
-  width: 100%;
-  align-items: start;
-  justify-content: center;
-  border-radius: 100%;
-  background: linear-gradient(180deg, 
-  #abe1f7 28%, 
-  #bbe6f7 32%, 
-  #ffa6005d 42%, 
-  #ff800071 49%, 
-  rgba(0, 0, 255, 0.568) 50%,
-  rgb(0, 0, 146) 55%,
-  rgb(0, 0, 119) 60%,
-  #182030 75%);
-  padding-top: 1px;
-}
 
-#ts_dark {
-  position: relative;
-  height: 100%;
-  width: 100%;
-  display: inline-flex;
-  align-items: end;
-  justify-content: center;
-  border-radius: 100%;
-  padding-bottom: 1px;
-}
-
-#ts_sun_icon {
-  color: #FDB813
-}
-
-#ts_moon_icon {
-  color: #F4F6F0
-}

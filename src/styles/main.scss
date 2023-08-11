@@ -1,6 +1,8 @@
+@use '_colors';
+@use '_mixins';
 
-#main_container {
-  margin: 25px 0;
+#main {
+  margin: 10px 0;
   display: grid;
   grid-template-columns: 46% 8% 46%;
   border-bottom: 2px dotted rgba(0, 0, 0, 0.428);
@@ -8,58 +10,43 @@
   height: 150px;
   -webkit-user-select: none;
   user-select: none;
-  animation: container_in 1s forwards
+  animation: container_in 1s forwards;
+
+  &__name {
+    @include mixins.mainnametheme;
+    @include mixins.maintext;
+    align-items: end;
+    transform: translateX(-20px);
+    span {
+      font-size: 43px;
+      font-weight: 600;
+      line-height: 110%;
+    }
+  };
+
+  &__role {
+    @include mixins.mainroletheme;
+    @include mixins.maintext;
+    align-items: start;
+    transform: translateX(20px);
+    span {
+      font-size: 32px;
+      font-weight: 600;
+      line-height: 110%;
+    }
+  };
+
+  &__midline {
+    @include mixins.mainmidline;
+    span {
+      @include mixins.mainmidtheme;
+      position: absolute;
+      width: 5px;
+      height: 80px;
+      border-radius: 5px;
+    }
+  }
 }
-
-#main_name {
-  display: flex;
-  flex-direction: column;
-  align-items: end;
-  justify-content: center;
-  transform: translateX(-20px);
-  opacity: 0
-}
-
-#main_name span {
-  font-size: 37px;
-  color: var(--dark-background3);
-  font-weight: 600;
-}
-
-
-#main_role {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-content: center;
-  transform: translateX(20px);
-  opacity: 0
-}
-
-#main_role span {
-  font-size: 27px;
-  font-weight: 600;
-  color: var(--dark-background6);
-}
-
-
-#midline {
-  position: relative;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#midline span {
-  position: absolute;
-  width: 4px;
-  height: 80px;
-  border-radius: 5px;
-  background-color: var(--light-font5);
-}
-
 
 /* animations and clases */
 
@@ -84,7 +71,7 @@
 }
 
 .midline_out {
-  animation: midline_out 1s cubic-bezier(0,1.1,.68,.98) .4s forwards;
+  animation: midline_out 1s cubic-bezier(0,1.1,.68,.98) .1s forwards;
 }
 
 @keyframes container_in {
@@ -149,31 +136,31 @@
   0% {
     opacity: 0;
     height: 4px;
-    width: 120px;
+    width: 300px;
   }
 
   49% {
     opacity: .8;
-    height: 4px;
-    width: 4px;
+    height: 5px;
+    width: 5px;
   }
 
   100% {
     opacity: 1;
     height: 80px;
-    width: 4px;
+    width: 5px;
   }
 }
 
 @keyframes midline_out {
   0% {
-    width: 4px;
+    width: 5px;
     height: 80px;
   }
 
   25% {
-    height: 4px;
-    width: 4px;
+    height: 5px;
+    width: 5px;
   }
 
   50% {

@@ -1,0 +1,94 @@
+@use '_colors' as c;
+
+/* generics */
+
+@mixin centercontent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* App.jsx */
+
+@mixin app {
+  &.light {
+
+  }
+
+  &.dark {
+    background: linear-gradient(90deg, 
+    c.$dark-background1, 
+    c.$dark-background2, 
+    c.$dark-background3, 
+    c.$dark-background3,
+    c.$dark-background2, 
+    c.$dark-background1);
+  }
+}
+
+/* ThemeSwitcher.scss */
+
+@mixin themeicon {
+  height: 25px;
+  width: 25px;
+  animation: icon_appear .2s linear forwards;
+}
+
+@keyframes icon_appear {
+  from {
+    transform: scale(50%, 50%);
+    opacity: 0;
+  }
+  to {
+    transform: scale(100%, 100%);
+    opacity: 1;
+  }
+}
+
+
+/* Main.jsx */
+
+@mixin maintext {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+}
+
+@mixin mainmidline {
+  position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin mainnametheme {
+  &.light {
+    color: c.$dark-background3;
+  }
+  &.dark {
+    color: c.$light-background3;
+  }
+}
+
+@mixin mainroletheme {
+  &.light {
+    color: c.$dark-background6;
+  }
+  &.dark {
+    color: c.$light-background3;
+  }
+}
+
+@mixin mainmidtheme {
+  &.light {
+    background-color: c.$light-font1;
+    color: c.$light-font1
+  }
+  &.dark {
+    background-color: c.$light-background2;
+    color: c.$light-background2;
+  }
+}

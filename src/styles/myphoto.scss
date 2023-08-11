@@ -1,8 +1,8 @@
-#myphoto_container {
+@use './mixins' as mx;
+
+#myphoto {
+  @include mx.centercontent;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin: 20px 0;
   height: 325px;
   width: 325px;
@@ -12,33 +12,43 @@
   background-color: var(--light-font3);
   opacity: 0;
   animation: myphoto_appear .5s ease-out forwards .7s;
+
+  &__photo {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 95%;
+    width: 95%;
+    clip-path: circle(50% at 50% 50%);
+    overflow: hidden;
+    z-index: 100;
+
+    img {
+      position: absolute;
+    }
+  }
+
+  .myphoto_circle_box {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    height: 100%;
+    width: 100%;
+    border-radius: 100%;
+  }
+
+  .myphoto_circle_box__inner {
+    position: absolute;
+    height: 80%;
+    width: 80%;
+    border-radius: 100%;
+    z-index: 1000;
+  }
+ 
 }
 
-#photo_container {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 95%;
-  width: 95%;
-  clip-path: circle(50% at 50% 50%);
-  overflow: hidden;
-  z-index: 100;
-}
-
-img {
-  position: absolute;
-}
-
-.myphoto_circle_container {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: end;
-  height: 100%;
-  width: 100%;
-  border-radius: 100%;
-}
 
 #first {
   animation: rotate_circle 6s infinite linear;
@@ -56,35 +66,19 @@ img {
   animation: rotate_circle 12s infinite linear;
 }
 
-#first .myphoto_circle {
-  position: absolute;
-  height: 80%;
-  width: 80%;
-  border-radius: 100%;
+#first > .myphoto_circle_box__inner {
   background-color: rgba(255, 0, 0, 0.55);
 }
 
-#second .myphoto_circle {
-  position: absolute;
-  height: 80%;
-  width: 80%;
-  border-radius: 100%;
+#second > .myphoto_circle_box__inner {
   background-color: rgba(0, 0, 255, 0.531);
 }
 
-#third .myphoto_circle {
-  position: absolute;
-  height: 80%;
-  width: 80%;
-  border-radius: 100%;
+#third .myphoto_circle_box__inner {
   background-color: rgba(0, 128, 0, 0.504);
 }
 
-#fourth .myphoto_circle {
-  position: absolute;
-  height: 80%;
-  width: 80%;
-  border-radius: 100%;
+#fourth .myphoto_circle_box__inner {
   background-color: rgba(255, 255, 0, 0.518);
 }
 

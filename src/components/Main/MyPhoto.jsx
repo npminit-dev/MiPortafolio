@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react'
-import '../../../App.scss'
-import '../../../styles/myphoto.scss'
+import '../../App.scss'
+import '../../styles/myphoto.scss'
 
 export default function MyPhoto() {
 
@@ -34,24 +34,24 @@ export default function MyPhoto() {
   }, [])
 
   return (
-    <div id='myphoto_container' ref={containerRef}>
-      <span id='photo_container'>
+    <div id='myphoto' ref={containerRef}>
+      <span id='myphoto__photo'>
         <img ref={imgRef} 
           src='https://i.ibb.co/NKZcnpZ/veridity-lasombradelenga-o.webp'
           className={`${centeredImg ? 'img_normalized' : ''}`}
         ></img>
       </span>
-      <span id='first' className='myphoto_circle_container'>
-        <div className='myphoto_circle'></div>
+      <span id='first' className='myphoto_circle_box'>
+        <div className='myphoto_circle_box__inner'></div>
       </span>
-      <span id='second' className='myphoto_circle_container'>
-        <div className='myphoto_circle'></div>
+      <span id='second' className='myphoto_circle_box'>
+        <div className='myphoto_circle_box__inner'></div>
       </span>
-      <span id='third' className='myphoto_circle_container'>
-        <div className='myphoto_circle'></div>
+      <span id='third' className='myphoto_circle_box'>
+        <div className='myphoto_circle_box__inner'></div>
       </span>
-      <span id='fourth' className='myphoto_circle_container'>
-        <div className='myphoto_circle'></div>
+      <span id='fourth' className='myphoto_circle_box'>
+        <div className='myphoto_circle_box__inner'></div>
       </span>
     </div>
   )
