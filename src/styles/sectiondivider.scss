@@ -1,0 +1,50 @@
+@use 'mixins' as mx;
+@use 'colors' as c;
+
+.projects__titlebox {
+  display: grid;
+  grid-template-rows: 70% 30%;
+  height: 70px;
+  width: 100%;
+  margin-bottom: 40px;
+
+  &:hover > &__iconbox > &__iconbox__icon {
+    animation: arrowbreath .5s linear infinite;
+  }
+
+  &__title {
+    @include mx.centercontent;
+    font-family: 'Nunito', sans-serif;
+    font-size: 25px;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  &__iconbox {
+    @include mx.centercontent;
+
+    &__icon {
+      height: 50px;
+      width: 50px;
+    }
+  }
+
+  @keyframes arrowbreath {
+    0% {
+      opacity: 1;
+      transform: translateY(-5px);
+    }
+    50% {
+      transform: translateY(2px);
+      opacity: 1;
+    }
+    50% {
+      transform: translateY(2px);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(5px);
+      opacity: 0;
+    }
+  }
+} 

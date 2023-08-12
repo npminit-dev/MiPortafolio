@@ -3,32 +3,8 @@
 
 .projects {
   margin: 35px 0;
-  box-sizing: border-box;
-
-  &__titlebox {
-    display: grid;
-    grid-template-rows: 70% 30%;
-    height: 70px;
-    width: 100%;
-    margin-bottom: 40px;
-
-    &__title {
-      @include mx.centercontent;
-      font-family: 'Nunito', sans-serif;
-      font-size: 25px;
-      -webkit-user-select: none;
-      user-select: none;
-    }
-
-    &__iconbox {
-      @include mx.centercontent;
-
-      &__icon {
-        height: 50px;
-        width: 50px;
-      }
-    }
-  }  
+  margin-bottom: 120px;
+  box-sizing: border-box; 
 
   .projects__box {
     display: block;
@@ -36,19 +12,20 @@
     max-width: 100vw;
     display: flex;
     flex-wrap: wrap;
+    align-items: start;
     justify-content: space-evenly;
   
     .LazyLoad {
-      height: 600px;
-      width: 400px;
-      padding: 5px;
+      height: 550px;
+      width: 375px;
+      padding: 7px;
       display: grid;
-      grid-template-rows: 7% 13% 70% 10%;
-      box-shadow: 0 0 5px black;
-      border-radius: 10px;
-      margin: 20px 0;
+      grid-template-rows: 7% 9% 67% 9% 8%;
+      border: 1px solid rgba(0, 0, 0, 0.3);
       opacity: 0;
       transition-duration: .5s;
+      border-radius: 10px;
+      overflow: hidden;
     }
 
     .is-visible {
@@ -56,6 +33,41 @@
     }
 
       .project {
+        background-color: c.$light-background1;
+        position: relative;
+        height: 550px;
+        width: 375px;
+        transition-duration: .2s;
+        border-radius: 10px;
+        box-shadow: none;
+        margin: 10px 0;
+        overflow: hidden;
+
+        &:hover {
+          box-shadow: 0 0 5px grey;
+          transform: scale(1.0090);
+          .project__glasseffect{
+            transition-duration: .2s;
+            top: 40%;
+            opacity: .8;
+          }
+        }
+
+        &__glasseffect {
+          position: absolute;
+          top: -90%;
+          left: 20%;
+          height: 120%;
+          width: 175px;
+          background: linear-gradient(90deg, rgba(255, 255, 255, 0.052), rgba(255, 255, 255, 0.149));
+          transform: translateY(0);
+          transform: rotate(65deg);
+          transition-duration: .1s;
+          transition-timing-function: ease-out;
+          transition-delay: 100ms;
+          opacity: .2;
+          pointer-events: none
+        }
 
         &__name {
           @include mx.centercontent;
@@ -66,25 +78,29 @@
             font-size: 25px;
             font-family: 'Nunito', sans-serif;
             align-items: center;
+            color: c.$light-font1;
           }
         }
 
         &__info {
           @include mx.centercontent;
+          margin: unset;
 
           span {
+            margin: none;
             width: 100%;
             text-align: center;
-            color: grey;
+            color: c.$light-font6;
             font-size: 14px;
             font-family: 'Nunito', sans-serif;
+            margin-bottom: 10px;
           }
         }
 
         &__imgbox {
           height: 100%;
           width: 100%;
-          background-color: grey;
+          background-color: c.$light-font5;
           padding: 0 10px;
           overflow: hidden;
           border-radius: 5px;
@@ -93,6 +109,76 @@
             height: 100%;
             width: 100%;
             object-fit: contain;
+          }
+        }
+
+        &_tecs {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-bottom: 1px solid rgba(128, 128, 128, 0.281);
+          
+          &__tecbox {
+            @include mx.centercontent;
+            position: relative;
+            height: 30px;
+            width: 30px;
+            margin: 0 5px;
+            z-index: 100;
+            transition-duration: .2s;
+            cursor: pointer;
+            
+            &:hover {
+              transform: scale(1.1, 1.1);
+            }
+
+            &__icon {
+              position: absolute;
+              height: 100%;
+              width: 100%;
+
+              &.resizable {
+                height: 80%;
+              }
+            }
+
+            .rotatable {
+              animation: rotation 7s linear infinite;
+            };
+
+            @keyframes rotation {
+              from {
+                transform: rotate(0deg);
+              }
+              to {
+                transform: rotate(359deg);
+              }
+            }
+          }
+        }
+
+        &__links {
+          @include mx.centercontent;
+          height: 100%;
+          width: 100%;
+          padding: 2px 0;
+          
+          &__box {
+            height: 100%;
+            width: 50px;
+            cursor: pointer;
+
+            &__link {
+              @include mx.centercontent;
+              height: 100%;
+              width: 50px;
+              
+              &__icon {
+                height: 90%;
+                width: 90%;
+                color: #0d1117;
+              }
+            }
           }
         }
  
