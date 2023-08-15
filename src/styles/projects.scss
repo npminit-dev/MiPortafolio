@@ -21,7 +21,7 @@
       padding: 7px;
       display: grid;
       grid-template-rows: 7% 9% 67% 9% 8%;
-      border: 1px solid rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(0, 0, 0, 0.163);
       opacity: 0;
       transition-duration: .5s;
       border-radius: 10px;
@@ -42,12 +42,13 @@
         box-shadow: none;
         margin: 10px 0;
         overflow: hidden;
+        cursor: pointer;
 
         &:hover {
-          box-shadow: 0 0 5px grey;
+          box-shadow: 0px 2px 5px black;
           transform: scale(1.0090);
           .project__glasseffect{
-            transition-duration: .2s;
+            transition-duration: .18s;
             top: 40%;
             opacity: .8;
           }
@@ -62,9 +63,9 @@
           background: linear-gradient(90deg, rgba(255, 255, 255, 0.052), rgba(255, 255, 255, 0.149));
           transform: translateY(0);
           transform: rotate(65deg);
-          transition-duration: .1s;
+          transition-duration: 100ms;
           transition-timing-function: ease-out;
-          transition-delay: 100ms;
+          transition-delay: 25ms;
           opacity: .2;
           pointer-events: none
         }
@@ -172,6 +173,11 @@
               @include mx.centercontent;
               height: 100%;
               width: 50px;
+
+              &__icon.ant-tooltip-open {
+                transition-duration: .3s;
+                color: c.$dark-background6;
+              }
               
               &__icon {
                 height: 90%;

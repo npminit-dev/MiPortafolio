@@ -5,6 +5,7 @@ import ThemeSwitcher from './components/ThemeSwitcher'
 import Projects from './components/Projects/Projects'
 import { themeContext } from './components/ThemeContext'
 import SectionDivider from './components/SectionDivider'
+import Skills from './components/Skills/Skills'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
       <SectionDivider tag={ 'PROYECTOS' }></SectionDivider>
       <Projects></Projects>
       <SectionDivider tag={ 'HABILIDADES' }></SectionDivider>
+      <Skills></Skills>
     </main>     
   )
 }
