@@ -19,6 +19,15 @@ function App() {
       <Projects></Projects>
       <SectionDivider tag={ 'HABILIDADES' }></SectionDivider>
       <Skills></Skills>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
     </main>     
   )
 }

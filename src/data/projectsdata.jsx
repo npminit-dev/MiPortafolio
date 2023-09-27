@@ -7,7 +7,8 @@ export const projectsdata = [
   {
     name: 'BookNexus',
     info: 'Web de libros con React/TS/Ant-Design (prueba tecnica de @midudev)',
-    cover: 'https://i.ibb.co/G0jzf8s/Book-Nexus.gif',
+    cover: 'https://i.ibb.co/HrMvDNv/Book-Nexus.webp',
+    thumbnail: 'https://i.ibb.co/3fVX707/Book-Nexus-tn.webp',
     link: 'https://dreamy-vacherin-eba168.netlify.app/',
     tecs: ['HTML5', 'CSS3', 'NodeJS', 'React', 'JavaScript', 'TypeScript', 'Ant-Design', 'Jest'],
     repo: 'https://github.com/npminit-dev/npminit-dev.git'
@@ -15,7 +16,8 @@ export const projectsdata = [
   {
     name: 'Landing Page',
     info: 'Landing page con Bootstrap5',
-    cover: 'https://i.ibb.co/6R5SHL2/Landing-Page.gif',
+    cover: 'https://i.ibb.co/80kqmpC/Landing-Page-BS5.webp',
+    thumbnail: 'https://i.ibb.co/Z2r64Zw/Landing-Page-BS5-tn.webp',
     link: 'https://capable-kringle-1fe2b3.netlify.app/',
     tecs: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap5'],
     repo: 'https://github.com/npminit-dev/BSLandingPage.git'
@@ -23,7 +25,8 @@ export const projectsdata = [
   {
     name: 'Football teams CRUD',
     info: 'CRUD de equipos de fútbol con React y Bootstrap5',
-    cover: 'https://i.ibb.co/gRCyMbL/Football-Teams-CRUD.gif',
+    cover: 'https://i.ibb.co/GJzRpjC/CRUDBS5.webp',
+    thumbnail: 'https://i.ibb.co/Jk753ZR/CRUDBS5-tn.webp',
     link: 'https://melodious-licorice-c983f3.netlify.app/',
     tecs: ['HTML5', 'CSS3', 'NodeJS', 'JavaScript', 'React', 'Bootstrap5'],
     repo: 'https://github.com/npminit-dev/BS5-React-CRUD.git'
@@ -31,7 +34,8 @@ export const projectsdata = [
   { 
     name: 'IndexedDB CRUD',
     info: 'CRUD con VainillaJS y IndexedDB',
-    cover: 'https://i.ibb.co/gP1HKjF/Indexed-DBCRUD.gif',
+    cover: 'https://i.ibb.co/ZGvBy74/Indexed-DBCRUD.webp',
+    thumbnail: 'https://i.ibb.co/S5XQpnZ/Indexed-DBCRUD-tn.webp',
     link: 'https://fluffy-snickerdoodle-8f13a1.netlify.app/',
     tecs: ['HTML5', 'CSS3', 'JavaScript'],
     repo: 'https://github.com/npminit-dev/Vainilla-CRUD.git'
@@ -39,7 +43,8 @@ export const projectsdata = [
   {  
     name: 'RealTime Chat',
     info: 'Chat en tiempo real entre 2 pestañas con Vainilla y Service Workers',
-    cover: 'https://i.ibb.co/WFrPB0R/Real-Time-CHAT.gif',
+    cover: 'https://i.ibb.co/fGn6skd/Real-Time-Chat.webp',
+    thumbnail: 'https://i.ibb.co/rs0W6y1/Real-Time-Chat-tn.webp',
     link: 'https://kaleidoscopic-muffin-fe5fc9.netlify.app/',
     tecs: ['HTML5', 'CSS3', 'JavaScript'],
     repo: 'https://github.com/npminit-dev/RealTimeChat.git'

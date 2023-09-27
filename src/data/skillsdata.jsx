@@ -1,88 +1,87 @@
-
 export const skills = [
   {
-    title: 'Otras',
+    title: "Otras",
     skills: [
-      'Desarrollo colaborativo y versionado con Github',
-      'Ingles escritura/lectura nivel medio',
-      'MS Excel',
-      'Optimizacion',
-      'Seguridad Informatica'
-    ]
+      "Desarrollo colaborativo y versionado con Github",
+      "Ingles escritura/lectura nivel medio",
+      "MS Excel",
+      "Optimización",
+      "Seguridad Informática",
+    ],
   },
   {
-    title: 'Habilidades blandas',
+    title: "Habilidades blandas",
     skills: [
-      'Creatividad',
-      'Actitud positiva',
-      'Cortesía, Amabilidad y respeto',
-      'Flexibilidad y aprendizaje continuo',
-      'Trabajo en equipo',
-      'Responsabilidad',
-      'Resolución de problemas'
-    ]
+      "Creatividad",
+      "Actitud positiva",
+      "Cortesía, Amabilidad y respeto",
+      "Flexibilidad y aprendizaje continuo",
+      "Trabajo en equipo",
+      "Responsabilidad",
+      "Resolución de problemas",
+    ],
   },
   {
-    title: 'Front-end',
+    title: "Front-end",
     skills: [
-      'HTML5',
-      'CSS3',
-      'SASS',
-      'Javascript avanzado',
-      { 
-        header: 'ReactJS',
+      "HTML5",
+      "CSS3",
+      "SASS",
+      "JavaScript avanzado",
+      {
+        header: "ReactJS",
         content: [
-          'React-DOM',
-          'React-Router v6',
-          'useForm hook',
-          'React-Typescript',
-          'React-DevTools',
-          'Prop-Types',
-          'Jest',
-        ]
+          "React-DOM",
+          "React-Router v6",
+          "useForm hook",
+          "React-TypeScript",
+          "React-DevTools",
+          "Prop-Types",
+          "Jest",
+        ],
       },
-      'Typescript',
-      'Ant-Design',
-      'Bootstrap5',
-      'ChakraUI',
-      'Principios UX/UI',
-      'Maquetación',
-    ]
+      "TypeScript",
+      "Ant-Design",
+      "Bootstrap5",
+      "ChakraUI",
+      "Principios UX/UI",
+      "Maquetación",
+    ],
   },
   {
-    title: 'Back-end',
+    title: "Back-end",
     skills: [
-      'NodeJS',
-      'Express',
-      'CORS',
-      'Zod',
-      'NodeJS-Typescript',
-      'API REST',
-      'Middlewares',
-      'Controladores',
-      'Autenticación y autorización',
-      'JSON'
-    ]
+      "NodeJS",
+      "Express",
+      "CORS",
+      "Zod",
+      "NodeJS-Typescript",
+      "API REST",
+      "Middlewares",
+      "Controladores",
+      "Autenticación y autorización",
+      "JSON",
+    ],
   },
   {
-    title: 'DDBB',
+    title: "DDBB",
     skills: [
-      'MySQL',
-      'PostgreSQL',
-      'SQLite',
-      { 
-        header: 'Modelado',
+      "MySQL",
+      "PostgreSQL",
+      "SQLite",
+      {
+        header: "Modelado",
         content: [
-          'Abstracción',
-          'Creación de tablas',
-          'Tipado y Restricciones',
-          'Claves y relaciones entre tablas',
-        ]
+          "Abstracción",
+          "Creación de tablas",
+          "Tipado y Restricciones",
+          "Claves y relaciones entre tablas",
+        ],
       },
-      'Consultas',
-      'Transacciones',
-      'Integridad de datos',
-      'Normalización'  
-    ]
+      "Consultas",
+      "Transacciones",
+      "Integridad de datos",
+      "Normalización",
+    ],
   },
-]
+];

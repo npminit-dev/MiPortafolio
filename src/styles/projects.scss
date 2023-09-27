@@ -43,10 +43,10 @@
         margin: 10px 0;
         overflow: hidden;
         cursor: pointer;
-
+        
         &:hover {
-          box-shadow: 0px 2px 5px black;
           transform: scale(1.0090);
+          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.523);
           .project__glasseffect{
             transition-duration: .18s;
             top: 40%;
@@ -101,7 +101,7 @@
         &__imgbox {
           height: 100%;
           width: 100%;
-          background-color: c.$light-font5;
+          background-color: c.$dark-font3;
           padding: 0 10px;
           overflow: hidden;
           border-radius: 5px;

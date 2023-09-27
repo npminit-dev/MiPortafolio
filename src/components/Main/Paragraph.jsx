@@ -11,7 +11,7 @@ export default function Paragraph({ content, i, status, setStatus, start }) {
 
   const letterDelay = useCallback(() => {
     return new Promise(res => {
-      const timer = setTimeout(() => res(''), Math.random() * 20)
+      const timer = setTimeout(() => res(''), Math.random() * 25)
       setTimer(timer)
     })
   }, [])

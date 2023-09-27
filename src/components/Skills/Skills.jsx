@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef, useContext } from 'react'
 import { skills } from '../../data/skillsdata'
-import { themeContext } from '../ThemeContext'
 import SkillList from './SkillList'
 import { v4 as uuidv4 } from 'uuid'
 import '../../styles/skills.scss'
@@ -24,29 +23,22 @@ export default function Skills() {
     selected === 3 ? 'translateX(-10px)' :
     selected === 4 ? 'translateX(-310px)' :
     selected === 5 ? 'translateX(-608px)' : '';
-
-    [...skMaskInner.current.children].forEach((list, i) => {
-      if(i + 1 === selected) {
-        list.classList.remove('unfocus')
-        list.classList.add('focus')
-      }
-      else list.classList.add('unfocus')
-    })
-    console.log('asdasd')
   }, [selected])
 
   useEffect(() => {
-    console.log('re-rendered')
-  }, [skSections, selected, setSelected])
+    console.log(selected)
+  }, [selected])
 
   return (
     <section className='skills' ref={skContainer}>
+
       <div 
         className='skills__leftarrow'
         onClick={() => setSelected(sel => sel > 1 ? sel - 1 : sel)}
       >
         <RxChevronLeft className='skills__leftarrow__icon'/>
       </div>
+
       <div className='skills__mask'>
         <div className={`backgroundicon i__${selected}`}>
         { 
@@ -63,7 +55,7 @@ export default function Skills() {
         {
         skSections.map((sk, i) => 
           <SkillList
-            className={i + 1 === selected ? 'focus' : 'unfocus'}
+            isFocused={i + 1 === selected ? true : false}
             key={uuidv4()}
             skillist={sk}
             >
@@ -72,12 +64,14 @@ export default function Skills() {
         }
         </div>
       </div>
+
       <div 
         className='skills__rightarrow'
         onClick={() => setSelected(sel => sel < 5 ? sel + 1 : sel)}
       >
         <RxChevronRight className='skills__rightarrow__icon'/>
       </div>
+
       <div className='skills__selectcount'>
       {
       skSections.map((_, i) => 
