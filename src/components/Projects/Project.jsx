@@ -13,7 +13,6 @@ export default function Project({ name, info, cover, tecs, link, repo }) {
     <div className={`project ${theme}`}>
       <LazyLoad
         className="LazyLoad"
-        onContentVisible={() => console.log("loaded")}
       >
         <>
           <span className="project__name">

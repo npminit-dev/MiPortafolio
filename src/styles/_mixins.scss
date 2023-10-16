@@ -53,6 +53,7 @@
   flex-direction: column;
   justify-content: center;
   opacity: 0;
+  font-family: 'Nunito', sans-serif;
 }
 
 @mixin mainmidline {
@@ -92,3 +93,5 @@
     color: c.$light-background2;
   }
 }
+
+/* MyPhoto.jsx */

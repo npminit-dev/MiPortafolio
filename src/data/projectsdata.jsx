@@ -1,7 +1,8 @@
 import { BiLogoCss3, BiLogoNodejs, BiLogoJavascript, BiLogoTypescript, BiLogoReact, BiLogoHtml5 } from 'react-icons/bi'
 import { FaBootstrap } from 'react-icons/fa'
 import { AiOutlineAntDesign } from 'react-icons/ai'
-import { SiJest } from 'react-icons/si'
+import { SiJest, SiExpo } from 'react-icons/si'
+import { TbBrandReactNative } from 'react-icons/tb'
 
 export const projectsdata = [
   {
@@ -96,5 +97,15 @@ export const tecs = [
     name: 'Jest',
     color: '#8f1844',
     icon: <SiJest className='project_tecs__tecbox__icon resizable'/>
+  },
+  {
+    name: 'Expo Go',
+    color: '#ecedee',
+    icon: <SiExpo className='project_tecs__tecbox__icon'></SiExpo>
+  },
+  {
+    name: 'React Native',
+    color: '#1977f2',
+    icon: <TbBrandReactNative className='project_tecs__tecbox__icon'></TbBrandReactNative>
   }
 ]

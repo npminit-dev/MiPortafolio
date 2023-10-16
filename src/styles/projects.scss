@@ -5,6 +5,7 @@
   margin: 35px 0;
   margin-bottom: 120px;
   box-sizing: border-box; 
+  padding: 10px 10px;
 
   .projects__box {
     display: block;
@@ -16,11 +17,11 @@
     justify-content: space-evenly;
   
     .LazyLoad {
-      height: 550px;
-      width: 375px;
-      padding: 7px;
+      height: 500px;
+      width: 350px;
+      padding: 6px 5px;
       display: grid;
-      grid-template-rows: 7% 9% 67% 9% 8%;
+      grid-template-rows: 7% 9% 65% 9% 10%;
       border: 1px solid rgba(0, 0, 0, 0.163);
       opacity: 0;
       transition-duration: .5s;
@@ -35,18 +36,18 @@
       .project {
         background-color: c.$light-background1;
         position: relative;
-        height: 550px;
-        width: 375px;
+        height: 100%;
+        width: 350px;
         transition-duration: .2s;
         border-radius: 10px;
         box-shadow: none;
         margin: 10px 0;
         overflow: hidden;
         cursor: pointer;
+        transform: scale(1.0090) rotate3d(-.5, .25, -.05, 10deg);
         
         &:hover {
-          transform: scale(1.0090);
-          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.523);
+          transform: none;
           .project__glasseffect{
             transition-duration: .18s;
             top: 40%;
@@ -101,7 +102,7 @@
         &__imgbox {
           height: 100%;
           width: 100%;
-          background-color: c.$dark-font3;
+          background-color: c.$light-font5;
           padding: 0 10px;
           overflow: hidden;
           border-radius: 5px;

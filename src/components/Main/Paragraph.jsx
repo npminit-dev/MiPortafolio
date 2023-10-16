@@ -78,7 +78,6 @@ export default function Paragraph({ content, i, status, setStatus, start }) {
             { element }
           </span>
           }
-         
         })
         }
       </p>

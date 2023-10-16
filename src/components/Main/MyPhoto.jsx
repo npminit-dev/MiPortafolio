@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from 'react'
 import '../../App.scss'
 import '../../styles/myphoto.scss'
+import { Image } from 'antd'
 
 export default function MyPhoto() {
 
@@ -40,6 +41,11 @@ export default function MyPhoto() {
           src='https://i.ibb.co/NKZcnpZ/veridity-lasombradelenga-o.webp'
           className={`${centeredImg ? 'img_normalized' : ''}`}
         ></img>
+        <div id='myphoto__loadmask'>
+          <span id='myphoto__loadmask__text'>
+            loading...
+          </span>
+        </div>
       </span>
       <span id='first' className='myphoto_circle_box'>
         <div className='myphoto_circle_box__inner'></div>
