@@ -23,6 +23,7 @@ export default function Projects() {
           name={elem.name}
           info={elem.info}
           cover={elem.cover}
+          thumbnail={elem.thumbnail}
           tecs={getTecsData(elem.tecs)}
           link={elem.link}
           repo={elem.repo}

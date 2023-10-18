@@ -17,8 +17,8 @@
     justify-content: space-evenly;
   
     .LazyLoad {
-      height: 500px;
-      width: 350px;
+      height: 450px;
+      width: 330px;
       padding: 6px 5px;
       display: grid;
       grid-template-rows: 7% 9% 65% 9% 10%;
@@ -37,11 +37,11 @@
         background-color: c.$light-background1;
         position: relative;
         height: 100%;
-        width: 350px;
+        width: 330px;
         transition-duration: .2s;
         border-radius: 10px;
         box-shadow: none;
-        margin: 10px 0;
+        margin: 12px 12px;
         overflow: hidden;
         cursor: pointer;
         transform: scale(1.0090) rotate3d(-.5, .25, -.05, 10deg);
@@ -92,6 +92,7 @@
             margin: none;
             width: 100%;
             text-align: center;
+            line-height: 1;
             color: c.$light-font6;
             font-size: 14px;
             font-family: 'Nunito', sans-serif;
@@ -100,6 +101,7 @@
         }
 
         &__imgbox {
+          @include mx.centercontent;
           height: 100%;
           width: 100%;
           background-color: c.$light-font5;

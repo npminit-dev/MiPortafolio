@@ -4,9 +4,9 @@ import { AiFillGithub, AiOutlineGlobal } from "react-icons/ai";
 import { themeContext } from "../ThemeContext";
 import LazyLoad from "react-lazy-load";
 import { v4 as uuidv4 } from 'uuid'
-import { Tooltip } from 'antd'
+import { Tooltip, Image } from 'antd'
 
-export default function Project({ name, info, cover, tecs, link, repo }) {
+export default function Project({ name, info, cover, thumbnail, tecs, link, repo }) {
   const { theme } = useContext(themeContext);
 
   return (
@@ -22,7 +22,13 @@ export default function Project({ name, info, cover, tecs, link, repo }) {
             <span>{info}</span>
           </p>
           <div className="project__imgbox">
-            <img src={cover} className="project__imgbox__img" alt={name}></img>
+            <Image
+              preview={{
+                src: cover
+              }}
+              src={thumbnail}
+              className="project__imgbox__img"
+            ></Image>
           </div>
           <div className="project_tecs">
           {
@@ -38,6 +44,8 @@ export default function Project({ name, info, cover, tecs, link, repo }) {
           }
           </div>
           <div className="project__links">
+          {
+            link !== '#' && 
             <span className="project__links__box">
               <a className="project__links__box__link" href={link}>
                 <Tooltip title="A la web" trigger="hover" placement="bottom">
@@ -45,6 +53,7 @@ export default function Project({ name, info, cover, tecs, link, repo }) {
                 </Tooltip>
               </a>
             </span>
+          }
             <span className="project__links__box">
               <a className="project__links__box__link" href={repo}>
                 <Tooltip title="Al repositorio" trigger="hover" placement="bottom">

@@ -5,8 +5,8 @@
   @include mx.centercontent;
   position: relative;
   margin: 20px 0;
-  height: 325px;
-  width: 325px;
+  height: 350px;
+  width: 350px;
   box-shadow: 0 0 10px grey;
   clip-path: circle(50% at 50% 50%);
   overflow: hidden;
@@ -17,8 +17,8 @@
   &__photo {
     @include mx.centercontent;
     position: absolute;
-    height: 95%;
-    width: 95%;
+    height: 96%;
+    width: 96%;
     clip-path: circle(50% at 50% 50%);
     overflow: hidden;
     z-index: 100;
@@ -79,19 +79,19 @@
 }
 
 #first > .myphoto_circle_box__inner {
-  background-color: rgba(255, 0, 0, 0.55);
+  background-color: #852EF0;
 }
 
 #second > .myphoto_circle_box__inner {
-  background-color: rgba(0, 0, 255, 0.531);
+  background-color: #6E26C7;
 }
 
 #third .myphoto_circle_box__inner {
-  background-color: rgba(0, 128, 0, 0.504);
+  background-color: #280E47;
 }
 
 #fourth .myphoto_circle_box__inner {
-  background-color: rgba(255, 255, 0, 0.518);
+  background-color: #581E9E;
 }
 
 /* animation and classes */

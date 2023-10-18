@@ -3,7 +3,6 @@ export const skills = [
     title: "Otras",
     skills: [
       "Desarrollo colaborativo y versionado con Github",
-      "Ingles escritura/lectura nivel medio",
       "MS Excel",
       "Optimización",
       "Seguridad Informática",
@@ -27,7 +26,7 @@ export const skills = [
       "HTML5",
       "CSS3",
       "SASS",
-      "JavaScript avanzado",
+      "JavaScript/TypeScript",
       {
         header: "ReactJS",
         content: [
@@ -40,12 +39,11 @@ export const skills = [
           "Jest",
         ],
       },
-      "TypeScript",
-      "Ant-Design",
+      "Ant-Design/Antd-Mobile",
       "Bootstrap5",
       "ChakraUI",
+      "React-Native-Elements",
       "Principios UX/UI",
-      "Maquetación",
     ],
   },
   {
@@ -66,9 +64,14 @@ export const skills = [
   {
     title: "DDBB",
     skills: [
-      "MySQL",
-      "PostgreSQL",
-      "SQLite",
+      {
+        header: "Gestores",
+        content: [
+          "MySQL",
+          "PostgreSQL",
+          "SQLite",
+        ]
+      },
       {
         header: "Modelado",
         content: [
