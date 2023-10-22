@@ -1,0 +1,19 @@
+@use './colors' as c;
+@use './mixins' as mx;
+
+#p_info_hover_box {
+  @include mx.centercontent;
+  height: 325px;
+  width: 625px;
+  border: 1px solid red;
+  z-index: 1000;
+  background-color: transparent;
+  cursor: pointer
+}
+
+#p_info_box {
+  height: 300px;
+  width: 600px;
+  border: 1px solid black;
+  pointer-events: none
+}

@@ -12,6 +12,7 @@ export function DrawContextProvider({ children }) {
   useEffect(() => {
     window.addEventListener('scroll', () => {
       if(!drawOn) setDrawOn(true)
+      if(!window.scrollY) setDrawOn(false)
       curr_prev.current = [curr_prev.current[1], Math.round(window.scrollY)]
       if(curr_prev.current[1] >= curr_prev.current[0]) setIsDownScrolled(true)
       else setIsDownScrolled(false)

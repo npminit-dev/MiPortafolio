@@ -1,29 +1,3 @@
-.default {
-  stroke-dasharray: 0 800;
-}
-
-.draw-in {
-  animation: draw 1.5s ease-out forwards;
-}
-
-.draw-out {
-  animation: draw_reverse 1.5s ease-in forwards;
-}
-
-@keyframes draw {
-  0% {
-    stroke-dasharray: 0 800;
-  }
-  100% {
-    stroke-dasharray: 800 0;
-  }
-}
-
-@keyframes draw_reverse {
-  0% {
-    stroke-dasharray: 800 0;
-  }
-  100% {
-    stroke-dasharray: 0 800;
-  }
+.draw {
+  opacity: .4
 }

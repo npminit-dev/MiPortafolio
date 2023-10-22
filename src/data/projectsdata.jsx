@@ -8,8 +8,8 @@ export const projectsdata = [
   {
     name: 'BookNexus',
     info: 'Web de libros con React/TS/Ant-Design (prueba tecnica de @midudev)',
-    cover: 'https://i.ibb.co/HrMvDNv/Book-Nexus.webp',
-    thumbnail: 'https://i.ibb.co/3fVX707/Book-Nexus-tn.webp',
+    cover: 'https://i.ibb.co/T1CX7Ln/Book-Nexus.webp',
+    thumbnail: 'https://i.ibb.co/J245vDK/Book-Nexus-tn.webp',
     link: 'https://dreamy-vacherin-eba168.netlify.app/',
     tecs: ['HTML5', 'CSS3', 'React', 'TypeScript', 'Ant-Design', 'Jest'],
     repo: 'https://github.com/npminit-dev/npminit-dev.git'

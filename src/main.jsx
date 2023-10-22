@@ -5,6 +5,14 @@ import { ThemeContextProvider } from './components/ThemeContext'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <ThemeContextProvider>
-    <App />
+    <span style={{
+      width: '100vw',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      backgroundColor: 'grey'
+    }}>
+      <App />
+    </span>
   </ThemeContextProvider>
 )
