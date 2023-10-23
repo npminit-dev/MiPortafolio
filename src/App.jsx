@@ -26,7 +26,6 @@ function App() {
         <ThemeSwitcher></ThemeSwitcher>
 
         <AboutMe></AboutMe>
-        <br/><br/><br/><br/><br/><br/><br/>
 
         <SectionDivider tag={ 'PROYECTOS' }></SectionDivider>
         <Projects></Projects>

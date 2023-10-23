@@ -1,19 +1,99 @@
 @use './colors' as c;
 @use './mixins' as mx;
 
-#p_info_hover_box {
+#p__info__hover__box {
   @include mx.centercontent;
-  height: 325px;
-  width: 625px;
-  border: 1px solid red;
+  margin-top: 150px;
+  height: 475px;
+  width: 800px;
   z-index: 1000;
-  background-color: transparent;
   cursor: pointer
 }
 
-#p_info_box {
-  height: 300px;
-  width: 600px;
-  border: 1px solid black;
-  pointer-events: none
+#p__info__box {
+  height: 450px;
+  width: 775px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 100%;
+  padding: 5px 10px;
+  background-color: #fafafa;
+  border: 2px solid #CCC;
+  border-radius: 10px;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+
+  &__info {
+
+    display: grid;
+    grid-template-rows: 50% 50%;
+
+    #p__info__box__imgbox {
+
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      height: 100%;
+      width: 100%;
+      padding-left: 25px;
+      object-fit: cover;
+      overflow: hidden;
+
+      &__img {
+        border-radius: 50%;
+        height: 180px;
+        width: 180px;
+        border: 2px solid grey;
+      }
+    }
+
+    #p__info__box__databox {
+
+      .p__info__box__databox__data {
+
+        padding-left: 15px;
+        letter-spacing: 1px;
+
+        &__label {
+          font-family: 'Open Sans', sans-serif;
+          font-size: 13px;
+          font-weight: 600;
+        }
+
+        &__data {
+          font-family: 'Open Sans', sans-serif;
+          font-size: 13px;
+
+        }
+      }
+    }
+  }
+
+  #p__info__box__review {
+
+    @include mx.centercontent;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+
+    .p__info__box__review__paragraph {
+      margin: 5px 0;
+      font-size: 13px;
+      font-family: 'Open Sans', sans-serif;
+      text-align: center;
+    }
+
+    &__citebox {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 15px;
+
+      &__cite {
+        font-family: 'Open Sans', sans-serif;
+        font-style: italic;
+        font-size: 15px;
+      }
+    }
+  }
 }
+
