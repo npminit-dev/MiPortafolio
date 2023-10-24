@@ -1,0 +1,75 @@
+@use './mixins' as mx;
+@use './colors' as c;
+
+#nw__section {
+  @include mx.centercontent;
+  height: 350px;
+  width: 100vw;
+
+  #nw__box {
+    @include mx.centercontent;
+    width: 800px;
+    height: 325px;
+    
+    .nw__box__nwbox {
+      position: relative;
+      height: 200px;
+      width: 200px;
+      display: grid;
+      grid-template-rows: 20% 80%;
+      border: 1px solid grey;
+      border-radius: 8px;
+      margin: 0 10px;
+      transition-duration: .2s;
+      background-color: #f5f5f5;
+      text-decoration: none;
+      color: inherit;
+      opacity: 0;
+
+      &:hover {
+        transform: scale(1.03);
+        box-shadow: 0 0 10px grey
+      }
+
+      &__title {
+        @include mx.centercontent;
+        text-align: center;
+        font-family: 'Nunito', sans-serif;
+        font-size: 20px;
+
+      }
+
+      &__iconbox {
+        @include mx.centercontent;
+        height: 100%;
+        width: 100%;
+        
+        &__icon {
+          height: 60%;
+          width: 60%;
+
+        }
+
+
+
+      }
+    }
+  }
+}
+
+.so {
+  color: #f17000
+}
+
+.gh {
+  color: #1e1c1c
+}
+
+.li {
+  color: #126bc4
+}
+
+.mail {
+  color: #eb493b
+}
+

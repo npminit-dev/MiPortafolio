@@ -16,7 +16,7 @@
   display: grid;
   grid-template-columns: 50% 50%;
   grid-template-rows: 100%;
-  padding: 5px 10px;
+  padding: 10px 15px;
   background-color: #fafafa;
   border: 2px solid #CCC;
   border-radius: 10px;
@@ -42,13 +42,17 @@
 
       &__img {
         border-radius: 50%;
-        height: 180px;
-        width: 180px;
-        border: 2px solid grey;
+        height: 200px;
+        width: 200px;
       }
     }
 
     #p__info__box__databox {
+
+      display: flex;
+      align-items: start;
+      justify-content: center;
+      flex-direction: column;
 
       .p__info__box__databox__data {
 
@@ -86,12 +90,12 @@
 
     &__citebox {
       font-family: 'Open Sans', sans-serif;
-      font-size: 15px;
+      font-size: 14px;
 
       &__cite {
         font-family: 'Open Sans', sans-serif;
         font-style: italic;
-        font-size: 15px;
+        font-size: 14px;
       }
     }
   }

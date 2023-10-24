@@ -9,6 +9,8 @@ import Skills from './components/Skills/Skills'
 import DrawSVG from './components/Decorations/DrawSVG'
 import { DrawContextProvider } from './components/DrawContext'
 import { OlogN, gears, globe, paperPlane, rocketShip } from './data/svgData'
+import NetWorks from './components/Info&Contact/Networks'
+import Solar from './components/Skills/Solar'
 
 function App() {
 
@@ -32,8 +34,13 @@ function App() {
         
         <SectionDivider tag={ 'HABILIDADES' }></SectionDivider>
         <Skills></Skills>
+
+        <SectionDivider tag={ 'INFORMACIÓN Y CONTACTO' }></SectionDivider>
+        <NetWorks></NetWorks>
+        <Solar></Solar>
       </DrawContextProvider>
     </main>     
+    
   )
 }
 

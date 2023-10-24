@@ -21,7 +21,7 @@ export default function PersonalInfo() {
       boxHoverRef.current.addEventListener("mousemove", (e) => {
         leaveAnim.current?.cancel();
         let [x, y] = getCoords(e);
-        boxRef.current.style.transform = `rotate3d(${x}, ${y}, 0, 17deg)`;
+        boxRef.current.style.transform = `rotate3d(${x}, ${y}, 0, 16deg)`;
       });
 
     boxHoverRef &&
@@ -62,7 +62,7 @@ export default function PersonalInfo() {
             </div>
             <div className="p__info__box__databox__data">
               <strong className="p__info__box__databox__data__label">Fecha de nacimiento: </strong>
-              <time className="p__info__box__databox__data__data" datetime="1995-02-15">15-02-1995</time>
+              <time className="p__info__box__databox__data__data" dateTime="1995-02-15">15-02-1995</time>
             </div>
             <div className="p__info__box__databox__data">
               <strong className="p__info__box__databox__data__label">Vivo en: </strong>

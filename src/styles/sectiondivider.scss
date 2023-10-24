@@ -2,11 +2,13 @@
 @use 'colors' as c;
 
 .projects__titlebox {
+  position: relative;
   display: grid;
   grid-template-rows: 70% 30%;
   height: 70px;
   width: 100%;
   margin-bottom: 40px;
+  margin-top: 40px;
 
   &:hover > &__iconbox > &__iconbox__icon {
     animation: arrowbreath .5s linear infinite;
@@ -18,10 +20,12 @@
     font-size: 25px;
     -webkit-user-select: none;
     user-select: none;
+    cursor: pointer
   }
 
   &__iconbox {
     @include mx.centercontent;
+    cursor: pointer;
 
     &__icon {
       height: 50px;
