@@ -22,20 +22,6 @@
   justify-content: center;
   background-color: #f5f5f5;
   z-index: 1000;
-
-  &.light {
-
-  }
-
-  &.dark {
-    background: linear-gradient(90deg, 
-    c.$dark-background1, 
-    c.$dark-background2, 
-    c.$dark-background3, 
-    c.$dark-background3,
-    c.$dark-background2, 
-    c.$dark-background1);
-  }
 }
 
 /* ThemeSwitcher.scss */

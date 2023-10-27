@@ -16,6 +16,7 @@
     @include mixins.maintext;
     align-items: end;
     transform: translateX(-20px);
+    color: #551c3b;
     span {
       font-size: 50px;
       font-weight: 600;
@@ -28,6 +29,7 @@
     @include mixins.maintext;
     align-items: start;
     transform: translateX(20px);
+    color: #301c4d;
     span {
       font-size: 32px;
       font-weight: 600;
@@ -43,6 +45,10 @@
       width: 5px;
       height: 80px;
       border-radius: 5px;
+    };
+
+    .main__midline__default  {
+      background-color: #333 !important;
     }
   }
 }

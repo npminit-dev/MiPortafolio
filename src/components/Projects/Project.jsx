@@ -1,16 +1,13 @@
-import { useContext } from "react";
 import "../../styles/projects.scss";
 import { AiFillGithub, AiOutlineGlobal } from "react-icons/ai";
-import { themeContext } from "../ThemeContext";
 import LazyLoad from "react-lazy-load";
 import { v4 as uuidv4 } from 'uuid'
 import { Tooltip, Image } from 'antd'
 
 export default function Project({ name, info, cover, thumbnail, tecs, link, repo }) {
-  const { theme } = useContext(themeContext);
 
   return (
-    <div className={`project ${theme}`}>
+    <div className={`project`}>
       <LazyLoad
         className="LazyLoad"
       >
