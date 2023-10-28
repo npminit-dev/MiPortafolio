@@ -44,7 +44,7 @@ export default function NetWorks() {
           </div>
         </a>
         <a 
-          href="https://www.linkedin.com/in/beats-4-all-81b52a262/"
+          onClick={() => alert('Disponible proximamente xD')}
           className="nw__box__nwbox"
         >
           <div className="nw__box__nwbox__title">LinkedIn</div>

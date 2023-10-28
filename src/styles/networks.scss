@@ -5,6 +5,7 @@
   @include mx.centercontent;
   height: 350px;
   width: 100vw;
+  margin-top: 50px;
 
   #nw__box {
     @include mx.centercontent;
@@ -25,6 +26,7 @@
       text-decoration: none;
       color: inherit;
       opacity: 0;
+      cursor: pointer;
 
       &:hover {
         transform: scale(1.03);

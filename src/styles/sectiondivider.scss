@@ -7,8 +7,7 @@
   grid-template-rows: 70% 30%;
   height: 70px;
   width: 100%;
-  margin-bottom: 40px;
-  margin-top: 40px;
+  margin: 50px 0;
 
   &:hover > &__iconbox > &__iconbox__icon {
     animation: arrowbreath .5s linear infinite;
@@ -17,7 +16,7 @@
   &__title {
     @include mx.centercontent;
     font-family: 'Nunito', sans-serif;
-    font-size: 25px;
+    font-size: 38px;
     -webkit-user-select: none;
     user-select: none;
     cursor: pointer

@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, useRef } from "react";
+import { useEffect, useContext, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 import "../../styles/decorations.scss";
 import { drawcontext } from "../DrawContext";
@@ -22,6 +22,7 @@ export default function DrawSVG({
     right: `${right ?? 'unset'}px`,
     bottom: `${bottom ?? 'unset'}px`,
     left: `${left ?? 'unset'}px`,
+    zIndex: -1000
   };
 
   useEffect(() => {

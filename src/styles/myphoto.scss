@@ -4,7 +4,7 @@
 #myphoto {
   @include mx.centercontent;
   position: relative;
-  margin: 20px 0;
+  margin: 50px 0;
   height: 350px;
   width: 350px;
   box-shadow: 0 0 10px grey;
@@ -13,7 +13,7 @@
   background-color: var(--light-font3);
   opacity: 0;
   animation: myphoto_appear .5s ease-out forwards .7s;
-
+  
   &__photo {
     @include mx.centercontent;
     position: absolute;
@@ -22,6 +22,8 @@
     clip-path: circle(50% at 50% 50%);
     overflow: hidden;
     z-index: 100;
+    cursor: pointer;
+    object-fit: fill;
 
     img {
       position: absolute;
@@ -79,19 +81,19 @@
 }
 
 #first > .myphoto_circle_box__inner {
-  background-color: #852EF0;
+  background-color: #032F57;
 }
 
 #second > .myphoto_circle_box__inner {
-  background-color: #6E26C7;
+  background-color: #515703;
 }
 
 #third .myphoto_circle_box__inner {
-  background-color: #280E47;
+  background-color: #570703;
 }
 
 #fourth .myphoto_circle_box__inner {
-  background-color: #581E9E;
+  background-color: #72A6D6;
 }
 
 /* animation and classes */

@@ -5,7 +5,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 export default function SolarSystem() {
 
-  const model = useLoader(GLTFLoader, "../../../assets/models/SolarSysModel.glb");
+  const model = useLoader(GLTFLoader, '/assets/models/SolarSysModel.glb');
   const { camera } = useThree()
 
   useEffect(() => {

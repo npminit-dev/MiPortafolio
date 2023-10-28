@@ -47,7 +47,7 @@ export default function PersonalInfo() {
           <div id="p__info__box__imgbox">
             <img 
               id="p__info__box__imgbox__img"
-              src='https://i.ibb.co/QdMvV4r/presentacion-movil-9.jpg' 
+              src='https://i.ibb.co/rtPfrTf/main.webp' 
               alt='Foto de la carta de presentacion' 
             ></img>
           </div>
@@ -69,16 +69,8 @@ export default function PersonalInfo() {
               <span className="p__info__box__databox__data__data">Buenos Aires, Argentina</span>
             </div>
             <div className="p__info__box__databox__data">
-              <strong className="p__info__box__databox__data__label">DNI: </strong>
-              <span className="p__info__box__databox__data__data">45869202</span>
-            </div>
-            <div className="p__info__box__databox__data">
               <strong className="p__info__box__databox__data__label">Edad: </strong>
               <span className="p__info__box__databox__data__data">28 años</span>
-            </div>
-            <div className="p__info__box__databox__data">
-              <strong className="p__info__box__databox__data__label">Estado civil: </strong>
-              <span className="p__info__box__databox__data__data">Soltero</span>
             </div>
             <div className="p__info__box__databox__data">
               <strong className="p__info__box__databox__data__label">Nacionalidad: </strong>
@@ -91,10 +83,10 @@ export default function PersonalInfo() {
             Soy un programador principalmente autodidacta, desde pequeño me han gustado los temas relacionados a las computadoras. Comencé a programar en la universidad donde aprendí las bases de la programación en lenguaje <dfn>C</dfn>.
           </p>
           <p className="p__info__box__review__paragraph">
-            Luego aprendí POO en <dfn>Java</dfn>, donde realicé varios proyectos para la universidad y aprendí sobre los conceptos clave de este paradigma. También me formé sobre las bases de datos relacionales.
+            Luego aprendí POO en <dfn>Java</dfn>, donde realicé varios proyectos y aprendí sobre los conceptos clave de este paradigma. También me formé sobre las bases de datos relacionales.
           </p>
           <p className="p__info__box__review__paragraph">
-            Finalmente, aprendí sobre el desarrollo web por mi cuenta, <dfn>HTML5</dfn>, <dfn>CSS3</dfn> y <dfn>JavaScript</dfn>, que es el lenguaje que mejor domino con diferencia, junto a varias librerías de componentes y preprocesadores como <dfn>SASS</dfn>, también tengo conocimientos de backend con <dfn>NodeJS</dfn>, aunque podría aprender cualquier herramienta de ser necesario. 
+            Finalmente, aprendí sobre el desarrollo web por mi cuenta, <dfn>HTML5</dfn>, <dfn>CSS3</dfn> y <dfn>JavaScript</dfn>, que es el lenguaje que mejor domino, junto a varias librerías de componentes y preprocesadores como <dfn>SASS</dfn>, también tengo conocimientos de backend con <dfn>NodeJS</dfn>, aunque podría aprender cualquier herramienta de ser necesario. 
           </p>
           <p className="p__info__box__review__paragraph">
             Mi objetivo profesional y personal es el constante aprendizaje y el desarrollo de mi capacidad para resolver los problemas que se presenten diariamente.

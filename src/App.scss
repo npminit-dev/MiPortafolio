@@ -3,7 +3,6 @@
 body {
   margin: 0;
   font-family: 'Roboto Slab', serif;
-  background-color: var(--light-background5) !important;
 }
 
 * {
@@ -16,7 +15,21 @@ body {
 }
 
 #App {
-  @include mixins.app
+  @include mixins.app;
+}
+
+#background__pattern {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: #e8e8e8;
+  opacity: 0.15;
+  background-image:  linear-gradient(30deg, #a0a0a0 12%, transparent 12.5%, transparent 87%, #a0a0a0 87.5%, #a0a0a0), linear-gradient(150deg, #a0a0a0 12%, transparent 12.5%, transparent 87%, #a0a0a0 87.5%, #a0a0a0), linear-gradient(30deg, #a0a0a0 12%, transparent 12.5%, transparent 87%, #a0a0a0 87.5%, #a0a0a0), linear-gradient(150deg, #a0a0a0 12%, transparent 12.5%, transparent 87%, #a0a0a0 87.5%, #a0a0a0), linear-gradient(60deg, #a0a0a077 25%, transparent 25.5%, transparent 75%, #a0a0a077 75%, #a0a0a077), linear-gradient(60deg, #a0a0a077 25%, transparent 25.5%, transparent 75%, #a0a0a077 75%, #a0a0a077);
+  background-size: 80px 140px;
+  background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+  z-index: -1200;
 }
 
 :root {
@@ -44,14 +57,14 @@ body {
 
 }
 
-@font-face {
-  font-family: "matrixSymbols1";   /*Can be any text*/
-  src: local("matrixSymbols1"),
-    url("./fonts/matrix\ code\ nfi.ttf") format("truetype");
-}
+// @font-face {
+//   font-family: "matrixSymbols1";   /*Can be any text*/
+//   src: local("matrixSymbols1"),
+//     url("./fonts/matrix\ code\ nfi.ttf") format("truetype");
+// }
 
-@font-face {
-  font-family: "matrixSymbols2";   /*Can be any text*/
-  src: local("matrixSymbols2"),
-    url("./fonts/matrix\ code\ nfi.otf") format("opentype");
-}
+// @font-face {
+//   font-family: "matrixSymbols2";   /*Can be any text*/
+//   src: local("matrixSymbols2"),
+//     url("./fonts/matrix\ code\ nfi.otf") format("opentype");
+// }

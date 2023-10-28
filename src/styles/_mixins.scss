@@ -57,28 +57,33 @@
 
 @mixin mainmidline {
   position: relative;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin mainopen_closetags {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 500;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @mixin mainnametheme {
   &.light {
     color: c.$dark-background3;
   }
-  &.dark {
-    color: c.$light-background3;
-  }
 }
 
 @mixin mainroletheme {
   &.light {
     color: c.$dark-background6;
-  }
-  &.dark {
-    color: c.$light-background3;
   }
 }
 

@@ -12,18 +12,17 @@ ul {
 .skills {
   @include mx.centercontent;
   position: relative;
-  width: 100%;
+  width: 100vw;
   height: 650px;
   overflow: hidden;
   
   &__selectcount {
     @include mx.centercontent;
     position: absolute;
-    width: 50vw;
+    width: 100%;
     height: 50px;
     bottom: 20px;
     z-index: 1000;
-    left: 24%;
 
     & > div {
       @include mx.centercontent;

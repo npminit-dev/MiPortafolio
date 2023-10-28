@@ -30,6 +30,7 @@ export default function Main() {
 
   return (
     <div id="main" ref={mainRef}>
+      <span id="main__opentag" className={`${hovered ? 'opentag_out' : 'opentag_in'}`}>{'<'}</span>
       <span id="main__name" className={`${hovered ? 'main_name_out' : 'main_name_in'}`}>
         <span>JORGE</span>
         <span>BALSAMO</span>
@@ -42,6 +43,7 @@ export default function Main() {
         <span>END</span>
         <span>DEV</span>
       </span>
+      <span id="main__closetag" className={`${hovered ? 'closetag_out' : 'closetag_in'}`}>{'/>'} </span>
     </div>
   )
 }

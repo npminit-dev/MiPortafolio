@@ -1,8 +1,23 @@
 #graph_container {
   position: absolute;
-  height: 750px;
-  width: 1500px;
-  top: 1500px;
+  height: 700px;
+  width: 1200px;
+  top: -10px;
+  right: -100px;
   z-index: -1000;
   background-color: transparent;
+}
+
+.graph_appear {
+  animation: graph_appear 5000ms linear forwards;
+};
+
+@keyframes graph_appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }

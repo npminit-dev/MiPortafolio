@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import '../../App.scss'
 import '../../styles/presentation.scss'
-import Lens from './Lens'
 import { paragraphs } from '../../data/presentation'
 import Paragraph from './Paragraph'
 import { v4 as uuidv4 } from 'uuid';
@@ -34,7 +33,6 @@ export default function Presentation() {
           ></Paragraph>
         })
       }
-      <Lens containerRef={containerRef}></Lens>
     </div>
   )
 }

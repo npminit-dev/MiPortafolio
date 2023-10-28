@@ -38,7 +38,8 @@ export default function MyPhoto() {
     <div id='myphoto' ref={containerRef}>
       <span id='myphoto__photo'>
         <img ref={imgRef} 
-          src='https://i.ibb.co/NKZcnpZ/veridity-lasombradelenga-o.webp'
+          src='https://i.ibb.co/HY200dh/main2.webp'
+          alt='Foto principal del propietario del portafolio'
           className={`${centeredImg ? 'img_normalized' : ''}`}
         ></img>
         <div id='myphoto__loadmask'>
