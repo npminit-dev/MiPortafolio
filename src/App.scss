@@ -1,4 +1,5 @@
 @use 'styles/_mixins.scss';
+@use 'styles/colors' as c;
 
 body {
   margin: 0;
@@ -16,6 +17,7 @@ body {
 
 #App {
   @include mixins.app;
+  overflow: hidden;
 }
 
 #background__pattern {
@@ -24,9 +26,9 @@ body {
   left: 0;
   height: 100vh;
   width: 100vw;
-  background-color: #e8e8e8;
-  opacity: 0.15;
-  background-image:  linear-gradient(30deg, #a0a0a0 12%, transparent 12.5%, transparent 87%, #a0a0a0 87.5%, #a0a0a0), linear-gradient(150deg, #a0a0a0 12%, transparent 12.5%, transparent 87%, #a0a0a0 87.5%, #a0a0a0), linear-gradient(30deg, #a0a0a0 12%, transparent 12.5%, transparent 87%, #a0a0a0 87.5%, #a0a0a0), linear-gradient(150deg, #a0a0a0 12%, transparent 12.5%, transparent 87%, #a0a0a0 87.5%, #a0a0a0), linear-gradient(60deg, #a0a0a077 25%, transparent 25.5%, transparent 75%, #a0a0a077 75%, #a0a0a077), linear-gradient(60deg, #a0a0a077 25%, transparent 25.5%, transparent 75%, #a0a0a077 75%, #a0a0a077);
+  background-color: #061178;
+  opacity: 1;
+  background-image:  linear-gradient(30deg, #030852 12%, transparent 12.5%, transparent 87%, #030852 87.5%, #030852), linear-gradient(150deg, #030852 12%, transparent 12.5%, transparent 87%, #030852 87.5%, #030852), linear-gradient(30deg, #030852 12%, transparent 12.5%, transparent 87%, #030852 87.5%, #030852), linear-gradient(150deg, #030852 12%, transparent 12.5%, transparent 87%, #030852 87.5%, #030852), linear-gradient(60deg, #03085277 25%, transparent 25.5%, transparent 75%, #03085277 75%, #03085277), linear-gradient(60deg, #03085277 25%, transparent 25.5%, transparent 75%, #03085277 75%, #03085277);
   background-size: 80px 140px;
   background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
   z-index: -1200;

@@ -6,6 +6,7 @@
   right: -100px;
   z-index: -1000;
   background-color: transparent;
+  filter: opacity(0);
 }
 
 .graph_appear {
@@ -14,10 +15,10 @@
 
 @keyframes graph_appear {
   from {
-    opacity: 0;
+    filter: opacity(0);
   }
 
   to {
-    opacity: 1;
+    filter: opacity(1);
   }
 }

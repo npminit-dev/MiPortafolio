@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useContext } from "react";
+import { useState, useEffect, useRef } from "react";
 import { skills } from "../../data/skillsdata";
 import SkillList from "./SkillList";
 import { v4 as uuidv4 } from "uuid";

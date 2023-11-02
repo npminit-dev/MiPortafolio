@@ -17,11 +17,10 @@
     @include mixins.maintext;
     align-items: end;
     transform: translateX(-20px);
-    color: #551c3b;
+    color: colors.$blue-1;
     span {
-      text-shadow: 4px 4px 5px white, -4px 4px 5px white, 4px -4px 5px white, -4px -4px 5px white;
       font-size: 45px;
-      font-weight: 600;
+      font-weight: 500;
       line-height: 110%;
     }
   };
@@ -31,11 +30,10 @@
     @include mixins.maintext;
     align-items: start;
     transform: translateX(20px);
-    color: #301c4d;
+    color: colors.$blue-1;
     span {
-      text-shadow: 4px 4px 5px white, -4px 4px 5px white, 4px -4px 5px white, -4px -4px 5px white;
       font-size: 32px;
-      font-weight: 600;
+      font-weight: 500;
       line-height: 110%;
     }
   };
@@ -44,7 +42,6 @@
     @include mixins.mainmidline;
     span {
       @include mixins.mainmidtheme;
-      box-shadow: 4px 4px 5px white, -4px 4px 5px white, 4px -4px 5px white, -4px -4px 5px white;
       position: absolute;
       width: 5px;
       height: 80px;
@@ -52,8 +49,7 @@
     };
 
     .main__midline__default  {
-      background-color: #333 !important;
-      box-shadow: 4px 4px 5px white, -4px 4px 5px white, 4px -4px 5px white, -4px -4px 5px white;
+      background-color: colors.$blue-4 !important;
     }
   }
 
@@ -62,7 +58,6 @@
     justify-content: end;
     font-size: 60px;
     opacity: 0;
-    text-shadow: 4px 4px 5px white, -4px 4px 5px white, 4px -4px 5px white, -4px -4px 5px white;
   }
 
   &__closetag {
@@ -71,7 +66,6 @@
     font-size: 60px;
     opacity: 0;
     left: -5px;
-    text-shadow: 4px 4px 5px white, -4px 4px 5px white, 4px -4px 5px white, -4px -4px 5px white;
   }
 }
 
@@ -102,7 +96,7 @@
 }
 
 .opentag_in {
-  animation: opentag_in .5s linear 750ms forwards
+  animation: opentag_in .5s linear 1000ms forwards
 }
 
 .opentag_out {
@@ -110,7 +104,7 @@
 }
 
 .closetag_in {
-  animation: closetag_in .5s linear 750ms forwards
+  animation: closetag_in .5s linear 1000ms forwards
 }
 
 .closetag_out {

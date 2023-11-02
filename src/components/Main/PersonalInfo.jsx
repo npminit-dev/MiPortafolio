@@ -1,6 +1,5 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import "../../styles/personalinfo.scss";
-import { FaRegFilePdf } from "react-icons/fa";
 
 const getCoords = (element) => {
   let rect = element.target.getBoundingClientRect();

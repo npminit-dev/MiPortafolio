@@ -19,7 +19,8 @@
     font-size: 38px;
     -webkit-user-select: none;
     user-select: none;
-    cursor: pointer
+    cursor: pointer;
+    color: c.$blue-2;
   }
 
   &__iconbox {
@@ -29,6 +30,7 @@
     &__icon {
       height: 50px;
       width: 50px;
+      color: c.$blue-2;
     }
   }
 

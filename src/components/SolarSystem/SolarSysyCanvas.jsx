@@ -10,17 +10,16 @@ export default function SolarSystemCanvas() {
   const [load, setLoad] = useState(null)
 
   useEffect(() => {
-    if(inView) setTimeout(() => setLoad(true), 1500)
+    if(inView) setTimeout(() => setLoad(true), 3000)
   }, [inView])
 
   return (
     <div id='graph_container' ref={ref} className={load ? 'graph_appear' : ''}>
       {
-        load ?
-        <Canvas camera={{ position: [10, 2, 1], rotateX: 50 }} resize={{ scroll: false }}>
-          <directionalLight color="PowderBlue" position={[50, 10, -70]} intensity={4}/>
-          <SolarSystem></SolarSystem>
-        </Canvas> : <></>
+      <Canvas camera={{ position: [10, 2, 1], rotateX: 50 }} resize={{ scroll: false }}>
+        <directionalLight color="#450678" position={[50, 10, -70]} intensity={25}/>
+        <SolarSystem></SolarSystem>
+      </Canvas> 
       }
     </div>
   )

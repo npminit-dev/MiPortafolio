@@ -13,7 +13,7 @@ export default function DrawSVG({
   reversed, duration
 }) {
   const { ref, inView, entry } = useInView({ initialInView: false });
-  const { drawOn, isDownScrolled } = useContext(drawcontext);
+  const { isDownScrolled } = useContext(drawcontext);
   const pathRef = useRef(null)
 
   const svgstyle = {
@@ -26,13 +26,13 @@ export default function DrawSVG({
   };
 
   useEffect(() => {
-    if (isDownScrolled && drawOn && inView) {
+    if (isDownScrolled && inView) {
       pathRef.current?.animate(drawAnimationKeyframes, reversed ? drawOutOptions : drawInOptions)
     }
-    if (!isDownScrolled && drawOn && inView) {
+    if (!isDownScrolled && inView) {
       pathRef.current?.animate(drawAnimationKeyframes, reversed ? drawInOptions : drawOutOptions)
     }
-  }, [inView, isDownScrolled, drawOn]);
+  }, [inView, isDownScrolled]);
 
   const drawAnimationKeyframes = [
     { strokeDasharray: `0 ${Math.ceil(pathRef.current?.getTotalLength())}`, visibility: 'hidden'}, 

@@ -1,3 +1,5 @@
+@use './colors' as c;
+
 #presentation_container {
   position: relative;
   display: flex;
@@ -18,66 +20,8 @@
   width: 100vw;
 }
 
-.lens {
-  position: absolute;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 70px;
-  width: 70px;
-  border-radius: 100%;
-  background: radial-gradient(rgba(255, 255, 255, 0.615), rgba(255, 255, 255, 0.529), rgba(255, 255, 255, 0.49), rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.353), rgba(255, 255, 255, 0.150));
-  -webkit-backdrop-filter: invert(1);
-  backdrop-filter: invert(1);
-  border: 2px solid black;
-  z-index: 1000;
-}
-
-.lens_invisible {
-  opacity: 0;
-}
-
-.lens_in {
-  animation: lens_appear .15s ease-out forwards
-}
-
-.lens_out {
-  animation: lens_disappear .15s ease-out forwards
-}
-
-#lanter_handler {
-  position: absolute;
-  height: 50%;
-  width: 75%;
-  clip-path: polygon(43% 0, 54% 0, 54% 9%, 53% 9%, 53% 69%, 50% 72%, 51% 78%, 51% 89%, 46% 89%, 46% 78%, 47% 72%, 44% 69%, 44% 9%, 43% 9%);
-  background-color: var(--light-font3);
-  transform: rotateZ(135deg);
-  top: 50px;
-  left: 40px
-}
-
-
 /* animations */
 
-@keyframes lens_appear {
-  from {
-    filter: opacity(0)
-  }
-
-  to {
-    filter: opacity(1)
-  }
-}
-
-@keyframes lens_disappear {
-  from {
-    filter: opacity(1)
-  }
-
-  to {
-    filter: opacity(0)
-  }
-}
 
 /* paragraph */
 
@@ -85,10 +29,10 @@
   width: 100%;
   height: min-content;
   text-align: center;
-  font-size: 18px;
+  font-size: 17px;
 
   p {
-    margin: 7px 0;
+    margin: 5px 0 0 0;
   }
 }
 
@@ -97,11 +41,11 @@
 .paragraph_letter-hide {
   color: transparent;
   font-family: 'Nunito', sans-serif;
-  font-weight: 300;
+  font-weight: 200;
 }
 
 .paragraph_letter-shown {
   font-family: 'Nunito', sans-serif;
-  font-weight: 300;
-  color: var(--light-font1)
+  font-weight: 200;
+  color: c.$blue-2;
 }

@@ -1,67 +1,109 @@
 @use './mixins' as mx;
 @use './colors' as cl;
 
-#myphoto {
-  @include mx.centercontent;
-  position: relative;
-  margin: 50px 0;
-  height: 350px;
-  width: 350px;
-  box-shadow: 0 0 10px grey;
-  clip-path: circle(50% at 50% 50%);
-  overflow: hidden;
-  background-color: var(--light-font3);
-  opacity: 0;
-  animation: myphoto_appear .5s ease-out forwards .7s;
-  
-  &__photo {
+#photo__animbox {
+
+  display: grid;
+  grid-template-columns: auto min-content auto;
+  width: 100vw;
+
+  #photo__animbox__leftarrows {
     @include mx.centercontent;
-    position: absolute;
-    height: 96%;
-    width: 96%;
+    justify-content: end;
+    .photo__animbox__leftarrow {
+      height: 80px;
+      width: 70px;
+      clip-path: polygon(25% 0, 50% 50%, 25% 100%, 0% 100%, 25% 50%, 0% 0%);
+      background-color: cl.$square-4;
+      filter: opacity(0)
+    }
+  }
+
+  #photo__animbox__rightarrows {
+    @include mx.centercontent;
+    justify-content: start;
+    .photo__animbox__rightarrow {
+      height: 80px;
+      width: 70px;
+      clip-path: polygon(100% 0%, 75% 50%, 100% 100%, 75% 100%, 50% 50%, 75% 0);    
+      background-color: cl.$square-4;
+      filter: opacity(0)
+    }
+  }
+
+  #myphoto {
+    @include mx.centercontent;
+    position: relative;
+    height: 225px;
+    width: 225px;
     clip-path: circle(50% at 50% 50%);
     overflow: hidden;
-    z-index: 100;
-    cursor: pointer;
-    object-fit: fill;
-
-    img {
+    background-color: cl.$analog-1;
+    filter: opacity(0);
+    animation: myphoto_appear .5s ease-out forwards 1.8s;
+    
+    &__photo {
+      @include mx.centercontent;
       position: absolute;
+      height: 95%;
+      width: 95%;
+      clip-path: circle(50% at 50% 50%);
+      overflow: hidden;
+      z-index: 100;
+      cursor: pointer;
+      object-fit: cover;
+  
+      img {
+        position: absolute;
+        height: 115%;
+        width: 115%;
+      }
     }
-  }
-
-  &__loadmask {
-    @include mx.centercontent;
-    background-color: cl.$light-background1;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    clip-path: circle(50% at 50% 50%);
-    z-index: -1;
-    &__text {
-      font-size: 30px;
+  
+    &__loadmask {
+      @include mx.centercontent;
+      background-color: cl.$analog-1;
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      clip-path: circle(50% at 50% 50%);
+      z-index: -1;
+      &__text {
+        font-size: 30px;
+        color: cl.$blue-1;
+      }
     }
+  
+    .myphoto_circle_box {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: end;
+      height: 100%;
+      width: 100%;
+      border-radius: 100%;
+    }
+  
+    .myphoto_circle_box__inner {
+      position: absolute;
+      height: 80%;
+      width: 80%;
+      border-radius: 100%;
+      z-index: 1000;
+    }
+   
   }
-
-  .myphoto_circle_box {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    height: 100%;
-    width: 100%;
-    border-radius: 100%;
-  }
-
-  .myphoto_circle_box__inner {
-    position: absolute;
-    height: 80%;
-    width: 80%;
-    border-radius: 100%;
-    z-index: 1000;
-  }
- 
 }
+
+@for $i from 1 through 3 {
+  .photo__animbox__leftarrow:nth-child(#{$i}) {
+    animation: arrow_appear .5s linear #{1000 + 150 * $i}ms forwards;
+  }
+  .photo__animbox__rightarrow:nth-child(#{$i}) {
+    animation: arrow_appear .5s linear #{1000 + 150 * ((4 - $i))}ms forwards;
+  };
+}
+
 
 
 #first {
@@ -105,13 +147,11 @@
 
 @keyframes myphoto_appear {
   from {
-    filter: grayscale(1);
-    opacity: 0;
+    filter: grayscale(1) opacity(0);
   }
 
   to {
-    filter: grayscale(0); 
-    opacity: 1
+    filter: grayscale(0) opacity(1); 
   }
 }
 
@@ -133,6 +173,18 @@
 
   to {
     transform: translate(0px, 0px);
+  }
+}
+
+@keyframes arrow_appear {
+  0% {
+    filter: opacity(0);
+  }
+  50% {
+    filter: opacity(1)
+  }
+  100% {
+    filter: opacity(0);
   }
 }
 

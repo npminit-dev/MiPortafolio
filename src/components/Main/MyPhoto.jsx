@@ -1,7 +1,6 @@
 import { useRef, useState, useEffect } from 'react'
 import '../../App.scss'
 import '../../styles/myphoto.scss'
-import { Image } from 'antd'
 
 export default function MyPhoto() {
 
@@ -35,31 +34,31 @@ export default function MyPhoto() {
   }, [])
 
   return (
-    <div id='myphoto' ref={containerRef}>
-      <span id='myphoto__photo'>
-        <img ref={imgRef} 
-          src='https://i.ibb.co/HY200dh/main2.webp'
-          alt='Foto principal del propietario del portafolio'
-          className={`${centeredImg ? 'img_normalized' : ''}`}
-        ></img>
-        <div id='myphoto__loadmask'>
-          <span id='myphoto__loadmask__text'>
-            loading...
-          </span>
-        </div>
-      </span>
-      <span id='first' className='myphoto_circle_box'>
-        <div className='myphoto_circle_box__inner'></div>
-      </span>
-      <span id='second' className='myphoto_circle_box'>
-        <div className='myphoto_circle_box__inner'></div>
-      </span>
-      <span id='third' className='myphoto_circle_box'>
-        <div className='myphoto_circle_box__inner'></div>
-      </span>
-      <span id='fourth' className='myphoto_circle_box'>
-        <div className='myphoto_circle_box__inner'></div>
-      </span>
-    </div>
+    <span id='photo__animbox'>
+      <div id='photo__animbox__leftarrows'>
+        <div className='photo__animbox__leftarrow'></div>
+        <div className='photo__animbox__leftarrow'></div>
+        <div className='photo__animbox__leftarrow'></div>
+      </div>
+      <div id='myphoto' ref={containerRef}>
+        <span id='myphoto__photo'>
+          <img ref={imgRef} 
+            src='../../../public/assets/avatar.jpg'
+            alt='Foto principal del propietario del portafolio'
+            className={`${centeredImg ? 'img_normalized' : ''}`}
+          ></img>
+          <div id='myphoto__loadmask'>
+            <span id='myphoto__loadmask__text'>
+              loading...
+            </span>
+          </div>
+        </span>
+      </div>
+      <div id='photo__animbox__rightarrows'>
+        <div className='photo__animbox__rightarrow'></div>
+        <div className='photo__animbox__rightarrow'></div>
+        <div className='photo__animbox__rightarrow'></div>
+      </div>
+    </span>
   )
 }

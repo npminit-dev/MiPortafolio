@@ -20,7 +20,7 @@ export default function Paragraph({ content, i, status, setStatus, start }) {
     return new Promise(async (res) => {
       await letterDelay()
       setPartial(partial => partial += content[index])
-      setindex(index + 1)
+      setindex(index => index + 1)
       res('')
     })
   }
@@ -33,7 +33,6 @@ export default function Paragraph({ content, i, status, setStatus, start }) {
     }
      
     if(start === 'pending') exe()
-
     if(index >= content.length) setTimeout(() => {
       setStatus(status => {
         return status.map((ord, ord_i) => {
@@ -42,8 +41,8 @@ export default function Paragraph({ content, i, status, setStatus, start }) {
           return ord
         })
       })
-    }, i === 0 || i === status.length - 2 ? 1000 : 400)
-    
+    }, i === 0 || i === status.length - 2 ? 800 : 400)
+       
     return () => clearTimeout(timer)
   }, [partial])
 
