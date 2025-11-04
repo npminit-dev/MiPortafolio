@@ -1,0 +1,213 @@
+@import "tailwindcss";
+
+/* FUENTES */
+
+/* JetBrains Mono - Para código y efectos typing */
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/font/JetBrains_Mono/JetBrainsMono-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/font/JetBrains_Mono/JetBrainsMono-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/font/JetBrains_Mono/JetBrainsMono-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/font/JetBrains_Mono/JetBrainsMono-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/font/JetBrains_Mono/JetBrainsMono-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/font/JetBrains_Mono/JetBrainsMono-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/font/JetBrains_Mono/JetBrainsMono-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/font/JetBrains_Mono/JetBrainsMono-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* JetBrains Mono Italic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/font/JetBrains_Mono/JetBrainsMono-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/font/JetBrains_Mono/JetBrainsMono-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Rajdhani - Para títulos y headings */
+@font-face {
+  font-family: 'Rajdhani';
+  src: url('/font/Rajdhani/Rajdhani-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rajdhani';
+  src: url('/font/Rajdhani/Rajdhani-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rajdhani';
+  src: url('/font/Rajdhani/Rajdhani-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rajdhani';
+  src: url('/font/Rajdhani/Rajdhani-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rajdhani';
+  src: url('/font/Rajdhani/Rajdhani-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Space Mono - Para UI y textos body */
+@font-face {
+  font-family: 'Space Mono';
+  src: url('/font/Space_Mono/SpaceMono-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Space Mono';
+  src: url('/font/Space_Mono/SpaceMono-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Space Mono';
+  src: url('/font/Space_Mono/SpaceMono-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Space Mono';
+  src: url('/font/Space_Mono/SpaceMono-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@theme {
+  /* Fuentes */
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-display: 'Rajdhani', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Space Mono', ui-monospace, monospace;
+
+  /* Colores de fondo oscuros */
+  --color-void-950: #050a14;
+  --color-void-900: #0a1128;
+  --color-void-800: #0f1729;
+  --color-void-700: #151d2f;
+  --color-void-600: #1a2438;
+
+  /* Acentos cyan/azul eléctrico */
+  --color-neon-cyan-500: #00d9ff;
+  --color-neon-cyan-600: #00b8d4;
+  --color-neon-cyan-700: #0096c7;
+  --color-neon-cyan-800: #0077b6;
+  --color-neon-cyan-900: #005f8f;
+
+  /* Acentos verde neón */
+  --color-neon-green-500: #00ffa3;
+  --color-neon-green-600: #00e08e;
+  --color-neon-green-700: #00c27a;
+  --color-neon-green-800: #00a868;
+  --color-neon-green-900: #008f57;
+
+  /* Acentos púrpura */
+  --color-plasma-purple-400: #a78bfa;
+  --color-plasma-purple-500: #8b5cf6;
+  --color-plasma-purple-600: #7c3aed;
+  --color-plasma-purple-700: #6d28d9;
+  --color-plasma-purple-800: #5b21b6;
+
+  /* Acentos magenta/violeta */
+  --color-plasma-magenta-400: #e879f9;
+  --color-plasma-magenta-500: #d946ef;
+  --color-plasma-magenta-600: #c026d3;
+  --color-plasma-magenta-700: #a21caf;
+  --color-plasma-magenta-800: #86198f;
+
+  /* Blancos */
+  --color-ghost-100: #ffffff;
+  --color-ghost-200: #e8eef5;
+  --color-ghost-300: #c9d6e8;
+
+  /* Negros y grises */
+  --color-shadow-100: #000000;
+  --color-shadow-200: #0d1117;
+  --color-shadow-300: #1c2333;
+  --color-shadow-400: #2a3244;
+  --color-shadow-500: #3d4660;
+}
