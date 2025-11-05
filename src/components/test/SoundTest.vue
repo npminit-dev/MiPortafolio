@@ -4,7 +4,7 @@
   const soundSt = useSoundStore()
 
   function toggle() {
-    if(soundSt.soundEnabled) {
+    if(soundSt.isSoundEnabled) {
       soundSt.setSoundEnabled(false)
     } else soundSt.setSoundEnabled(true)
   }
@@ -15,7 +15,7 @@
   <button type="button" @click="soundSt.setSoundEnabled(true)">activate</button>
   <br>
   <button type="button" @click="soundSt.play(soundSt.sounds['background-2'])">play background</button>
-  <button type="button" @click="soundSt.play(soundSt.sounds['select-3'])">play fx</button>
+  <button type="button" @click="soundSt.play(soundSt.sounds['select-2'])">play fx</button>
   <br>
   <button @click="toggle">
     toggle volume
