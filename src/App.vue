@@ -1,11 +1,16 @@
 <script setup lang="ts">
-  import LangTest from './components/test/LangTest.vue'
-  import SoundTest from './components/test/SoundTest.vue';
-  
 </script>
 
 <template>
-  <LangTest/>
+
+
+
+
+  <!-- <LangTest />
   <br>
-  <SoundTest/>
+  <SoundTest />
+  <br>
+  <BackgroundTest/> -->
 </template>
+
+

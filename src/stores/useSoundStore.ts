@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
-import { computed, reactive, ref, shallowReactive, watch, watchEffect } from 'vue'
-import { Howl, Howler } from 'howler';
+import { reactive, ref, watch } from 'vue'
+import { Howl } from 'howler';
 
 type Sound = 'background-1' | 'background-2' | 'background-3' | 'error-1' | 'error-2' | 'hit-1' | 'hover-1' | 'hover-2' | 'loading-1' |
   'loading-2' | 'loading-3' | 'loading-4' | 'select-1' | 'select-2' | 'select-3' | 'select-4' | 'select-5' | 'transition-1' | 'transition-2' | 'transition-3'
@@ -14,15 +14,15 @@ type Howlers = Record<Sound, HowlRecord>
 
 const howlers: Howlers = {
   "background-1": {
-    howl: new Howl({ src: ['sound/background-1.mp3'], volume: 0, loop: true }),
+    howl: new Howl({ src: ['sound/background-1.mp3'], volume: 0, loop: true, html5: true }),
     maxVolume: 0.3
   },
   "background-2": {
-    howl: new Howl({ src: ['sound/background-2.mp3'], volume: 0, loop: true }),
+    howl: new Howl({ src: ['sound/background-2.mp3'], volume: 0, loop: true, html5: true }),
     maxVolume: 0.3
   },
   "background-3": {
-    howl: new Howl({ src: ['sound/background-3.mp3'], volume: 0, loop: true }),
+    howl: new Howl({ src: ['sound/background-3.mp3'], volume: 0, loop: true, html5: true }),
     maxVolume: 0.8
   },
   "error-1": {
@@ -98,7 +98,6 @@ const howlers: Howlers = {
 export const useSoundStore = defineStore('soundStore', () => {
 
   const isSoundEnabled = ref<boolean>(false)
-  const globalVolume = ref<number>(0)
   const sounds = reactive(howlers)
 
   function setSoundEnabled(newStatus: boolean) {
@@ -110,7 +109,7 @@ export const useSoundStore = defineStore('soundStore', () => {
       sound.howl.play()
     } else {
       if(sound.howl.volume() !== 0) {
-        sound.howl.fade(sound.howl.volume(), 0, 500)
+        sound.howl.fade(sound.howl.volume(), 0, 2000)
       }
     }
   }
@@ -130,7 +129,6 @@ export const useSoundStore = defineStore('soundStore', () => {
 
   return {
     isSoundEnabled,
-    globalVolume,
     sounds,
     setSoundEnabled,
     play
