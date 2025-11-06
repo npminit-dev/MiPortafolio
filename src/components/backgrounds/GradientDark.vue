@@ -3,6 +3,7 @@
 
 <template>
   <div id="background">
+    <slot/>
   </div>
 </template>
 

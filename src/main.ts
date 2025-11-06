@@ -6,9 +6,20 @@ import I18NextVue from 'i18next-vue';
 import { en } from './locales/en';
 import { es } from './locales/es';
 import { createPinia } from 'pinia';
-
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollSmoother } from "gsap/ScrollSmoother";
+import { MorphSVGPlugin } from 'gsap/MorphSVGPlugin';
+import { MotionPathHelper } from 'gsap/MotionPathHelper';
+import { ScrambleTextPlugin } from 'gsap/all';
+import { SplitText } from 'gsap/SplitText';
+import { addIcons, OhVueIcon } from 'oh-vue-icons';
+import { FiAr, FiEs } from "oh-vue-icons/icons";
+import { router } from './router';
+    
 const app = createApp(App);
 
+/* i18 config */
 await i18next.init({
   resources: {
     en: {
@@ -22,8 +33,19 @@ await i18next.init({
   fallbackLng: false
 });
 
+/* pinia */
 const pinia = createPinia()
 
+/* vue-icons */
+addIcons(FiAr, FiEs);
+app.component("v-icon", OhVueIcon);
+
+/* gsap plugin register */
+gsap.registerPlugin(ScrollTrigger,ScrollSmoother, MorphSVGPlugin, MotionPathHelper, SplitText, ScrambleTextPlugin);
+
+/* plugin use */
 app.use(I18NextVue, {i18next});
 app.use(pinia)
+app.use(router)
+
 app.mount('#app')

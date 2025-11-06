@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue';
 import i18next from 'i18next';
-import { Lang } from '../../types/globals.ts'
+import type { Lang } from '../../types/globals.ts'
 
 const lang = ref<Lang>('en');
 

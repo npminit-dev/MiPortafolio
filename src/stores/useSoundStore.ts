@@ -15,15 +15,15 @@ type Howlers = Record<Sound, HowlRecord>
 const howlers: Howlers = {
   "background-1": {
     howl: new Howl({ src: ['sound/background-1.mp3'], volume: 0, loop: true, html5: true }),
-    maxVolume: 0.3
+    maxVolume: 0.2
   },
   "background-2": {
     howl: new Howl({ src: ['sound/background-2.mp3'], volume: 0, loop: true, html5: true }),
-    maxVolume: 0.3
+    maxVolume: 0.2
   },
   "background-3": {
     howl: new Howl({ src: ['sound/background-3.mp3'], volume: 0, loop: true, html5: true }),
-    maxVolume: 0.8
+    maxVolume: 0.2
   },
   "error-1": {
     howl: new Howl({ src: ['sound/error-1.mp3'], volume: 0, }),

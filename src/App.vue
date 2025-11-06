@@ -1,16 +1,25 @@
 <script setup lang="ts">
+  import PageTransition from './components/PageTransition.vue';
+import SoundSwitcher from './components/SoundSwitcher.vue';
 </script>
 
 <template>
-
-
-
-
-  <!-- <LangTest />
-  <br>
-  <SoundTest />
-  <br>
-  <BackgroundTest/> -->
+    <!-- <LangTest />
+    <br>
+    <SoundTest />
+    <br>
+    <BackgroundTest/> -->
+    <!-- <v-icon name="fi-es"></v-icon> -->
+  <div>
+    <router-view/>
+    <PageTransition />
+    <div class="fixed right-2 bottom-2">
+      <SoundSwitcher/>
+    </div>
+    <p class="fixed bottom-2 left-2 font-display text-ghost-100">
+      {{ $t('Made with ♥') }}
+    </p>
+  </div>
 </template>
 
 
