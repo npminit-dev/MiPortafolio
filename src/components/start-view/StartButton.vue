@@ -1,110 +1,33 @@
 <script setup lang="ts">
-import { useSoundStore } from '../stores/useSoundStore';
-import { onMounted, ref, watch, nextTick } from 'vue';
+import { ref, watch, nextTick, watchEffect, onMounted } from 'vue';
 import { gsap } from 'gsap';
-import { SplitText } from 'gsap/SplitText';
-import { usePageTransition } from '../composables/usePageTransition';
+import { useSoundStore } from '../../stores/useSoundStore.ts';
+import { usePageTransition } from '../../composables/usePageTransition';
+import { useTranslation } from 'i18next-vue';
 
 const st = useSoundStore()
 const { triggerTransition } = usePageTransition()
+const { i18next } = useTranslation()
 
 const isHovered = ref<boolean>(false)
 const isClicked = ref<boolean>(false)
-const showSoundPrompt = ref<boolean>(true)
 const innerRef = ref<HTMLElement | null>(null)
 const outerRef = ref<HTMLElement | null>(null)
 const textRef = ref<HTMLElement | null>(null)
 const containerRef = ref<HTMLElement | null>(null)
-const title1Ref = ref<HTMLElement | null>(null)
-const title2Ref = ref<HTMLElement | null>(null)
 
 let hoverTimeline: gsap.core.Timeline | null = null
-let splitTitle1: any = null
-let splitTitle2: any = null
 
 onMounted(() => {
-  animateTextIn()
+  animateIn()
 })
 
-function animateTextIn() {
-  nextTick(() => {
-    if (!title1Ref.value || !title2Ref.value) return
-    
-    splitTitle1 = new SplitText(title1Ref.value, { type: 'chars' })
-    splitTitle2 = new SplitText(title2Ref.value, { type: 'chars' })
-    
-    const tl = gsap.timeline()
-    
-    tl.from(splitTitle1.chars, {
-      opacity: 0,
-      y: 10,
-      stagger: 0.01,
-      duration: 0.5,
-      ease: 'power2.out'
-    })
-    
-    tl.from(splitTitle2.chars, {
-      opacity: 0,
-      y: 10,
-      stagger: 0.01,
-      duration: 0.5,
-      ease: 'power2.out'
-    }, '-=0.6')
-    
-    tl.to([title1Ref.value, title2Ref.value], {
-      textShadow: '0 0 20px rgba(255, 255, 255, 0.3)',
-      duration: 0.5,
-      ease: 'power2.inOut'
-    }, '-=0.3')
-  })
-}
+watchEffect(() => {
+  i18next.language;
+  scrambleButtonText()
+})
 
-function handleAccept() {
-  st.play(st.sounds['select-2'])
-  
-  if (!title1Ref.value || !title2Ref.value) return
-  
-  const tl = gsap.timeline({
-    onComplete: () => {
-      st.setSoundEnabled(true)
-      showSoundPrompt.value = false
-      
-      if (splitTitle1) splitTitle1.revert()
-      if (splitTitle2) splitTitle2.revert()
-      
-      nextTick(() => {
-        animateMainScreenIn()
-      })
-    }
-  })
-  
-  tl.to([title1Ref.value, title2Ref.value], {
-    textShadow: '0 0 0px rgba(255, 255, 255, 0)',
-    duration: 0.2,
-    ease: 'power2.in'
-  })
-  
-  tl.to(splitTitle2.chars, {
-    opacity: 0,
-    y: -10,
-    stagger: 0.01,
-    duration: 0.3,
-    ease: 'back.in(1.7)'
-  }, '-=0.1')
-  
-  tl.to(splitTitle1.chars, {
-    opacity: 0,
-    y: -10,
-    stagger: 0.01,
-    duration: 0.3,
-    ease: 'back.in(1.7)',
-    onStart: () => {
-      st.play(st.sounds['background-2'])
-    }
-  }, '-=0.3')
-}
-
-function animateMainScreenIn() {
+function animateIn() {
   if (!containerRef.value) return
   
   gsap.set(containerRef.value, { opacity: 0, scale: 0.9 })
@@ -125,6 +48,8 @@ function animateMainScreenIn() {
     yoyo: true,
     repeat: 1
   }, '-=0.4')
+
+  scrambleButtonText()
 }
 
 function handleStart() {
@@ -133,30 +58,41 @@ function handleStart() {
   isClicked.value = true
   st.play(st.sounds['select-2'])
   
-  // Keep hover state
   isHovered.value = true
   
-  // Click animation
   if (innerRef.value) {
     gsap.timeline()
       .to(innerRef.value, {
         scale: 0.95,
-        duration: 0.1,
+        duration: 0.12,
         ease: 'power2.in'
       })
       .to(innerRef.value, {
         scale: 1,
         duration: 0.3,
-        ease: 'elastic.out(1, 0.6)'
+        ease: 'elastic.out(1, 0.3)'
       })
   }
   
-  // Trigger page transition to main menu
   triggerTransition('/main')
 }
 
+function scrambleButtonText() {
+  nextTick(() => {
+    if (!textRef.value) return
+    gsap.to(textRef.value, {
+      duration: .6,
+      scrambleText: {
+        text: textRef.value.textContent,
+        chars: 'upperCase',
+        speed: 2
+      }
+    })
+  })
+}
+
 watch(isHovered, (newValue) => {
-  if (isClicked.value) return // Don't animate if already clicked
+  if (isClicked.value) return
   if (!innerRef.value || !outerRef.value || !textRef.value) return
   
   if (hoverTimeline) {
@@ -194,14 +130,14 @@ watch(isHovered, (newValue) => {
         width: 400,
         height: 400,
         backgroundColor: 'transparent',
-        opacity: 0.3,
+        opacity: 0.4,
         duration: 0.4,
         ease: 'power2.inOut'
       }, 0)
       .to(outerRef.value, {
         width: 900,
         height: 900,
-        opacity: 0.2,
+        opacity: 0.3,
         duration: 0.6,
         ease: 'power2.inOut'
       }, 0)
@@ -213,31 +149,10 @@ watch(isHovered, (newValue) => {
       }, 0)
   }
 })
-
 </script>
 
 <template>
-  <div
-    v-if="showSoundPrompt"
-    class="w-full h-full flex flex-col items-center justify-center gap-4 cursor-pointer" 
-    @click="handleAccept"
-  >
-    <h1 
-      ref="title1Ref"
-      class="text-ghost-100 font-display text-3xl font-light"
-    >
-      {{ $t('THIS PORTFOLIO HAS SOUND EFFECTS') }}
-    </h1>
-    <h2 
-      ref="title2Ref"
-      class="text-ghost-100 font-display text-3xl font-light"
-    >
-      {{ $t('CLICK ANYWHERE TO ACCEPT') }}
-    </h2>
-  </div>
-
   <div 
-    v-else
     ref="containerRef"
     id="container" 
     class="w-[500px] h-[500px] flex items-center justify-center"
@@ -245,7 +160,7 @@ watch(isHovered, (newValue) => {
     <img 
       id="dashed" 
       src="/image/dashed-circle.png" 
-      class="absolute h-[500px] w-[500px] object-cover opacity-30"
+      class="absolute h-[500px] w-[500px] object-cover opacity-40"
     >
     
     <div 
@@ -257,14 +172,14 @@ watch(isHovered, (newValue) => {
       <div 
         ref="innerRef"
         id="inner" 
-        class="absolute h-[400px] w-[400px] border-2 border-ghost-300 rounded-full opacity-30 flex items-center justify-center pointer-events-none"
+        class="absolute h-[400px] w-[400px] border-2 border-ghost-300 rounded-full opacity-40 flex items-center justify-center pointer-events-none"
       />
     </div>
     
     <div 
       ref="outerRef"
       id="outer" 
-      class="absolute h-[900px] w-[900px] border-[1px] border-ghost-300 rounded-full opacity-20 pointer-events-none"
+      class="absolute h-[900px] w-[900px] border-[1px] border-ghost-300 rounded-full opacity-30 pointer-events-none"
     />
     
     <h1 
@@ -289,5 +204,11 @@ watch(isHovered, (newValue) => {
     } to {
       transform: rotateZ(360deg)
     }
+  }
+
+  #container:hover #dashed {
+    opacity: 1;
+    transition-duration: .7s;
+    transition-delay: .3s;
   }
 </style>

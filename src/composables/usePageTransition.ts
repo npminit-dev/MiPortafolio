@@ -10,7 +10,6 @@ export function usePageTransition() {
   function triggerTransition(targetRoute?: string, callback?: () => void) {
     if (isTransitioning.value) return
 
-    console.log('🚀 Transition triggered:', targetRoute)
     isTransitioning.value = true
 
     // Execute callback when transition completes
@@ -21,14 +20,12 @@ export function usePageTransition() {
     // Navigate to route when white screen appears (after 2 seconds)
     if (targetRoute) {
       setTimeout(() => {
-        console.log('📍 Navigating to:', targetRoute)
         router.push(targetRoute)
       }, 2000)
     }
   }
 
   function completeTransition() {
-    console.log('✅ Transition complete')
     isTransitioning.value = false
     
     // Execute all pending callbacks

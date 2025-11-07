@@ -3,7 +3,7 @@
 
 <template>
   <div id="background">
-    <slot/>
+    <slot />
   </div>
 </template>
 
@@ -11,53 +11,34 @@
 #background {
   height: 100%;
   width: 100%;
-  background: linear-gradient(220deg, var(--color-void-950), var(--color-void-600));
-  background-size: 400% 400%;
-
-  -webkit-animation: AnimationName 10s ease infinite;
-  -moz-animation: AnimationName 10s ease infinite;
-  animation: AnimationName 10s ease infinite;
+  background: linear-gradient(90deg,var(--color-void-900), var(--color-void-800), var(--color-shadow-100));
+  background-size: 180% 180%;
+  animation: gradient-animation 21s ease infinite;;
 }
 
-@-webkit-keyframes AnimationName {
+@keyframes gradient-animation {
   0% {
-    background-position: 50% 0%
+    background-position: 0% 50%;
   }
-
   50% {
-    background-position: 50% 100%
+    background-position: 100% 50%;
   }
-
   100% {
-    background-position: 50% 0%
+    background-position: 0% 50%;
   }
 }
 
-@-moz-keyframes AnimationName {
+@keyframes gradient-animation {
   0% {
-    background-position: 50% 0%
+    background-position: 0% 50%;
   }
 
   50% {
-    background-position: 50% 100%
+    background-position: 100% 50%;
   }
 
   100% {
-    background-position: 50% 0%
-  }
-}
-
-@keyframes AnimationName {
-  0% {
-    background-position: 50% 0%
-  }
-
-  50% {
-    background-position: 50% 100%
-  }
-
-  100% {
-    background-position: 50% 0%
+    background-position: 0% 50%;
   }
 }
 </style>

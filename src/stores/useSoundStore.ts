@@ -50,8 +50,8 @@ const howlers: Howlers = {
     maxVolume: 1
   },
   "loading-2": {
-    howl: new Howl({ src: ['sound/loading-2.mp3'], volume: 0, }),
-    maxVolume: 1
+    howl: new Howl({ src: ['sound/loading-2.mp3'], volume: 0, loop: true }),
+    maxVolume: .6
   },
   "loading-3": {
     howl: new Howl({ src: ['sound/loading-3.mp3'], volume: 0, }),
@@ -67,7 +67,7 @@ const howlers: Howlers = {
   },
   "select-2": {
     howl: new Howl({ src: ['sound/select-2.mp3'], volume: 0, }),
-    maxVolume: 1
+    maxVolume: .5
   },
   "select-3": {
     howl: new Howl({ src: ['sound/select-3.mp3'], volume: 0, }),
@@ -112,6 +112,7 @@ export const useSoundStore = defineStore('soundStore', () => {
         sound.howl.fade(sound.howl.volume(), 0, 2000)
       }
     }
+    return sound
   }
 
   watch(isSoundEnabled, () => {

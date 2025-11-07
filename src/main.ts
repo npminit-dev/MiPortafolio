@@ -14,7 +14,7 @@ import { MotionPathHelper } from 'gsap/MotionPathHelper';
 import { ScrambleTextPlugin } from 'gsap/all';
 import { SplitText } from 'gsap/SplitText';
 import { addIcons, OhVueIcon } from 'oh-vue-icons';
-import { FiAr, FiEs } from "oh-vue-icons/icons";
+import { FiSquareEs, FiSquareGb } from "oh-vue-icons/icons";
 import { router } from './router';
     
 const app = createApp(App);
@@ -30,14 +30,14 @@ await i18next.init({
     }
   },
   interpolation: { escapeValue: false },
-  fallbackLng: false
+  fallbackLng: 'en'
 });
 
 /* pinia */
 const pinia = createPinia()
 
 /* vue-icons */
-addIcons(FiAr, FiEs);
+addIcons(FiSquareEs, FiSquareGb);
 app.component("v-icon", OhVueIcon);
 
 /* gsap plugin register */

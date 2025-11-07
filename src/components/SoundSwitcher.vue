@@ -77,7 +77,7 @@ function handleToggle() {
       <svg
         ref="svg"
         viewBox="-9 -19 50 20"
-        class="w-12 h-6 transition-opacity duration-1000 flex items-center"
+        class="w-12 h-6 flex items-center"
         :class="st.isSoundEnabled ? 'opacity-100' : 'opacity-40'"
       >
         <polyline 
@@ -90,15 +90,12 @@ function handleToggle() {
         />
       </svg>
     </div>
-    <!-- Glow cuando está encendido -->
   </button>
 </template>
 
 <style scoped>
-button {
-  transition: all 0.2s ease;
-}
 button:hover {
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  transition-duration: 600ms;
 }
 </style>

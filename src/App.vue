@@ -1,5 +1,6 @@
 <script setup lang="ts">
-  import PageTransition from './components/PageTransition.vue';
+  import LangSwitcher from './components/LangSwitcher.vue';
+import PageTransition from './components/PageTransition.vue';
 import SoundSwitcher from './components/SoundSwitcher.vue';
 </script>
 
@@ -13,6 +14,9 @@ import SoundSwitcher from './components/SoundSwitcher.vue';
   <div>
     <router-view/>
     <PageTransition />
+    <div class="fixed right-3 top-3">
+      <LangSwitcher/>
+    </div>
     <div class="fixed right-2 bottom-2">
       <SoundSwitcher/>
     </div>

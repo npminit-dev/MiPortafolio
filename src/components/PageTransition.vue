@@ -25,17 +25,10 @@ const blobPath = "M 500,20 L 550,280 L 800,150 L 680,380 L 950,450 L 700,550 L 8
 watch(isTransitioning, (newValue) => {
   if (newValue) {
     // Wait for DOM to update
-    nextTick(() => {
-      console.log('After nextTick - Refs:', {
-        container: !!containerRef.value,
-        svg: !!svgRef.value,
-        path: !!pathRef.value
-      })
-      
+    nextTick(() => {  
       if (pathRef.value && svgRef.value && containerRef.value) {
         animateTransition()
       } else {
-        console.error('Refs still null after nextTick!')
       }
     })
   }
@@ -43,7 +36,6 @@ watch(isTransitioning, (newValue) => {
 
 function animateTransition() {
   if (!pathRef.value || !svgRef.value || !containerRef.value) {
-    console.error('Missing refs in animateTransition')
     return
   }
 
@@ -66,7 +58,9 @@ function animateTransition() {
     morphSVG: blobPath,
     duration: 1,
     ease: 'power2.inOut',
-    onStart: () => st.play(st.sounds['transition-1'])
+    onStart: () => {
+      st.play(st.sounds['transition-1'])
+    }
   })
 
   // Scale up to fill screen (same time as morph)
@@ -79,9 +73,8 @@ function animateTransition() {
   // Fade out (1 second)
   tl.to(containerRef.value, {
     opacity: 0,
-    duration: 1,
+    duration: .5,
     ease: 'power2.inOut',
-    onStart: () => console.log('👋 Fade out started'),
     onComplete: () => {
       // Reset for next use
       gsap.set(containerRef.value, { opacity: 0 })
@@ -97,7 +90,7 @@ function animateTransition() {
   <div 
     v-if="isTransitioning"
     ref="container"
-    class="fixed inset-0 z-[9999] pointer-events-none flex items-center justify-center bg-transparent"
+    class="fixed inset-0 z-50 pointer-events-none flex items-center justify-center bg-transparent"
     style="opacity: 0"
   >
     <svg
