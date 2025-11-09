@@ -74,7 +74,7 @@ function handleStart() {
       })
   }
   
-  triggerTransition('/main')
+  triggerTransition('/menu')
 }
 
 function scrambleButtonText() {

@@ -10,7 +10,7 @@ const routes = [
     component: StartView
   },
   {
-    path: '/main', 
+    path: '/menu', 
     component: MainView
   },
 ]

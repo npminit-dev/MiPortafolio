@@ -3,7 +3,7 @@ import { reactive, ref, watch } from 'vue'
 import { Howl } from 'howler';
 
 type Sound = 'background-1' | 'background-2' | 'background-3' | 'error-1' | 'error-2' | 'hit-1' | 'hover-1' | 'hover-2' | 'loading-1' |
-  'loading-2' | 'loading-3' | 'loading-4' | 'select-1' | 'select-2' | 'select-3' | 'select-4' | 'select-5' | 'transition-1' | 'transition-2' | 'transition-3'
+  'loading-2' | 'loading-3' | 'loading-4' | 'loading-5'| 'select-1' | 'select-2' | 'select-3' | 'select-4' | 'select-5' | 'transition-1' | 'transition-2' | 'transition-3'
 
 type HowlRecord = {
   howl: Howl,
@@ -43,23 +43,27 @@ const howlers: Howlers = {
   },
   "hover-2": {
     howl: new Howl({ src: ['sound/hover-2.mp3'], volume: 0, }),
-    maxVolume: 1
+    maxVolume: .2
   },
   "loading-1": {
-    howl: new Howl({ src: ['sound/loading-1.mp3'], volume: 0, }),
-    maxVolume: 1
+    howl: new Howl({ src: ['sound/loading-1.mp3'], volume: 0, loop: true }),
+    maxVolume: .3
   },
   "loading-2": {
     howl: new Howl({ src: ['sound/loading-2.mp3'], volume: 0, loop: true }),
-    maxVolume: .6
+    maxVolume: .5
   },
   "loading-3": {
-    howl: new Howl({ src: ['sound/loading-3.mp3'], volume: 0, }),
+    howl: new Howl({ src: ['sound/loading-3.mp3'], volume: 0, loop: true }),
     maxVolume: 1
   },
   "loading-4": {
-    howl: new Howl({ src: ['sound/loading-4.mp3'], volume: 0, }),
+    howl: new Howl({ src: ['sound/loading-4.mp3'], volume: 0, loop: true }),
     maxVolume: 1
+  },
+  "loading-5": {
+    howl: new Howl({ src: ['sound/loading-5.mp3'], volume: 0, loop: true }),
+    maxVolume: .5
   },
   "select-1": {
     howl: new Howl({ src: ['sound/select-1.mp3'], volume: 0, }),
@@ -75,7 +79,7 @@ const howlers: Howlers = {
   },
   "select-4": {
     howl: new Howl({ src: ['sound/select-4.mp3'], volume: 0, }),
-    maxVolume: 1
+    maxVolume: .6
   },
   "select-5": {
     howl: new Howl({ src: ['sound/select-5.mp3'], volume: 0, }),
@@ -87,11 +91,11 @@ const howlers: Howlers = {
   },
   "transition-2": {
     howl: new Howl({ src: ['sound/transition-2.mp3'], volume: 0, }),
-    maxVolume: 0.3
+    maxVolume: 1
   },
   "transition-3": {
     howl: new Howl({ src: ['sound/transition-3.mp3'], volume: 0, }),
-    maxVolume: 0.3
+    maxVolume: .4
   }
 }
 

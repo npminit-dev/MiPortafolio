@@ -12,8 +12,8 @@
 $dna-lines: 30;
 $rotate-time: 10s;
 $rotate-delay: 0.35s;
-$lines-color: var(--color-plasma-purple-800);
-$dots-color: var(--color-plasma-purple-500);
+$lines-color: var(--color-neon-cyan-900);
+$dots-color: var(--color-neon-cyan-700);
 
 #dna {
   position: absolute;

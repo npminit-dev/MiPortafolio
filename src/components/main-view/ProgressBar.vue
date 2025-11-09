@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount, useTemplateRef } from "vue";
+import { onMounted, onBeforeUnmount, useTemplateRef, inject } from "vue";
 import gsap from "gsap";
 import { useSoundStore } from "../../stores/useSoundStore";
 import { useTranslation } from "i18next-vue";
@@ -17,6 +17,7 @@ const text = useTemplateRef<HTMLHeadingElement>("text");
 const system = useTemplateRef<HTMLSpanElement>("system");
 const spinner = useTemplateRef<HTMLSpanElement>("spinner");
 const container = useTemplateRef<HTMLDivElement>("container");
+const endLoading = inject<Function>('endLoading')
 
 const st = useSoundStore();
 const { t, i18next } = useTranslation();
@@ -170,6 +171,9 @@ const startAnimations = () => {
               {
                 opacity: 0,
                 duration: 1,
+                onComplete: () => {
+                  endLoading!()
+                }
               },
               "<"
             );

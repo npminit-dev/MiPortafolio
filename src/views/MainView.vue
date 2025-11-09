@@ -1,7 +1,15 @@
-<script setup langt="ts">
+<script setup lang="ts">
 import GradientDark from "../components/backgrounds/GradientDark.vue";
-import DNA from '../components/main-view/DNA.vue';
 import ProgressBar from '../components/main-view/ProgressBar.vue';
+import Menu from '../components/main-view/Menu.vue'
+import { provide, ref, type InjectionKey } from 'vue';
+
+const loading = ref<boolean>(true)
+
+provide('endLoading', () => {
+  loading.value = false
+})
+
 </script>
 
 <template>
@@ -9,7 +17,8 @@ import ProgressBar from '../components/main-view/ProgressBar.vue';
     <GradientDark />
   </div>
   <main class="w-screen min-h-screen flex items-center justify-center">
-    <ProgressBar/>
+    <ProgressBar v-if="loading"/>
+    <Menu v-if="!loading" />
   </main>
 </template>
 

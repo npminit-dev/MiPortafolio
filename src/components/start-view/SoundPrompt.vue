@@ -94,7 +94,7 @@ function handleAccept() {
     duration: 0.3,
     ease: 'back.in(1.7)',
     onStart: () => {
-      st.play(st.sounds['background-3'])
+      st.play(st.sounds['background-2'])
     }
   }, '-=0.3')
 }
