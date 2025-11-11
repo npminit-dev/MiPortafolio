@@ -45,13 +45,14 @@ function animateTransition() {
     }
   })
 
-  // Make container visible
-  gsap.set(containerRef.value, { opacity: 1 })
-
   // Wait 1 second
   tl.to({}, { 
     duration: 1,
+    onComplete: () => {
+      gsap.set(containerRef.value, { opacity: 1 })
+    }
   })
+
 
   // Morph from circle to blob (1 second)
   tl.to(pathRef.value, {

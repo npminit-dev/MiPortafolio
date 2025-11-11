@@ -110,7 +110,7 @@ onMounted(() => {
         <span id="title-surname" class="invisible-text">BALSAMO</span>
         <div class="flex flex-col items-center justify-center">
           <div class="relative flex flex-col w-full my-1">
-            <div class="grow-line bg-ghost-300 h-[1px] mb-[1px] w-full"></div>
+            <div class="grow-line bg-ghost-300 h-[1px] mb-[3px] w-full"></div>
             <div class="grow-line bg-ghost-300 h-[1px] w-full"></div>
           </div>
           <span id="title-role" class="font-mono font-light text-xl invisible-text">

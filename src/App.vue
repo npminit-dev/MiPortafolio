@@ -1,7 +1,21 @@
 <script setup lang="ts">
-  import LangSwitcher from './components/LangSwitcher.vue';
+import { onMounted } from 'vue';
+import LangSwitcher from './components/LangSwitcher.vue';
 import PageTransition from './components/PageTransition.vue';
 import SoundSwitcher from './components/SoundSwitcher.vue';
+import gsap from 'gsap';
+import ScrollSmoother from 'gsap/dist/ScrollSmoother';
+
+gsap.registerPlugin(ScrollSmoother)
+
+onMounted(() => {
+  ScrollSmoother.create({
+    speed: 1,
+    effects: true,
+    smooth: 2
+  })
+})
+
 </script>
 
 <template>
@@ -12,7 +26,11 @@ import SoundSwitcher from './components/SoundSwitcher.vue';
     <BackgroundTest/> -->
     <!-- <v-icon name="fi-es"></v-icon> -->
   <div>
-    <router-view/>
+    <div id="smooth-wrapper">
+      <div id="smooth-content">
+        <router-view/>
+      </div>
+    </div>
     <PageTransition />
     <div class="fixed right-3 top-3">
       <LangSwitcher/>

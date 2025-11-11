@@ -12,6 +12,7 @@ import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { MorphSVGPlugin } from 'gsap/MorphSVGPlugin';
 import { MotionPathHelper } from 'gsap/MotionPathHelper';
 import { ScrambleTextPlugin } from 'gsap/all';
+import { DrawSVGPlugin } from 'gsap/all';
 import { SplitText } from 'gsap/SplitText';
 import { addIcons, OhVueIcon } from 'oh-vue-icons';
 import { FiSquareEs, FiSquareGb } from "oh-vue-icons/icons";
@@ -41,7 +42,15 @@ addIcons(FiSquareEs, FiSquareGb);
 app.component("v-icon", OhVueIcon);
 
 /* gsap plugin register */
-gsap.registerPlugin(ScrollTrigger,ScrollSmoother, MorphSVGPlugin, MotionPathHelper, SplitText, ScrambleTextPlugin);
+gsap.registerPlugin(
+  ScrollTrigger,
+  ScrollSmoother, 
+  MorphSVGPlugin, 
+  MotionPathHelper, 
+  SplitText, 
+  ScrambleTextPlugin,
+  DrawSVGPlugin
+);
 
 /* plugin use */
 app.use(I18NextVue, {i18next});

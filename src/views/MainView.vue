@@ -2,7 +2,7 @@
 import GradientDark from "../components/backgrounds/GradientDark.vue";
 import ProgressBar from '../components/main-view/ProgressBar.vue';
 import Menu from '../components/main-view/Menu.vue'
-import { provide, ref, type InjectionKey } from 'vue';
+import { provide, ref } from 'vue';
 
 const loading = ref<boolean>(true)
 

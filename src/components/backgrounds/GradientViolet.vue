@@ -11,60 +11,67 @@
 #background {
   height: 100%;
   width: 100%;
-  background: linear-gradient(90deg,var(--color-void-900), var(--color-void-800), var(--color-shadow-100));
-  background-size: 180% 180%;
+  background: linear-gradient(90deg, var(--color-plasma-purple-950), var(--color-shadow-100));
+  background-size: 400% 400%;
   animation: gradient-animation 21s ease infinite;
   -o-animation: gradient-animation 21s ease infinite;
   -moz-animation: gradient-animation 21s ease infinite;
   -webkit-animation: gradient-animation 21s ease infinite;
 }
 
-@keyframes gradient-animation {
+@-webkit-keyframes gradient-animation {
   0% {
-    background-position: 0% 50%;
+    background-position: 0% 50%
   }
+
   50% {
-    background-position: 100% 50%;
+    background-position: 100% 51%
   }
+
   100% {
-    background-position: 0% 50%;
+    background-position: 0% 50%
   }
 }
 
 @-moz-keyframes gradient-animation {
   0% {
-    background-position: 0% 50%;
+    background-position: 0% 50%
   }
+
   50% {
-    background-position: 100% 50%;
+    background-position: 100% 51%
   }
+
   100% {
-    background-position: 0% 50%;
+    background-position: 0% 50%
   }
 }
 
 @-o-keyframes gradient-animation {
   0% {
-    background-position: 0% 50%;
+    background-position: 0% 50%
   }
+
   50% {
-    background-position: 100% 50%;
+    background-position: 100% 51%
   }
+
   100% {
-    background-position: 0% 50%;
+    background-position: 0% 50%
   }
 }
 
-@-webkit-keyframes gradient-animation {
+@keyframes gradient-animation {
   0% {
-    background-position: 0% 50%;
+    background-position: 0% 50%
   }
+
   50% {
-    background-position: 100% 50%;
+    background-position: 100% 51%
   }
+
   100% {
-    background-position: 0% 50%;
+    background-position: 0% 50%
   }
 }
-
 </style>
