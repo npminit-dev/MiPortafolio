@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import gsap from 'gsap'
 import GradientViolet from '../components/backgrounds/GradientViolet.vue'
-import { onMounted, onBeforeUnmount } from 'vue'
+import { onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { SplitText } from 'gsap/all'
 import { useTranslation } from 'i18next-vue'
 import { useSoundStore } from '../../stores/useSoundStore'
 import Body from './Body.vue'
 
-const { t } = useTranslation()
+const { i18next } = useTranslation()
 const st = useSoundStore()
 
 let tl: gsap.core.Timeline | null = null
@@ -99,11 +99,22 @@ function killAnimation() {
 
 onMounted(function () {
   startAnimation()
+
+  i18next.on('languageChanged', async () => {
+    killAnimation()
+    await nextTick()
+    await nextTick()
+    startAnimation()
+  })
 })
 
 onBeforeUnmount(function () {
   killAnimation()
 })
+
+function test() {
+  const toMove = document.getElementById('carrer-translation-circle')
+}
 </script>
 
 <template>
@@ -115,6 +126,7 @@ onBeforeUnmount(function () {
       </h1>
       <h2 id="career-sub-log" class="font-display font-normal text-ghost-200 text-xl my-4 text-left">
         {{ $t('[LOG: CAREER ANALYSIS — SUBJECT D-095]') }}
+        <div id="carrer-translation-circle" class="inline-block border-[1px] border-ghost-100 h-3 w-3 rounded-full opacity-0"></div>
       </h2>
       <p id="career-sub-p" class="font-display font-light text-ghost-200 w-[500px] text-lg text-left break-normal">
         {{
@@ -125,6 +137,4 @@ onBeforeUnmount(function () {
       </p>
     </div>
   </div>
-  
-
 </template>

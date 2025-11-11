@@ -11,7 +11,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { MorphSVGPlugin } from 'gsap/MorphSVGPlugin';
 import { MotionPathHelper } from 'gsap/MotionPathHelper';
-import { ScrambleTextPlugin } from 'gsap/all';
+import { Flip, ScrambleTextPlugin } from 'gsap/all';
 import { DrawSVGPlugin } from 'gsap/all';
 import { SplitText } from 'gsap/SplitText';
 import { addIcons, OhVueIcon } from 'oh-vue-icons';
@@ -49,7 +49,8 @@ gsap.registerPlugin(
   MotionPathHelper, 
   SplitText, 
   ScrambleTextPlugin,
-  DrawSVGPlugin
+  DrawSVGPlugin,
+  Flip
 );
 
 /* plugin use */

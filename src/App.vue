@@ -19,13 +19,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <!-- <LangTest />
-    <br>
-    <SoundTest />
-    <br>
-    <BackgroundTest/> -->
-    <!-- <v-icon name="fi-es"></v-icon> -->
-  <div>
+  <div class="scroll">
     <div id="smooth-wrapper">
       <div id="smooth-content">
         <router-view/>

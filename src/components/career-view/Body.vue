@@ -31,7 +31,7 @@ onMounted(() => {
     // 2. Morph de línea a rectángulo
     tl.to(morphPath.value, {
       morphSVG: rectPath,
-      duration: 0.8,
+      duration: 0.5,
       ease: "power2.out",
       delay: .5
     });
@@ -42,7 +42,7 @@ onMounted(() => {
     // 4. Morph de rectángulo a cuerpo
     tl.to(morphPath.value, {
       morphSVG: bodyPath,
-      duration: 1.2,
+      duration: .8,
       fill: '#c9d6e811',
       ease: "power2.out"
     });
@@ -53,7 +53,6 @@ onMounted(() => {
 <template>
   <div class="self-center justify-self-end">
     <svg ref="svgContainer" width="250" height="350" viewBox="0 0 338 800" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Path que inicia como línea y se transforma en cuerpo -->
       <path
         ref="morphPath"
         d="M 169 0 L 169 0 L 169 800 L 169 800 Z"

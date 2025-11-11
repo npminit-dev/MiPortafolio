@@ -63,7 +63,7 @@ const howlers: Howlers = {
   },
   "loading-5": {
     howl: new Howl({ src: ['sound/loading-5.mp3'], volume: 0, loop: true }),
-    maxVolume: .5
+    maxVolume: .1
   },
   "select-1": {
     howl: new Howl({ src: ['sound/select-1.mp3'], volume: 0, }),
