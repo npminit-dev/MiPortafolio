@@ -34,6 +34,7 @@ function startAnimation() {
     {
       stagger: 0.05,
       duration: 0.1,
+      textShadow: '0 0 20px rgba(255, 255, 255, 0.3)',
       onStart: function () {
         st.play(st.sounds['loading-1'])
       },
@@ -51,6 +52,7 @@ function startAnimation() {
     {
       stagger: 0.01,
       duration: 0.1,
+      textShadow: '0 0 20px rgba(255, 255, 255, 0.3)',
       onStart: function () {
         st.play(st.sounds['loading-1'])
       },
@@ -58,7 +60,7 @@ function startAnimation() {
         st.sounds['loading-1'].howl.stop()
       }
     },
-    1.2
+    '>.5'
   )
 
   // Párrafo
@@ -68,6 +70,7 @@ function startAnimation() {
     {
       stagger: 0.004,
       duration: 0.1,
+      textShadow: '0 0 20px rgba(255, 255, 255, 0.3)',
       onStart: function () {
         st.play(st.sounds['loading-1'])
       },
@@ -75,7 +78,7 @@ function startAnimation() {
         st.sounds['loading-1'].howl.stop()
       }
     },
-    2
+    '>.5'
   )
 }
 

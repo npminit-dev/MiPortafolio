@@ -3,15 +3,13 @@
   import gsap from 'gsap';
   import { useTranslation } from 'i18next-vue';
   import { v4 as uuidv4 } from 'uuid';
-import { useSoundStore } from '../../stores/useSoundStore';
 
   type Props = {
     text: string
   }
 
   const props = defineProps<Props>()
-  const { i18next, t } = useTranslation()
-  const st = useSoundStore()
+  const { i18next } = useTranslation()
   const id = uuidv4()
 
   onMounted(async () => {
@@ -19,6 +17,7 @@ import { useSoundStore } from '../../stores/useSoundStore';
 
     i18next.on('languageChanged', async () => {
       killAnimation()
+      await nextTick()
       await nextTick()
       startAnimation()
     })
@@ -29,7 +28,7 @@ import { useSoundStore } from '../../stores/useSoundStore';
       opacity: 0
     }, {
       scrambleText: {
-        text: props.text.toUpperCase(),
+        text: document.getElementById(`subtitle-${id}`)?.textContent || '',
         chars: 'upperCase',
         speed: 5,
       },
@@ -40,15 +39,8 @@ import { useSoundStore } from '../../stores/useSoundStore';
         toggleActions: 'play reset play reset',
       },
       opacity: 1,
+      textShadow: '0 0 20px rgba(255, 255, 255, 0.3)',
       duration: 1,
-      onStart: () => {
-        const isPlaying = st.sounds['loading-5'].howl.playing()
-        if(isPlaying) st.sounds['loading-5'].howl.stop()
-        st.sounds['loading-5'].howl.play()
-      },
-      onComplete: () => {
-        st.sounds['loading-5'].howl.stop()
-      },
     })
   }
 
@@ -61,7 +53,7 @@ import { useSoundStore } from '../../stores/useSoundStore';
 
 
 <template>
-  <h3 :id="`subtitle-box-${id}`" class="text-2xl font-mono text-ghost-100">
+  <h3 :id="`subtitle-box-${id}`" class="text-2xl font-body text-ghost-100">
     [<span :id="`subtitle-${id}`" class="">{{$t(props.text.toUpperCase())}}</span>]
   </h3>
 </template>

@@ -11,7 +11,7 @@
 #background {
   height: 100%;
   width: 100%;
-  background: linear-gradient(90deg, var(--color-plasma-purple-950), var(--color-shadow-100));
+  background: linear-gradient(90deg, var(--color-deep-teal-shadow), var(--color-shadow-100));
   background-size: 400% 400%;
   animation: gradient-animation 21s ease infinite;
   -o-animation: gradient-animation 21s ease infinite;

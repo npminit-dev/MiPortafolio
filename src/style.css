@@ -212,4 +212,7 @@
   --color-shadow-300: #1c2333;
   --color-shadow-400: #2a3244;
   --color-shadow-500: #3d4660;
+
+  /* Especiales */
+  --color-deep-teal-shadow: #001f29
 }
