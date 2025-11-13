@@ -35,7 +35,7 @@ const howlers: Howlers = {
   },
   "hit-1": {
     howl: new Howl({ src: ['sound/hit-1.mp3'], volume: 0, }),
-    maxVolume: 1
+    maxVolume: .4
   },
   "hover-1": {
     howl: new Howl({ src: ['sound/hover-1.mp3'], volume: 0, }),
@@ -47,7 +47,7 @@ const howlers: Howlers = {
   },
   "loading-1": {
     howl: new Howl({ src: ['sound/loading-1.mp3'], volume: 0, loop: true }),
-    maxVolume: .3
+    maxVolume: .5
   },
   "loading-2": {
     howl: new Howl({ src: ['sound/loading-2.mp3'], volume: 0, loop: true }),

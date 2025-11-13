@@ -158,6 +158,10 @@
   font-display: swap;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 @theme {
   /* Fuentes */
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;

@@ -114,10 +114,6 @@ onMounted(function () {
 onBeforeUnmount(function () {
   killAnimation()
 })
-
-function test() {
-  const toMove = document.getElementById('carrer-translation-circle')
-}
 </script>
 
 <template>

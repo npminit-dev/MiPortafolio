@@ -6,11 +6,14 @@ import { useTranslation } from 'i18next-vue';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
+import { Draggable } from 'gsap/Draggable';
+import { Flip } from 'gsap/all';
 
 type Props = {
   company: string,
   role: string,
-  description: string
+  description: string,
+  hasFlip?: boolean
 }
 
 const props = defineProps<Props>()
@@ -21,10 +24,16 @@ const { i18next } = useTranslation()
 let timeline: gsap.core.Timeline | null = null
 let scrollTriggerInstance: ScrollTrigger | null = null
 let splitInstances: SplitText[] = []
+let flipTimeline: gsap.core.Timeline | null = null
+let flipScrollTrigger: ScrollTrigger | null = null
 
 onMounted(() => {
   killAnimations()
   startAnimation()
+
+  setTimeout(() => {
+    startFlipAnimation()
+  }, 100)
 
   i18next.on('languageChanged', async () => {
     killAnimations()
@@ -43,6 +52,7 @@ function startAnimation() {
   gsap.set(`#experience-svg-circle-${uniqueID}`, { drawSVG: '50% 50%' })
   gsap.set(`#experience-svg-line1-${uniqueID}`, { drawSVG: '0% 0%' })
   gsap.set(`#experience-svg-line2-${uniqueID}`, { drawSVG: '50% 50%' })
+  gsap.set(`#experience-image-${uniqueID}`, { rotateY: 270 })
 
   // SplitText para los elementos de texto
   const h4Split = new SplitText(`#experience-company-${uniqueID}`, { type: 'chars' })
@@ -66,22 +76,35 @@ function startAnimation() {
     duration: 0.6
   })
 
-  // 2. Animar línea 1
+  /* 2. Animar imagen */
+  timeline.fromTo(`#experience-image-${uniqueID}`, { rotateY: 270 }, {
+    transformStyle: 'preserve-3d',
+    rotateY: 0,
+    duration: 1.3,
+    ease: 'power4.out'
+  }, 0)
+
+  // 3. Animar línea 1
   timeline.to(`#experience-svg-line1-${uniqueID}`, {
     drawSVG: '0% 100%',
     ease: 'linear',
     duration: 0.1
-  })
+  }, 0.6)
 
-  // 3. Animar línea 2
+  // 4. Animar línea 2
   timeline.to(`#experience-svg-line2-${uniqueID}`, {
     drawSVG: '0% 100%',
     ease: 'power4.out',
-    duration: 0.2
-  })
+    duration: 0.2,
+    onStart: () => {
+      const isPlaying = st.sounds['hit-1'].howl.playing()
+      if(isPlaying) st.sounds['hit-1'].howl.stop()
+      st.play(st.sounds['hit-1'])
+    }
+  }, 0.7)
 
-  // 4. Animar textos (todos empiezan al mismo tiempo)
-  const textStartTime = timeline.duration()
+  // 5. Animar textos (todos empiezan al mismo tiempo)
+  const textStartTime = timeline.duration() - .6
 
   // H4 - caracteres con stagger levemente mayor
   timeline.to(h4Split.chars, {
@@ -115,7 +138,77 @@ function startAnimation() {
     start: 'top 90%',
     end: 'bottom 20%',
     animation: timeline,
-    toggleActions: 'play reverse play reverse'
+    toggleActions: props.hasFlip ? 'play none none none' : 'play reverse play reverse'
+  })
+
+  Draggable.create(`#experience-image-${uniqueID}`, {
+    type: 'rotation',
+    minDuration: 1,
+    maxDuration: 2,
+    inertia: true,
+    snap: () => {
+      return 0
+    },
+    onDragStart: () => {
+      console.log('dragged')
+    }
+  })
+}
+
+// Nueva función después de startAnimation()
+function startFlipAnimation() {
+  if (!props.hasFlip) return
+  
+  const flipElement = document.getElementById('exp-educ-flip')
+  const targetContainer = document.getElementById('flip-target')
+  const endTrigger = document.getElementById('education-outer-container')
+  
+  if (!flipElement || !targetContainer || !endTrigger) {
+    console.warn('FLIP: Elementos no encontrados aún')
+    return
+  }
+
+  // Estado inicial: invisible
+  gsap.set(flipElement, { opacity: 0 })
+
+  // Guardar estado inicial
+  const state = Flip.getState(flipElement)
+  
+  // Mover al destino
+  targetContainer.appendChild(flipElement)
+  
+  // Crear animación FLIP (sin opacity aquí)
+  flipTimeline = Flip.from(state, {
+    duration: 1,
+    rotateX: 540,
+    rotateY: 180,
+    ease: 'cubic-bezier(.16,.45,.86,.56)',
+    absolute: true,
+    paused: true,
+  })
+  
+  // ScrollTrigger con control de opacidad
+  flipScrollTrigger = ScrollTrigger.create({
+    trigger: `#experience-${uniqueID}`,
+    endTrigger: '#education-outer-container',
+    start: 'center center',
+    end: 'top top',
+    scrub: true,
+    animation: flipTimeline,
+    anticipatePin: 1,
+    onUpdate: (self) => {
+      if (self.progress > 0) {
+        gsap.set(flipElement, { opacity: 1 })
+      } else {
+        gsap.set(flipElement, { opacity: 0 })
+      }
+    },
+    onEnter() {
+       gsap.set(`#experience-svg-circle-${uniqueID}`, { opacity: 0 })
+    },
+    onLeaveBack() {
+      gsap.set(`#experience-svg-circle-${uniqueID}`, { opacity: 1 })
+    }
   })
 }
 
@@ -129,25 +222,50 @@ function killAnimations() {
     scrollTriggerInstance = null
   }
   
+  // Agregar esto para el FLIP
+  if (flipTimeline) {
+    flipTimeline.kill()
+    flipTimeline = null
+  }
+  if (flipScrollTrigger) {
+    flipScrollTrigger.kill()
+    flipScrollTrigger = null
+  }
+  
   // Revertir SplitText
   splitInstances.forEach(instance => {
     instance.revert()
   })
   splitInstances = []
 }
+
+function transitionElementVerify(): boolean {
+  return props.hasFlip && document.getElementById('exp-educ-flip') === null
+}
 </script>
 
 <template>
-  <div :id="`experience-${uniqueID}`" class="grid grid-cols-[35%_65%] my-14 gap-4">
-    <svg :id="`experience-svg-${uniqueID}`" width="293" height="160" viewBox="0 0 293 160" fill="none"
-      class="self-center justify-self-end">
-      <circle :id="`experience-svg-circle-${uniqueID}`" cx="80" cy="80" r="79.5" stroke="var(--color-ghost-300)" />
-      <line :id="`experience-svg-line1-${uniqueID}`" x1="160" y1="79.5" x2="292" y2="79.5"
-        stroke="var(--color-ghost-300)" />
-      <line :id="`experience-svg-line2-${uniqueID}`" x1="292.5" y1="48" x2="292.5" y2="113"
-        stroke="var(--color-ghost-300)" />
-    </svg>
-
+  <article :id="`experience-${uniqueID}`" class="grid grid-cols-[35%_65%] my-14 gap-4">
+    <div class="relative self-center justify-self-end">
+      <div :id="`experience-image-${uniqueID}`" class="absolute left-2 inset-y-2 flex items-center justify-center bg-ghost-200 border-ghost-300 border-[1px] rounded-full h-36 w-36 overflow-hidden z-50">
+        <slot class="h-full w-full object-cover flex items-center justify-center bg-ghost-200">
+          <div class="h-full w-full font-display font-semibold text-xl text-deep-teal-shadow bg-ghost-200 flex items-center justify-center overflow-hidden leading-0 select-none">{{ props.company }}</div>
+        </slot>
+      </div>
+      <svg :id="`experience-svg-${uniqueID}`" width="293" height="160" viewBox="0 0 293 160" fill="none"
+        class="">
+        <circle :id="`experience-svg-circle-${uniqueID}`" cx="80" cy="80" r="79.5" stroke="var(--color-ghost-300)" />
+        <line :id="`experience-svg-line1-${uniqueID}`" x1="160" y1="79.5" x2="292" y2="79.5"
+          stroke="var(--color-ghost-300)" />
+        <line :id="`experience-svg-line2-${uniqueID}`" x1="292.5" y1="48" x2="292.5" y2="113"
+          stroke="var(--color-ghost-300)" />
+      </svg>
+      <div 
+        id="exp-educ-flip"
+        class="absolute inset-y-0 left-0 h-40 w-40 border-[1px] border-ghost-300 opacity-0 rounded-full"
+        v-if="transitionElementVerify()"
+      ></div>
+    </div>
     <div class="font-display text-start max-w-[600px]">
       <h4 :id="`experience-company-${uniqueID}`" class="font-medium text-2xl text-ghost-100">
         {{ $t(props.company) }}
@@ -159,7 +277,7 @@ function killAnimations() {
         {{ $t(props.description) }}
       </p>
     </div>
-  </div>
+  </article>
 </template>
 
 <style></style>
