@@ -185,6 +185,7 @@ function startFlipAnimation() {
     ease: 'cubic-bezier(.16,.45,.86,.56)',
     absolute: true,
     paused: true,
+    
   })
   
   // ScrollTrigger con control de opacidad
@@ -192,7 +193,7 @@ function startFlipAnimation() {
     trigger: `#experience-${uniqueID}`,
     endTrigger: '#education-outer-container',
     start: 'center center',
-    end: 'top top',
+    end: 'bottom bottom',
     scrub: true,
     animation: flipTimeline,
     anticipatePin: 1,

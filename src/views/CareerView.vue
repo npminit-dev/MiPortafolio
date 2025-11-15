@@ -30,7 +30,6 @@ onMounted(() => {
     <Experience company="- CodeCraft -" role="Fullstack / Mobile Developer" has-flip
       description="During the CodeCraft assignment, subject D-095 operated within full stack web and mobile development environments, utilizing React, Next.js, Vue, Angular, and React Native with Expo for cross-platform deployment. The subject collaborated under agile methodologies, contributing to iterative release cycles and coordinated task sprints. Backend systems were structured through Node.js and Express, integrating multiple relational and non-relational databases, including SQL, PostgreSQL, and MongoDB. Throughout the operation, subject D-095 exhibited consistency in delivery precision, adaptability to evolving frameworks, and procedural efficiency across diverse technological ecosystems." />
 
-    <SubTitle text="MODULE: COGNITIVE DEVELOPMENT" class="my-36 mb-16 mx-auto" />
     <Education/>
 
     <br>

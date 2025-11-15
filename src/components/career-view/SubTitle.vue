@@ -1,64 +1,72 @@
 <script setup lang="ts">
-  import { nextTick, onMounted } from 'vue';
-  import gsap from 'gsap';
-  import { useTranslation } from 'i18next-vue';
-  import { v4 as uuidv4 } from 'uuid';
+import { nextTick, onMounted, onBeforeUnmount } from "vue";
+import gsap from "gsap";
+import { useTranslation } from "i18next-vue";
+import { v4 as uuidv4 } from "uuid";
 
-  type Props = {
-    text: string
-  }
+type Props = {
+  text: string;
+  simple?: boolean;
+};
 
-  const props = defineProps<Props>()
-  const { i18next } = useTranslation()
-  const id = uuidv4()
+const { text, simple } = defineProps<Props>();
+const { i18next } = useTranslation();
+const id = uuidv4();
+let scrollTriggerInstance: ScrollTrigger | null = null;
 
-  onMounted(async () => {
-    startAnimation()
+onMounted(async () => {
+  startAnimation();
 
-    i18next.on('languageChanged', async () => {
-      killAnimation()
-      await nextTick()
-      await nextTick()
-      startAnimation()
-    })
-  })
+  i18next.on("languageChanged", async () => {
+    killAnimation();
+    await nextTick();
+    await nextTick();
+    startAnimation();
+  });
+});
 
-  function startAnimation() {
-    gsap.fromTo(`#subtitle-${id}`, {
-      opacity: 0
-    }, {
+onBeforeUnmount(() => {
+  killAnimation();
+});
+
+function startAnimation() {
+  const animation = gsap.fromTo(
+    `#subtitle-${id}`,
+    {
+      opacity: 0,
+    },
+    {
       scrambleText: {
-        text: document.getElementById(`subtitle-${id}`)?.textContent || '',
-        chars: 'upperCase',
+        text: document.getElementById(`subtitle-${id}`)?.textContent || "",
+        chars: "upperCase",
         speed: 5,
       },
       scrollTrigger: {
         trigger: `#subtitle-box-${id}`,
-        start: 'top bottom',
-        end: 'bottom top',
-        toggleActions: 'play reset play reset',
+        start: "top bottom",
+        end: "bottom top",
+        toggleActions: simple ? 'play none none none' : "play reset play reset",
       },
       opacity: 1,
-      textShadow: '0 0 20px rgba(255, 255, 255, 0.3)',
+      textShadow: "0 0 20px rgba(255, 255, 255, 0.3)",
       duration: 1,
-    })
-  }
-
-  function killAnimation() {
-    const animation = gsap.getById(`#subtitle-${id}`)
-    if(animation) animation.kill()
-  }
+    }
+  );
   
-</script>
+  scrollTriggerInstance = animation.scrollTrigger || null;
+}
 
+function killAnimation() {
+  const animation = gsap.getById(`#subtitle-${id}`);
+  if (animation) animation.kill();
+  scrollTriggerInstance = null;
+}
+</script>
 
 <template>
   <h3 :id="`subtitle-box-${id}`" class="text-2xl font-body text-ghost-100">
-    [<span :id="`subtitle-${id}`" class="">{{$t(props.text.toUpperCase())}}</span>]
+    [<span :id="`subtitle-${id}`" class="">{{ $t(text.toUpperCase()) }}</span>]
   </h3>
 </template>
 
-<style>
-
-</style>
-
+<style></style>
