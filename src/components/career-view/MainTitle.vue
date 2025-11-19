@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import gsap from 'gsap'
-import GradientViolet from '../components/backgrounds/GradientViolet.vue'
 import { onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { SplitText } from 'gsap/all'
 import { useTranslation } from 'i18next-vue'

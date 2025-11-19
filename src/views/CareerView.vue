@@ -24,12 +24,17 @@ onMounted(() => {
       description="During the GrowForce Project, subject D-095 developed an advanced interface using Astro, GSAP, and TailwindCSS. The system incorporated intricate time and scroll-driven animations and was deployed through Vercel for optimal performance. D-095 implemented a communication layer via Astro Actions and Nodemailer, allowing direct visitor messages to GrowForce’s network. Simultaneously, the subject maintained and refined existing frontends under strict deadlines, exhibiting adaptive efficiency and precision in high-demand visual and communication environments.">
       <img src="/image/GrowForce.png" class="w-3/4 select-none" alt="Growforce logo">
     </Experience>
-    <Experience company="- iEscrow -" role="Fullstack Web3 developer"
+    <Experience company="- iEscrow -" role="Fullstack Web3 developer" has-flip
       description="During the iEscrow Simulation, subject D-095 oversaw the operational development of both the Presale and Staking platforms. The subject engineered the frontend architecture using React, Next.js, and Node.js, establishing secure communication between the visual layer and smart contracts via Hardhat, ethers.js, and Wagmi. For the Staking system, data acquisition from BitQuery was implemented to display daily OHLC metrics of the token in USD, while the Presale platform integrated KYC verification, API endpoints, and Next.js Server Actions with SSR for secure transactional flow. Both systems were constructed from initial deployment protocols, evidencing D-095’s capacity for autonomous system design, cross-layer integration, and high technical precision within blockchain-based infrastructures.">
       <img src="/image/iEscrow.png" class="w-3/4 -mt-3 select-none" alt="iEsscrow logo" />
     </Experience>
-    <Experience company="- CodeCraft -" role="Fullstack / Mobile Developer" has-flip
+    <Experience company="- CodeCraft -" role="Fullstack / Mobile Developer"
       description="During the CodeCraft assignment, subject D-095 operated within full stack web and mobile development environments, utilizing React, Next.js, Vue, Angular, and React Native with Expo for cross-platform deployment. The subject collaborated under agile methodologies, contributing to iterative release cycles and coordinated task sprints. Backend systems were structured through Node.js and Express, integrating multiple relational and non-relational databases, including SQL, PostgreSQL, and MongoDB. Throughout the operation, subject D-095 exhibited consistency in delivery precision, adaptability to evolving frameworks, and procedural efficiency across diverse technological ecosystems." />
+      <Experience company="- Personal Projects -" role="Independent Web & Mobile Developer" has-flip
+        description="Throughout autonomous experimentation cycles, subject D-095 engineered multiple web and mobile systems designed to refine his operational dexterity across diverse stacks. These constructs include full interface pipelines using React, Next.js, Vue, and Angular, as well as mobile deployments through React Native and Expo. Parallel to this, the subject developed algorithmic utilities, UI micro-frameworks, and specialized tooling for workflow optimization. Each project was executed without external oversight, demonstrating D-095’s capacity for self-directed system design, rapid prototyping, and sustained technical evolution driven by curiosity and long-term methodological refinement." >
+      <img src="/image/PersonalProjects.png" class="w-3/4 -mt-3 select-none" alt="Study image" />
+    </Experience>
+
 
     <Education/>
 

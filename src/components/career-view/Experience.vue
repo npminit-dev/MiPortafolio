@@ -181,11 +181,15 @@ function startFlipAnimation() {
   flipTimeline = Flip.from(state, {
     duration: 1,
     rotateX: 540,
-    rotateY: 180,
-    ease: 'cubic-bezier(.16,.45,.86,.56)',
+    rotateY: -180,
+    ease: 'linear',
     absolute: true,
     paused: true,
-    
+    onComplete: () => {
+      const sound = st.sounds['hit-1'].howl
+      if(sound.playing()) sound.stop()
+      sound.play()
+    }
   })
   
   // ScrollTrigger con control de opacidad

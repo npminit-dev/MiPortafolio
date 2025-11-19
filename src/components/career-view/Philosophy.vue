@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, onBeforeUnmount, ref, nextTick } from 'vue';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SubTitle from './SubTitle.vue';
+import { useTranslation } from 'i18next-vue';
+import { useSoundStore } from '../../stores/useSoundStore';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,13 +30,24 @@ const text2 = ref(false);
 const text3 = ref(false);
 const text4 = ref(false);
 
+const { i18next } = useTranslation()
+const st = useSoundStore()
+
 const VISIBILITY_THRESHOLD = -250;
 const INVISIBILITY_THRESHOLD = 350;
 
-onMounted(() => {
+let scrollTriggerInstance: ScrollTrigger | null = null;
+
+const playTransition = () => {
+  const sound = st.sounds['transition-1'].howl
+  if(sound.playing()) sound.stop()
+  sound.play()
+}
+
+const startAnimations = () => {
   const container = document.getElementById('stars-container');
 
-  ScrollTrigger.create({
+  scrollTriggerInstance = ScrollTrigger.create({
     trigger: container,
     start: 'bottom bottom',
     end: '+=650%',
@@ -82,6 +95,7 @@ onMounted(() => {
       if (text1Z > VISIBILITY_THRESHOLD && text1Z < INVISIBILITY_THRESHOLD) {
         if (!text1.value) {
           text1.value = true;
+          playTransition()
           gsap.to('#text-1', {
             opacity: 1,
             duration: 0.5,
@@ -92,13 +106,13 @@ onMounted(() => {
         text1.value = false;
         gsap.to('#text-1', {
           opacity: 0,
-          duration: 0.3
+          duration: 0.5
         });
       } else if (text1Z <= VISIBILITY_THRESHOLD && text1.value) {
         text1.value = false;
         gsap.to('#text-1', {
           opacity: 0,
-          duration: 0.3
+          duration: 0.5
         });
       }
 
@@ -106,6 +120,7 @@ onMounted(() => {
       if (text2Z > VISIBILITY_THRESHOLD && text2Z < INVISIBILITY_THRESHOLD) {
         if (!text2.value) {
           text2.value = true;
+          playTransition();
           gsap.to('#text-2', {
             opacity: 1,
             duration: 0.5,
@@ -116,13 +131,13 @@ onMounted(() => {
         text2.value = false;
         gsap.to('#text-2', {
           opacity: 0,
-          duration: 0.3
+          duration: 0.5
         });
       } else if (text2Z <= VISIBILITY_THRESHOLD && text2.value) {
         text2.value = false;
         gsap.to('#text-2', {
           opacity: 0,
-          duration: 0.3
+          duration: 0.5
         });
       }
 
@@ -130,6 +145,7 @@ onMounted(() => {
       if (text3Z > VISIBILITY_THRESHOLD && text3Z < INVISIBILITY_THRESHOLD) {
         if (!text3.value) {
           text3.value = true;
+          playTransition();
           gsap.to('#text-3', {
             opacity: 1,
             duration: 0.5,
@@ -140,13 +156,13 @@ onMounted(() => {
         text3.value = false;
         gsap.to('#text-3', {
           opacity: 0,
-          duration: 0.3
+          duration: 0.5
         });
       } else if (text3Z <= VISIBILITY_THRESHOLD && text3.value) {
         text3.value = false;
         gsap.to('#text-3', {
           opacity: 0,
-          duration: 0.3
+          duration: 0.5
         });
       }
 
@@ -154,6 +170,7 @@ onMounted(() => {
       if (text4Z > VISIBILITY_THRESHOLD && text4Z < INVISIBILITY_THRESHOLD) {
         if (!text4.value) {
           text4.value = true;
+          playTransition();
           gsap.to('#text-4', {
             opacity: 1,
             duration: 0.5,
@@ -164,17 +181,54 @@ onMounted(() => {
         text4.value = false;
         gsap.to('#text-4', {
           opacity: 0,
-          duration: 0.3
+          duration: 0.5
         });
       } else if (text4Z <= VISIBILITY_THRESHOLD && text4.value) {
         text4.value = false;
         gsap.to('#text-4', {
           opacity: 0,
-          duration: 0.3
+          duration: 0.5
         });
       }
     }
   });
+};
+
+const killAnimations = () => {
+  // Matar el ScrollTrigger
+  if (scrollTriggerInstance) {
+    scrollTriggerInstance.kill();
+    scrollTriggerInstance = null;
+  }
+
+  // Matar todas las animaciones GSAP activas
+  gsap.killTweensOf('.star-layer');
+  gsap.killTweensOf('#text-1');
+  gsap.killTweensOf('#text-2');
+  gsap.killTweensOf('#text-3');
+  gsap.killTweensOf('#text-4');
+
+  // Resetear estados
+  text1.value = false;
+  text2.value = false;
+  text3.value = false;
+  text4.value = false;
+
+  st.sounds['transition-1'].howl.stop()
+};
+
+onMounted(() => {
+  startAnimations();
+
+  i18next.on('languageChanged', async () => {
+    killAnimations()
+    await nextTick()
+    startAnimations()
+  })
+});
+
+onBeforeUnmount(() => {
+  killAnimations();
 });
 </script>
 
