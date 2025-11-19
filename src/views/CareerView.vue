@@ -6,6 +6,7 @@ import SubTitle from '../components/career-view/SubTitle.vue';
 import Experience from '../components/career-view/Experience.vue';
 import GradientGreen from '../components/backgrounds/GradientGreen.vue';
 import Education from '../components/career-view/Education.vue';
+import Philosophy from '../components/career-view/Philosophy.vue';
 
 onMounted(() => {
 
@@ -32,15 +33,7 @@ onMounted(() => {
 
     <Education/>
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+    <Philosophy/>
     
   </main>
 </template>

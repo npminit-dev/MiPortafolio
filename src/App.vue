@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollSmoother)
 
 onMounted(() => {
   ScrollSmoother.create({
-    speed: 1,
+    speed: .75,
     effects: true,
     smooth: 2
   })
