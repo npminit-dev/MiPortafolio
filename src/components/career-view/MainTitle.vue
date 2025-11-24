@@ -4,7 +4,25 @@ import { onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { SplitText } from 'gsap/all'
 import { useTranslation } from 'i18next-vue'
 import { useSoundStore } from '../../stores/useSoundStore'
-import Body from './Body.vue'
+
+interface Props {
+  titleKey: string
+  subtitleKey: string
+  descriptionKey: string
+  showCircle?: boolean
+  descriptionWidth?: string
+  spinningImage?: string
+  imageSize?: string
+  imageOpacity?: string
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  showCircle: true,
+  descriptionWidth: '500px',
+  spinningImage: '/image/dashed-circle-hd.png',
+  imageSize: '1000px',
+  imageOpacity: '40'
+})
 
 const { i18next } = useTranslation()
 const st = useSoundStore()
@@ -13,18 +31,26 @@ let tl: gsap.core.Timeline | null = null
 let splitInstances: SplitText[] = []
 
 function startAnimation() {
-  killAnimation() // limpiar si ya existía algo
+  killAnimation()
 
-  const titleText = new SplitText('#career-title', { type: 'chars' })
-  const logText = new SplitText('#career-sub-log', { type: 'chars' })
-  const pText = new SplitText('#career-sub-p', { type: 'chars, lines' })
+  const titleText = new SplitText('#animated-title', { type: 'chars' })
+  const logText = new SplitText('#animated-subtitle', { type: 'chars' })
+  const pText = new SplitText('#animated-description', { type: 'chars, lines' })
+  const circle = document.getElementById('rotating-circle')
 
   splitInstances = [titleText, logText, pText]
 
   tl = gsap.timeline()
 
-  // Estado inicial: invisibles
   tl.set([titleText.chars, logText.chars, pText.chars], { opacity: 0 })
+
+  // Circulo
+  tl.to(circle, {
+    rotateZ: 360,
+    repeat: -1,
+    duration: 120,
+    ease: 'linear'
+  }, 0)
 
   // Título
   tl.fromTo(
@@ -44,7 +70,7 @@ function startAnimation() {
     0.5
   )
 
-  // Log
+  // Subtitle
   tl.fromTo(
     logText.chars,
     { opacity: 1 },
@@ -62,7 +88,7 @@ function startAnimation() {
     '>.5'
   )
 
-  // Párrafo
+  // Description
   tl.fromTo(
     pText.chars,
     { opacity: 1 },
@@ -87,12 +113,10 @@ function killAnimation() {
     tl = null
   }
 
-  // detener sonido si sigue activo
   if (st.sounds['loading-1']?.howl) {
     st.sounds['loading-1'].howl.stop()
   }
 
-  // revertir SplitText (quita los spans)
   splitInstances.forEach(function (instance) {
     instance.revert()
   })
@@ -117,22 +141,51 @@ onBeforeUnmount(function () {
 
 <template>
   <div class="relative h-screen w-screen grid grid-cols-[40%_60%]">
-    <Body/>
-    <div class="flex flex-col items-start justify-center mr-12">
-      <h1 id="career-title" class="text-ghost-100 font-mono font-light text-4xl">
-        {{ $t('CAREER') }}
+    <!-- Slot para componentes SVG animados (como Body) -->
+    <slot name="animated-body" />
+
+    <div class="relative flex flex-col items-start justify-center mr-12">
+      <h1 id="animated-title" class="text-ghost-100 font-mono font-light text-4xl">
+        {{ $t(titleKey) }}
       </h1>
-      <h2 id="career-sub-log" class="font-display font-normal text-ghost-200 text-xl my-4 text-left">
-        {{ $t('[LOG: CAREER ANALYSIS — SUBJECT D-095]') }}
-        <div id="carrer-translation-circle" class="inline-block border-[1px] border-ghost-100 h-3 w-3 rounded-full opacity-0"></div>
+      <h2 id="animated-subtitle" class="font-display font-normal text-ghost-200 text-xl my-4 text-left">
+        {{ $t(subtitleKey) }}
+        <div 
+          v-if="showCircle"
+          class="inline-block border-[1px] border-ghost-100 h-3 w-3 rounded-full opacity-0"
+        ></div>
       </h2>
-      <p id="career-sub-p" class="font-display font-light text-ghost-200 w-[500px] text-lg text-left break-normal">
-        {{
-          $t(
-            "This simulation provides an analytical reconstruction of subject D-231’s professional records, academic conditioning, and behavioral directives. Extracted data is processed through the system’s evaluation core to determine operational stability and response accuracy. Findings contribute to the ongoing assessment of the subject’s technical cognition and adaptive progression."
-          )
-        }}
+      <p 
+        id="animated-description" 
+        class="font-display font-light text-ghost-200 text-lg text-left break-normal leading-tight"
+        :style="{ width: descriptionWidth }"
+      >
+        {{ $t(descriptionKey) }}
       </p>
+    </div>
+
+    <div class="absolute h-full w-full flex items-center justify-center object-contain mask-fade">
+      <img
+        id="rotating-circle"
+        :src="spinningImage"
+        :class="`opacity-${imageOpacity}`"
+        :style="{ width: imageSize, height: imageSize }"
+        alt=""
+      />
     </div>
   </div>
 </template>
+
+<style scoped>
+.mask-fade {
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 20%,
+    black 60%,
+    black 40%,
+    transparent 80%
+  );
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+}
+</style>

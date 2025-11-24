@@ -321,25 +321,25 @@ onBeforeUnmount(() => {
 
       <!-- Textos parallax -->
       <p id="text-1" 
-        class="absolute text-center text-xl font-light font-display text-ghost-100 w-[500px] leading-tight"
+        class="absolute text-center text-xl font-display text-ghost-100 w-[500px] leading-tight"
         style="transform: translateZ(-250px); opacity: 0;">
         {{ $t('In current operational records, D-095 is identified as an engineer driven by disciplined curiosity and affinity for well-structured workflows. Though accustomed to defined roles, he demonstrates notable adaptability, calibrating his methods under high-pressure conditions while preserving strong standards of code quality whenever mission timing allows.') }}
       </p>
 
       <p id="text-2" 
-        class="absolute text-center text-xl font-light font-display text-ghost-100 w-[500px] leading-tight"
+        class="absolute text-center text-xl font-display text-ghost-100 w-[500px] leading-tight"
         style="transform: translateZ(-975px); opacity: 0;">
         {{ $t('Across multiple learning cycles, D-095 displays a persistent expansion of technical range, integrating new tools with unusual efficiency. His reliance on generative AI functions as an auxiliary processor, accelerating comprehension and solution-building. Evaluators note his ability to convert complex systems into clear, accessible explanations that strengthen team alignment.') }}
       </p>
 
       <p id="text-3" 
-        class="absolute text-center text-xl font-light font-display text-ghost-100 w-[500px] leading-tight"
+        class="absolute text-center text-xl font-display text-ghost-100 w-[500px] leading-tight"
         style="transform: translateZ(-1700px); opacity: 0;">
         {{ $t('Behavioral scans show that D-095 operates from a stable ethical lattice grounded in humility, respect, and tolerance. He engages proactively in communication loops, ensuring shared clarity of objectives and reducing operational drift. Analysts report that this consistent initiative enhances cohesion, positioning him as both a dependable technician and a stabilizing presence within collaborative units.') }}
       </p>
 
       <p id="text-4" 
-        class="absolute text-center text-xl font-light font-display text-ghost-100 w-[500px] leading-tight"
+        class="absolute text-center text-xl font-display text-ghost-100 w-[500px] leading-tight"
         style="transform: translateZ(-2275px); opacity: 0;">
         {{ $t('Conclusion: Long-term projections indicate that D-095 will continue refining his methodologies, merging disciplined structure with adaptive insight. His trajectory suggests a constant upward drift in capability, driven by curiosity, ethical stability, and a sustained commitment to elevating every system he becomes part of.') }}
       </p>

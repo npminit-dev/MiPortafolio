@@ -1,30 +1,39 @@
 <script setup lang="ts">
-  import { ref, watch } from 'vue';
+  import { onMounted, ref, watch } from 'vue';
   import type { Lang } from '../types/globals';
   import { useTranslation } from 'i18next-vue';
 
   const selectedLang = ref<Lang>('en')
   const { i18next } = useTranslation()
 
-  watch(selectedLang, () => {
+  onMounted(() => {
+    const savedLang = localStorage.getItem('lang')
+    if(!savedLang) localStorage.setItem('lang', 'en')
+    else selectedLang.value = savedLang as Lang
     i18next.changeLanguage(selectedLang.value)
   })
+
+  function handleLangChange(lang: Lang) {
+    localStorage.setItem('lang', lang)
+    selectedLang.value = lang
+    i18next.changeLanguage(selectedLang.value)
+  }
 
 </script>
 
 <template>
   <div class="relative w-14 flex items-center justify-between z-10">
     <div class="size-5 flex items-center justify-center rounded-full overflow-hidden cursor-pointer"
-      @click="selectedLang = 'es'">
-      <v-icon name="fi-square-es" class="size-7" />
+      @click="handleLangChange('en')">
+      <v-icon name="fi-square-gb" class="size-7" />
     </div>
     <div class="size-5 flex items-center justify-center rounded-full overflow-hidden cursor-pointer"
-      @click="selectedLang = 'en'">
-      <v-icon name="fi-square-gb" class="size-7" />
+      @click="handleLangChange('es')">
+      <v-icon name="fi-square-es" class="size-7" />
     </div>
     <div 
       class="absolute size-7 border-[1px] border-ghost-300 rounded-full -left-1 -z-10"
-      :class="[selectedLang === 'es' ? 'esSelect' : 'gbSelect']"
+      :class="[selectedLang === 'en' ? 'esSelect' : 'gbSelect']"
     />
   </div>
 </template>

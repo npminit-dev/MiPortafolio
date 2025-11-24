@@ -8,14 +8,16 @@ import SubTitle from "./SubTitle.vue";
 import { SplitText } from "gsap/all";
 import EducationDivider from "./EducationDivider.vue";
 import { useTranslation } from "i18next-vue";
+import { useSoundStore } from '../../stores/useSoundStore';
 
 const { width } = useWindowSize();
 const subtitleWrapper = useTemplateRef<HTMLElement | null>("subtitleWrapper");
 const subtitleRef = useTemplateRef<InstanceType<typeof SubTitle> | null>("subtitleRef");
 const { i18next } = useTranslation(); 
+const st = useSoundStore()
 let splits: SplitText[] = [];
 
-let animations: gsap.core.Tween[] = [];
+let animations: Array<gsap.core.Tween|gsap.core.Timeline> = [];
 
 function calcXPercent() {
   return 100 - (width.value / getWidthAndMargin()) * 100;
@@ -26,6 +28,9 @@ function getWidthAndMargin() {
 }
 
 function createAnimations() {
+  // Establecer todos los logos como invisibles inicialmente
+  gsap.set(".education-logo-container", { autoAlpha: 0 });
+
   // ScrollTrigger para el SubTitle
   const subtitleAnim = gsap.to(subtitleWrapper.value, {
     scrollTrigger: {
@@ -57,7 +62,7 @@ function createAnimations() {
         scrub: 0,
         anticipatePin: 1,
         onEnter: () => {
-          console.log("entered");
+          gsap.set(".education-logo-container", { autoAlpha: 1 });
         },
       },
     }
@@ -104,7 +109,7 @@ function createAnimations() {
     const splitH5 = new SplitText(h5, { type: "chars" });
     const splitP = new SplitText(p, { type: "lines" });
 
-    splits.push(splitH4, splitH5, splitP)
+    splits.push(splitH4, splitH5, splitP);
 
     // Animar títulos con desplazamiento
     const animTitles = gsap.fromTo(
@@ -144,7 +149,7 @@ function createAnimations() {
           containerAnimation: horScroll,
           start: "left right",
           end: "right left",
-          toggleActions: 'play none none none',
+          toggleActions: "play none none none",
         },
       }
     );
@@ -175,7 +180,28 @@ function createAnimations() {
           pinnedContainer: "#education-outer-container",
           start: "left right",
           end: "right left",
-          toggleActions: 'play none none none',
+          toggleActions: "play none none none",
+        },
+        onStart: () => {
+          if (!i) {
+            st.play(st.sounds["hit-1"]);
+            const stars = document.getElementsByClassName("hit-star");
+            let tl = gsap.timeline();
+            tl.fromTo(
+              stars,
+              {
+                autoAlpha: 1,
+              },
+              {
+                x: () => Math.random() * 600 - 200,
+                y: () => Math.random() * 600 - 300,
+                autoAlpha: 0,
+                ease: "expo.out",
+                duration: () => 2 + Math.random() * 6,
+              }
+            );
+            animations.push(tl);
+          }
         },
       }
     );
@@ -235,7 +261,45 @@ onUnmounted(() => {
           <div
             class="education-logo-container h-full w-full overflow-hidden rounded-full object-contain"
           >
-            <img src="/image/uno.png" alt="UNO logo" class="education-logo" />
+            <img src="/image/uno.png" alt="UNO logo" class="education-logo rounded-full" />
+          </div>
+          <div id="hit-stars-container" class="absolute inset-0 flex items-center justify-center -z-10">
+            <div class="absolute hit-star h-[1px] w-[1px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[3px] w-[3px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[3px] w-[3px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[3px] w-[3px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[3px] w-[3px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[3px] w-[3px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[1px] w-[1px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[1px] w-[1px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[1px] w-[1px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[1px] w-[1px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[1px] w-[1px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[1px] w-[1px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[2px] w-[2px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[2px] w-[2px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[2px] w-[2px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[2px] w-[2px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[1px] w-[1px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[3px] w-[3px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[3px] w-[3px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[3px] w-[3px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[3px] w-[3px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[3px] w-[3px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[1px] w-[1px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[1px] w-[1px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[1px] w-[1px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[1px] w-[1px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[1px] w-[1px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[1px] w-[1px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[2px] w-[2px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[2px] w-[2px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[2px] w-[2px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[2px] w-[2px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[2px] w-[2px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[2px] w-[2px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[2px] w-[2px] bg-ghost-100 rounded-full opacity-0"/>
+            <div class="absolute hit-star h-[2px] w-[2px] bg-ghost-100 rounded-full opacity-0"/>
           </div>
         </div>
         <EducationData

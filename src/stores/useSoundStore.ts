@@ -87,7 +87,7 @@ const howlers: Howlers = {
   },
   "transition-1": {
     howl: new Howl({ src: ['sound/transition-1.mp3'], volume: 0, }),
-    maxVolume: 0.3
+    maxVolume: 0.4
   },
   "transition-2": {
     howl: new Howl({ src: ['sound/transition-2.mp3'], volume: 0, }),

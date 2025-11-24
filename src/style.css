@@ -195,7 +195,7 @@
   --color-plasma-purple-600: #7c3aed;
   --color-plasma-purple-700: #6d28d9;
   --color-plasma-purple-800: #5b21b6;
-  --color-plasma-purple-900: #2e0b75;
+  --color-plasma-purple-900: #180646;
   --color-plasma-purple-950: #0c0028;
 
   /* Acentos magenta/violeta */
@@ -218,5 +218,5 @@
   --color-shadow-500: #3d4660;
 
   /* Especiales */
-  --color-deep-teal-shadow: #001f29
+  --color-deep-teal-shadow: #001f29;
 }

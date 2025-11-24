@@ -17,7 +17,7 @@ import { DrawSVGPlugin } from 'gsap/all';
 import { SplitText } from 'gsap/SplitText';
 import { InertiaPlugin } from 'gsap/all';
 import { addIcons, OhVueIcon } from 'oh-vue-icons';
-import { FiSquareEs, FiSquareGb } from "oh-vue-icons/icons";
+import { BiChevronCompactLeft, BiChevronCompactRight, FiSquareEs, FiSquareGb } from "oh-vue-icons/icons";
 import { router } from './router';
     
 const app = createApp(App);
@@ -40,7 +40,7 @@ await i18next.init({
 const pinia = createPinia()
 
 /* vue-icons */
-addIcons(FiSquareEs, FiSquareGb);
+addIcons(FiSquareEs, FiSquareGb, BiChevronCompactLeft, BiChevronCompactRight);
 app.component("v-icon", OhVueIcon);
 
 /* gsap plugin register */

@@ -38,7 +38,6 @@ onMounted(() => {
   i18next.on('languageChanged', async () => {
     killAnimations()
     await nextTick()
-    await nextTick()
     startAnimation()
   })
 })
@@ -57,12 +56,12 @@ function startAnimation() {
   // SplitText para los elementos de texto
   const h4Split = new SplitText(`#experience-company-${uniqueID}`, { type: 'chars' })
   const h5Split = new SplitText(`#experience-role-${uniqueID}`, { type: 'chars' })
-  const pSplit = new SplitText(`#experience-description-${uniqueID}`, { type: 'words' })
+  const pSplit = new SplitText(`#experience-description-${uniqueID}`, { type: 'lines' })
   
   splitInstances = [h4Split, h5Split, pSplit]
 
   // Estado inicial: todos invisibles
-  gsap.set([h4Split.chars, h5Split.chars, pSplit.words], { opacity: 0 })
+  gsap.set([h4Split.chars, h5Split.chars, pSplit.lines], { opacity: 0 })
 
   // Crear timeline con todas las animaciones secuenciales
   timeline = gsap.timeline({
@@ -96,11 +95,6 @@ function startAnimation() {
     drawSVG: '0% 100%',
     ease: 'power4.out',
     duration: 0.2,
-    onStart: () => {
-      const isPlaying = st.sounds['hit-1'].howl.playing()
-      if(isPlaying) st.sounds['hit-1'].howl.stop()
-      st.play(st.sounds['hit-1'])
-    }
   }, 0.7)
 
   // 5. Animar textos (todos empiezan al mismo tiempo)
@@ -125,10 +119,10 @@ function startAnimation() {
   }, textStartTime)
 
   // P - palabras con stagger menor
-  timeline.to(pSplit.words, {
+  timeline.to(pSplit.lines, {
     opacity: 1,
     duration: 1,
-    stagger: 0.007,
+    stagger: 0.05,
     ease: 'power2.out'
   }, textStartTime)
 
@@ -185,11 +179,6 @@ function startFlipAnimation() {
     ease: 'linear',
     absolute: true,
     paused: true,
-    onComplete: () => {
-      const sound = st.sounds['hit-1'].howl
-      if(sound.playing()) sound.stop()
-      sound.play()
-    }
   })
   
   // ScrollTrigger con control de opacidad
