@@ -50,8 +50,17 @@ export const es = {
   "Conclusion: Long-term projections indicate that D-095 will continue refining his methodologies, merging disciplined structure with adaptive insight. His trajectory suggests a constant upward drift in capability, driven by curiosity, ethical stability, and a sustained commitment to elevating every system he becomes part of.": "Conclusión: Las proyecciones a largo plazo indican que D-095 seguirá refinando sus metodologías, fusionando estructura disciplinada con percepción adaptable. Su trayectoria sugiere un avance continuo en capacidad, impulsado por curiosidad, estabilidad ética y un compromiso sostenido por elevar cada sistema del que forma parte.",
 
   "[LOG: SKILLS ANALYSIS — SUBJECT D-095]": "[LOG: ANÁLISIS DE HABILIDADES — SUJETO D-095]",
-
   "his segment compiles a procedural breakdown of subject D-095’s verified technical domains and interpersonal attributes. All registered competencies have been processed through automated filtering layers to determine present operational range. The record contributes to continuous monitoring of skill acquisition and cognitive refinement.": "Este segmento reúne un desglose operativo de los dominios técnicos verificados y los rasgos interpersonales del Sujeto D-095. Cada competencia registrada fue procesada mediante capas automáticas de filtrado para definir su rango operativo actual. El informe sostiene el monitoreo continuo de su adquisición de habilidades y refinamiento cognitivo.",
+
+  "LAYER: PRIMARY PROTOCOLS": "CAPA: PROTOCOLOS PRIMARIOS",
+  "LAYER: CODE DIRECTIVES": "CAPA: DIRECTIVAS DE CÓDIGO",
+  "LAYER: IMPLEMENTATION ARRAY": "CAPA: MATRIZ DE IMPLEMENTACIÓN",
+  "LAYER: BEHAVIORAL SYSTEMS": "CAPA: SISTEMAS CONDUCTUALES",
+
+  "This layer outlines the essential protocols that form the base of D-095’s architecture, supporting all higher-level operations.": "Este nivel describe los protocolos esenciales que conforman la base de la arquitectura de D-095 y sostienen todas las operaciones de nivel superior.",
+  "This layer defines the logical instructions that govern execution flow, coordinating how processes activate, respond, and adapt.": "Este nivel define las instrucciones lógicas que gobiernan el flujo de ejecución y coordinan cómo los procesos se activan, responden y se adaptan.",
+  "This layer compiles the operational frameworks and auxiliary tools governing D-095’s applied execution across multiple environments.": "Este nivel recopila los frameworks operativos y las herramientas auxiliares que regulan la ejecución aplicada de D-095 en múltiples entornos.",
+  "This layer defines the behavioral parameters and adaptive patterns regulating D-095’s interpersonal and operational conduct.": "Este nivel establece los parámetros conductuales y los patrones adaptativos que regulan el comportamiento interpersonal y operativo de D-095.",
 
   "Back to Central Node": "Volver al Nodo Central"
 }

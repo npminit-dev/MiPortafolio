@@ -54,9 +54,9 @@ function startAnimation() {
   gsap.set(`#experience-image-${uniqueID}`, { rotateY: 270 })
 
   // SplitText para los elementos de texto
-  const h4Split = new SplitText(`#experience-company-${uniqueID}`, { type: 'chars' })
-  const h5Split = new SplitText(`#experience-role-${uniqueID}`, { type: 'chars' })
-  const pSplit = new SplitText(`#experience-description-${uniqueID}`, { type: 'lines' })
+  const h4Split = new SplitText(`#experience-company-${uniqueID}`, { type: 'chars, words' })
+  const h5Split = new SplitText(`#experience-role-${uniqueID}`, { type: 'chars, words' })
+  const pSplit = new SplitText(`#experience-description-${uniqueID}`, { type: 'lines, words' })
   
   splitInstances = [h4Split, h5Split, pSplit]
 

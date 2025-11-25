@@ -4,7 +4,7 @@ import gsap from "gsap";
 import { useWindowSize } from "@vueuse/core";
 import EducationData from "./EducationData.vue";
 import EducationLogo from "./EducationLogo.vue";
-import SubTitle from "./SubTitle.vue";
+import SubTitle from "../SubTitle.vue";
 import { SplitText } from "gsap/all";
 import EducationDivider from "./EducationDivider.vue";
 import { useTranslation } from "i18next-vue";
@@ -242,7 +242,7 @@ onUnmounted(() => {
       ref="subtitleRef"
       :simple="true"
       text="MODULE: COGNITIVE DEVELOPMENT"
-      class="my-36 mb-16 mx-auto"
+      class="w-full my-36 mb-16 mx-auto text-nowrap"
     />
   </div>
   <div>

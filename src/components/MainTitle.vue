@@ -3,7 +3,7 @@ import gsap from 'gsap'
 import { onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { SplitText } from 'gsap/all'
 import { useTranslation } from 'i18next-vue'
-import { useSoundStore } from '../../stores/useSoundStore'
+import { useSoundStore } from '../stores/useSoundStore'
 
 interface Props {
   titleKey: string
@@ -12,16 +12,16 @@ interface Props {
   showCircle?: boolean
   descriptionWidth?: string
   spinningImage?: string
-  imageSize?: string
-  imageOpacity?: string
+  imageSize?: number
+  imageOpacity?: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
   showCircle: true,
   descriptionWidth: '500px',
   spinningImage: '/image/dashed-circle-hd.png',
-  imageSize: '1000px',
-  imageOpacity: '40'
+  imageSize: 1000,
+  imageOpacity: 30
 })
 
 const { i18next } = useTranslation()
@@ -48,7 +48,7 @@ function startAnimation() {
   tl.to(circle, {
     rotateZ: 360,
     repeat: -1,
-    duration: 120,
+    duration: 160,
     ease: 'linear'
   }, 0)
 
@@ -146,45 +146,37 @@ onBeforeUnmount(function () {
 
     <div class="relative flex flex-col items-start justify-center mr-12">
       <h1 id="animated-title" class="text-ghost-100 font-mono font-light text-4xl">
-        {{ $t(titleKey) }}
+        {{ $t(props.titleKey) }}
       </h1>
       <h2 id="animated-subtitle" class="font-display font-normal text-ghost-200 text-xl my-4 text-left">
-        {{ $t(subtitleKey) }}
-        <div 
-          v-if="showCircle"
-          class="inline-block border-[1px] border-ghost-100 h-3 w-3 rounded-full opacity-0"
-        ></div>
+        {{ $t(props.subtitleKey) }}
+        <div v-if="showCircle" class="inline-block border-[1px] border-ghost-100 h-3 w-3 rounded-full opacity-0"></div>
       </h2>
-      <p 
-        id="animated-description" 
+      <p id="animated-description"
         class="font-display font-light text-ghost-200 text-lg text-left break-normal leading-tight"
-        :style="{ width: descriptionWidth }"
-      >
-        {{ $t(descriptionKey) }}
+        :style="{ width: props.descriptionWidth }">
+        {{ $t(props.descriptionKey) }}
       </p>
     </div>
 
     <div class="absolute h-full w-full flex items-center justify-center object-contain mask-fade">
-      <img
-        id="rotating-circle"
-        :src="spinningImage"
-        :class="`opacity-${imageOpacity}`"
-        :style="{ width: imageSize, height: imageSize }"
-        alt=""
-      />
+      <img id="rotating-circle" :src="props.spinningImage" :class="`absolute opacity-${props.imageOpacity}`"
+        :style="{ width: props.imageSize, height: props.imageSize }" alt="" />
+      <div 
+        class="absolute border-[1px] border-ghost-100 rounded-full"
+        :style="{ height: `${props.imageSize + 200}px`, width: `${props.imageSize + 200}px`, opacity: `${props.imageOpacity - 10}%` }"
+      ></div>
     </div>
   </div>
 </template>
 
 <style scoped>
 .mask-fade {
-  mask-image: linear-gradient(
-    to bottom,
-    transparent 20%,
-    black 60%,
-    black 40%,
-    transparent 80%
-  );
+  mask-image: linear-gradient(to bottom,
+      transparent 20%,
+      black 60%,
+      black 40%,
+      transparent 80%);
   mask-size: 100% 100%;
   mask-repeat: no-repeat;
 }

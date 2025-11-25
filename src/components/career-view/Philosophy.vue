@@ -2,7 +2,7 @@
 import { onMounted, onBeforeUnmount, ref, nextTick } from 'vue';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import SubTitle from './SubTitle.vue';
+import SubTitle from '../SubTitle.vue';
 import { useTranslation } from 'i18next-vue';
 import { useSoundStore } from '../../stores/useSoundStore';
 

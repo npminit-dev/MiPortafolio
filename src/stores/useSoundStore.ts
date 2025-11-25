@@ -119,6 +119,14 @@ export const useSoundStore = defineStore('soundStore', () => {
     return sound
   }
 
+  function stopAllLoadings() {
+    Object.entries(sounds).forEach(([key, value]) => {
+      if(key.startsWith('loading')) {
+        value.howl.stop()
+      }
+    })
+  }
+
   watch(isSoundEnabled, () => {
     Object.values(sounds).forEach(sound => {
       if(!isSoundEnabled.value) {
@@ -136,6 +144,7 @@ export const useSoundStore = defineStore('soundStore', () => {
     isSoundEnabled,
     sounds,
     setSoundEnabled,
+    stopAllLoadings,
     play
   }
 })

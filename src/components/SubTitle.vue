@@ -12,7 +12,6 @@ type Props = {
 const { text, simple } = defineProps<Props>();
 const { i18next } = useTranslation();
 const id = uuidv4();
-let scrollTriggerInstance: ScrollTrigger | null = null;
 
 onMounted(async () => {
   startAnimation();
@@ -30,7 +29,7 @@ onBeforeUnmount(() => {
 });
 
 function startAnimation() {
-  const animation = gsap.fromTo(
+  gsap.fromTo(
     `#subtitle-${id}`,
     {
       opacity: 0,
@@ -52,14 +51,14 @@ function startAnimation() {
       duration: 1,
     }
   );
-  
-  scrollTriggerInstance = animation.scrollTrigger || null;
 }
 
 function killAnimation() {
   const animation = gsap.getById(`#subtitle-${id}`);
-  if (animation) animation.kill();
-  scrollTriggerInstance = null;
+  if (animation) {
+    animation.kill();
+    animation.scrollTrigger?.kill()
+  }
 }
 </script>
 

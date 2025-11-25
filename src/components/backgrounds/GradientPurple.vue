@@ -12,7 +12,7 @@
   height: 100%;
   width: 100%;
   background: linear-gradient(90deg, var(--color-plasma-purple-900), var(--color-plasma-purple-950), var(--color-shadow-100));
-  background-size: 180% 180%;
+  background-size: 200% 200%;
   animation: gradient-animation 21s ease infinite;
   -o-animation: gradient-animation 21s ease infinite;
   -moz-animation: gradient-animation 21s ease infinite;

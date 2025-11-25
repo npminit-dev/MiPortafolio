@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import MainTitle from '../components/career-view/MainTitle.vue';
-import SubTitle from '../components/career-view/SubTitle.vue';
+import MainTitle from '../components/MainTitle.vue';
+import SubTitle from '../components/SubTitle.vue';
 import Experience from '../components/career-view/Experience.vue';
 import Education from '../components/career-view/Education.vue';
 import Philosophy from '../components/career-view/Philosophy.vue';

@@ -1,30 +1,73 @@
 <script setup lang="ts">
-  import MainTitle from '../components/career-view/MainTitle.vue';
-  import BackToMenu from '../components/BackToMenu.vue';
-  import Body from '../components/career-view/Body.vue';
-  import GradientPurple from '../components/backgrounds/GradientPurple.vue';
+import MainTitle from '../components/MainTitle.vue';
+import BackToMenu from '../components/BackToMenu.vue';
+import Body from '../components/career-view/Body.vue';
+import GradientPurple from '../components/backgrounds/GradientPurple.vue';
+import SubTitle from '../components/SubTitle.vue';
+import Description from '../components/Description.vue';
+import BinaryTree from '../components/skills-view/BinaryTree.vue';
+import Graph from '../components/skills-view/Graph.vue';
 
 </script>
 
 <template>
   <main class="relative w-screen overflow-clip min-h-screen flex flex-col items-center">
-    <GradientPurple class="fixed h-screen w-screen left-0 top-0 -z-30"/>
+    <GradientPurple class="fixed h-screen w-screen left-0 top-0 -z-30" />
 
-    <MainTitle
-      title-key="SKILLS"
-      subtitle-key="[LOG: SKILLS ANALYSIS — SUBJECT D-095]"
-      description-key="his segment compiles a procedural breakdown of subject D-095’s verified technical domains and interpersonal attributes. All registered competencies have been processed through automated filtering layers to determine present operational range. The record contributes to continuous monitoring of skill acquisition and cognitive refinement."
-    >
+    <MainTitle title-key="SKILLS" subtitle-key="[LOG: SKILLS ANALYSIS — SUBJECT D-095]"
+      description-key="his segment compiles a procedural breakdown of subject D-095’s verified technical domains and interpersonal attributes. All registered competencies have been processed through automated filtering layers to determine present operational range. The record contributes to continuous monitoring of skill acquisition and cognitive refinement.">
       <template #animated-body>
+
         <Body />
       </template>
     </MainTitle>
 
+    <div class="flex flex-col items-center justify-center mb-32">
+      <SubTitle text="LAYER: PRIMARY PROTOCOLS" class="mb-4" />
+      <Description
+        content="This layer outlines the essential protocols that form the base of D-095’s architecture, supporting all higher-level operations." />
+    </div>
+
+    <div 
+      class="w-full grid grid-cols-2 grid-rows-[40% 20% 40%] gap-y-16 gap-x-64"
+    >
+      <BinaryTree class="self-center justify-self-end" height="325"/>
+      <Graph class="self-center justify-self-start" height="325"/>
+
+      <Description
+        class="col-span-2 self-center justify-self-center text-xl"
+        content="[ Advanced Data Structure Handling ]"
+        :duration=".75"
+        :with-sounds="false"
+      />
+    
+    </div>
+
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+    <!-- <div class="flex flex-col items-center justify-center my-16">
+      <SubTitle class="mb-4" text="LAYER: CODE DIRECTIVES" />
+      <Description
+        content="This layer defines the logical instructions that govern execution flow, coordinating how processes activate, respond, and adapt." />
+    </div>
+
+    <div class="flex flex-col items-center justify-center my-16">
+      <SubTitle class="mb-4" text="LAYER: IMPLEMENTATION ARRAY" />
+      <Description
+        content="This layer compiles the operational frameworks and auxiliary tools governing D-095’s applied execution across multiple environments." />
+    </div>
+
+    <div class="flex flex-col items-center justify-center my-16">
+      <SubTitle class="mb-4" text="LAYER: BEHAVIORAL SYSTEMS" />
+      <Description
+        content="This layer defines the behavioral parameters and adaptive patterns regulating D-095’s interpersonal and operational conduct." />
+    </div> -->
 
     <div class="w-full my-16 flex items-center justify-center">
-      <BackToMenu/>
+      <BackToMenu />
     </div>
-    
+
   </main>
 </template>
 
