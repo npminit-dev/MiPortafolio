@@ -57,10 +57,14 @@ export const es = {
   "LAYER: IMPLEMENTATION ARRAY": "CAPA: MATRIZ DE IMPLEMENTACIÓN",
   "LAYER: BEHAVIORAL SYSTEMS": "CAPA: SISTEMAS CONDUCTUALES",
 
-  "This layer outlines the essential protocols that form the base of D-095’s architecture, supporting all higher-level operations.": "Este nivel describe los protocolos esenciales que conforman la base de la arquitectura de D-095 y sostienen todas las operaciones de nivel superior.",
+  "This layer outlines the essential protocols that form the base of D-095’s architecture, supporting all higher-level operations.": "Este nivel describe los protocolos esenciales que conforman la base de la arquitectura de D-095 y sostienen todas las operaciones de orden superior.",
+
+  "Core data structures used for storage, retrieval, indexing, and hierarchical organization of information.": "Estructuras de datos centrales usadas para almacenamiento, recuperación, indexación y organización jerárquica de la información.",
+  "Essential OOP constructs, relational database fundamentals, SQL interaction methods, and core models for structured information.": "Elementos esenciales de POO, fundamentos de bases de datos relacionales, métodos de interacción SQL y modelos centrales para información estructurada.",
+
   "This layer defines the logical instructions that govern execution flow, coordinating how processes activate, respond, and adapt.": "Este nivel define las instrucciones lógicas que gobiernan el flujo de ejecución y coordinan cómo los procesos se activan, responden y se adaptan.",
   "This layer compiles the operational frameworks and auxiliary tools governing D-095’s applied execution across multiple environments.": "Este nivel recopila los frameworks operativos y las herramientas auxiliares que regulan la ejecución aplicada de D-095 en múltiples entornos.",
   "This layer defines the behavioral parameters and adaptive patterns regulating D-095’s interpersonal and operational conduct.": "Este nivel establece los parámetros conductuales y los patrones adaptativos que regulan el comportamiento interpersonal y operativo de D-095.",
 
-  "Back to Central Node": "Volver al Nodo Central"
+  "Back to Central Node": "Volver al Nodo Central",
 }

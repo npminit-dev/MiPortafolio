@@ -17,17 +17,48 @@ const props = withDefaults(defineProps<Props>(), {
 const svgRef = useTemplateRef('svgRef')
 let scrollTriggerInstance: ScrollTrigger | null = null
 
+// Estructura del grafo con node-1 (izquierda) como inicio
+// node-1 (cx="38.6647" cy="276.093") es el nodo inicial
 const graphStructure = {
-  'node-4': { edges: ['edge-2', 'edge-7'], nodes: ['node-1', 'node-2'] },
-  
-  'node-1': { edges: ['edge-0', 'edge-8'], nodes: ['node-0', 'node-2'] },
-  'node-2': { edges: ['edge-3', 'edge-9', 'edge-11'], nodes: ['node-0', 'node-5', 'node-6'] },
-  
-  'node-0': { edges: ['edge-1', 'edge-5'], nodes: ['node-5'] },
-  'node-5': { edges: ['edge-4', 'edge-10'], nodes: ['node-6'] },
-  'node-6': { edges: ['edge-6'], nodes: ['node-3'] },
-  
-  'node-3': { edges: ['edge-12'], nodes: [] }
+  // Nodo inicial: extremo izquierdo (38.6647, 276.093)
+  'node-1': {
+    edges: ['edge-0', 'edge-2', 'edge-5'],
+    nodes: ['node-0', 'node-5', 'node-2']
+  },
+
+  // Primera capa de vecinos
+  'node-0': {
+    edges: ['edge-1', 'edge-4', 'edge-16'],
+    nodes: ['node-2', 'node-6']
+  },
+  'node-5': {
+    edges: ['edge-3', 'edge-9', 'edge-14'],
+    nodes: ['node-2', 'node-4']
+  },
+  'node-2': {
+    edges: ['edge-6', 'edge-13', 'edge-15'],
+    nodes: ['node-3', 'node-6']
+  },
+
+  // Segunda capa de vecinos
+  'node-6': {
+    edges: ['edge-8', 'edge-12'],
+    nodes: ['node-7']
+  },
+  'node-4': {
+    edges: ['edge-10'],
+    nodes: ['node-3']
+  },
+  'node-3': {
+    edges: ['edge-7', 'edge-11'],
+    nodes: ['node-7']
+  },
+
+  // Tercera capa
+  'node-7': {
+    edges: [],
+    nodes: []
+  }
 }
 
 function startAnimation() {
@@ -35,9 +66,9 @@ function startAnimation() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: svgRef.value,
-        start: 'top bottom',
-        end: 'bottom top',
-        toggleActions: 'play reset play reset',
+        start: 'center bottom',
+        end: 'center top',
+        toggleActions: 'play reverse play reverse',
         onRefresh: (self) => {
           scrollTriggerInstance = self
         }
@@ -48,33 +79,35 @@ function startAnimation() {
 
     const visitedNodes = new Set<string>()
     const visitedEdges = new Set<string>()
-    
-    const queue: string[] = ['node-4']
-    visitedNodes.add('node-4')
 
-    const nodeDuration = 0.5
-    const edgeDuration = 0.5
+    const queue: string[] = ['node-1']
+    visitedNodes.add('node-1')
+
+    const nodeDuration = 0.47
+    const edgeDuration = 0.47
     const overlap = .35
 
-    const initialNode = svgRef.value.querySelector('#node-4')
+    // Animar el nodo inicial
+    const initialNode = svgRef.value.querySelector('#node-1')
     tl.fromTo(initialNode, {
-      drawSVG: '-25% -25%'
+      drawSVG: '50% 50%'
     }, {
-      drawSVG: '-75% 25%',
+      drawSVG: '0% 100%',
       duration: nodeDuration,
-      ease: 'power2.out'
+      ease: 'linear'
     })
 
+    // BFS: recorrer el grafo nivel por nivel
     while (queue.length > 0) {
       const currentNode = queue.shift()!
       const nodeData = graphStructure[currentNode as keyof typeof graphStructure]
-      
+
       if (!nodeData) continue
 
       const newEdges = nodeData.edges.filter(edge => !visitedEdges.has(edge))
-      
+
       if (newEdges.length > 0) {
-        const edgeElements = newEdges.map(edgeId => 
+        const edgeElements = newEdges.map(edgeId =>
           svgRef.value!.querySelector(`#${edgeId}`)
         ).filter(el => el !== null)
 
@@ -83,24 +116,24 @@ function startAnimation() {
         }, {
           drawSVG: '0% 100%',
           duration: edgeDuration,
-          ease: 'power2.out'
+          ease: 'linear'
         }, `-=${overlap}`)
 
         newEdges.forEach(edge => visitedEdges.add(edge))
 
         const newNodes = nodeData.nodes.filter(node => !visitedNodes.has(node))
-        
+
         if (newNodes.length > 0) {
-          const nodeElements = newNodes.map(nodeId => 
+          const nodeElements = newNodes.map(nodeId =>
             svgRef.value!.querySelector(`#${nodeId}`)
           ).filter(el => el !== null)
 
           tl.fromTo(nodeElements, {
-            drawSVG: '-25% -25%'
+            drawSVG: '50% 50%'
           }, {
-            drawSVG: '-75% 25%',
+            drawSVG: '0% 100%',
             duration: nodeDuration,
-            ease: 'power2.out'
+            ease: 'linear'
           }, `-=${overlap}`)
 
           newNodes.forEach(node => {
@@ -130,37 +163,62 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <svg 
-    ref="svgRef"
-    :height="props.height"
-    viewBox="0 0 664 553"
-    fill="none"
-  >
-    <!-- Nodos -->
-    <circle id="node-0" cx="169.668" cy="44.6755" r="35.824" stroke="white" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <circle id="node-1" cx="38.7651" cy="253.952" r="35.824" stroke="white" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <circle id="node-2" cx="324.386" cy="262.809" r="35.824" stroke="white" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <circle id="node-3" cx="469.501" cy="510.625" r="35.824" stroke="white" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <circle id="node-4" cx="169.668" cy="474.301" r="35.824" stroke="white" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <circle id="node-5" cx="469.501" cy="60.389" r="35.824" stroke="white" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <circle id="node-6" cx="625.235" cy="253.952" r="35.824" stroke="white" stroke-width="2" vector-effect="non-scaling-stroke" />
-    
-    <!-- Aristas -->
-    <line id="edge-0" x1="56.8847" y1="223.236" x2="147.595" y2="73.3469" stroke="white" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="round" />
-    <line id="edge-1" x1="192.224" y1="73.4571" x2="303.131" y2="233.697" stroke="white" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="round" />
-    <line id="edge-2" x1="56.1534" y1="285.473" x2="150.5" y2="443.743" stroke="white" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="round" />
-    <line id="edge-3" x1="345.352" y1="233.78" x2="448.689" y2="90.1677" stroke="white" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="round" />
-    <line id="edge-4" x1="491.621" y1="89.0429" x2="600.844" y2="227.701" stroke="white" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="round" />
-    <line id="edge-5" x1="205.833" y1="48.0564" x2="433.203" y2="59.8896" stroke="white" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="round" />
-    <line id="edge-6" x1="205.242" y1="479.404" x2="433.969" y2="505.915" stroke="white" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="round" />
-    <line id="edge-7" x1="191.722" y1="445.923" x2="302.742" y2="291.443" stroke="white" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="round" />
-    <line id="edge-8" x1="75.0429" y1="255.877" x2="288.077" y2="262.309" stroke="white" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="round" />
-    <line id="edge-9" x1="360.912" y1="260.754" x2="589.029" y2="255.185" stroke="white" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="round" />
-    <line id="edge-10" x1="491.17" y1="481.376" x2="607.541" y2="285.294" stroke="white" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="round" />
-    <line id="edge-11" x1="342.818" y1="294.093" x2="452.365" y2="478.12" stroke="white" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="round" />
-    <line id="edge-12" x1="342.818" y1="294.093" x2="452.365" y2="478.12" stroke="white" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="round" />
+  <svg ref="svgRef" :height="props.height" viewBox="0 0 664 553" fill="none">
+
+    <!-- Aristas (17 líneas) -->
+    <line id="edge-0" x1="58.4227" y1="246.339" x2="149.978" y2="105.056" stroke="var(--color-shadow-500)"
+      stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="round" />
+    <line id="edge-1" x1="184.276" y1="108.135" x2="228.199" y2="243.143" stroke="var(--color-shadow-500)"
+      stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="round" />
+    <line id="edge-2" x1="56.145" y1="307.753" x2="148.941" y2="448.639" stroke="var(--color-shadow-500)"
+      stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="round" />
+    <line id="edge-3" x1="184.446" y1="445.546" x2="233.354" y2="311.049" stroke="var(--color-shadow-500)"
+      stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="round" />
+    <line id="edge-4" x1="205.762" y1="74.5945" x2="440.098" y2="74.5945" stroke="var(--color-shadow-500)"
+      stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="round" />
+    <line id="edge-5" x1="74.9308" y1="276" x2="205.953" y2="276" stroke="var(--color-shadow-500)" stroke-width="1"
+      vector-effect="non-scaling-stroke" stroke-linecap="round" />
+    <line id="edge-6" x1="278.583" y1="276" x2="367.449" y2="276" stroke="var(--color-shadow-500)" stroke-width="1"
+      vector-effect="non-scaling-stroke" stroke-linecap="round" />
+    <line id="edge-7" x1="439.603" y1="275.785" x2="589.012" y2="275.785" stroke="var(--color-shadow-500)"
+      stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="round" />
+    <line id="edge-8" x1="414.17" y1="241.901" x2="464.569" y2="109.121" stroke="var(--color-shadow-500)"
+      stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="round" />
+    <line id="edge-9" x1="205.805" y1="477.319" x2="440.098" y2="477.319" stroke="var(--color-shadow-500)"
+      stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="round" />
+    <line id="edge-10" x1="463.812" y1="444.273" x2="416.033" y2="309.726" stroke="var(--color-shadow-500)"
+      stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="round" />
+    <line id="edge-11" x1="498.078" y1="449.223" x2="605.664" y2="306.464" stroke="var(--color-shadow-500)"
+      stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="round" />
+    <line id="edge-12" x1="604.269" y1="246.932" x2="497.646" y2="104.179" stroke="var(--color-shadow-500)"
+      stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="round" />
+    <line id="edge-13" x1="266.209" y1="305.377" x2="448.092" y2="455.744" stroke="var(--color-shadow-500)"
+      stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="round" />
+    <line id="edge-14" x1="196.913" y1="454.1" x2="376.48" y2="299.508" stroke="var(--color-shadow-500)"
+      stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="round" />
+    <line id="edge-15" x1="266.708" y1="249.714" x2="448.96" y2="97.3699" stroke="var(--color-shadow-500)"
+      stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="round" />
+    <line id="edge-16" x1="378.393" y1="251.29" x2="196.737" y2="98.5339" stroke="var(--color-shadow-500)"
+      stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="round" />
+      
+    <!-- Nodos (8 círculos exactos) -->
+    <circle id="node-0" cx="169.629" cy="74.9719" r="35.824" stroke="white" stroke-width="1"
+      vector-effect="non-scaling-stroke" />
+    <circle id="node-1" cx="38.6647" cy="276.093" r="35.824" stroke="white" stroke-width="1"
+      vector-effect="non-scaling-stroke" />
+    <circle id="node-2" cx="242.277" cy="276.093" r="35.824" stroke="white" stroke-width="1"
+      vector-effect="non-scaling-stroke" />
+    <circle id="node-3" cx="403.773" cy="276.093" r="35.824" stroke="white" stroke-width="1"
+      vector-effect="non-scaling-stroke" />
+    <circle id="node-4" cx="476.422" cy="478.028" r="35.824" stroke="white" stroke-width="1"
+      vector-effect="non-scaling-stroke" />
+    <circle id="node-5" cx="169.629" cy="478.028" r="35.824" stroke="white" stroke-width="1"
+      vector-effect="non-scaling-stroke" />
+    <circle id="node-6" cx="476.422" cy="74.9719" r="35.824" stroke="white" stroke-width="1"
+      vector-effect="non-scaling-stroke" />
+    <circle id="node-7" cx="625.335" cy="276.093" r="35.824" stroke="white" stroke-width="1"
+      vector-effect="non-scaling-stroke" />
   </svg>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

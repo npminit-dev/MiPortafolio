@@ -29,9 +29,9 @@ function startAnimation() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: svgRef.value,
-        start: 'top 90%',
-        end: 'bottom top',
-        toggleActions: 'play reset play reset',
+        start: 'center bottom',
+        end: 'center top',
+        toggleActions: 'play reverse play reverse',
         onRefresh: (self) => {
           scrollTriggerInstance = self
         }
@@ -95,42 +95,50 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <svg ref="svgRef" :height="props.height" viewBox="0 0 505 553" fill="none" style="width: auto; display: block;"
+  <svg ref="svgRef" :height="props.height" viewBox="0 0 664 553" fill="none" style="width: auto; display: block;"
     preserveAspectRatio="xMidYMid meet">
-    <!-- Raíz (nivel 0) -->
-    <circle id="raiz" cx="253.204" cy="40.1238" r="35.824" stroke="white" stroke-width="2"
-      vector-effect="non-scaling-stroke" />
 
     <!-- Líneas nivel 1 (raíz a hijos) -->
-    <line class="linea-nivel-1" x1="224.133" y1="61.0736" x2="133.853" y2="217.443" stroke="white" stroke-width="1"
+    <line class="linea-nivel-1" x2="184.565" y2="187.277" x1="303.867" y1="94.4783" stroke="var(--color-shadow-500)" stroke-width="1"
       vector-effect="non-scaling-stroke" stroke-linecap="round" />
-    <line class="linea-nivel-1" x1="282.748" y1="60.639" x2="373.53" y2="217.878" stroke="white" stroke-width="1"
+    <line class="linea-nivel-1" x1="359.928" y1="94.4943" x2="478.943" y2="187.779"  stroke="var(--color-shadow-500)" stroke-width="1"
       vector-effect="non-scaling-stroke" stroke-linecap="round" />
-
-    <!-- Nodos nivel 1 (2 hijos) -->
-    <circle class="nodo-nivel-1" cx="116.369" cy="249.322" r="35.824" stroke="white" stroke-width="2"
-      vector-effect="non-scaling-stroke" />
-    <circle class="nodo-nivel-1" cx="390.996" cy="249.595" r="35.824" stroke="white" stroke-width="2"
-      vector-effect="non-scaling-stroke" />
 
     <!-- Líneas nivel 2 (hijos a nietos) -->
-    <line class="linea-nivel-2" x1="101.679" y1="281.462" x2="49.4654" y2="476.326" stroke="white" stroke-width="1"
+    <line class="linea-nivel-2" x1="144.611" y1="243.978" x2="60.8378" y2="450.315" stroke="var(--color-shadow-500)" stroke-width="1"
       vector-effect="non-scaling-stroke" stroke-linecap="round" />
-    <line class="linea-nivel-2" x1="132.861" y1="281.462" x2="185.075" y2="476.326" stroke="white" stroke-width="1"
+    <line class="linea-nivel-2" x2="157.12" y2="444.655" x1="157.12" y1="246.113" stroke="var(--color-shadow-500)" stroke-width="1"
       vector-effect="non-scaling-stroke" stroke-linecap="round" />
-    <line class="linea-nivel-2" x1="375.405" y1="282.498" x2="323.192" y2="477.361" stroke="white" stroke-width="1"
+    <line class="linea-nivel-2" x1="170.658" y1="243.716" x2="259.577" y2="447.813" stroke="var(--color-shadow-500)" stroke-width="1"
       vector-effect="non-scaling-stroke" stroke-linecap="round" />
-    <line class="linea-nivel-2" x1="406.588" y1="282.498" x2="458.801" y2="477.361" stroke="white" stroke-width="1"
+    <line class="linea-nivel-2" x1="494.314" y1="243.833" x2="403.828" y2="447.336" stroke="var(--color-shadow-500)" stroke-width="1"
+      vector-effect="non-scaling-stroke" stroke-linecap="round" />
+    <line class="linea-nivel-2" x2="507.331" y2="444.805" x1="507.331" y1="246.263" stroke="var(--color-shadow-500)" stroke-width="1"
+      vector-effect="non-scaling-stroke" stroke-linecap="round" />
+    <line class="linea-nivel-2" x1="520.857" y1="243.444" x2="609.816" y2="447.984" stroke="var(--color-shadow-500)" stroke-width="1"
       vector-effect="non-scaling-stroke" stroke-linecap="round" />
 
-    <!-- Nodos nivel 2 (4 nietos/hojas) -->
-    <circle class="nodo-nivel-2" cx="38.7651" cy="510.877" r="35.824" stroke="white" stroke-width="2"
+    <!-- Nodos nivel 2 (6 nietos/hojas) -->
+    <circle class="nodo-nivel-2" cx="39.9021" cy="480.979" r="35.824" stroke="white" stroke-width="1"
       vector-effect="non-scaling-stroke" />
-    <circle class="nodo-nivel-2" cx="192.099" cy="511.763" r="35.824" stroke="white" stroke-width="2"
+    <circle class="nodo-nivel-2" cx="156.911" cy="480.979" r="35.824" stroke="white" stroke-width="1"
       vector-effect="non-scaling-stroke" />
-    <circle class="nodo-nivel-2" cx="315.248" cy="512.677" r="35.824" stroke="white" stroke-width="2"
+    <circle class="nodo-nivel-2" cx="273.92" cy="480.979" r="35.824" stroke="white" stroke-width="1"
       vector-effect="non-scaling-stroke" />
-    <circle class="nodo-nivel-2" cx="466.223" cy="512.876" r="35.824" stroke="white" stroke-width="2"
+    <circle class="nodo-nivel-2" cx="390.646" cy="480.979" r="35.824" stroke="white" stroke-width="1"
+      vector-effect="non-scaling-stroke" />
+    <circle class="nodo-nivel-2" cx="507.372" cy="480.979" r="35.824" stroke="white" stroke-width="1"
+      vector-effect="non-scaling-stroke" />
+    <circle class="nodo-nivel-2" cx="624.098" cy="480.979" r="35.824" stroke="white" stroke-width="1"
+      vector-effect="non-scaling-stroke" />
+    <!-- Nodos nivel 1 (2 hijos) -->
+    <circle class="nodo-nivel-1" cx="156.911" cy="210.277" r="35.824" stroke="white" stroke-width="1"
+      vector-effect="non-scaling-stroke" />
+    <circle class="nodo-nivel-1" cx="507.372" cy="210.277" r="35.824" stroke="white" stroke-width="1"
+      vector-effect="non-scaling-stroke" />
+
+    <!-- Raíz (nivel 0) -->
+    <circle id="raiz" cx="332" cy="72.0214" r="35.824" stroke="white" stroke-width="1"
       vector-effect="non-scaling-stroke" />
   </svg>
 </template>

@@ -5,8 +5,11 @@ import Body from '../components/career-view/Body.vue';
 import GradientPurple from '../components/backgrounds/GradientPurple.vue';
 import SubTitle from '../components/SubTitle.vue';
 import Description from '../components/Description.vue';
-import BinaryTree from '../components/skills-view/BinaryTree.vue';
+import Tree from '../components/skills-view/Tree.vue';
 import Graph from '../components/skills-view/Graph.vue';
+import SortingArray from '../components/skills-view/SortingArray.vue';
+import Intersection from '../components/skills-view/Intersection.vue';
+import POO from '../components/skills-view/POO.vue';
 
 </script>
 
@@ -25,28 +28,37 @@ import Graph from '../components/skills-view/Graph.vue';
     <div class="flex flex-col items-center justify-center mb-32">
       <SubTitle text="LAYER: PRIMARY PROTOCOLS" class="mb-4" />
       <Description
-        content="This layer outlines the essential protocols that form the base of D-095’s architecture, supporting all higher-level operations." />
+        content="This layer outlines the essential protocols that form the base of D-095’s architecture, supporting all higher-level operations."
+        :duration=".75" />
     </div>
 
-    <div 
-      class="w-full grid grid-cols-2 grid-rows-[40% 20% 40%] gap-y-16 gap-x-64"
-    >
-      <BinaryTree class="self-center justify-self-end" height="325"/>
-      <Graph class="self-center justify-self-start" height="325"/>
+    <div class="w-full flex flex-col gap-16 my-8 items-center justify-center">
+      <SortingArray />
+      <Description class="col-span-2 self-center justify-self-center w-[450px] opacity-90"
+        content="Core data structures used for storage, retrieval, indexing, and hierarchical organization of information."
+        :duration="1.5" :with-sounds="false" />
+    </div>
 
-      <Description
-        class="col-span-2 self-center justify-self-center text-xl"
-        content="[ Advanced Data Structure Handling ]"
-        :duration=".75"
-        :with-sounds="false"
-      />
-    
+    <div class="w-full flex items-center justify-center flex-nowrap gap-y-16 gap-x-32">
+      <Tree height="325" />
+      <Graph height="325" />
+    </div>
+
+    <div class="w-full flex gap-16 my-10 items-center justify-center">
+      <Description class="col-span-2 self-center justify-self-center w-[450px] opacity-90"
+        content="Essential OOP constructs, relational database fundamentals, SQL interaction methods, and core models for structured information."
+        :duration="1.25" :with-sounds="false" />
+    </div>
+
+    <div class="w-full flex items-center justify-center flex-nowrap gap-y-16 gap-x-32">
+      <Intersection height="325" />
+      <POO :height="450"/>
     </div>
 
 
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
-    <!-- <div class="flex flex-col items-center justify-center my-16">
+    <div class="flex flex-col items-center justify-center my-16">
       <SubTitle class="mb-4" text="LAYER: CODE DIRECTIVES" />
       <Description
         content="This layer defines the logical instructions that govern execution flow, coordinating how processes activate, respond, and adapt." />
@@ -62,7 +74,7 @@ import Graph from '../components/skills-view/Graph.vue';
       <SubTitle class="mb-4" text="LAYER: BEHAVIORAL SYSTEMS" />
       <Description
         content="This layer defines the behavioral parameters and adaptive patterns regulating D-095’s interpersonal and operational conduct." />
-    </div> -->
+    </div>
 
     <div class="w-full my-16 flex items-center justify-center">
       <BackToMenu />

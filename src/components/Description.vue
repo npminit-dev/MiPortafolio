@@ -27,7 +27,9 @@ let splits: Array<SplitText> = []
   }
 
   const stopLoading: ScrollTrigger.Callback = () => {
-    st.sounds['loading-2'].howl.stop()
+    if(withSounds) {
+      st.sounds['loading-2'].howl.stop()
+    }
   }
 
 function startAnimations() {
@@ -39,9 +41,8 @@ function startAnimations() {
     autoAlpha: 0
   }, {
     autoAlpha: 1,
-    duration: 0.0001,
+    duration: 0.0000001,
     stagger: duration / text.chars.length,
-    delay: .25,
     scrollTrigger: {
       trigger: p.value,
       start: 'top bottom',
@@ -52,8 +53,7 @@ function startAnimations() {
       onLeave: stopLoading,
       onLeaveBack: stopLoading
     },
-    onComplete: stopLoading,
-    onInterrupt: stopLoading
+    onComplete: stopLoading
   })
   animations.push(animation)
 }
@@ -72,7 +72,6 @@ onMounted(() => {
   startAnimations()
   i18next.on('languageChanged', async () => {
     killAnimations()
-    st.stopAllLoadings()
     await nextTick()
     await nextTick()
     startAnimations()
@@ -81,7 +80,6 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   killAnimations()
-  st.stopAllLoadings()
 })
 
 </script>
