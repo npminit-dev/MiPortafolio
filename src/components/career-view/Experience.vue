@@ -105,7 +105,6 @@ function startAnimation() {
     opacity: 1,
     duration: 0.3,
     stagger: 0.02,
-    textShadow: '0 0 20px rgba(255, 255, 255, 0.3)',
     ease: 'power2.out'
   }, textStartTime)
 
@@ -114,7 +113,6 @@ function startAnimation() {
     opacity: 1,
     duration: 0.3,
     stagger: 0.02,
-    textShadow: '0 0 20px rgba(255, 255, 255, 0.3)',
     ease: 'power2.out'
   }, textStartTime)
 

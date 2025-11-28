@@ -47,6 +47,7 @@ function startAnimations() {
       trigger: p.value,
       start: 'top bottom',
       end: 'bottom top',
+      once: simple,
       toggleActions: simple ? 'play none none none' : 'play reset play reset',
       onEnter: playLoading,
       onEnterBack: playLoading,

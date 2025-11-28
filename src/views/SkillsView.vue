@@ -10,6 +10,7 @@ import Graph from '../components/skills-view/Graph.vue';
 import SortingArray from '../components/skills-view/SortingArray.vue';
 import Intersection from '../components/skills-view/Intersection.vue';
 import POO from '../components/skills-view/POO.vue';
+import Langs from '../components/skills-view/Langs.vue';
 
 </script>
 
@@ -36,7 +37,7 @@ import POO from '../components/skills-view/POO.vue';
       <SortingArray />
       <Description class="col-span-2 self-center justify-self-center w-[450px] opacity-90"
         content="Core data structures used for storage, retrieval, indexing, and hierarchical organization of information."
-        :duration="1.5" :with-sounds="false" />
+        :duration="1.5" :with-sounds="false" simple />
     </div>
 
     <div class="w-full flex items-center justify-center flex-nowrap gap-y-16 gap-x-32">
@@ -44,10 +45,10 @@ import POO from '../components/skills-view/POO.vue';
       <Graph height="325" />
     </div>
 
-    <div class="w-full flex gap-16 my-10 items-center justify-center">
+    <div class="w-full flex mt-10 mb-6 items-center justify-center">
       <Description class="col-span-2 self-center justify-self-center w-[450px] opacity-90"
         content="Essential OOP constructs, relational database fundamentals, SQL interaction methods, and core models for structured information."
-        :duration="1.25" :with-sounds="false" />
+        :duration="1.25" :with-sounds="false" simple />
     </div>
 
     <div class="w-full flex items-center justify-center flex-nowrap gap-y-16 gap-x-32">
@@ -55,16 +56,9 @@ import POO from '../components/skills-view/POO.vue';
       <POO :height="450"/>
     </div>
 
+    <Langs/>
 
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-    <div class="flex flex-col items-center justify-center my-16">
-      <SubTitle class="mb-4" text="LAYER: CODE DIRECTIVES" />
-      <Description
-        content="This layer defines the logical instructions that govern execution flow, coordinating how processes activate, respond, and adapt." />
-    </div>
-
-    <div class="flex flex-col items-center justify-center my-16">
+    <!-- <div class="flex flex-col items-center justify-center my-16">
       <SubTitle class="mb-4" text="LAYER: IMPLEMENTATION ARRAY" />
       <Description
         content="This layer compiles the operational frameworks and auxiliary tools governing D-095’s applied execution across multiple environments." />
@@ -74,7 +68,7 @@ import POO from '../components/skills-view/POO.vue';
       <SubTitle class="mb-4" text="LAYER: BEHAVIORAL SYSTEMS" />
       <Description
         content="This layer defines the behavioral parameters and adaptive patterns regulating D-095’s interpersonal and operational conduct." />
-    </div>
+    </div> -->
 
     <div class="w-full my-16 flex items-center justify-center">
       <BackToMenu />
