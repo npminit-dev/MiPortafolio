@@ -58,11 +58,13 @@ import Langs from '../components/skills-view/Langs.vue';
 
     <Langs/>
 
-    <!-- <div class="flex flex-col items-center justify-center my-16">
+    <div class="flex flex-col items-center justify-center my-16">
       <SubTitle class="mb-4" text="LAYER: IMPLEMENTATION ARRAY" />
       <Description
         content="This layer compiles the operational frameworks and auxiliary tools governing D-095’s applied execution across multiple environments." />
     </div>
+
+    <!--
 
     <div class="flex flex-col items-center justify-center my-16">
       <SubTitle class="mb-4" text="LAYER: BEHAVIORAL SYSTEMS" />

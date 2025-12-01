@@ -11,6 +11,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { MorphSVGPlugin } from 'gsap/MorphSVGPlugin';
 import { MotionPathHelper } from 'gsap/MotionPathHelper';
+import { MotionPathPlugin } from 'gsap/all';
 import { Draggable } from 'gsap/Draggable';
 import { Flip, ScrambleTextPlugin } from 'gsap/all';
 import { DrawSVGPlugin } from 'gsap/all';
@@ -54,7 +55,8 @@ gsap.registerPlugin(
   DrawSVGPlugin,
   Flip,
   Draggable,
-  InertiaPlugin
+  InertiaPlugin,
+  MotionPathPlugin
 );
 
 /* plugin use */
