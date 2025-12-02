@@ -11,6 +11,7 @@ import SortingArray from '../components/skills-view/SortingArray.vue';
 import Intersection from '../components/skills-view/Intersection.vue';
 import POO from '../components/skills-view/POO.vue';
 import Langs from '../components/skills-view/Langs.vue';
+import Frameworks from '../components/skills-view/Frameworks.vue';
 
 </script>
 
@@ -64,13 +65,17 @@ import Langs from '../components/skills-view/Langs.vue';
         content="This layer compiles the operational frameworks and auxiliary tools governing D-095’s applied execution across multiple environments." />
     </div>
 
-    <!--
+    <Frameworks
+      
+    />
+
+    
 
     <div class="flex flex-col items-center justify-center my-16">
       <SubTitle class="mb-4" text="LAYER: BEHAVIORAL SYSTEMS" />
       <Description
         content="This layer defines the behavioral parameters and adaptive patterns regulating D-095’s interpersonal and operational conduct." />
-    </div> -->
+    </div> 
 
     <div class="w-full my-16 flex items-center justify-center">
       <BackToMenu />

@@ -19,6 +19,11 @@ import { SplitText } from 'gsap/SplitText';
 import { InertiaPlugin } from 'gsap/all';
 import { addIcons, OhVueIcon } from 'oh-vue-icons';
 import { BiChevronCompactLeft, BiChevronCompactRight, FiSquareEs, FiSquareGb } from "oh-vue-icons/icons";
+import { CoReact, CoAngular, SiVuedotjs, CoNextJs, CoRedux, SiTailwindcss, FaBootstrap, GiJesterHat, SiReactrouter, SiAntdesign, SiSemanticuireact, SiReactquery } from "oh-vue-icons/icons";
+import { LaNodeJs, SiExpress, FaHardHat, CoGraphql, CoSocketIo, SiPrisma, CoPostman, SiJsonwebtokens, CoDocker, AiZotero, IoLogoVercel, CoLetsEncrypt } from "oh-vue-icons/icons";
+import { SiPostgresql, CoMysql, SiSqlite, SiMicrosoftsqlserver, SiSupabase, SiMongodb } from "oh-vue-icons/icons";
+import { SiReact, CoExpo, CoGradle, IoLogoGooglePlaystore, SiAndroidstudio, CoAndroidAlt } from "oh-vue-icons/icons";
+import { BiGit, BiGithub, CoVisualStudioCode, GiArtificialIntelligence, LaJira, CoNpm, CoEslint, FaFigma, CoConfluence, SiVite, SiNetlify, CoCanva } from "oh-vue-icons/icons";
 import { router } from './router';
     
 const app = createApp(App);
@@ -42,6 +47,11 @@ const pinia = createPinia()
 
 /* vue-icons */
 addIcons(FiSquareEs, FiSquareGb, BiChevronCompactLeft, BiChevronCompactRight);
+addIcons(CoReact, CoAngular, SiVuedotjs, CoNextJs, CoRedux, SiTailwindcss, FaBootstrap, GiJesterHat, SiReactrouter, SiAntdesign, SiSemanticuireact, SiReactquery)
+addIcons(LaNodeJs, SiExpress, FaHardHat, CoGraphql, CoSocketIo, SiPrisma, CoPostman, SiJsonwebtokens, CoDocker, AiZotero, IoLogoVercel, CoLetsEncrypt)
+addIcons(SiPostgresql, CoMysql, SiSqlite, SiMicrosoftsqlserver, SiSupabase, SiMongodb);
+addIcons(SiReact, CoExpo, CoGradle, IoLogoGooglePlaystore, SiAndroidstudio, CoAndroidAlt);
+addIcons(BiGit, BiGithub, CoVisualStudioCode, GiArtificialIntelligence, LaJira, CoNpm, CoEslint, FaFigma, CoConfluence, SiVite, SiNetlify, CoCanva)
 app.component("v-icon", OhVueIcon);
 
 /* gsap plugin register */

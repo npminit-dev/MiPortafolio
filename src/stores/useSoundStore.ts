@@ -75,7 +75,7 @@ const howlers: Howlers = {
   },
   "select-3": {
     howl: new Howl({ src: ['sound/select-3.mp3'], volume: 0, }),
-    maxVolume: 1
+    maxVolume: .5
   },
   "select-4": {
     howl: new Howl({ src: ['sound/select-4.mp3'], volume: 0, }),
