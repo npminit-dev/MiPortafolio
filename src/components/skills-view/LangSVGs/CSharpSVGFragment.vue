@@ -71,7 +71,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <circle fill="var(--color-plasma-purple-950)" ref="csharp-main-circle" cx="2295.68" cy="2292.14" r="76.5" transform="rotate(45 2295.68 2292.14)"
+  <circle fill="var(--color-void-950)" ref="csharp-main-circle" cx="2295.68" cy="2292.14" r="76.5" transform="rotate(45 2295.68 2292.14)"
     stroke="var(--color-ghost-200)" />
   <circle cx="2295.68" cy="2292.14" r="69.5" stroke="var(--color-ghost-200)" />
   <path

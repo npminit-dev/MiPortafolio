@@ -8,7 +8,6 @@ import { SplitText } from 'gsap/all';
 const categories = Object.keys(Frameworks) as (keyof typeof Frameworks)[];
 const currentCategory = ref<keyof typeof Frameworks>("FRONTEND");
 const hoveredTool = ref<string | null>(null);
-const previousHoveredTool = ref<string | null>(null);
 const isAnimating = ref(false);
 const st = useSoundStore();
 
@@ -22,7 +21,7 @@ let textSplit: any = null;
 const initializeCircles = () => {
   const circles = document.querySelectorAll('[class*="-circle"]');
   circles.forEach((circle) => {
-    gsap.set(circle, { drawSVG: "0%" });
+    gsap.set(circle, { drawSVG: "0% 0%" });
   });
 };
 
@@ -32,9 +31,9 @@ const animateCircle = (iconName: string, draw: boolean) => {
   if (!circle || isAnimating.value) return;
 
   const tween = gsap.to(circle, {
-    drawSVG: draw ? "100%" : "0%",
-    duration: 0,
-    ease: "power2.out",
+    drawSVG: draw ? "-25% -125%" : "0%",
+    duration: .4,
+    ease: draw ? "power1.out" : "power1.in",
   });
 
   circleAnimations.push(tween);
@@ -54,6 +53,9 @@ watch(hoveredTool, (newTool, oldTool) => {
     const newToolData = toolsToShow.value.find((t) => t.toolName === newTool);
     if (newToolData) {
       animateCircle(newToolData.iconName, true);
+      const sound = st.sounds['hover-3'].howl
+      sound.stop()
+      sound.play()
     }
 
     // Animar texto con SplitText
@@ -82,8 +84,8 @@ const animateToolName = () => {
         { autoAlpha: 0 },
         {
           autoAlpha: 1,
-          duration: 0,
-          stagger: 0.5,
+          duration: 0.001,
+          stagger: .05,
           ease: "none",
         }
       );
@@ -92,7 +94,7 @@ const animateToolName = () => {
 };
 
 // Animación de cambio de categoría
-const animateCategoryChange = async () => {
+const animateCategoryChange = async (newCat: keyof typeof Frameworks) => {
   if (isAnimating.value) return;
 
   isAnimating.value = true;
@@ -111,17 +113,17 @@ const animateCategoryChange = async () => {
 
   const currentLogos = document.querySelectorAll(".grid > div");
   const verticalLines = document.querySelectorAll(
-    ".absolute.h-full.w-full.flex.items-center > div"
+    "#ver-lines-box > div"
   );
   const horizontalLines = document.querySelectorAll(
-    ".absolute.h-full.w-full.flex.flex-col > div"
+    "#hor-lines-box > div"
   );
 
   // Salida: logos desaparecen con stagger
   categoryTimeline.to(currentLogos, {
     opacity: 0,
     scale: 0.8,
-    duration: 0.15,
+    duration: 0.3,
     stagger: 0.03,
     ease: "power2.in",
   });
@@ -134,7 +136,6 @@ const animateCategoryChange = async () => {
       duration: 0.3,
       ease: "power2.inOut",
     },
-    "-=0.1"
   );
 
   categoryTimeline.to(
@@ -143,6 +144,9 @@ const animateCategoryChange = async () => {
       scaleX: 0,
       duration: 0.3,
       ease: "power2.inOut",
+      onComplete: () => {
+        currentCategory.value = newCat;
+      }
     },
     "<"
   );
@@ -153,7 +157,7 @@ const animateCategoryChange = async () => {
     duration: 0.3,
     ease: "power2.out",
     onStart: () => {
-      st.play(st.sounds['transition-1'])
+      st.play(st.sounds['transition-4'])
     }
   });
 
@@ -201,12 +205,7 @@ const animateCategoryChange = async () => {
 const handleCategoryChange = (cat: keyof typeof Frameworks) => {
   if (isAnimating.value || currentCategory.value === cat) return;
 
-  animateCategoryChange();
-
-  // Cambiamos la categoría después de que empiecen las animaciones de salida
-  setTimeout(() => {
-    currentCategory.value = cat;
-  }, 400); // Tiempo suficiente para que desaparezcan los logos actuales
+  animateCategoryChange(cat);
 };
 
 const startAnimations = () => {
@@ -250,101 +249,62 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="w-full h-screen flex flex-col items-center justify-between py-12">
+  <div class="w-full flex flex-col items-center justify-center py-12">
     <!-- SELECTOR -->
     <nav class="flex gap-6 mb-10">
-      <button
-        v-for="cat in categories"
-        :key="cat"
-        class="text-ghost-200 font-display text-2xl cursor-pointer transition-opacity"
+      <button v-for="cat in categories" :key="cat"
+        class="text-ghost-200 font-display font-semibold text-2xl cursor-pointer transition-opacity"
         :class="currentCategory === cat ? 'opacity-100' : 'opacity-40 hover:opacity-80'"
-        @click="handleCategoryChange(cat)"
-        @mouseenter="!isAnimating && st.play(st.sounds['hover-2'])"
-        :disabled="isAnimating"
-      >
+        @click="handleCategoryChange(cat)" @mouseenter="!isAnimating && st.play(st.sounds['hover-2'])"
+        :disabled="isAnimating">
         {{ cat }}
       </button>
     </nav>
 
+    <!-- HOVER NAME -->
+    <div class="h-16 flex items-center ">
+      <span v-if="hoveredTool" class="tool-name-text font-display font-medium text-2xl text-ghost-300 tracking-normal">
+        {{ $t(hoveredTool) }}
+      </span>
+    </div>
+
     <!-- GRID -->
-    <div class="relative flex items-center justify-center h-fit w-fit">
+    <div class="relative flex items-center justify-center h-[50vh] w-fit">
       <!-- items -->
-      <div
-        class="grid"
-        :class="
-          toolsToShow.length === 12
-            ? 'grid-rows-3 grid-cols-4'
-            : 'grid-rows-2 grid-cols-3'
-        "
-      >
-        <div
-          v-for="tool in toolsToShow"
-          :key="tool.toolName"
-          class="self-center justify-self-center m-8 group cursor-pointer flex items-center justify-center opacity-0"
-          @mouseenter="!isAnimating && (hoveredTool = tool.toolName)"
-          @mouseleave="
+      <div class="grid" :class="toolsToShow.length === 12
+          ? 'grid-rows-3 grid-cols-4'
+          : 'grid-rows-2 grid-cols-3'
+        ">
+        <div v-for="tool in toolsToShow" :key="tool.toolName"
+          class="self-center justify-self-center m-8 group cursor-pointer flex items-center justify-center opacity-0 group"
+          @mouseenter="!isAnimating && (hoveredTool = tool.toolName)" @mouseleave="
             !isAnimating && hoveredTool === tool.toolName && (hoveredTool = null)
-          "
-        >
-          <v-icon :name="tool.iconName" class="text-ghost-300 size-18" />
-          <svg
-            width="100"
-            height="100"
-            viewBox="0 0 100 100"
-            fill="none"
-            class="absolute"
-          >
-            <circle
-              :class="tool.iconName + '-circle'"
-              r="49.5"
-              cx="50"
-              cy="50"
-              stroke-width="1"
-              stroke="var(--color-shadow-500)"
-              fill="none"
-            />
+            ">
+          <v-icon :name="tool.iconName" class="text-ghost-300 group-hover:text-ghost-100 duration-200 size-18" />
+          <svg width="100" height="100" viewBox="0 0 100 100" fill="none" class="absolute">
+            <circle :class="tool.iconName + '-circle opacity-70'" r="49.5" cx="50" cy="50" stroke-width="1"
+              stroke="var(--color-ghost-300)" fill="none" />
           </svg>
         </div>
       </div>
       <!-- grid-lines -->
-      <div
-        class="absolute inset-0 w-full h-full flex items-center justify-center pointer-events-none"
-      >
+      <div class="absolute inset-0 w-full h-full flex items-center justify-center pointer-events-none">
         <!-- vertical -->
-        <div class="absolute h-full w-full flex items-center justify-evenly">
-          <div
-            class="h-full w-[1px] bg-gradient-to-t from-transparent via-ghost-300/50 to-transparent"
-          ></div>
-          <div
-            class="h-full w-[1px] bg-gradient-to-t from-transparent via-ghost-300/50 to-transparent"
-          ></div>
-          <div
-            v-if="toolsToShow.length === 12"
-            class="h-full w-[1px] bg-gradient-to-t from-transparent via-ghost-300/50 to-transparent"
-          ></div>
+        <div id="ver-lines-box" class="absolute h-full w-full flex items-center justify-evenly">
+          <div class="h-full w-[1px] bg-gradient-to-t from-transparent via-ghost-300/50 to-transparent"></div>
+          <div class="h-full w-[1px] bg-gradient-to-t from-transparent via-ghost-300/50 to-transparent"></div>
+          <div v-if="toolsToShow.length === 12"
+            class="h-full w-[1px] bg-gradient-to-t from-transparent via-ghost-300/50 to-transparent"></div>
         </div>
         <!-- horizontal -->
-        <div class="absolute h-full w-full flex flex-col items-center justify-evenly">
-          <div
-            class="w-full h-[1px] bg-gradient-to-r from-transparent via-ghost-300/50 to-transparent"
-          ></div>
-          <div
-            v-if="toolsToShow.length === 12"
-            class="w-full h-[1px] bg-gradient-to-r from-transparent via-ghost-300/50 to-transparent"
-          ></div>
+        <div id="hor-lines-box" class="absolute h-full w-full flex flex-col items-center justify-evenly">
+          <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-ghost-300/50 to-transparent"></div>
+          <div v-if="toolsToShow.length === 12"
+            class="w-full h-[1px] bg-gradient-to-r from-transparent via-ghost-300/50 to-transparent"></div>
         </div>
       </div>
     </div>
 
-    <!-- HOVER NAME -->
-    <div class="h-16 flex items-center -mt-10">
-      <span
-        v-if="hoveredTool"
-        class="tool-name-text font-display text-2xl text-ghost-200 tracking-wide"
-      >
-        {{ $t(hoveredTool) }}
-      </span>
-    </div>
   </div>
 </template>
 

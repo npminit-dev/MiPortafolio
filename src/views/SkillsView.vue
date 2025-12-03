@@ -1,23 +1,29 @@
 <script setup lang="ts">
-import MainTitle from '../components/MainTitle.vue';
-import BackToMenu from '../components/BackToMenu.vue';
-import Body from '../components/career-view/Body.vue';
-import GradientPurple from '../components/backgrounds/GradientPurple.vue';
-import SubTitle from '../components/SubTitle.vue';
-import Description from '../components/Description.vue';
-import Tree from '../components/skills-view/Tree.vue';
-import Graph from '../components/skills-view/Graph.vue';
-import SortingArray from '../components/skills-view/SortingArray.vue';
-import Intersection from '../components/skills-view/Intersection.vue';
-import POO from '../components/skills-view/POO.vue';
-import Langs from '../components/skills-view/Langs.vue';
-import Frameworks from '../components/skills-view/Frameworks.vue';
+  import MainTitle from '../components/MainTitle.vue';
+  import BackToMenu from '../components/BackToMenu.vue';
+  import Body from '../components/career-view/Body.vue';
+  import GradientPurple from '../components/backgrounds/GradientPurple.vue';
+  import SubTitle from '../components/SubTitle.vue';
+  import Description from '../components/Description.vue';
+  import Tree from '../components/skills-view/Tree.vue';
+  import Graph from '../components/skills-view/Graph.vue';
+  import SortingArray from '../components/skills-view/SortingArray.vue';
+  import Intersection from '../components/skills-view/Intersection.vue';
+  import POO from '../components/skills-view/POO.vue';
+  import Langs from '../components/skills-view/Langs.vue';
+  import Frameworks from '../components/skills-view/Frameworks.vue';
+  import SolarSystem from '../components/skills-view/SolarSystem.vue';
+  import SoftSkills from '../components/skills-view/SoftSkills.vue';
+  import GradientDark from '../components/backgrounds/GradientDark.vue';
+  import { useSoundStore } from '../stores/useSoundStore';
+
+  const st = useSoundStore()
 
 </script>
 
 <template>
   <main class="relative w-screen overflow-clip min-h-screen flex flex-col items-center">
-    <GradientPurple class="fixed h-screen w-screen left-0 top-0 -z-30" />
+    <GradientDark class="fixed h-screen w-screen left-0 top-0 -z-30" />
 
     <MainTitle title-key="SKILLS" subtitle-key="[LOG: SKILLS ANALYSIS — SUBJECT D-095]"
       description-key="his segment compiles a procedural breakdown of subject D-095’s verified technical domains and interpersonal attributes. All registered competencies have been processed through automated filtering layers to determine present operational range. The record contributes to continuous monitoring of skill acquisition and cognitive refinement.">
@@ -65,20 +71,20 @@ import Frameworks from '../components/skills-view/Frameworks.vue';
         content="This layer compiles the operational frameworks and auxiliary tools governing D-095’s applied execution across multiple environments." />
     </div>
 
-    <Frameworks
-      
-    />
+    <Frameworks/>
 
-    
-
-    <div class="flex flex-col items-center justify-center my-16">
+    <div class="flex flex-col items-center justify-center my-16 z-50">
       <SubTitle class="mb-4" text="LAYER: BEHAVIORAL SYSTEMS" />
       <Description
         content="This layer defines the behavioral parameters and adaptive patterns regulating D-095’s interpersonal and operational conduct." />
     </div> 
 
-    <div class="w-full my-16 flex items-center justify-center">
-      <BackToMenu />
+    <SoftSkills
+    
+    />
+
+    <div class="w-full my-16 mt-40 flex items-center justify-center">
+      <BackToMenu :before-back="() => st.resetBackgrounds()" />
     </div>
 
   </main>

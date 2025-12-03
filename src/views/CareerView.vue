@@ -5,16 +5,16 @@ import SubTitle from '../components/SubTitle.vue';
 import Experience from '../components/career-view/Experience.vue';
 import Education from '../components/career-view/Education.vue';
 import Philosophy from '../components/career-view/Philosophy.vue';
-import GradientDark from '../components/backgrounds/GradientDark.vue';
 import BackToMenu from '../components/BackToMenu.vue';
 import Body from '../components/career-view/Body.vue';
 import GradientGreen from '../components/backgrounds/GradientGreen.vue';
+import GradientDark from '../components/backgrounds/GradientDark.vue';
 
 </script>
 
 <template>
   <main class="relative w-screen overflow-clip min-h-screen flex flex-col items-center">
-    <GradientGreen class="fixed h-screen w-screen left-0 top-0 -z-30" />
+    <GradientDark class="fixed h-screen w-screen left-0 top-0 -z-30" />
 
     <MainTitle
       title-key="CAREER"

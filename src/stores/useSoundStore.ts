@@ -2,8 +2,8 @@ import { defineStore } from 'pinia'
 import { reactive, ref, watch } from 'vue'
 import { Howl } from 'howler';
 
-type Sound = 'background-1' | 'background-2' | 'background-3' | 'error-1' | 'error-2' | 'hit-1' | 'hover-1' | 'hover-2' | 'loading-1' |
-  'loading-2' | 'loading-3' | 'loading-4' | 'loading-5'| 'select-1' | 'select-2' | 'select-3' | 'select-4' | 'select-5' | 'transition-1' | 'transition-2' | 'transition-3'
+type Sound = 'background-1' | 'background-2' | 'background-3' | 'background-4' | 'error-1' | 'error-2' | 'hit-1' | 'hover-1' | 'hover-2' | 'hover-3' | 'loading-1' |
+  'loading-2' | 'loading-3' | 'loading-4' | 'loading-5' | 'select-1' | 'select-2' | 'select-3' | 'select-4' | 'select-5' | 'transition-1' | 'transition-2' | 'transition-3' | 'transition-4'
 
 type HowlRecord = {
   howl: Howl,
@@ -19,11 +19,15 @@ const howlers: Howlers = {
   },
   "background-2": {
     howl: new Howl({ src: ['sound/background-2.mp3'], volume: 0, loop: true, html5: true }),
-    maxVolume: 0.2
+    maxVolume: 0.4
   },
   "background-3": {
     howl: new Howl({ src: ['sound/background-3.mp3'], volume: 0, loop: true, html5: true }),
     maxVolume: 0.2
+  },
+  "background-4": {
+    howl: new Howl({ src: ['sound/background-4.mp3'], volume: 0, loop: true, html5: true }),
+    maxVolume: 0.4
   },
   "error-1": {
     howl: new Howl({ src: ['sound/error-1.mp3'], volume: 0, }),
@@ -44,6 +48,10 @@ const howlers: Howlers = {
   "hover-2": {
     howl: new Howl({ src: ['sound/hover-2.mp3'], volume: 0, }),
     maxVolume: .2
+  },
+  "hover-3": {
+    howl: new Howl({ src: ['sound/hover-3.mp3'], volume: 0, }),
+    maxVolume: .4
   },
   "loading-1": {
     howl: new Howl({ src: ['sound/loading-1.mp3'], volume: 0, loop: true }),
@@ -96,6 +104,10 @@ const howlers: Howlers = {
   "transition-3": {
     howl: new Howl({ src: ['sound/transition-3.mp3'], volume: 0, }),
     maxVolume: .4
+  },
+  "transition-4": {
+    howl: new Howl({ src: ['sound/transition-4.mp3'], volume: 0, }),
+    maxVolume: 1
   }
 }
 
@@ -109,10 +121,10 @@ export const useSoundStore = defineStore('soundStore', () => {
   }
 
   function play(sound: HowlRecord) {
-    if(isSoundEnabled) {
+    if (isSoundEnabled) {
       sound.howl.play()
     } else {
-      if(sound.howl.volume() !== 0) {
+      if (sound.howl.volume() !== 0) {
         sound.howl.fade(sound.howl.volume(), 0, 2000)
       }
     }
@@ -121,15 +133,60 @@ export const useSoundStore = defineStore('soundStore', () => {
 
   function stopAllLoadings() {
     Object.entries(sounds).forEach(([key, value]) => {
-      if(key.startsWith('loading')) {
+      if (key.startsWith('loading')) {
         value.howl.stop()
       }
     })
   }
 
+  function crossfadeBackgrounds(value: number) {
+    const normalized = Math.max(0, Math.min(100, value)) / 100
+
+    const bg2 = sounds['background-2']
+    const bg4 = sounds['background-4']
+
+    const bg4Volume = normalized * bg4.maxVolume
+    const bg2Volume = (1 - normalized) * bg2.maxVolume
+
+    if (isSoundEnabled.value) {
+      if (!bg2.howl.playing()) {
+        bg2.howl.play()
+      }
+
+      if (!bg4.howl.playing()) {
+        bg4.howl.seek(bg2.howl.seek())
+        bg4.howl.play()
+      }
+
+      bg4.howl.volume(bg4Volume)
+      bg2.howl.volume(bg2Volume)
+
+      if (bg4Volume === 0) {
+        bg4.howl.stop()
+      }
+
+      if (bg2Volume === 0) {
+        bg2.howl.stop()
+      }
+    }
+  }
+
+  function resetBackgrounds() {
+    const bg2 = sounds['background-2']
+    const bg4 = sounds['background-4']
+
+    if (isSoundEnabled.value) {
+      bg4.howl.stop()
+
+      bg2.howl.stop()
+      bg2.howl.volume(bg2.maxVolume)
+      bg2.howl.play()
+    }
+  }
+
   watch(isSoundEnabled, () => {
     Object.values(sounds).forEach(sound => {
-      if(!isSoundEnabled.value) {
+      if (!isSoundEnabled.value) {
         sound.howl.fade(sound.howl.volume(), 0, 2000)
       } else {
         sound.howl.fade(0, sound.maxVolume, 2000)
@@ -144,6 +201,8 @@ export const useSoundStore = defineStore('soundStore', () => {
     isSoundEnabled,
     sounds,
     setSoundEnabled,
+    crossfadeBackgrounds,
+    resetBackgrounds,
     stopAllLoadings,
     play
   }

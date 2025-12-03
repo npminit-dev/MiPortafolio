@@ -76,7 +76,7 @@ watchEffect(() => {
 
 <template>
   <!-- Círculos principales (SIEMPRE VISIBLES) -->
-  <circle fill="var(--color-plasma-purple-950)" ref="sql-main-circle" cx="991.68" cy="991.139" r="76.5" transform="rotate(45 991.68 991.139)" stroke="var(--color-ghost-200)" />
+  <circle fill="var(--color-void-950)" ref="sql-main-circle" cx="991.68" cy="991.139" r="76.5" transform="rotate(45 991.68 991.139)" stroke="var(--color-ghost-200)" />
   <circle cx="991.68" cy="991.138" r="69.5" stroke="var(--color-ghost-200)" />
   
   <!-- Contenido principal (SIEMPRE VISIBLE) -->

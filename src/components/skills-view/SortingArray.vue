@@ -97,7 +97,7 @@ onMounted(() => {
       :key="`container-${num}`"
       class="box-container h-14 w-14"
     >
-      <div class="box h-full w-full border-[1px] border-ghost-300/70 bg-plasma-purple-950/60 flex items-center justify-center">
+      <div class="box h-full w-full border-[1px] border-ghost-300/70 bg-void-950 flex items-center justify-center">
         {{ num }}
       </div>
     </div>

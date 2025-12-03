@@ -3,11 +3,17 @@
   import { usePageTransition } from '../composables/usePageTransition';
   import { useSoundStore } from '../stores/useSoundStore';
   import gsap from 'gsap'
-import { useTranslation } from 'i18next-vue';
+  import { useTranslation } from 'i18next-vue';
+
+  type Props = {
+    beforeBack?: () => void 
+  }
 
   const { triggerTransition } = usePageTransition()
   const st = useSoundStore()
   const { i18next } = useTranslation()
+  const { beforeBack } = defineProps<Props>()
+
   let timeline: gsap.core.Timeline
 
   function startAnimations() {
@@ -79,6 +85,7 @@ import { useTranslation } from 'i18next-vue';
   function handleBack() {
     killAnimations()
     st.play(st.sounds['select-1'])
+    if(beforeBack) beforeBack()
     triggerTransition('/menu')
   }
 </script>

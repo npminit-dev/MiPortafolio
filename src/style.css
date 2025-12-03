@@ -169,6 +169,7 @@
   --font-body: 'Space Mono', ui-monospace, monospace;
 
   /* Colores de fondo oscuros */
+  --color-void-975: #03060c;
   --color-void-950: #050a14;
   --color-void-900: #0a1128;
   --color-void-800: #0f1729;

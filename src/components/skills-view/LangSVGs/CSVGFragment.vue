@@ -63,7 +63,7 @@ watchEffect(() => {
 <template>
 
   <!-- content-circles (SIEMPRE VISIBLES) -->
-  <circle ref="c-main-circle" fill="var(--color-plasma-purple-950)" cx="338.45" cy="336.442" r="76.5" transform="rotate(45 338.45 336.442)"
+  <circle ref="c-main-circle" fill="var(--color-void-950)" cx="338.45" cy="336.442" r="76.5" transform="rotate(45 338.45 336.442)"
     stroke="var(--color-ghost-200)" />
   <circle cx="338.45" cy="336.442" r="69.5" stroke="var(--color-ghost-200)" vector-effect="non-scaling-stroke" />
 

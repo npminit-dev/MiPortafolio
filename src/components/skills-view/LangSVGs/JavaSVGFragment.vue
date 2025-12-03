@@ -79,7 +79,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <circle fill="var(--color-plasma-purple-950)" ref="java-main-circle" cx="1643" cy="1643.09" r="69.5" stroke="var(--color-ghost-200)" vector-effect="non-scaling-stroke"/>
+  <circle fill="var(--color-void-950)" ref="java-main-circle" cx="1643" cy="1643.09" r="69.5" stroke="var(--color-ghost-200)" vector-effect="non-scaling-stroke"/>
   <circle cx="1643.18" cy="1643.18" r="76.5" transform="rotate(45 1643.18 1643.18)" stroke="var(--color-ghost-200)" vector-effect="non-scaling-stroke"/>
 
   <path

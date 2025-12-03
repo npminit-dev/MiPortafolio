@@ -55,7 +55,7 @@ export const Frameworks: FrameworksType = {
     { iconName: "bi-git", toolName: "Git" },
     { iconName: "bi-github", toolName: "GitHub" },
     { iconName: "co-visual-studio-code", toolName: "Visual Studio Code" },
-    { iconName: "gi-artificial-intelligence", toolName: "Artificial Intelligence" },
+    { iconName: "gi-artificial-intelligence", toolName: "AI tools" },
     { iconName: "la-jira", toolName: "Jira" },
     { iconName: "co-npm", toolName: "NPM" },
     { iconName: "co-eslint", toolName: "ESLint" },
