@@ -160,14 +160,6 @@ export const useSoundStore = defineStore('soundStore', () => {
 
       bg4.howl.volume(bg4Volume)
       bg2.howl.volume(bg2Volume)
-
-      if (bg4Volume === 0) {
-        bg4.howl.stop()
-      }
-
-      if (bg2Volume === 0) {
-        bg2.howl.stop()
-      }
     }
   }
 
@@ -176,11 +168,13 @@ export const useSoundStore = defineStore('soundStore', () => {
     const bg4 = sounds['background-4']
 
     if (isSoundEnabled.value) {
-      bg4.howl.stop()
+      if(!bg2.howl.playing()) {
+        bg2.howl.volume(0)
+        bg2.howl.play()
+      }
 
-      bg2.howl.stop()
-      bg2.howl.volume(bg2.maxVolume)
-      bg2.howl.play()
+      bg4.howl.fade(bg4.howl.volume(), 0, 500)
+      bg2.howl.fade(0, bg2.maxVolume, 500)
     }
   }
 

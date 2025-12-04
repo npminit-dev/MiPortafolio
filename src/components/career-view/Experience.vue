@@ -29,16 +29,19 @@ let flipScrollTrigger: ScrollTrigger | null = null
 
 onMounted(() => {
   killAnimations()
-  startAnimation()
 
-  setTimeout(() => {
-    startFlipAnimation()
-  }, 100)
-
-  i18next.on('languageChanged', async () => {
-    killAnimations()
-    await nextTick()
+  document.fonts.addEventListener('loadingdone', async () => {
+    nextTick()
     startAnimation()
+    setTimeout(() => {
+      startFlipAnimation()
+    }, 100)
+
+    i18next.on('languageChanged', async () => {
+      killAnimations()
+      await nextTick()
+      startAnimation()
+    })
   })
 })
 
@@ -241,7 +244,7 @@ function transitionElementVerify(): boolean {
     <div class="relative self-center justify-self-end">
       <div :id="`experience-image-${uniqueID}`" class="absolute left-2 inset-y-2 flex items-center justify-center bg-ghost-200 border-ghost-300 border-[1px] rounded-full h-36 w-36 overflow-hidden z-50">
         <slot class="h-full w-full object-cover flex items-center justify-center bg-ghost-200">
-          <div class="h-full w-full font-display font-semibold text-xl text-deep-teal-shadow bg-ghost-200 flex items-center justify-center overflow-hidden leading-0 select-none">{{ props.company }}</div>
+          <div class="h-full w-full font-display font-bold text-2xl text-deep-teal-shadow bg-ghost-200 flex items-center justify-center overflow-hidden leading-0 select-none">{{ props.company.slice(2, -2) }}</div>
         </slot>
       </div>
       <svg :id="`experience-svg-${uniqueID}`" width="293" height="160" viewBox="0 0 293 160" fill="none"
@@ -254,9 +257,12 @@ function transitionElementVerify(): boolean {
       </svg>
       <div 
         id="exp-educ-flip"
-        class="absolute inset-y-0 left-0 h-40 w-40 border-[1px] border-ghost-300 opacity-0 rounded-full"
+        class="absolute inset-y-0 left-0 h-40 w-40 border-[1px] flex items-center justify-center border-ghost-300 opacity-0 rounded-full"
         v-if="transitionElementVerify()"
-      ></div>
+      >
+        <div class="h-32 w-32 border-[1px] border-ghost-300 opacity-0 rounded-full">
+        </div>
+      </div>
     </div>
     <div class="font-display text-start max-w-[600px]">
       <h4 :id="`experience-company-${uniqueID}`" class="font-medium text-2xl text-ghost-100">
@@ -265,7 +271,7 @@ function transitionElementVerify(): boolean {
       <h5 :id="`experience-role-${uniqueID}`" class="font-normal text-xl text-ghost-200">
         {{ $t(props.role) }}
       </h5>
-      <p :id="`experience-description-${uniqueID}`" class="leading-tight font-light text-lg text-ghost-100 my-2">
+      <p :id="`experience-description-${uniqueID}`" class="w-[550px] leading-tight font-light text-lg text-ghost-100 my-2">
         {{ $t(props.description) }}
       </p>
     </div>

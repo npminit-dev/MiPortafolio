@@ -167,7 +167,7 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="w-screen flex flex-col items-center justify-center">
-    <SubTitle text="MODULE: OPERATIONAL PHILOSOPHY" class="mt-36 mb-16" />
+    <SubTitle text="MODULE: OPERATIONAL PHILOSOPHY" class="mt-16 mb-16" />
     <div id="stars-container"
       class="relative h-screen w-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-0% from-transparent via-50% via-shadow-100 to-transparent to-100%">
 
