@@ -47,7 +47,6 @@ function startAnimation() {
         toggleActions: simple ? 'play none none none' : "play reset play reset",
       },
       opacity: 1,
-      textShadow: "0 0 20px rgba(255, 255, 255, 0.3)",
       duration: 1,
     }
   );

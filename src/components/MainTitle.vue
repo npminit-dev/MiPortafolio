@@ -174,7 +174,7 @@ onBeforeUnmount(function () {
         <div v-if="showCircle" class="inline-block border-[1px] border-ghost-100 h-3 w-3 rounded-full opacity-0"></div>
       </h2>
       <p id="animated-description"
-        class="font-display font-light text-ghost-200 text-lg text-left break-normal leading-tight opacity-0"
+        class="font-display font-light text-ghost-100 text-lg text-left break-normal leading-tight opacity-0"
         :style="{ width: props.descriptionWidth }">
         {{ $t(props.descriptionKey) }}
       </p>

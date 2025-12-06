@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { nextTick, onMounted, onUnmounted, ref, useTemplateRef } from "vue";
+import { nextTick, onMounted, onUnmounted, useTemplateRef } from "vue";
 import gsap from "gsap";
 import { useWindowSize } from "@vueuse/core";
 import EducationData from "./EducationData.vue";
@@ -9,6 +9,7 @@ import { SplitText } from "gsap/all";
 import EducationDivider from "./EducationDivider.vue";
 import { useTranslation } from "i18next-vue";
 import { useSoundStore } from '../../stores/useSoundStore';
+import Description from '../Description.vue';
 
 const { width } = useWindowSize();
 const subtitleWrapper = useTemplateRef<HTMLElement | null>("subtitleWrapper");
@@ -267,9 +268,14 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div ref="subtitleWrapper">
-    <SubTitle ref="subtitleRef" :simple="true" text="MODULE: COGNITIVE DEVELOPMENT"
-      class="w-full my-36 mb-16 mx-auto text-nowrap" />
+  <div ref="subtitleWrapper" class="w-full flex flex-col items-center justify-center mb-6 mt-32">
+    <SubTitle ref="subtitleRef" simple text="MODULE: COGNITIVE DEVELOPMENT"
+      class="text-nowrap mb-4" />
+    <Description
+      content="This module details the accumulated learning processes refining D-095’s mental architecture, creating the base structure that informs its interpretive capacity."
+      :duration=".75"
+      class="" simple
+    />
   </div>
   <div>
     <section id="education-outer-container" class="relative h-[80vh] w-screen flex items-center">

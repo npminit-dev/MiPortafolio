@@ -148,8 +148,8 @@ import { useTranslation } from 'i18next-vue';
     <div id="black-background" class="absolute h-[200vh] bg-void-975 w-screen -z-[200] -top-1/2 left-0 pointer-events-none"/>
     <SolarSystem
       id="solar-system"
-      :height="1000"
-      class="absolute -z-10 opacity-40"
+      :height="1500"
+      class="absolute -z-50 opacity-40"
     />
     <div class="h-full w-full flex items-center justify-center">
       <p class="absolute font-display text-ghost-200 text-[21px] text-center leading-tight max-w-[600px] shadowed-p">

@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SubTitle from '../SubTitle.vue';
 import { useTranslation } from 'i18next-vue';
 import { useSoundStore } from '../../stores/useSoundStore';
+import Description from '../Description.vue';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -167,7 +168,16 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="w-screen flex flex-col items-center justify-center">
-    <SubTitle text="MODULE: OPERATIONAL PHILOSOPHY" class="mt-16 mb-16" />
+
+    <div class="flex flex-col items-center justify-center mb-16">
+      <SubTitle text="MODULE: OPERATIONAL PHILOSOPHY" class="mb-4"/>
+      <Description
+        class="mb-16"
+        content="This module explores the intent driving D-095’s day-to-day actions, revealing how personal principles and reflective practice influence its overall work ethic."
+        :duration=".75"
+      />
+    </div>
+
     <div id="stars-container"
       class="relative h-screen w-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-0% from-transparent via-50% via-shadow-100 to-transparent to-100%">
 

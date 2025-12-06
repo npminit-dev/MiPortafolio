@@ -240,7 +240,7 @@ function transitionElementVerify(): boolean {
 </script>
 
 <template>
-  <article :id="`experience-${uniqueID}`" class="grid grid-cols-[35%_65%] my-14 gap-4">
+  <article :id="`experience-${uniqueID}`" class="grid grid-cols-[40%_60%] my-14 gap-4">
     <div class="relative self-center justify-self-end">
       <div :id="`experience-image-${uniqueID}`" class="absolute left-2 inset-y-2 flex items-center justify-center bg-ghost-200 border-ghost-300 border-[1px] rounded-full h-36 w-36 overflow-hidden z-50">
         <slot class="h-full w-full object-cover flex items-center justify-center bg-ghost-200">

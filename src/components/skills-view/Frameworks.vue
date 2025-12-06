@@ -249,7 +249,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="w-full flex flex-col items-center justify-center py-12">
+  <div class="w-full flex flex-col items-center justify-center py-12 z-50">
     <!-- SELECTOR -->
     <nav class="flex gap-6 mb-10">
       <button v-for="cat in categories" :key="cat"
