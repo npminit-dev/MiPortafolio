@@ -162,6 +162,8 @@
   box-sizing: border-box;
 }
 
+body {}
+
 @theme {
   /* Fuentes */
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;

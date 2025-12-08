@@ -65,9 +65,10 @@ function handleToggle() {
 
 <template>
   <button
+    id="sound-switcher-container"
     ref="container"
     @click="handleToggle"
-    class="relative flex items-center justify-center w-10 h-10 p-2 rounded-full border-[1px] transition-all duration-300 cursor-pointer hover:scale-110 active:scale-95 overflow-hidden bg-radial to-void-800 from-void-950"
+    class="relative flex items-center justify-center w-10 h-10 p-2 rounded-full border-[1px] transition-all duration-300 cursor-pointer hover:scale-110 active:scale-95 overflow-hidden bg-radial to-void-800 from-void-950 z-10"
     :class="st.isSoundEnabled 
       ? 'border-ghost-100' 
       : 'border-ghost-300/40'"

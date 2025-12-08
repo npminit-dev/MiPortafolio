@@ -22,7 +22,7 @@
 </script>
 
 <template>
-  <div class="relative w-14 flex items-center justify-between z-10">
+  <div id="lang-switcher-container" class="relative w-14 flex items-center justify-between z-10">
     <div class="size-5 flex items-center justify-center rounded-full overflow-hidden cursor-pointer"
       @click="handleLangChange('en')">
       <v-icon name="fi-square-gb" class="size-7" />

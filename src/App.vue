@@ -20,8 +20,8 @@ onMounted(() => {
 
 <template>
   <div class="scroll">
-    <div id="smooth-wrapper">
-      <div id="smooth-content">
+    <div id="smooth-wrapper" class="">
+      <div id="smooth-content" class="">
         <router-view/>
       </div>
     </div>
@@ -37,5 +37,9 @@ onMounted(() => {
     </p>
   </div>
 </template>
+
+<style scoped>
+  
+</style>
 
 

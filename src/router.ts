@@ -1,10 +1,10 @@
-import { createMemoryHistory, createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
 import MainView from './views/MainView.vue'
 import StartView from './views/StartView.vue'
-import App from './App.vue'
 import CareerView from './views/CareerView.vue'
 import SkillsView from './views/SkillsView.vue'
+import AboutView from './views/AboutView.vue'
 
 const routes = [
   {
@@ -22,6 +22,10 @@ const routes = [
   {
     path: '/skills',
     component: SkillsView
+  },
+  {
+    path: '/about',
+    component: AboutView
   }
 ]
 

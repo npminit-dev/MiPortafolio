@@ -101,7 +101,7 @@ onUnmounted(() => {
         stroke="var(--color-shadow-500)" 
         stroke-width="2"
         stroke-linejoin="round"
-        class="opacity-50"
+        class="opacity-60"
         fill="none"
       />
       <circle 
@@ -111,7 +111,7 @@ onUnmounted(() => {
         stroke="var(--color-shadow-500)"
         stroke-width="2"
         stroke-linejoin="round"
-        class="opacity-50"
+        class="opacity-60"
         fill="none"
       />
       <circle 
@@ -121,7 +121,7 @@ onUnmounted(() => {
         stroke="var(--color-shadow-500)"
         stroke-width="2"
         stroke-linejoin="round"
-        class="opacity-50"
+        class="opacity-60"
         fill="none"
       />
       <path 
@@ -129,7 +129,7 @@ onUnmounted(() => {
         stroke="var(--color-shadow-500)"
         stroke-width="2"
         stroke-linejoin="round"
-        class="opacity-50"
+        class="opacity-60"
         fill="none"
       />
       <path 
@@ -137,7 +137,7 @@ onUnmounted(() => {
         stroke="var(--color-shadow-500)"
         stroke-width="2"
         stroke-linejoin="round"
-        class="opacity-50"
+        class="opacity-60"
         fill="none"
       />
       <path 
@@ -145,7 +145,7 @@ onUnmounted(() => {
         stroke="var(--color-shadow-500)"
         stroke-width="2"
         stroke-linejoin="round"
-        class="opacity-50"
+        class="opacity-60"
         fill="none"
       />
       <path 
@@ -153,7 +153,7 @@ onUnmounted(() => {
         stroke="var(--color-shadow-500)"
         stroke-width="2"
         stroke-linejoin="round"
-        class="opacity-50"
+        class="opacity-60"
         fill="none"
       />
       <path 
@@ -161,7 +161,7 @@ onUnmounted(() => {
         stroke="var(--color-shadow-500)"
         stroke-width="2"
         stroke-linejoin="round"
-        class="opacity-50"
+        class="opacity-60"
         fill="none"
       />
       <path 
@@ -169,7 +169,7 @@ onUnmounted(() => {
         stroke="var(--color-shadow-500)"
         stroke-width="2"
         stroke-linejoin="round"
-        class="opacity-50"
+        class="opacity-60"
         fill="none"
       />
     </g>

@@ -24,7 +24,7 @@
     <GradientDark class="fixed h-screen w-screen left-0 top-0 -z-30" />
 
     <MainTitle title-key="SKILLS" subtitle-key="[LOG: SKILLS ANALYSIS — SUBJECT D-095]"
-      description-key="his segment compiles a procedural breakdown of subject D-095’s verified technical domains and interpersonal attributes. All registered competencies have been processed through automated filtering layers to determine present operational range. The record contributes to continuous monitoring of skill acquisition and cognitive refinement.">
+      description-key="This segment compiles a procedural breakdown of subject D-095’s verified technical domains and interpersonal attributes. All registered competencies have been processed through automated filtering layers to determine present operational range. The record contributes to continuous monitoring of skill acquisition and cognitive refinement.">
       <template #animated-body>
         <MainTitleMorphSVG
           :paths="{
