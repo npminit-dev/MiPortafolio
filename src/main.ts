@@ -1,5 +1,4 @@
 import { createApp } from 'vue'
-import './normalize.css'
 import './style.css'
 import App from './App.vue'
 import i18next from 'i18next';
@@ -19,7 +18,7 @@ import { DrawSVGPlugin } from 'gsap/all';
 import { SplitText } from 'gsap/SplitText';
 import { InertiaPlugin } from 'gsap/all';
 import { addIcons, OhVueIcon } from 'oh-vue-icons';
-import { BiChevronCompactLeft, BiChevronCompactRight, FiSquareEs, FiSquareGb } from "oh-vue-icons/icons";
+import { BiChevronCompactLeft, BiChevronCompactRight, FiSquareEs, FiSquareGb, BiHandThumbsUp, BiHandThumbsDown } from "oh-vue-icons/icons";
 import { CoReact, CoAngular, SiVuedotjs, CoNextJs, CoRedux, SiTailwindcss, FaBootstrap, GiJesterHat, SiReactrouter, SiAntdesign, SiSemanticuireact, SiReactquery } from "oh-vue-icons/icons";
 import { LaNodeJs, SiExpress, FaHardHat, CoGraphql, CoSocketIo, SiPrisma, CoPostman, SiJsonwebtokens, CoDocker, AiZotero, IoLogoVercel, CoLetsEncrypt } from "oh-vue-icons/icons";
 import { SiPostgresql, CoMysql, SiSqlite, SiMicrosoftsqlserver, SiSupabase, SiMongodb } from "oh-vue-icons/icons";
@@ -47,7 +46,7 @@ await i18next.init({
 const pinia = createPinia()
 
 /* vue-icons */
-addIcons(FiSquareEs, FiSquareGb, BiChevronCompactLeft, BiChevronCompactRight);
+addIcons(FiSquareEs, FiSquareGb, BiChevronCompactLeft, BiChevronCompactRight, BiHandThumbsDown, BiHandThumbsUp);
 addIcons(CoReact, CoAngular, SiVuedotjs, CoNextJs, CoRedux, SiTailwindcss, FaBootstrap, GiJesterHat, SiReactrouter, SiAntdesign, SiSemanticuireact, SiReactquery)
 addIcons(LaNodeJs, SiExpress, FaHardHat, CoGraphql, CoSocketIo, SiPrisma, CoPostman, SiJsonwebtokens, CoDocker, AiZotero, IoLogoVercel, CoLetsEncrypt)
 addIcons(SiPostgresql, CoMysql, SiSqlite, SiMicrosoftsqlserver, SiSupabase, SiMongodb);

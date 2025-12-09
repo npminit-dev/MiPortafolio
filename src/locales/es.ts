@@ -84,5 +84,12 @@ export const es = {
   "I'm a curious and self-taught person: when something challenges me, I research, experiment, and learn until I solve it. I feel comfortable working in a team and contributing ideas, and professionally, I'm motivated by building useful tools and continuing to grow as a developer.": "Soy una persona curiosa y autodidacta: cuando algo me desafía, investigo, pruebo y aprendo hasta resolverlo. Me siento cómodo trabajando en equipo y aportando ideas, y profesionalmente me motiva crear herramientas útiles y seguir creciendo como desarrollador.",
   "I believe that technology shouldn't distance us from what makes us human and connects us to others, and that technological progress is most meaningful when it accompanies and respects human needs.": "Creo que la tecnología no debe alejarnos de lo que nos hace humanos y nos conecta con los demás, y que el progreso tecnológico tiene más sentido cuando acompaña y respeta las necesidades humanas.",
 
+  "Let's talk!": "Charlemos!",
+  "Send me an email with your proposal, project, or anything you´d like to discuss using this form or by contacting me through": "Envíame un email con tu propuesta, proyecto, o cualquier cosa que quieras discutir usando este formulario o a través de",
+  "my LinkedIn profile.": "mi perfil de LinkedIn",
+  "Name": "Nombre",
+  "Message": "Mensaje",
+  "SEND": "ENVIAR",
+
   "Back to Central Node": "Volver al Nodo Central",
 }

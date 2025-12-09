@@ -3,6 +3,7 @@
   import gsap from 'gsap';
 import AboutMe from './AboutMe.vue';
 import Contact from './Contact.vue';
+import Feedback from './Feedback.vue';
 
   let beforeSnapAnimation: gsap.core.Animation|null = null
 
@@ -34,7 +35,8 @@ import Contact from './Contact.vue';
     <div id="snap-outer-container" class="absolute inset-0 w-screen h-screen">
       <div id="snap-inner-container">
         <!-- <AboutMe/> -->
-        <Contact/>
+        <!-- <Contact/> -->
+        <Feedback/>
       </div>
     </div>
   </div>

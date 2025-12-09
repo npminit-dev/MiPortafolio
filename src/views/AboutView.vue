@@ -95,8 +95,6 @@ function killAnimations() {
 
     <SnappedContainer />
 
-
-
     <div class="w-full my-16 mt-40 flex items-center justify-center">
       <BackToMenu :before-back="() => st.resetBackgrounds()" />
     </div>
