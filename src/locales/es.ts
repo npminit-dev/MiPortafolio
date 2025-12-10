@@ -91,5 +91,10 @@ export const es = {
   "Message": "Mensaje",
   "SEND": "ENVIAR",
 
+  "Help me improve this site!": "¡Ayúdame a mejorar este sitio!",
+  "Do you like how this website looks? The style, the fonts, the animations, the concept? If not, how could I improve it?": "¿Te gusta el aspecto de este sitio web? ¿El estilo, las fuentes, las animaciones, el concepto? Si no, ¿cómo puedo mejorarlo?",
+  "Details": "Detalles",
+  "Thank you for your feedback!": "Gracias por tus comentarios!",
+
   "Back to Central Node": "Volver al Nodo Central",
 }
