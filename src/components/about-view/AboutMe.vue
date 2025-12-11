@@ -3,12 +3,17 @@ import gsap from "gsap";
 import { useTranslation } from "i18next-vue";
 import { nextTick, onBeforeUnmount, onMounted } from "vue";
 import { SplitText } from "gsap/all";
+import { useSoundStore } from "../../stores/useSoundStore";
+import { sleep } from "../../utils";
 
 const { i18next } = useTranslation();
+const st = useSoundStore();
+
 let tl: gsap.core.Timeline | null = null;
 let pSplit: SplitText | null = null;
 
 onMounted(async () => {
+  stopAllDrawingSounds();
   gsap.set("#aboutme-container", { autoAlpha: 0 });
   await document.fonts.ready;
   gsap.set("#aboutme-container", { autoAlpha: 1 });
@@ -23,12 +28,41 @@ onMounted(async () => {
 });
 
 onBeforeUnmount(() => {
+  stopAllDrawingSounds();
   killAnimations();
 });
+
+async function playDrawingSounds() {
+  await sleep(400);
+  st.play(st.sounds["streak-3"]);
+  await sleep(250);
+  st.play(st.sounds["streak-1"]);
+  await sleep(200);
+  st.play(st.sounds["streak-2"]);
+  await sleep(175);
+  st.play(st.sounds["streak-3"]);
+  await sleep(175);
+  st.play(st.sounds["streak-2"]);
+  await sleep(200);
+  st.play(st.sounds["streak-2"]);
+  await sleep(200);
+  st.play(st.sounds["streak-2"]);
+  await sleep(200);
+  st.play(st.sounds["streak-4"]);
+}
+
+function stopAllDrawingSounds() {
+  st.sounds["streak-1"].howl.stop();
+  st.sounds["streak-2"].howl.stop();
+  st.sounds["streak-3"].howl.stop();
+  st.sounds["streak-4"].howl.stop();
+}
 
 function startAnimations() {
   tl = gsap.timeline();
   pSplit = SplitText.create(".aboutme-p", { type: "lines, words" });
+
+  playDrawingSounds();
 
   tl.fromTo(
     "#aboutme-picture-draw",
@@ -40,6 +74,7 @@ function startAnimations() {
       duration: 1.5,
       ease: "linear",
       delay: 0.5,
+      onInterrupt: stopAllDrawingSounds,
     },
     0
   )

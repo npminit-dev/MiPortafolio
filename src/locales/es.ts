@@ -75,6 +75,8 @@ export const es = {
 
   "[LOG: IDENTITY & CONTACT NODE — SUBJECT D-095]": "[LOG: NODO DE IDENTIDAD Y CONTACTO — SUJETO D-095]",
 
+  "[ CONNECTION WITH D-095 ESTABLISHED ]": "[ CONEXIÓN CON D-095 ESTABLECIDA ]",
+
   "This interface compiles the direct channels through which subject D-095 chooses to connect with the outside field. Beyond technical identifiers, each route reflects the subject’s intent to maintain clear communication, offer transparent collaboration and sustain meaningful professional exchange. The module highlights the human layer behind the system’s operational profile.": "Esta interfaz reúne los canales directos mediante los cuales el sujeto D-095 elige conectarse con el campo exterior. Más allá de los identificadores técnicos, cada ruta refleja la intención del sujeto de mantener una comunicación clara, ofrecer una colaboración transparente y sostener un intercambio profesional significativo. El módulo resalta la capa humana detrás del perfil operativo del sistema.",
 
   "Hello! Thank you for visiting my website :)": "¡Hola! Gracias por visitar mi sitio web :)",

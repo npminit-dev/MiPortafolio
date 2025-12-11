@@ -1,65 +1,76 @@
 <script setup lang="ts">
-import { ref, useTemplateRef, watchEffect } from 'vue'
-import { ScrollTrigger } from 'gsap/all';
-import gsap from 'gsap';
-import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin';
-
+import { ref, useTemplateRef, watchEffect } from "vue";
+import { ScrollTrigger } from "gsap/all";
+import gsap from "gsap";
 
 type Props = {
-  containerAnimation: gsap.core.Animation | null,
-  pinnedContainer: HTMLDivElement | null,
-}
-const { containerAnimation, pinnedContainer } = defineProps<Props>()
-let scrollTriggerInstance = ref<ScrollTrigger | null>(null)
-const mainCircle = useTemplateRef<HTMLElement>('sql-main-circle')
+  containerAnimation: gsap.core.Animation | null;
+  pinnedContainer: HTMLDivElement | null;
+};
+const { containerAnimation, pinnedContainer } = defineProps<Props>();
+let scrollTriggerInstance = ref<ScrollTrigger | null>(null);
+const mainCircle = useTemplateRef<HTMLElement>("sql-main-circle");
 
 // Referencias para database node
-const databaseLine = useTemplateRef<SVGLineElement>('database-line')
-const databaseCircle = useTemplateRef<SVGCircleElement>('database-circle')
-const databaseContent = useTemplateRef<SVGGElement>('database-content')
+const databaseLine = useTemplateRef<SVGLineElement>("database-line");
+const databaseCircle = useTemplateRef<SVGCircleElement>("database-circle");
+const databaseContent = useTemplateRef<SVGGElement>("database-content");
 
 // Referencias para table node
-const tableLine = useTemplateRef<SVGLineElement>('table-line')
-const tableCircle = useTemplateRef<SVGCircleElement>('table-circle')
-const tableContent = useTemplateRef<SVGGElement>('table-content')
+const tableLine = useTemplateRef<SVGLineElement>("table-line");
+const tableCircle = useTemplateRef<SVGCircleElement>("table-circle");
+const tableContent = useTemplateRef<SVGGElement>("table-content");
 
 // Referencias para fire node
-const fireLine = useTemplateRef<SVGLineElement>('fire-line')
-const fireCircle = useTemplateRef<SVGCircleElement>('fire-circle')
-const fireContent = useTemplateRef<SVGGElement>('fire-content')
+const fireLine = useTemplateRef<SVGLineElement>("fire-line");
+const fireCircle = useTemplateRef<SVGCircleElement>("fire-circle");
+const fireContent = useTemplateRef<SVGGElement>("fire-content");
 
 // Referencias para venn node
-const vennLine = useTemplateRef<SVGLineElement>('venn-line')
-const vennCircle = useTemplateRef<SVGCircleElement>('venn-circle')
-const vennContent = useTemplateRef<SVGGElement>('venn-content')
+const vennLine = useTemplateRef<SVGLineElement>("venn-line");
+const vennCircle = useTemplateRef<SVGCircleElement>("venn-circle");
+const vennContent = useTemplateRef<SVGGElement>("venn-content");
 
 watchEffect(() => {
-  if (containerAnimation && pinnedContainer && !scrollTriggerInstance.value && mainCircle.value) {
+  if (
+    containerAnimation &&
+    pinnedContainer &&
+    !scrollTriggerInstance.value &&
+    mainCircle.value
+  ) {
     const tl = gsap.timeline({
-      defaults: { ease: 'power2.out' }
+      defaults: { ease: "power2.out" },
     });
 
     // Configurar estado inicial
-    gsap.set([databaseLine.value, tableLine.value, fireLine.value, vennLine.value], { drawSVG: '100% 100%' });
-    gsap.set([databaseCircle.value, tableCircle.value, fireCircle.value, vennCircle.value], { drawSVG: '0% 0%' });
-    gsap.set([databaseContent.value, tableContent.value, fireContent.value, vennContent.value], { autoAlpha: 0 });
+    gsap.set([databaseLine.value, tableLine.value, fireLine.value, vennLine.value], {
+      drawSVG: "100% 100%",
+    });
+    gsap.set(
+      [databaseCircle.value, tableCircle.value, fireCircle.value, vennCircle.value],
+      { drawSVG: "0% 0%" }
+    );
+    gsap.set(
+      [databaseContent.value, tableContent.value, fireContent.value, vennContent.value],
+      { autoAlpha: 0 }
+    );
 
     // Animaciones en paralelo para los 4 nodos
-    tl.to(databaseLine.value, { drawSVG: '100% 0%', duration: 0.4 }, 0)
-      .to(databaseCircle.value, { drawSVG: '0% 100%', duration: 0.4 }, 0.2)
+    tl.to(databaseLine.value, { drawSVG: "100% 0%", duration: 0.4 }, 0)
+      .to(databaseCircle.value, { drawSVG: "0% 100%", duration: 0.4 }, 0.2)
       .to(databaseContent.value, { autoAlpha: 1, duration: 0.3 }, 0.4)
 
-      .to(tableLine.value, { drawSVG: '100% 0%', duration: 0.4 }, 0.1)
-      .to(tableCircle.value, { drawSVG: '0% 100%', duration: 0.4 }, 0.3)
+      .to(tableLine.value, { drawSVG: "100% 0%", duration: 0.4 }, 0.1)
+      .to(tableCircle.value, { drawSVG: "0% 100%", duration: 0.4 }, 0.3)
       .to(tableContent.value, { autoAlpha: 1, duration: 0.3 }, 0.5)
 
-      .to(fireLine.value, { drawSVG: '100% 0%', duration: 0.4 }, 0.2)
-      .to(fireCircle.value, { drawSVG: '0% 100%', duration: 0.4 }, 0.4)
+      .to(fireLine.value, { drawSVG: "100% 0%", duration: 0.4 }, 0.2)
+      .to(fireCircle.value, { drawSVG: "0% 100%", duration: 0.4 }, 0.4)
       .to(fireContent.value, { autoAlpha: 1, duration: 0.3 }, 0.6)
 
-      .to(vennLine.value, { drawSVG: '100% 0%', duration: 0.4 }, 0.3)
-      .to(vennCircle.value, { drawSVG: '0% 100%', duration: 0.4 }, 0.5)
-      .to(vennContent.value, { autoAlpha: 1, duration: 0.3 }, 0.7)
+      .to(vennLine.value, { drawSVG: "100% 0%", duration: 0.4 }, 0.3)
+      .to(vennCircle.value, { drawSVG: "0% 100%", duration: 0.4 }, 0.5)
+      .to(vennContent.value, { autoAlpha: 1, duration: 0.3 }, 0.7);
 
     scrollTriggerInstance.value = ScrollTrigger.create({
       trigger: mainCircle.value,
@@ -68,75 +79,157 @@ watchEffect(() => {
       anticipatePin: 1,
       containerAnimation: containerAnimation,
       animation: tl,
-      toggleActions: 'play reverse play reverse'
-    })
+      toggleActions: "play reverse play reverse",
+    });
   }
-})
+});
 </script>
 
 <template>
   <!-- Círculos principales (SIEMPRE VISIBLES) -->
-  <circle fill="var(--color-void-950)" ref="sql-main-circle" cx="991.68" cy="991.139" r="76.5" transform="rotate(45 991.68 991.139)" stroke="var(--color-ghost-200)" />
+  <circle
+    fill="var(--color-void-950)"
+    ref="sql-main-circle"
+    cx="991.68"
+    cy="991.139"
+    r="76.5"
+    transform="rotate(45 991.68 991.139)"
+    stroke="var(--color-ghost-200)"
+  />
   <circle cx="991.68" cy="991.138" r="69.5" stroke="var(--color-ghost-200)" />
-  
+
   <!-- Contenido principal (SIEMPRE VISIBLE) -->
   <g clip-path="url(#clip0_2084_108)">
     <path
       d="M1017.68 1007.39L1017.68 968.388L1011.18 968.388L1011.18 1013.89L1037.18 1013.89L1037.18 1007.39L1017.68 1007.39Z"
-      fill="var(--color-ghost-200)" />
+      fill="var(--color-ghost-200)"
+    />
     <path
       d="M998.18 968.388L985.18 968.388C983.456 968.388 981.803 969.073 980.584 970.292C979.365 971.511 978.68 973.165 978.68 974.888L978.68 1007.39C978.68 1009.11 979.365 1010.77 980.584 1011.98C981.803 1013.2 983.456 1013.89 985.18 1013.89L988.43 1013.89L988.43 1020.39C988.43 1022.11 989.115 1023.77 990.334 1024.98C991.553 1026.2 993.206 1026.89 994.93 1026.89L1001.43 1026.89L1001.43 1020.39L994.93 1020.39L994.93 1013.89L998.18 1013.89C999.904 1013.89 1001.56 1013.2 1002.78 1011.98C1004 1010.77 1004.68 1009.11 1004.68 1007.39L1004.68 974.888C1004.68 973.165 1004 971.511 1002.78 970.292C1001.56 969.073 999.904 968.388 998.18 968.388ZM985.18 1007.39L985.18 974.888L998.18 974.888L998.18 1007.39L985.18 1007.39Z"
-      fill="var(--color-ghost-200)" />
+      fill="var(--color-ghost-200)"
+    />
     <path
       d="M965.68 1013.89L946.18 1013.89L946.18 1007.39L965.68 1007.39L965.68 994.388L952.68 994.388C950.956 994.388 949.303 993.704 948.084 992.485C946.865 991.266 946.18 989.612 946.18 987.888L946.18 974.888C946.18 973.165 946.865 971.511 948.084 970.292C949.303 969.073 950.956 968.388 952.68 968.388L972.18 968.388L972.18 974.888L952.68 974.888L952.68 987.888L965.68 987.888C967.404 987.888 969.057 988.573 970.276 989.792C971.495 991.011 972.18 992.665 972.18 994.388L972.18 1007.39C972.18 1009.11 971.495 1010.77 970.276 1011.98C969.057 1013.2 967.404 1013.89 965.68 1013.89Z"
-      fill="var(--color-ghost-200)" />
+      fill="var(--color-ghost-200)"
+    />
   </g>
 
   <!-- Database node -->
-  <line ref="database-line" x1="871.356" y1="866.178" x2="940.103" y2="934.925" stroke="var(--color-shadow-500)" />
-  <circle ref="database-circle" cx="852.408" cy="849.177" r="24.5" stroke="var(--color-ghost-200)" />
+  <line
+    ref="database-line"
+    x1="871.356"
+    y1="866.178"
+    x2="940.103"
+    y2="934.925"
+    stroke="var(--color-shadow-500)"
+  />
+  <circle
+    ref="database-circle"
+    cx="852.408"
+    cy="849.177"
+    r="24.5"
+    stroke="var(--color-ghost-200)"
+  />
   <g ref="database-content" clip-path="url(#clip1_2084_108)">
     <path
       d="M852.408 847.177C858.708 847.177 865.408 845.247 865.408 841.677L865.408 838.677C865.408 835.107 858.708 833.177 852.408 833.177C846.108 833.177 839.408 835.107 839.408 838.677L839.408 841.677C839.408 845.247 846.108 847.177 852.408 847.177ZM841.408 838.677C841.408 837.247 845.698 835.177 852.408 835.177C859.118 835.177 863.408 837.247 863.408 838.677L863.408 841.677C863.408 843.107 859.118 845.177 852.408 845.177C845.698 845.177 841.408 843.107 841.408 841.677L841.408 838.677Z"
-      fill="var(--color-ghost-200)" stroke="var(--color-ghost-200)" stroke-width="0.00032" />
+      fill="var(--color-ghost-200)"
+      stroke="var(--color-ghost-200)"
+      stroke-width="0.00032"
+    />
     <path
       d="M852.408 865.177C858.708 865.177 865.408 863.247 865.408 859.677V856.677C865.408 856.412 865.303 856.158 865.115 855.97C864.928 855.783 864.673 855.677 864.408 855.677C864.143 855.677 863.889 855.783 863.701 855.97C863.514 856.158 863.408 856.412 863.408 856.677V859.677C863.408 861.107 859.118 863.177 852.408 863.177C845.698 863.177 841.408 861.107 841.408 859.677V856.677C841.408 856.412 841.303 856.158 841.115 855.97C840.928 855.783 840.673 855.677 840.408 855.677C840.143 855.677 839.889 855.783 839.701 855.97C839.514 856.158 839.408 856.412 839.408 856.677V859.677C839.408 863.247 846.108 865.177 852.408 865.177Z"
-      fill="var(--color-ghost-200)" stroke="var(--color-ghost-200)" stroke-width="0.00032" />
+      fill="var(--color-ghost-200)"
+      stroke="var(--color-ghost-200)"
+      stroke-width="0.00032"
+    />
     <path
       d="M852.408 856.177C858.708 856.177 865.408 854.247 865.408 850.677V847.677C865.408 847.412 865.303 847.158 865.115 846.97C864.928 846.783 864.673 846.677 864.408 846.677C864.143 846.677 863.889 846.783 863.701 846.97C863.514 847.158 863.408 847.412 863.408 847.677V850.677C863.408 852.107 859.118 854.177 852.408 854.177C845.698 854.177 841.408 852.107 841.408 850.677V847.677C841.408 847.412 841.303 847.158 841.115 846.97C840.928 846.783 840.673 846.677 840.408 846.677C840.143 846.677 839.889 846.783 839.701 846.97C839.514 847.158 839.408 847.412 839.408 847.677V850.677C839.408 854.247 846.108 856.177 852.408 856.177Z"
-      fill="var(--color-ghost-200)" stroke="var(--color-ghost-200)" stroke-width="0.00032" />
+      fill="var(--color-ghost-200)"
+      stroke="var(--color-ghost-200)"
+      stroke-width="0.00032"
+    />
   </g>
 
   <!-- Table node -->
-  <line ref="table-line" x1="990.282" y1="915.051" x2="991.18" y2="841.171" stroke="var(--color-shadow-500)" />
-  <circle ref="table-circle" cx="991.68" cy="816.177" r="24.5" stroke="var(--color-ghost-200)" />
+  <line
+    ref="table-line"
+    x1="990.282"
+    y1="915.051"
+    x2="991.18"
+    y2="841.171"
+    stroke="var(--color-shadow-500)"
+  />
+  <circle
+    ref="table-circle"
+    cx="991.68"
+    cy="816.177"
+    r="24.5"
+    stroke="var(--color-ghost-200)"
+  />
   <g ref="table-content">
     <path
       d="M1002.98 803.754L980.385 803.754C980.206 803.758 980.029 803.797 979.865 803.87C979.7 803.942 979.552 804.046 979.428 804.176C979.304 804.306 979.207 804.459 979.142 804.627C979.077 804.794 979.046 804.973 979.05 805.152L979.05 827.203C979.046 827.382 979.077 827.561 979.142 827.728C979.207 827.896 979.304 828.049 979.428 828.179C979.552 828.309 979.7 828.413 979.865 828.485C980.029 828.558 980.206 828.597 980.385 828.601L1002.98 828.601C1003.34 828.592 1003.68 828.439 1003.93 828.177C1004.18 827.915 1004.32 827.564 1004.31 827.203L1004.31 805.152C1004.32 804.791 1004.18 804.44 1003.93 804.178C1003.68 803.916 1003.34 803.763 1002.98 803.754ZM984.608 809.559H989.009V812.995H984.608V809.559ZM984.608 813.834H989.009V817.761H984.608L984.608 813.834ZM984.608 818.584H989.009L989.009 822.806H984.608V818.584ZM983.805 826.923H980.111V823.63H983.805L983.805 826.923ZM983.805 822.785H980.111L980.111 818.563H983.805V822.785ZM983.805 817.74H980.111V813.818H983.805L983.805 817.74ZM983.805 812.99H980.111L980.111 809.543H983.805V812.99ZM984.608 826.923L984.608 823.63H989.009V826.923H984.608ZM993.817 826.923H989.811V823.63H993.817V826.923ZM993.817 822.785H989.811L989.811 818.563H993.817L993.817 822.785ZM993.817 817.74H989.811V813.818H993.817V817.74ZM993.817 812.99H989.811V809.543H993.817V812.99ZM998.351 826.934H994.614V823.63H998.351V826.934ZM998.351 822.796H994.614L994.614 818.574H998.351L998.351 822.796ZM998.351 817.75H994.614V813.818H998.351V817.75ZM998.351 813H994.614V809.543H998.351V813ZM1003.24 826.944H999.153V823.63H1003.24V826.944ZM1003.24 822.806H999.153L999.153 818.584H1003.24L1003.24 822.806ZM1003.24 817.761H999.153V813.818H1003.24V817.761ZM1003.24 813.011H999.153V809.543L1003.24 809.543V813.011Z"
-      fill="var(--color-ghost-200)" stroke="var(--color-ghost-200)" stroke-width="0.00072" />
+      fill="var(--color-ghost-200)"
+      stroke="var(--color-ghost-200)"
+      stroke-width="0.00072"
+    />
   </g>
 
   <!-- Fire node -->
-  <line ref="fire-line" x1="991.18" y1="1141.1" x2="991.182" y2="1068" stroke="var(--color-shadow-500)" />
-  <circle ref="fire-circle" cx="991.68" cy="1166.1" r="24.5" stroke="var(--color-ghost-200)" />
+  <line
+    ref="fire-line"
+    x1="991.18"
+    y1="1141.1"
+    x2="991.182"
+    y2="1068"
+    stroke="var(--color-shadow-500)"
+  />
+  <circle
+    ref="fire-circle"
+    cx="991.68"
+    cy="1166.1"
+    r="24.5"
+    stroke="var(--color-ghost-200)"
+  />
   <g ref="fire-content">
     <path
       d="M991.445 1175.53C991.445 1175.53 991.445 1161.93 991.896 1161.93C992.245 1161.93 992.7 1179.47 992.7 1179.47C992.075 1179.4 991.445 1176.59 991.445 1175.53ZM1000.2 1162.09C998.99 1156.82 996.348 1152.29 992.705 1148.79L992.696 1148.78C992.252 1148.1 991.846 1147.33 991.521 1146.51L991.489 1146.42C991.491 1146.44 991.491 1146.48 991.491 1146.51C991.491 1147.25 991.159 1147.91 990.635 1148.36L990.631 1148.36C985.94 1152.34 982.956 1158.21 982.857 1164.78V1164.79C982.856 1164.87 982.856 1164.97 982.856 1165.07C982.856 1171.57 985.986 1177.35 990.823 1180.97L990.874 1181L990.988 1181.09C991.199 1182.65 991.379 1184.21 991.529 1185.78H992.318C992.536 1183.82 992.83 1182.11 993.214 1180.43L993.154 1180.74C993.673 1180.38 994.128 1180.01 994.552 1179.6L994.548 1179.61C998.224 1176.2 1000.52 1171.34 1000.52 1165.95C1000.52 1165.87 1000.52 1165.79 1000.52 1165.71V1165.73C1000.51 1164.44 1000.4 1163.18 1000.17 1161.96L1000.19 1162.09L1000.2 1162.09Z"
-      fill="var(--color-ghost-200)" stroke="var(--color-ghost-200)" stroke-width="0.00032" />
+      fill="var(--color-ghost-200)"
+      stroke="var(--color-ghost-200)"
+      stroke-width="0.00032"
+    />
   </g>
 
   <!-- Venn node -->
-  <line ref="venn-line" x1="1112.85" y1="1107.72" x2="1048.4" y2="1043.28" stroke="var(--color-shadow-500)" />
-  <circle ref="venn-circle" cx="1129.41" cy="1125.03" r="24.5" stroke="var(--color-ghost-200)" />
+  <line
+    ref="venn-line"
+    x1="1112.85"
+    y1="1107.72"
+    x2="1048.4"
+    y2="1043.28"
+    stroke="var(--color-shadow-500)"
+  />
+  <circle
+    ref="venn-circle"
+    cx="1129.41"
+    cy="1125.03"
+    r="24.5"
+    stroke="var(--color-ghost-200)"
+  />
   <g ref="venn-content" clip-path="url(#clip2_2084_108)">
     <path
       d="M1134.16 1113.16C1132.52 1113.16 1130.91 1113.5 1129.41 1114.16C1127.6 1113.37 1125.63 1113.04 1123.66 1113.2C1121.69 1113.36 1119.8 1114.02 1118.15 1115.1C1116.5 1116.17 1115.14 1117.65 1114.2 1119.38C1113.26 1121.12 1112.77 1123.06 1112.77 1125.03C1112.77 1127.01 1113.26 1128.95 1114.2 1130.68C1115.14 1132.42 1116.5 1133.89 1118.15 1134.97C1119.8 1136.05 1121.69 1136.7 1123.66 1136.87C1125.63 1137.03 1127.6 1136.7 1129.41 1135.91C1131.03 1136.62 1132.78 1136.95 1134.54 1136.9C1136.31 1136.84 1138.04 1136.39 1139.61 1135.58C1141.18 1134.77 1142.54 1133.62 1143.61 1132.22C1144.68 1130.81 1145.42 1129.18 1145.78 1127.46C1146.14 1125.73 1146.11 1123.94 1145.7 1122.23C1145.28 1120.51 1144.49 1118.91 1143.37 1117.54C1142.26 1116.17 1140.85 1115.07 1139.26 1114.31C1137.67 1113.55 1135.92 1113.16 1134.16 1113.16ZM1124.66 1134.53C1123.32 1134.54 1121.99 1134.26 1120.77 1133.72C1119.55 1133.17 1118.45 1132.38 1117.56 1131.38C1116.66 1130.38 1115.99 1129.21 1115.58 1127.94C1115.17 1126.66 1115.04 1125.31 1115.18 1123.98C1115.33 1122.65 1115.76 1121.37 1116.44 1120.21C1117.12 1119.06 1118.03 1118.06 1119.12 1117.29C1120.22 1116.51 1121.46 1115.98 1122.77 1115.72C1124.09 1115.45 1125.44 1115.47 1126.74 1115.77C1125.35 1116.88 1124.23 1118.29 1123.46 1119.89C1122.68 1121.5 1122.28 1123.25 1122.28 1125.03C1122.28 1126.81 1122.68 1128.57 1123.46 1130.17C1124.23 1131.78 1125.35 1133.19 1126.74 1134.3C1126.06 1134.45 1125.36 1134.53 1124.66 1134.53ZM1134.16 1134.53C1133.46 1134.53 1132.76 1134.45 1132.07 1134.3C1133.46 1133.19 1134.59 1131.78 1135.36 1130.17C1136.13 1128.57 1136.53 1126.81 1136.53 1125.03C1136.53 1123.25 1136.13 1121.5 1135.36 1119.89C1134.59 1118.29 1133.46 1116.88 1132.07 1115.77C1133.37 1115.48 1134.72 1115.46 1136.03 1115.73C1137.34 1115.99 1138.58 1116.53 1139.67 1117.3C1140.76 1118.08 1141.67 1119.07 1142.35 1120.23C1143.02 1121.38 1143.45 1122.66 1143.6 1123.99C1143.75 1125.31 1143.61 1126.66 1143.2 1127.93C1142.8 1129.2 1142.13 1130.37 1141.24 1131.37C1140.35 1132.37 1139.25 1133.16 1138.03 1133.71C1136.81 1134.25 1135.49 1134.53 1134.16 1134.53Z"
-      fill="var(--color-ghost-200)" stroke="var(--color-ghost-200)" stroke-width="0.00085" />
-    <path d="M1148.41 1106.03L1110.41 1106.03L1110.41 1144.03L1148.41 1144.03L1148.41 1106.03Z" stroke="var(--color-ghost-200)"
-      stroke-width="0.00085" />
+      fill="var(--color-ghost-200)"
+      stroke="var(--color-ghost-200)"
+      stroke-width="0.00085"
+    />
+    <path
+      d="M1148.41 1106.03L1110.41 1106.03L1110.41 1144.03L1148.41 1144.03L1148.41 1106.03Z"
+      stroke="var(--color-ghost-200)"
+      stroke-width="0.00085"
+    />
   </g>
 </template>
 
-<style scoped>
-  
-</style>
+<style scoped></style>

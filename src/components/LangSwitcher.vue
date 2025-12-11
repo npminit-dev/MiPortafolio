@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref } from "vue";
 import type { Lang } from "../types/globals";
 import { useTranslation } from "i18next-vue";
 import ES from "./icons/ES.vue";

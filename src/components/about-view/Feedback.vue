@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import gsap from "gsap";
-import { t } from "i18next";
 import { useTranslation } from "i18next-vue";
 import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 import { SplitText } from "gsap/all";
+import { useSoundStore } from "../../stores/useSoundStore";
+import BackToMenu from "../BackToMenu.vue";
+import { sleep } from "../../utils";
 
 const { i18next } = useTranslation();
 const hasScored = ref<boolean | null>(null);
 const improvementSuggest = ref<string | null>(null);
+const st = useSoundStore();
+
 let tl: gsap.core.Timeline | null = null;
 let titleSplit: SplitText | null = null;
 let pSplit: SplitText | null = null;
@@ -26,13 +30,48 @@ onMounted(async () => {
 });
 
 onBeforeUnmount(() => {
+  stopAllDrawingSounds();
   killAnimations();
 });
+
+async function startDrawingSounds() {
+  await sleep(500);
+  st.play(st.sounds["streak-1"]);
+  await sleep(140);
+  st.play(st.sounds["streak-2"]);
+  await sleep(140);
+  st.play(st.sounds["streak-3"]);
+  await sleep(140);
+  st.play(st.sounds["streak-2"]);
+  await sleep(140);
+  st.play(st.sounds["streak-1"]);
+  await sleep(140);
+  st.play(st.sounds["streak-2"]);
+  await sleep(140);
+  st.play(st.sounds["streak-3"]);
+  await sleep(140);
+  st.play(st.sounds["streak-2"]);
+  await sleep(140);
+  st.play(st.sounds["streak-1"]);
+  await sleep(140);
+  st.play(st.sounds["streak-2"]);
+  await sleep(140);
+  st.play(st.sounds["streak-1"]);
+  await sleep(140);
+}
+
+function stopAllDrawingSounds() {
+  st.sounds["streak-1"].howl.stop();
+  st.sounds["streak-2"].howl.stop();
+  st.sounds["streak-3"].howl.stop();
+  st.sounds["streak-4"].howl.stop();
+}
 
 function startAnimations() {
   tl = gsap.timeline();
   titleSplit = SplitText.create("#feedback-form-title", { type: "words, chars" });
   pSplit = SplitText.create("#feedback-form-p", { type: "words, chars" });
+  startDrawingSounds();
 
   tl.fromTo(
     "#feedback-picture-draw",
@@ -44,6 +83,7 @@ function startAnimations() {
       duration: 1.5,
       ease: "linear",
       delay: 0.5,
+      onInterrupt: stopAllDrawingSounds,
     },
     0
   )
@@ -178,6 +218,12 @@ function handleSuggestSubmit(e: FormDataEvent) {
           </div>
         </transition>
       </div>
+      <BackToMenu
+        class="absolute bottom-6 inset-x-2"
+        inverted
+        simple
+        :before-back="() => st.resetBackgrounds()"
+      />
     </div>
   </div>
 </template>

@@ -1,5 +1,3 @@
-import type { IconType } from "oh-vue-icons/types/icons"
-
 export type Lang = 'en'|'es'
 
 export type MenuItem = {

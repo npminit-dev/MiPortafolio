@@ -3,7 +3,8 @@ import { reactive, ref, watch } from 'vue'
 import { Howl } from 'howler';
 
 type Sound = 'background-1' | 'background-2' | 'background-3' | 'background-4' | 'error-1' | 'error-2' | 'hit-1' | 'hover-1' | 'hover-2' | 'hover-3' | 'loading-1' |
-  'loading-2' | 'loading-3' | 'loading-4' | 'loading-5' | 'select-1' | 'select-2' | 'select-3' | 'select-4' | 'select-5' | 'transition-1' | 'transition-2' | 'transition-3' | 'transition-4'
+  'loading-2' | 'loading-3' | 'loading-4' | 'loading-5' | 'select-1' | 'select-2' | 'select-3' | 'select-4' | 'select-5' | 'transition-1' | 'transition-2' | 'transition-3' | 'transition-4' | 'transition-5'
+  | 'streak-1' | 'streak-2' | 'streak-3' | 'streak-4'
 
 type HowlRecord = {
   howl: Howl,
@@ -108,7 +109,27 @@ const howlers: Howlers = {
   "transition-4": {
     howl: new Howl({ src: ['sound/transition-4.mp3'], volume: 0, }),
     maxVolume: 1
-  }
+  },
+  "transition-5": {
+    howl: new Howl({ src: ['sound/transition-5.mp3'], volume: 0, }),
+    maxVolume: .3
+  },
+  "streak-1": {
+    howl: new Howl({ src: ['sound/streak-1.mp3'], volume: 0, }),
+    maxVolume: .2
+  },
+  "streak-2": {
+    howl: new Howl({ src: ['sound/streak-2.mp3'], volume: 0 }),
+    maxVolume: .2
+  },
+  "streak-3": {
+    howl: new Howl({ src: ['sound/streak-3.mp3'], volume: 0, }),
+    maxVolume: .2
+  },
+  "streak-4": {
+    howl: new Howl({ src: ['sound/streak-4.mp3'], volume: 0, }),
+    maxVolume: .2
+  },
 }
 
 export const useSoundStore = defineStore('soundStore', () => {

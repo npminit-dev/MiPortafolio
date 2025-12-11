@@ -17,7 +17,7 @@ const text = useTemplateRef<HTMLHeadingElement>("text");
 const system = useTemplateRef<HTMLSpanElement>("system");
 const spinner = useTemplateRef<HTMLSpanElement>("spinner");
 const container = useTemplateRef<HTMLDivElement>("container");
-const endLoading = inject<Function>('endLoading')
+const endLoading = inject<Function>("endLoading");
 
 const st = useSoundStore();
 const { t, i18next } = useTranslation();
@@ -30,7 +30,7 @@ let spinnerInterval: number | null = null;
 let spinnerIndex = 0;
 const spinnerChars = ["|", "/", "-", "\\"];
 
-const clearAnimations = () => {
+const killAnimations = () => {
   if (container.value) gsap.killTweensOf(container.value.querySelectorAll("*"));
   mainTl?.kill();
   textTl?.kill();
@@ -68,23 +68,21 @@ const stopSpinner = () => {
   }
 };
 
-onMounted(() => {
+onMounted(async () => {
+  await document.fonts.ready;
   startAnimations();
-
   i18next.on("languageChanged", () => {
     stopSounds();
-    clearAnimations();
+    killAnimations();
     startAnimations();
   });
 });
 
 onBeforeUnmount(() => {
-  clearAnimations();
+  killAnimations();
 });
 
 const startAnimations = () => {
-  clearAnimations();
-
   mainTl = gsap.timeline();
 
   mainTl.set(text.value, { textContent: t(paragraphs[0]), opacity: 1 });
@@ -172,8 +170,8 @@ const startAnimations = () => {
                 opacity: 0,
                 duration: 1,
                 onComplete: () => {
-                  endLoading!()
-                }
+                  endLoading!();
+                },
               },
               "<"
             );

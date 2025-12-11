@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, watchEffect, nextTick } from "vue";
+import { ref, onMounted, onBeforeUnmount, nextTick } from "vue";
 import { gsap } from "gsap";
 import SplitText from "gsap/SplitText";
 import { useSoundStore } from "../../stores/useSoundStore";
 import type { MenuItem } from "../../types/globals";
 import { usePageTransition } from "../../composables/usePageTransition";
-import { useTranslation } from 'i18next-vue';
+import { useTranslation } from "i18next-vue";
 
 const st = useSoundStore();
-const { t, i18next } = useTranslation()
+const { i18next } = useTranslation();
 const pgTransition = usePageTransition();
 const selected = ref<string | null>(null);
 const prevSelected = ref<string | null>(null);
@@ -22,24 +22,24 @@ const menuItems: Array<MenuItem> = [
 
 // --- CONFIGURACIÓN ---
 let delay = 2; // segundos antes de empezar animación
-const TOTAL_ANIMATION_DURATION = .2; // duración total deseada para toda la animación (en segundos)
+const TOTAL_ANIMATION_DURATION = 0.2; // duración total deseada para toda la animación (en segundos)
 // ----------------------
 
 let masterTimeline: gsap.core.Timeline | null = null;
 
-function enterAnimations() {
+function startAnimations() {
   // evitar que se dispare dos veces
   if (masterTimeline) {
-    return
-  };
+    return;
+  }
 
   interactions.value = false; // 🔒 bloquear interacción
   const tl = gsap.timeline({
     defaults: { ease: "none" },
     onComplete: () => {
       interactions.value = true;
-      st.sounds['loading-1'].howl.stop()
-    }
+      st.sounds["loading-1"].howl.stop();
+    },
   });
 
   const items = document.querySelectorAll(".nav-item-text");
@@ -58,12 +58,15 @@ function enterAnimations() {
   gsap.set(items, { opacity: 0 });
 
   // Esperar delay inicial
-  tl.to({
-  }, {
-    duration: delay, onComplete: () => {
-      st.play(st.sounds['loading-1'])
+  tl.to(
+    {},
+    {
+      duration: delay,
+      onComplete: () => {
+        st.play(st.sounds["loading-1"]);
+      },
     }
-  });
+  );
 
   // Crear animaciones encadenadas
   items.forEach((item) => {
@@ -96,7 +99,7 @@ function killAnimations() {
     masterTimeline = null;
   }
 
-  st.sounds['loading-1'].howl.stop()
+  st.sounds["loading-1"].howl.stop();
   // Limpiar todos los SplitText anteriores
   const items = document.querySelectorAll(".nav-item-text");
   items.forEach((item) => {
@@ -109,7 +112,7 @@ function killAnimations() {
 function sectionChange(href: string) {
   if (!interactions.value) return; // no permitir clic durante animación
   st.play(st.sounds["select-1"]);
-  interactions.value = false
+  interactions.value = false;
   pgTransition.triggerTransition(href);
 }
 
@@ -120,50 +123,66 @@ function hoverItem(text: string) {
   st.play(st.sounds["hover-2"]);
 }
 
-onMounted(() => {
-  enterAnimations()
-  i18next.on('languageChanged', async () => {
-    delay = .25
-    prevSelected.value = null
-    selected.value = null
-    killAnimations()
-    await nextTick()
-    await nextTick()
-    enterAnimations()
-  })
+onMounted(async () => {
+  gsap.set("#navitems-container", { autoAlpha: 0 });
+  await document.fonts.ready;
+  gsap.set("#navitems-container", { autoAlpha: 1 });
+  startAnimations();
+  i18next.on("languageChanged", async () => {
+    delay = 0.25;
+    prevSelected.value = null;
+    selected.value = null;
+    killAnimations();
+    await nextTick();
+    await nextTick();
+    startAnimations();
+  });
 });
 
 onBeforeUnmount(() => {
   killAnimations();
 });
-
 </script>
 
 <template>
-  <nav>
-    <ul 
+  <nav id="navitems-container">
+    <ul
       class="flex flex-col items-center justify-center"
-      :class="[interactions ? 'pointer-events-auto' : 'pointer-events-none']">
-      <li v-for="{ text, href } in menuItems" 
-        @click="sectionChange(href)" 
+      :class="[interactions ? 'pointer-events-auto' : 'pointer-events-none']"
+    >
+      <li
+        v-for="{ text, href } in menuItems"
+        @click="sectionChange(href)"
         @mouseenter="hoverItem(text)"
         class="nav-item relative flex items-center justify-center cursor-pointer"
       >
-        <span 
-          :key="selected || 'null'" class="absolute -left-4 opacity-0 h-1 w-1 rounded-full bg-ghost-300"
-          :class="[text === selected ? 'left-ball' : text === prevSelected ? 'left-ball-out' : 'hidden']"
-          
+        <span
+          :key="selected || 'null'"
+          class="absolute -left-4 opacity-0 h-1 w-1 rounded-full bg-ghost-300"
+          :class="[
+            text === selected
+              ? 'left-ball'
+              : text === prevSelected
+              ? 'left-ball-out'
+              : 'hidden',
+          ]"
         />
-        <a 
+        <a
           class="nav-item-text font-display font-light text-xl text-white duration-100"
           :class="{ 'shadowed-text': text === selected }"
         >
           {{ $t(text) }}
         </a>
-        <span 
-          :key="selected || 'null'" 
+        <span
+          :key="selected || 'null'"
           class="absolute -right-4 opacity-0 h-1 w-1 rounded-full bg-ghost-300"
-          :class="[text === selected ? 'right-ball' : text === prevSelected ? 'right-ball-out' : 'opacity-0 animate-none']"
+          :class="[
+            text === selected
+              ? 'right-ball'
+              : text === prevSelected
+              ? 'right-ball-out'
+              : 'opacity-0 animate-none',
+          ]"
         />
       </li>
     </ul>

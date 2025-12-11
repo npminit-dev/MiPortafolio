@@ -1,19 +1,71 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onBeforeUnmount, onMounted, ref } from "vue";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import AboutMe from "./AboutMe.vue";
 import Contact from "./Contact.vue";
 import Feedback from "./Feedback.vue";
+import SnapScrollProgress from "./SnapScrollProgress.vue";
+import { useSoundStore } from "../../stores/useSoundStore";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const st = useSoundStore();
+const showAboutMe = ref<boolean>(false);
+const showContact = ref<boolean>(false);
+const showFeedback = ref<boolean>(false);
+const scrollSection = ref<number>(1);
+
 let beforeSnapAnimation: gsap.core.Animation | null = null;
-const showAboutMe = ref(false);
-const showContact = ref(false);
-const showFeedback = ref(false);
+let tl: gsap.core.Timeline | null = null;
 
 onMounted(() => {
+  startAnimations();
+});
+
+onBeforeUnmount(() => {
+  killAnimations();
+});
+
+function setLightLangAndSound() {
+  gsap.to("#sound-switcher-container", {
+    backgroundColor: "var(--color-ghost-300)",
+    borderColor: "var(--color-void-600)",
+    duration: 0.3,
+  });
+  gsap.to("#sound-switcher-wave", {
+    stroke: "var(--color-void-800)",
+    duration: 0.3,
+  });
+  gsap.to("#lang-switcher-ring", {
+    borderColor: "var(--color-void-600)",
+    duration: 0.3,
+  });
+  gsap.to(".lang-icon-container", {
+    borderColor: "var(--color-void-600)",
+  });
+}
+
+function revertLightLangAndSound() {
+  gsap.to("#sound-switcher-container", {
+    backgroundColor: "var(--color-void-950)",
+    borderColor: "var(--color-ghost-200)",
+    duration: 0.3,
+  });
+  gsap.to("#sound-switcher-wave", {
+    stroke: "var(--color-ghost-300)",
+    duration: 0.3,
+  });
+  gsap.to("#lang-switcher-ring", {
+    borderColor: "var(--color-ghost-300)",
+    duration: 0.3,
+  });
+  gsap.to(".lang-icon-container", {
+    borderColor: "var(--color-ghost-300)",
+  });
+}
+
+function startAnimations() {
   beforeSnapAnimation = gsap.fromTo(
     "#white-rounded",
     {
@@ -39,46 +91,8 @@ onMounted(() => {
 
   gsap.set(["#about-me", "#contact", "#feedback"], { autoAlpha: 0 });
 
-  function setLightLangAndSound() {
-    gsap.to("#sound-switcher-container", {
-      backgroundColor: "var(--color-ghost-300)",
-      borderColor: "var(--color-void-600)",
-      duration: 0.3,
-    });
-    gsap.to("#sound-switcher-wave", {
-      stroke: "var(--color-void-800)",
-      duration: 0.3,
-    });
-    gsap.to("#lang-switcher-ring", {
-      borderColor: "var(--color-void-600)",
-      duration: 0.3,
-    });
-    gsap.to(".lang-icon-container", {
-      borderColor: "var(--color-void-600)",
-    });
-  }
-
-  function revertLightLangAndSound() {
-    gsap.to("#sound-switcher-container", {
-      backgroundColor: "var(--color-void-950)",
-      borderColor: "var(--color-ghost-200)",
-      duration: 0.3,
-    });
-    gsap.to("#sound-switcher-wave", {
-      stroke: "var(--color-ghost-300)",
-      duration: 0.3,
-    });
-    gsap.to("#lang-switcher-ring", {
-      borderColor: "var(--color-ghost-300)",
-      duration: 0.3,
-    });
-    gsap.to(".lang-icon-container", {
-      borderColor: "var(--color-ghost-300)",
-    });
-  }
-
   // Timeline principal controlada por scroll
-  const tl = gsap.timeline({
+  tl = gsap.timeline({
     scrollTrigger: {
       trigger: "#general-container",
       start: "top top",
@@ -87,25 +101,32 @@ onMounted(() => {
       pin: true,
       pinSpacing: "margin",
       anticipatePin: 1,
-      onEnter: setLightLangAndSound,
+      onEnter: () => {
+        setLightLangAndSound();
+        st.play(st.sounds["transition-5"]);
+      },
       onEnterBack: setLightLangAndSound,
-      onLeave: revertLightLangAndSound,
       onLeaveBack: revertLightLangAndSound,
       onUpdate: (self) => {
         const progress = self.progress;
-
         if (progress < 0.33) {
           if (!showAboutMe.value) showAboutMe.value = true;
           if (showContact.value) showContact.value = false;
           if (showFeedback.value) showFeedback.value = false;
+          if (scrollSection.value !== 1) st.play(st.sounds["transition-5"]);
+          scrollSection.value = 1;
         } else if (progress >= 0.33 && progress < 0.66) {
           if (showAboutMe.value) showAboutMe.value = false;
           if (!showContact.value) showContact.value = true;
           if (showFeedback.value) showFeedback.value = false;
+          if (scrollSection.value !== 2) st.play(st.sounds["transition-5"]);
+          scrollSection.value = 2;
         } else {
           if (showAboutMe.value) showAboutMe.value = false;
           if (showContact.value) showContact.value = false;
           if (!showFeedback.value) showFeedback.value = true;
+          if (scrollSection.value !== 3) st.play(st.sounds["transition-5"]);
+          scrollSection.value = 3;
         }
       },
     },
@@ -134,7 +155,27 @@ onMounted(() => {
       duration: 0.03,
     })
     .to({}, { duration: 0.31 });
-});
+  tl.fromTo(
+    "#scroll-progress",
+    {
+      drawSVG: "-25% -25%",
+    },
+    {
+      drawSVG: "-25% 75%",
+      repeat: 2,
+      duration: 0.33,
+    },
+    0
+  );
+}
+
+function killAnimations() {
+  beforeSnapAnimation?.scrollTrigger?.kill();
+  beforeSnapAnimation?.kill();
+  tl?.scrollTrigger?.kill();
+  tl?.kill();
+  revertLightLangAndSound();
+}
 </script>
 
 <template>
@@ -158,6 +199,7 @@ onMounted(() => {
           <Feedback v-if="showFeedback" />
         </div>
       </div>
+      <SnapScrollProgress :scroll-section />
     </div>
   </div>
 </template>

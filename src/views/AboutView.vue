@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useSoundStore } from "../stores/useSoundStore";
-import BackToMenu from "../components/BackToMenu.vue";
 import GradientDark from "../components/backgrounds/GradientDark.vue";
 import MainTitle from "../components/MainTitle.vue";
 import MainTitleMorphSVG from "../components/MainTitleMorphSVG.vue";
@@ -11,21 +9,18 @@ import { SplitText } from "gsap/all";
 import { nextTick, onMounted } from "vue";
 import { useTranslation } from "i18next-vue";
 
-const st = useSoundStore();
 const { i18next } = useTranslation();
 const connectionAnimation: gsap.core.Animation | null = null;
 let splitted: SplitText | null = null;
 
-onMounted(() => {
-  document.fonts.onloadingdone = () => {
+onMounted(async () => {
+  await document.fonts.ready;
+  startAnimations();
+  i18next.on("languageChanged", async () => {
+    killAnimations();
+    await nextTick();
     startAnimations();
-
-    i18next.on("languageChanged", async () => {
-      killAnimations();
-      await nextTick();
-      startAnimations();
-    });
-  };
+  });
 });
 
 function startAnimations() {
@@ -100,10 +95,6 @@ function killAnimations() {
     <ConvergentDots />
 
     <SnappedContainer />
-
-    <div class="w-full -my-1 py-16 flex items-center justify-center z-50">
-      <BackToMenu :before-back="() => st.resetBackgrounds()" />
-    </div>
   </main>
 </template>
 

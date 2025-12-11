@@ -5,6 +5,14 @@ export function projectHeight(h: number, angle: number = 45): number {
   return h * Math.cos(rad);
 }
 
+export function sleep(ms: number) {
+  return new Promise((res) => {
+    setTimeout(() => {
+      res(null)
+    }, ms)
+  })
+}
+
 
 export const Frameworks: FrameworksType = {
   'FRONTEND': [
