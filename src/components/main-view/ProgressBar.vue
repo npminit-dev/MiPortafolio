@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { useSoundStore } from "../../stores/useSoundStore";
 import { useTranslation } from "i18next-vue";
 import DNA from "./DNA.vue";
+import { useWindowSize } from "@vueuse/core";
 
 const paragraphs: string[] = [
   "INITIALIZING DEVELOPER CORE MODULES...",
@@ -21,6 +22,7 @@ const endLoading = inject<Function>("endLoading");
 
 const st = useSoundStore();
 const { t, i18next } = useTranslation();
+const { width } = useWindowSize();
 
 // 🔹 Timelines y control
 let mainTl: gsap.core.Timeline | null = null;
@@ -79,6 +81,7 @@ onMounted(async () => {
 });
 
 onBeforeUnmount(() => {
+  stopSounds();
   killAnimations();
 });
 
@@ -88,7 +91,7 @@ const startAnimations = () => {
   mainTl.set(text.value, { textContent: t(paragraphs[0]), opacity: 1 });
   mainTl.set(system.value, { opacity: 1 });
   mainTl.set(spinner.value, { opacity: 1, textContent: "" });
-  mainTl.set("#progress-bar", { width: 0, autoAlpha: 1 });
+  mainTl.set("#progress-bar", { width: 0, opacity: 1 });
   mainTl.set("#progress-fill", { width: 0 });
 
   gsap.fromTo(
@@ -157,7 +160,7 @@ const startAnimations = () => {
               },
               {
                 width: "0%",
-                autoAlpha: 0,
+                opacity: 0,
                 ease: "power2.inOut",
                 duration: 0.5,
               },
@@ -196,7 +199,7 @@ const startAnimations = () => {
         chars: "upperCase",
         speed: 3,
         revealDelay: 0,
-        tweenLength: false,
+        tweenLength: true,
       },
       ease: "none",
     });
@@ -209,17 +212,25 @@ const startAnimations = () => {
   <div
     ref="container"
     id="progress-container"
-    class="w-[650px] flex flex-col items-start justify-center gap-[2px]"
+    class="w-[650px] flex flex-col items-start justify-center gap-[2px] px-2 sm:px-0"
   >
     <DNA />
     <div class="flex items-center justify-between w-full">
-      <div>
-        <span ref="system" class="inline font-display font-normal text-ghost-100 text-xl"
-          >[SYSTEM]:
+      <div class="min-h-[26px] sm:min-h-[unset]">
+        <span
+          ref="system"
+          class="inline font-display font-normal text-ghost-100 sm:text-lg md:text-xl"
+          >{{ width <= 640 ? "" : "[SYSTEM]:" }}
         </span>
-        <h1 ref="text" class="inline font-display font-light text-ghost-100 text-xl"></h1>
+        <h1
+          ref="text"
+          class="inline font-display font-light text-ghost-100 sm:text-lg md:text-xl"
+        ></h1>
       </div>
-      <span ref="spinner" class="font-mono text-ghost-200 text-lg pr-1"></span>
+      <span
+        ref="spinner"
+        class="hidden sm:inline font-mono text-ghost-200 text-lg pr-1"
+      ></span>
     </div>
 
     <div

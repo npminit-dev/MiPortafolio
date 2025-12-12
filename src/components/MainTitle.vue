@@ -4,6 +4,7 @@ import { onMounted, onBeforeUnmount, nextTick } from "vue";
 import { SplitText } from "gsap/all";
 import { useTranslation } from "i18next-vue";
 import { useSoundStore } from "../stores/useSoundStore";
+import { useWindowSize } from "@vueuse/core";
 
 interface Props {
   titleKey: string;
@@ -26,6 +27,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const { i18next } = useTranslation();
 const st = useSoundStore();
+const { width } = useWindowSize();
 
 let tl: gsap.core.Timeline | null = null;
 let splitInstances: SplitText[] = [];
@@ -74,7 +76,7 @@ async function startAnimation() {
     {
       stagger: 0.05,
       duration: 0.1,
-      textShadow: "0 0 20px rgba(255, 255, 255, 0.3)",
+      textShadow: width.value >= 640 ? "0 0 20px rgba(255, 255, 255, 0.3)" : "none",
       onStart: function () {
         gsap.set("#animated-title", { opacity: 1 });
         st.play(st.sounds["loading-1"]);
@@ -93,7 +95,7 @@ async function startAnimation() {
     {
       stagger: 0.01,
       duration: 0.1,
-      textShadow: "0 0 20px rgba(255, 255, 255, 0.3)",
+      textShadow: width.value >= 640 ? "0 0 20px rgba(255, 255, 255, 0.3)" : "none",
       onStart: function () {
         gsap.set("#animated-subtitle", { opacity: 1 });
         st.play(st.sounds["loading-1"]);
@@ -112,7 +114,7 @@ async function startAnimation() {
     {
       stagger: 0.004,
       duration: 0.1,
-      textShadow: "0 0 20px rgba(255, 255, 255, 0.3)",
+      textShadow: width.value >= 640 ? "0 0 20px rgba(255, 255, 255, 0.3)" : "none",
       onStart: function () {
         st.play(st.sounds["loading-1"]);
         gsap.set("#animated-description", { opacity: 1 });
@@ -161,21 +163,23 @@ onBeforeUnmount(function () {
 <template>
   <div
     id="maintitle-container"
-    class="relative h-screen w-screen grid grid-cols-[40%_60%]"
+    class="relative h-screen w-screen grid grid-cols-1 md:grid-cols-[40%_60%]"
   >
     <!-- Slot para componentes SVG animados (como Body) -->
-    <slot name="animated-body" />
+    <slot name="animated-body" class="absolute inset-0 md:static" />
 
-    <div class="relative flex flex-col items-start justify-center mr-12">
+    <div
+      class="relative flex flex-col items-center md:items-start justify-center mr-0 md:mr-12"
+    >
       <h1
         id="animated-title"
-        class="text-ghost-100 font-mono font-light text-4xl opacity-0"
+        class="text-ghost-100 font-mono font-light text-3xl md:text-4xl opacity-0"
       >
         {{ $t(props.titleKey) }}
       </h1>
       <h2
         id="animated-subtitle"
-        class="font-display font-normal text-ghost-200 text-xl my-4 text-left opacity-0"
+        class="font-display font-normal text-ghost-200 text-lg sm:text-xl my-4 text-left opacity-0"
       >
         {{ $t(props.subtitleKey) }}
         <div
@@ -185,15 +189,15 @@ onBeforeUnmount(function () {
       </h2>
       <p
         id="animated-description"
-        class="font-display font-light text-ghost-100 text-lg text-left break-normal leading-tight opacity-0"
-        :style="{ width: props.descriptionWidth }"
+        class="font-display font-light text-ghost-100 text-sm sm:text-base md:text-lg text-center md:text-left leading-tight opacity-0"
+        :style="{ width: width >= 640 ? props.descriptionWidth : '100dvw' }"
       >
         {{ $t(props.descriptionKey) }}
       </p>
     </div>
 
     <div
-      class="absolute h-full w-full flex items-center justify-center object-contain mask-fade"
+      class="absolute h-full w-full flex items-center justify-center object-contain mask-fade -z-10"
     >
       <img
         id="rotating-circle"

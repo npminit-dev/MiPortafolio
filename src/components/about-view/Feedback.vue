@@ -56,7 +56,7 @@ async function startDrawingSounds() {
   await sleep(140);
   st.play(st.sounds["streak-2"]);
   await sleep(140);
-  st.play(st.sounds["streak-1"]);
+  st.play(st.sounds["streak-2"]);
   await sleep(140);
 }
 

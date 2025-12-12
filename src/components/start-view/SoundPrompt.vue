@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 import { SplitText } from "gsap/SplitText";
 import { useSoundStore } from "../../stores/useSoundStore";
 import { useTranslation } from "i18next-vue";
+import { useWindowSize } from "@vueuse/core";
 
 const emit = defineEmits<{
   accept: [];
@@ -11,6 +12,7 @@ const emit = defineEmits<{
 
 const st = useSoundStore();
 const { i18next } = useTranslation();
+const { width } = useWindowSize();
 
 const title1Ref = ref<HTMLElement | null>(null);
 const title2Ref = ref<HTMLElement | null>(null);
@@ -19,7 +21,9 @@ let splitTitle1: any = null;
 let splitTitle2: any = null;
 
 onMounted(async () => {
+  gsap.set("#sound-prompt-container", { autoAlpha: 0 });
   await document.fonts.ready;
+  gsap.set("#sound-prompt-container", { autoAlpha: 1 });
   animateTextIn();
 
   i18next.on("languageChanged", async () => {
@@ -32,14 +36,14 @@ function animateTextIn() {
   nextTick(() => {
     if (!title1Ref.value || !title2Ref.value) return;
 
-    splitTitle1 = new SplitText(title1Ref.value, { type: "chars" });
-    splitTitle2 = new SplitText(title2Ref.value, { type: "chars" });
+    splitTitle1 = new SplitText(title1Ref.value, { type: "chars, words" });
+    splitTitle2 = new SplitText(title2Ref.value, { type: "chars, words" });
 
     const tl = gsap.timeline();
 
     tl.from(splitTitle1.chars, {
       opacity: 0,
-      y: 10,
+      y: width.value >= 768 ? 10 : width.value > 640 ? 8 : 6,
       stagger: 0.01,
       duration: 0.6,
       ease: "power2.out",
@@ -50,7 +54,7 @@ function animateTextIn() {
       splitTitle2.chars,
       {
         opacity: 0,
-        y: 10,
+        y: width.value >= 768 ? 10 : width.value > 640 ? 8 : 6,
         stagger: 0.01,
         duration: 0.6,
         ease: "power2.out",
@@ -58,15 +62,19 @@ function animateTextIn() {
       "-=0.6"
     );
 
-    tl.to(
-      [title1Ref.value, title2Ref.value],
-      {
-        textShadow: "0 0 20px rgba(255, 255, 255, 0.3)",
-        duration: 0.5,
-        ease: "power2.inOut",
-      },
-      "-=0.3"
-    );
+    const mm = gsap.matchMedia([title1Ref.value, title2Ref.value]);
+
+    mm.add("(min-width: 640px)", () => {
+      tl.to(
+        [title1Ref.value, title2Ref.value],
+        {
+          textShadow: "0 0 20px rgba(255, 255, 255, 0.3)",
+          duration: 0.5,
+          ease: "power2.inOut",
+        },
+        "-=0.3"
+      );
+    });
   });
 }
 
@@ -96,7 +104,7 @@ function handleAccept() {
     splitTitle2.chars,
     {
       opacity: 0,
-      y: -10,
+      y: width.value >= 768 ? -10 : width.value > 640 ? -8 : -6,
       stagger: 0.01,
       duration: 0.3,
       ease: "back.in(1.7)",
@@ -108,7 +116,7 @@ function handleAccept() {
     splitTitle1.chars,
     {
       opacity: 0,
-      y: -10,
+      y: width.value >= 768 ? -10 : width.value > 640 ? -8 : -6,
       stagger: 0.01,
       duration: 0.3,
       ease: "back.in(1.7)",
@@ -123,13 +131,20 @@ function handleAccept() {
 
 <template>
   <div
-    class="w-full h-full flex flex-col items-center justify-center gap-4 cursor-pointer"
+    id="sound-prompt-container"
+    class="w-full h-full flex flex-col items-center justify-center gap-2 sm:gap-3 md:gap-4 cursor-pointer"
     @click="handleAccept"
   >
-    <h1 ref="title1Ref" class="text-ghost-100 font-display text-3xl font-light">
+    <h1
+      ref="title1Ref"
+      class="text-ghost-100 font-display text-xl sm:text-2xl md:text-3xl font-light text-center leading-tight"
+    >
       {{ $t("THIS WEBSITE HAS SOUND EFFECTS") }}
     </h1>
-    <h2 ref="title2Ref" class="text-ghost-100 font-display text-3xl font-light">
+    <h2
+      ref="title2Ref"
+      class="text-ghost-100 font-display text-xl sm:text-2xl md:text-3xl font-light text-center leading-tight"
+    >
       {{ $t("CLICK ANYWHERE TO ACCEPT") }}
     </h2>
   </div>

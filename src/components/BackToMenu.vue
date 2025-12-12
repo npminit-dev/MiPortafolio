@@ -19,7 +19,9 @@ const { beforeBack, inverted = false, simple = false } = defineProps<Props>();
 let timeline: gsap.core.Timeline;
 
 const getColorClass = () =>
-  !inverted ? "text-ghost-300 hover:text-ghost-100" : "text-void-600 hover:text-void-950";
+  !inverted
+    ? "text-ghost-300 hover:text-ghost-100"
+    : "text-void-600 hover:text-void-950 font-semibold";
 
 function startAnimations() {
   const container = document.getElementById("back-menu-container");

@@ -154,7 +154,7 @@ onBeforeUnmount(() => {
         v-for="{ text, href } in menuItems"
         @click="sectionChange(href)"
         @mouseenter="hoverItem(text)"
-        class="nav-item relative flex items-center justify-center cursor-pointer"
+        class="nav-item relative flex items-center justify-center cursor-pointer my-[2px] sm:my-0"
       >
         <span
           :key="selected || 'null'"
@@ -168,7 +168,7 @@ onBeforeUnmount(() => {
           ]"
         />
         <a
-          class="nav-item-text font-display font-light text-xl text-white duration-100"
+          class="nav-item-text font-display font-light text-2xl sm:text-xl text-white duration-100"
           :class="{ 'shadowed-text': text === selected }"
         >
           {{ $t(text) }}

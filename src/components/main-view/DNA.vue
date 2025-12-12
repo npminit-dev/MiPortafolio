@@ -27,8 +27,12 @@ $dots-color: var(--color-neon-cyan-700);
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: .1;
+  opacity: 0.1;
   transform: scale(1.2);
+
+  @media screen and (max-width: 768px) {
+    transform: scale(1) rotateZ(90deg);
+  }
 }
 
 #dna div {

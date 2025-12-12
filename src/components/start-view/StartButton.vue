@@ -184,31 +184,31 @@ watch(isHovered, (newValue) => {
   <div
     ref="containerRef"
     id="container"
-    class="w-[500px] h-[500px] flex items-center justify-center"
+    class="size-[500px] flex items-center justify-center overflow-visible"
   >
     <img
       id="dashed"
       src="/image/dashed-circle.png"
-      class="absolute h-[500px] w-[500px] object-cover opacity-40"
+      class="absolute min-h-[500px] min-w-[500px] max-w-[500px] max-h-[500px] opacity-40"
     />
 
     <div
       @click="handleStart"
       @mouseenter="isHovered = true"
       @mouseleave="isHovered = false"
-      class="absolute h-[400px] w-[400px] rounded-full flex items-center justify-center cursor-pointer"
+      class="absolute size-[400px] rounded-full flex items-center justify-center cursor-pointer"
     >
       <div
         ref="innerRef"
         id="inner"
-        class="absolute h-[400px] w-[400px] border-2 border-ghost-300 rounded-full opacity-40 flex items-center justify-center pointer-events-none"
+        class="absolute size-[400px] border-2 border-ghost-300 rounded-full opacity-40 flex items-center justify-center pointer-events-none"
       />
     </div>
 
     <div
       ref="outerRef"
       id="outer"
-      class="absolute h-[900px] w-[900px] border-[1px] border-ghost-300 rounded-full opacity-30 pointer-events-none"
+      class="absolute size-[700px] sm:size-[800px] md:size-[900px] border-[1px] border-ghost-300 rounded-full opacity-30 pointer-events-none"
     />
 
     <h1

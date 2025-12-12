@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { nextTick, onMounted, onUnmounted, useTemplateRef } from "vue";
+import { nextTick, onMounted, onUnmounted, ref, useTemplateRef } from "vue";
 import gsap from "gsap";
 import { useWindowSize } from "@vueuse/core";
 import EducationData from "./EducationData.vue";
@@ -10,12 +10,15 @@ import EducationDivider from "./EducationDivider.vue";
 import { useTranslation } from "i18next-vue";
 import { useSoundStore } from "../../stores/useSoundStore";
 import Description from "../Description.vue";
+import CircuitSVGX from "../backgrounds/CircuitSVGX.vue";
 
 const { width } = useWindowSize();
 const subtitleWrapper = useTemplateRef<HTMLElement | null>("subtitleWrapper");
 const subtitleRef = useTemplateRef<InstanceType<typeof SubTitle> | null>("subtitleRef");
 const { i18next } = useTranslation();
+const horScrollRef = ref<gsap.core.Tween | null>(null);
 const st = useSoundStore();
+
 let splits: SplitText[] = [];
 
 let animations: Array<gsap.core.Tween | gsap.core.Timeline> = [];
@@ -56,6 +59,9 @@ function startAnimations() {
       },
     }
   );
+
+  horScrollRef.value = horScroll;
+
   animations.push(horScroll);
 
   // ScrollTrigger para el SubTitle
@@ -177,8 +183,6 @@ function startAnimations() {
           start: "top bottom",
           end: "bottom top",
           toggleActions: "play reverse play reverse",
-          onEnter: () => console.log("entered"),
-          onLeave: () => console.log("leaved"),
         },
       }
     );
@@ -293,6 +297,12 @@ onUnmounted(() => {
         id="education-inner-container"
         class="flex items-center justify-evenly flex-nowrap h-3/4 left-0 px-32"
       >
+        <CircuitSVGX
+          v-if="horScrollRef !== null"
+          :width="1200"
+          :container-animation="horScrollRef"
+          class="absolute left-1/2 top-1/2 -translate-1/2 origin-center"
+        />
         <div
           class="relative h-40 w-40 p-2 flex items-center justify-betwen"
           id="flip-target"

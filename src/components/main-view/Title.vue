@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
 import { gsap } from "gsap";
-import { useSoundStore } from '../../stores/useSoundStore';
+import { useSoundStore } from "../../stores/useSoundStore";
+import { useWindowSize } from "@vueuse/core";
 
-const st = useSoundStore()
+const st = useSoundStore();
+const { width } = useWindowSize();
 
 function animateEnter() {
   const tl = gsap.timeline({ defaults: { ease: "power4.out" }, delay: 0.5 });
@@ -28,9 +30,9 @@ function animateEnter() {
     opacity: 1,
     scrambleText: { text: "JORGE", chars: "upperCase", speed: 3 },
     ease: "linear",
-    textShadow: '0 0 20px rgba(255, 255, 255, 0.3)',
+    textShadow: width.value >= 640 ? "0 0 20px rgba(255, 255, 255, 0.3)" : "none",
     onStart: () => {
-      st.play(st.sounds['transition-2'])
+      st.play(st.sounds["transition-2"]);
     },
   });
   tl.to(
@@ -39,7 +41,7 @@ function animateEnter() {
       duration: 1.2,
       opacity: 1,
       scrambleText: { text: "BALSAMO", chars: "upperCase", speed: 3 },
-      textShadow: '0 0 20px rgba(255, 255, 255, 0.3)',
+      textShadow: width.value >= 640 ? "0 0 20px rgba(255, 255, 255, 0.3)" : "none",
       ease: "linear",
     },
     "<" // al mismo tiempo
@@ -62,7 +64,7 @@ function animateEnter() {
       x: 0,
       opacity: 1,
       duration: 1.2,
-      textShadow: '0 0 20px rgba(255, 255, 255, 0.3)'
+      textShadow: width.value >= 640 ? "0 0 20px rgba(255, 255, 255, 0.3)" : "none",
     },
     "0.7"
   );
@@ -73,7 +75,7 @@ function animateEnter() {
       x: 0,
       opacity: 1,
       duration: 1.2,
-      textShadow: '0 0 20px rgba(255, 255, 255, 0.3)'
+      textShadow: width.value >= 640 ? "0 0 20px rgba(255, 255, 255, 0.3)" : "none",
     },
     "0.7"
   );
@@ -85,7 +87,7 @@ function animateEnter() {
       duration: 2,
       opacity: 1,
       scrambleText: { text: "SOFTWARE DEVELOPER", chars: "upperCase", speed: 4 },
-      textShadow: '0 0 20px rgba(255, 255, 255, 0.3)',
+      textShadow: width.value >= 640 ? "0 0 20px rgba(255, 255, 255, 0.3)" : "none",
     },
     "1.2"
   );

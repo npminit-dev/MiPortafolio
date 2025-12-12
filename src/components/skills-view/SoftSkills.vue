@@ -35,7 +35,11 @@ const startAnimations = () => {
         end: "center center",
         scrub: true,
         onUpdate: ({ progress }) => {
-          st.crossfadeBackgrounds(Math.round(progress * 100));
+          st.crossfadeBackgrounds(
+            "background-2",
+            "background-4",
+            Math.round(progress * 100)
+          );
         },
       },
     }

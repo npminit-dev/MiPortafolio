@@ -9,10 +9,14 @@ import ScrollSmoother from "gsap/dist/ScrollSmoother";
 gsap.registerPlugin(ScrollSmoother);
 
 onMounted(() => {
-  ScrollSmoother.create({
+  const mm = gsap.matchMedia();
+
+  const sm = ScrollSmoother.create({
     speed: 0.75,
     effects: true,
     smooth: 2,
+    ignoreMobileResize: true,
+    normalizeScroll: true,
   });
 });
 </script>
