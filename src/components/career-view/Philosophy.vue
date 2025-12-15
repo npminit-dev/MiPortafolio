@@ -6,8 +6,7 @@ import SubTitle from "../SubTitle.vue";
 import { useTranslation } from "i18next-vue";
 import { useSoundStore } from "../../stores/useSoundStore";
 import Description from "../Description.vue";
-
-gsap.registerPlugin(ScrollTrigger);
+import { useWindowSize } from "@vueuse/core";
 
 const generateStarData = (count: number) => {
   return Array.from({ length: count }, () => ({
@@ -17,15 +16,6 @@ const generateStarData = (count: number) => {
   }));
 };
 
-const layer1Stars = ref(generateStarData(36));
-const layer2Stars = ref(generateStarData(36));
-const layer3Stars = ref(generateStarData(36));
-const layer4Stars = ref(generateStarData(36));
-const layer5Stars = ref(generateStarData(36));
-const layer6Stars = ref(generateStarData(36));
-const layer7Stars = ref(generateStarData(36));
-const layer8Stars = ref(generateStarData(36));
-
 const text1 = ref(false);
 const text2 = ref(false);
 const text3 = ref(false);
@@ -33,6 +23,18 @@ const text4 = ref(false);
 
 const { i18next } = useTranslation();
 const st = useSoundStore();
+const { width } = useWindowSize();
+
+const starsPerLayer = width.value >= 768 ? 36 : 25;
+
+const layer1Stars = ref(generateStarData(starsPerLayer));
+const layer2Stars = ref(generateStarData(starsPerLayer));
+const layer3Stars = ref(generateStarData(starsPerLayer));
+const layer4Stars = ref(generateStarData(starsPerLayer));
+const layer5Stars = ref(generateStarData(starsPerLayer));
+const layer6Stars = ref(generateStarData(starsPerLayer));
+const layer7Stars = ref(generateStarData(starsPerLayer));
+const layer8Stars = ref(generateStarData(starsPerLayer));
 
 const VISIBILITY_THRESHOLD = -250;
 const INVISIBILITY_THRESHOLD = 350;
@@ -100,7 +102,7 @@ const startAnimations = () => {
   scrollTriggerInstance = ScrollTrigger.create({
     trigger: container,
     start: "bottom bottom",
-    end: "+=650%",
+    end: width.value >= 768 ? "+=650%" : width.value >= 640 ? "+=550%" : "+=400%",
     pin: true,
     scrub: 1,
     anticipatePin: 1,
@@ -158,6 +160,7 @@ onMounted(async () => {
 });
 
 onBeforeUnmount(() => {
+  st.clearFXs();
   killAnimations();
 });
 </script>
@@ -179,7 +182,8 @@ onBeforeUnmount(() => {
     >
       <!-- Capas de estrellas -->
       <div
-        class="star-layer absolute h-screen w-screen grid grid-rows-8 grid-cols-8"
+        class="star-layer absolute h-screen w-screen grid"
+        :class="width >= 768 ? 'grid-rows-6 grid-cols-6' : 'grid-rows-5 grid-cols-5'"
         style="transform: translateZ(0px)"
       >
         <div
@@ -196,7 +200,8 @@ onBeforeUnmount(() => {
       </div>
 
       <div
-        class="star-layer absolute h-screen w-screen grid grid-rows-6 grid-cols-6"
+        class="star-layer absolute h-screen w-screen grid"
+        :class="width >= 768 ? 'grid-rows-6 grid-cols-6' : 'grid-rows-5 grid-cols-5'"
         style="transform: translateZ(-300px)"
       >
         <div
@@ -213,7 +218,8 @@ onBeforeUnmount(() => {
       </div>
 
       <div
-        class="star-layer absolute h-screen w-screen grid grid-rows-6 grid-cols-6"
+        class="star-layer absolute h-screen w-screen grid"
+        :class="width >= 768 ? 'grid-rows-6 grid-cols-6' : 'grid-rows-5 grid-cols-5'"
         style="transform: translateZ(-600px)"
       >
         <div
@@ -230,7 +236,8 @@ onBeforeUnmount(() => {
       </div>
 
       <div
-        class="star-layer absolute h-screen w-screen grid grid-rows-6 grid-cols-6"
+        class="star-layer absolute h-screen w-screen grid"
+        :class="width >= 768 ? 'grid-rows-6 grid-cols-6' : 'grid-rows-5 grid-cols-5'"
         style="transform: translateZ(-900px)"
       >
         <div
@@ -247,7 +254,8 @@ onBeforeUnmount(() => {
       </div>
 
       <div
-        class="star-layer absolute h-screen w-screen grid grid-rows-6 grid-cols-6"
+        class="star-layer absolute h-screen w-screen grid"
+        :class="width >= 768 ? 'grid-rows-6 grid-cols-6' : 'grid-rows-5 grid-cols-5'"
         style="transform: translateZ(-1200px)"
       >
         <div
@@ -264,7 +272,8 @@ onBeforeUnmount(() => {
       </div>
 
       <div
-        class="star-layer absolute h-screen w-screen grid grid-rows-6 grid-cols-6"
+        class="star-layer absolute h-screen w-screen grid"
+        :class="width >= 768 ? 'grid-rows-6 grid-cols-6' : 'grid-rows-5 grid-cols-5'"
         style="transform: translateZ(-1500px)"
       >
         <div
@@ -281,7 +290,8 @@ onBeforeUnmount(() => {
       </div>
 
       <div
-        class="star-layer absolute h-screen w-screen grid grid-rows-6 grid-cols-6"
+        class="star-layer absolute h-screen w-screen grid"
+        :class="width >= 768 ? 'grid-rows-6 grid-cols-6' : 'grid-rows-5 grid-cols-5'"
         style="transform: translateZ(-1800px)"
       >
         <div
@@ -298,7 +308,8 @@ onBeforeUnmount(() => {
       </div>
 
       <div
-        class="star-layer absolute h-screen w-screen grid grid-rows-6 grid-cols-6"
+        class="star-layer absolute h-screen w-screen grid"
+        :class="width >= 768 ? 'grid-rows-6 grid-cols-6' : 'grid-rows-5 grid-cols-5'"
         style="transform: translateZ(-2100px)"
       >
         <div
@@ -317,7 +328,7 @@ onBeforeUnmount(() => {
       <!-- Textos parallax -->
       <p
         id="text-1"
-        class="absolute text-center text-xl font-display text-ghost-100 w-[500px] leading-tight"
+        class="absolute text-center text-base sm:text-lg md:text-xl font-display text-ghost-100 w-[300px] sm:w-[450px] md:w-[500px] leading-tight"
         style="transform: translateZ(-250px); opacity: 0"
       >
         {{
@@ -329,7 +340,7 @@ onBeforeUnmount(() => {
 
       <p
         id="text-2"
-        class="absolute text-center text-xl font-display text-ghost-100 w-[500px] leading-tight"
+        class="absolute text-center text-base sm:text-lg md:text-xl font-display text-ghost-100 w-[300px] sm:w-[450px] md:w-[500px] leading-tight"
         style="transform: translateZ(-866.67px); opacity: 0"
       >
         {{
@@ -341,7 +352,7 @@ onBeforeUnmount(() => {
 
       <p
         id="text-3"
-        class="absolute text-center text-xl font-display text-ghost-100 w-[500px] leading-tight"
+        class="absolute text-center text-base sm:text-lg md:text-xl font-display text-ghost-100 w-[300px] sm:w-[450px] md:w-[500px] leading-tight"
         style="transform: translateZ(-1483.33px); opacity: 0"
       >
         {{
@@ -353,7 +364,7 @@ onBeforeUnmount(() => {
 
       <p
         id="text-4"
-        class="absolute text-center text-xl font-display text-ghost-100 w-[500px] leading-tight"
+        class="absolute text-center text-base sm:text-lg md:text-xl font-display text-ghost-100 w-[300px] sm:w-[450px] md:w-[500px] leading-tight"
         style="transform: translateZ(-2100px); opacity: 0"
       >
         {{

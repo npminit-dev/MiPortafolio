@@ -31,6 +31,7 @@ onMounted(async () => {
 
 onBeforeUnmount(() => {
   stopAllDrawingSounds();
+  st.clearFXs();
   killAnimations();
 });
 

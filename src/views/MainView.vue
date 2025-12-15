@@ -5,20 +5,20 @@ import GradientDark from "../components/backgrounds/GradientDark.vue";
 import ProgressBar from "../components/main-view/ProgressBar.vue";
 import Menu from "../components/main-view/Menu.vue";
 
-const loadingFinished = ref<boolean | null>(true);
+const loadingFinished = ref<boolean | null>(null);
 
 onMounted(() => {
-  // const alreadyLoaded = sessionStorage.getItem("loadingFinished");
-  // if (alreadyLoaded === "true") {
-  //   loadingFinished.value = true;
-  // } else {
-  //   loadingFinished.value = false;
-  // }
+  const alreadyLoaded = sessionStorage.getItem("loadingFinished");
+  if (alreadyLoaded === "true") {
+    loadingFinished.value = true;
+  } else {
+    loadingFinished.value = false;
+  }
 });
 
 provide("endLoading", () => {
-  // loadingFinished.value = true;
-  // sessionStorage.setItem("loadingFinished", "true");
+  loadingFinished.value = true;
+  sessionStorage.setItem("loadingFinished", "true");
 });
 </script>
 

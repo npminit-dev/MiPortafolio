@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { Draggable } from "gsap/Draggable";
 import { Flip } from "gsap/all";
+import { useWindowSize } from "@vueuse/core";
 
 type Props = {
   company: string;
@@ -18,21 +19,24 @@ type Props = {
 const props = defineProps<Props>();
 const uniqueID = uuidv4();
 const { i18next } = useTranslation();
+const { width } = useWindowSize();
 
 let timeline: gsap.core.Timeline | null = null;
 let scrollTriggerInstance: ScrollTrigger | null = null;
 let splitInstances: SplitText[] = [];
 let flipTimeline: gsap.core.Timeline | null = null;
 let flipScrollTrigger: ScrollTrigger | null = null;
+const mm = gsap.matchMedia();
 
 onMounted(async () => {
   await document.fonts.ready;
-
-  await nextTick();
   startAnimation();
-  setTimeout(() => {
-    startFlipAnimation();
-  }, 100);
+
+  mm.add("(min-width: 768px)", () => {
+    setTimeout(() => {
+      startFlipAnimation();
+    }, 100);
+  });
 
   i18next.on("languageChanged", async () => {
     killAnimations();
@@ -46,11 +50,73 @@ onBeforeUnmount(() => {
 });
 
 function startAnimation() {
-  // Estado inicial de todos los elementos SVG
-  gsap.set(`#experience-svg-circle-${uniqueID}`, { drawSVG: "50% 50%" });
-  gsap.set(`#experience-svg-line1-${uniqueID}`, { drawSVG: "0% 0%" });
-  gsap.set(`#experience-svg-line2-${uniqueID}`, { drawSVG: "50% 50%" });
-  gsap.set(`#experience-image-${uniqueID}`, { rotateY: 270 });
+  // Crear timeline con todas las animaciones secuenciales
+  timeline = gsap.timeline({
+    paused: true,
+  });
+
+  mm.add("(min-width: 768px)", () => {
+    // Estado inicial de todos los elementos SVG
+    gsap.set(`#experience-svg-circle-${uniqueID}`, { drawSVG: "50% 50%" });
+    gsap.set(`#experience-svg-line1-${uniqueID}`, { drawSVG: "0% 0%" });
+    gsap.set(`#experience-svg-line2-${uniqueID}`, { drawSVG: "50% 50%" });
+    gsap.set(`#experience-image-${uniqueID}`, { rotateY: 270 });
+
+    // 1. Animar el círculo
+    timeline!.to(`#experience-svg-circle-${uniqueID}`, {
+      drawSVG: "0% 100%",
+      ease: "power3.in",
+      duration: 0.6,
+    });
+
+    /* 2. Animar imagen */
+    timeline!.fromTo(
+      `#experience-image-${uniqueID}`,
+      { rotateY: 270 },
+      {
+        transformStyle: "preserve-3d",
+        rotateY: 0,
+        duration: 1.3,
+        ease: "power4.out",
+      },
+      0
+    );
+
+    // 3. Animar línea 1
+    timeline!.to(
+      `#experience-svg-line1-${uniqueID}`,
+      {
+        drawSVG: "0% 100%",
+        ease: "linear",
+        duration: 0.1,
+      },
+      0.6
+    );
+
+    // 4. Animar línea 2
+    timeline!.to(
+      `#experience-svg-line2-${uniqueID}`,
+      {
+        drawSVG: "0% 100%",
+        ease: "power4.out",
+        duration: 0.2,
+      },
+      0.7
+    );
+
+    Draggable.create(`#experience-image-${uniqueID}`, {
+      type: "rotation",
+      minDuration: 1,
+      maxDuration: 2,
+      inertia: true,
+      snap: () => {
+        return 0;
+      },
+      onDragStart: () => {
+        console.log("dragged");
+      },
+    });
+  });
 
   // SplitText para los elementos de texto
   const h4Split = new SplitText(`#experience-company-${uniqueID}`, {
@@ -65,53 +131,6 @@ function startAnimation() {
 
   // Estado inicial: todos invisibles
   gsap.set([h4Split.chars, h5Split.chars, pSplit.lines], { opacity: 0 });
-
-  // Crear timeline con todas las animaciones secuenciales
-  timeline = gsap.timeline({
-    paused: true,
-  });
-
-  // 1. Animar el círculo
-  timeline.to(`#experience-svg-circle-${uniqueID}`, {
-    drawSVG: "0% 100%",
-    ease: "power3.in",
-    duration: 0.6,
-  });
-
-  /* 2. Animar imagen */
-  timeline.fromTo(
-    `#experience-image-${uniqueID}`,
-    { rotateY: 270 },
-    {
-      transformStyle: "preserve-3d",
-      rotateY: 0,
-      duration: 1.3,
-      ease: "power4.out",
-    },
-    0
-  );
-
-  // 3. Animar línea 1
-  timeline.to(
-    `#experience-svg-line1-${uniqueID}`,
-    {
-      drawSVG: "0% 100%",
-      ease: "linear",
-      duration: 0.1,
-    },
-    0.6
-  );
-
-  // 4. Animar línea 2
-  timeline.to(
-    `#experience-svg-line2-${uniqueID}`,
-    {
-      drawSVG: "0% 100%",
-      ease: "power4.out",
-      duration: 0.2,
-    },
-    0.7
-  );
 
   // 5. Animar textos (todos empiezan al mismo tiempo)
   const textStartTime = timeline.duration() - 0.6;
@@ -158,20 +177,12 @@ function startAnimation() {
     start: "top 90%",
     end: "bottom 20%",
     animation: timeline,
-    toggleActions: props.hasFlip ? "play none none none" : "play reverse play reverse",
-  });
-
-  Draggable.create(`#experience-image-${uniqueID}`, {
-    type: "rotation",
-    minDuration: 1,
-    maxDuration: 2,
-    inertia: true,
-    snap: () => {
-      return 0;
-    },
-    onDragStart: () => {
-      console.log("dragged");
-    },
+    toggleActions:
+      width.value >= 768
+        ? props.hasFlip
+          ? "play none none none"
+          : "play reverse play reverse"
+        : "play none none none",
   });
 }
 
@@ -233,6 +244,8 @@ function startFlipAnimation() {
 }
 
 function killAnimations() {
+  mm.kill();
+
   if (timeline) {
     timeline.kill();
     timeline = null;
@@ -265,8 +278,11 @@ function transitionElementVerify(): boolean {
 </script>
 
 <template>
-  <article :id="`experience-${uniqueID}`" class="grid grid-cols-[40%_60%] my-14 gap-4">
-    <div class="relative self-center justify-self-end">
+  <article
+    :id="`experience-${uniqueID}`"
+    class="grid grid-cols-1 md:grid-cols-[40%_60%] my-14 gap-4"
+  >
+    <div class="hidden md:inline-block relative self-center justify-self-end">
       <div
         :id="`experience-image-${uniqueID}`"
         class="absolute left-2 inset-y-2 flex items-center justify-center bg-ghost-200 border-ghost-300 border-[1px] rounded-full h-36 w-36 overflow-hidden z-50"
@@ -324,16 +340,19 @@ function transitionElementVerify(): boolean {
     <div class="font-display text-start max-w-[600px]">
       <h4
         :id="`experience-company-${uniqueID}`"
-        class="font-medium text-2xl text-ghost-100"
+        class="font-medium text-2xl text-center md:text-left text-ghost-100"
       >
         {{ $t(props.company) }}
       </h4>
-      <h5 :id="`experience-role-${uniqueID}`" class="font-normal text-xl text-ghost-200">
+      <h5
+        :id="`experience-role-${uniqueID}`"
+        class="font-normal text-xl text-center md:text-left text-ghost-200"
+      >
         {{ $t(props.role) }}
       </h5>
       <p
         :id="`experience-description-${uniqueID}`"
-        class="w-[550px] leading-tight font-light text-lg text-ghost-100 my-2"
+        class="w-[100dvw] px-2 sm:px-3 md:px-0 md:w-[550px] text-center md:text-left leading-tight font-light text-sm sm:text-base md:text-lg text-ghost-100 my-2"
       >
         {{ $t(props.description) }}
       </p>

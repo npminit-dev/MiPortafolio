@@ -156,6 +156,7 @@ onMounted(async function () {
 });
 
 onBeforeUnmount(function () {
+  st.clearFXs();
   killAnimation();
 });
 </script>
@@ -163,7 +164,7 @@ onBeforeUnmount(function () {
 <template>
   <div
     id="maintitle-container"
-    class="relative h-screen w-screen grid grid-cols-1 md:grid-cols-[40%_60%]"
+    class="relative h-[100dvh] w-[100dvw] grid grid-cols-1 md:grid-cols-[40%_60%]"
   >
     <!-- Slot para componentes SVG animados (como Body) -->
     <slot name="animated-body" class="absolute inset-0 md:static" />
@@ -190,7 +191,7 @@ onBeforeUnmount(function () {
       <p
         id="animated-description"
         class="font-display font-light text-ghost-100 text-sm sm:text-base md:text-lg text-center md:text-left leading-tight opacity-0"
-        :style="{ width: width >= 640 ? props.descriptionWidth : '100dvw' }"
+        :style="{ width: width >= 640 ? props.descriptionWidth : '300px' }"
       >
         {{ $t(props.descriptionKey) }}
       </p>

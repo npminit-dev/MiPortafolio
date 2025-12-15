@@ -140,6 +140,7 @@ onMounted(async () => {
 });
 
 onBeforeUnmount(() => {
+  st.clearFXs();
   killAnimations();
 });
 </script>

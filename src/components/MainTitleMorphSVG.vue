@@ -74,6 +74,7 @@ onMounted(() => {
 <template>
   <div
     class="self-center md:justify-self-end justify-self-center opacity-40 md:opacity-100"
+    style=""
   >
     <svg
       ref="svgContainer"

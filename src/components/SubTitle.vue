@@ -44,7 +44,7 @@ function startAnimation() {
         trigger: `#subtitle-box-${id}`,
         start: "top bottom",
         end: "bottom top",
-        toggleActions: simple ? 'play none none none' : "play reset play reset",
+        toggleActions: simple ? "play none none none" : "play reset play reset",
       },
       opacity: 1,
       duration: 1,
@@ -56,14 +56,18 @@ function killAnimation() {
   const animation = gsap.getById(`#subtitle-${id}`);
   if (animation) {
     animation.kill();
-    animation.scrollTrigger?.kill()
+    animation.scrollTrigger?.kill();
   }
 }
 </script>
 
 <template>
-  <h3 :id="`subtitle-box-${id}`" class="text-2xl font-body text-ghost-100">
-    [<span :id="`subtitle-${id}`" class="">{{ $t(text.toUpperCase()) }}</span>]
+  <h3
+    :id="`subtitle-box-${id}`"
+    class="md:text-2xl sm:text-xl text-base text-center font-body text-ghost-100"
+  >
+    [<span :id="`subtitle-${id}`" class="">{{ $t(text.toUpperCase()) }}</span
+    >]
   </h3>
 </template>
 

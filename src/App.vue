@@ -3,18 +3,19 @@ import { onMounted } from "vue";
 import LangSwitcher from "./components/LangSwitcher.vue";
 import PageTransition from "./components/PageTransition.vue";
 import SoundSwitcher from "./components/SoundSwitcher.vue";
-import gsap from "gsap";
 import ScrollSmoother from "gsap/dist/ScrollSmoother";
+import { useWindowSize } from "@vueuse/core";
+import gsap from "gsap";
+
+const { width } = useWindowSize();
 
 gsap.registerPlugin(ScrollSmoother);
 
 onMounted(() => {
-  const mm = gsap.matchMedia();
-
-  const sm = ScrollSmoother.create({
-    speed: 0.75,
+  ScrollSmoother.create({
+    speed: width.value >= 640 ? 0.75 : 0,
     effects: true,
-    smooth: 2,
+    smooth: width.value >= 640 ? 2 : 0.5,
     ignoreMobileResize: true,
     normalizeScroll: true,
   });

@@ -14,12 +14,14 @@ import Frameworks from "../components/skills-view/Frameworks.vue";
 import SoftSkills from "../components/skills-view/SoftSkills.vue";
 import GradientDark from "../components/backgrounds/GradientDark.vue";
 import { useSoundStore } from "../stores/useSoundStore";
+import { useWindowSize } from "@vueuse/core";
 
 const st = useSoundStore();
+const { width } = useWindowSize();
 </script>
 
 <template>
-  <main class="relative w-screen overflow-clip min-h-screen flex flex-col items-center">
+  <main class="relative w-[100dvw] overflow-clip min-h-screen flex flex-col items-center">
     <GradientDark class="fixed h-screen w-screen left-0 top-0 -z-30" />
 
     <MainTitle
@@ -29,6 +31,7 @@ const st = useSoundStore();
     >
       <template #animated-body>
         <MainTitleMorphSVG
+          class="absolute md:static"
           :paths="{
             start: 'M 169 0 L 169 0 L 169 800 L 169 800 Z',
             middle:
@@ -40,7 +43,7 @@ const st = useSoundStore();
       </template>
     </MainTitle>
 
-    <div class="flex flex-col items-center justify-center mb-32">
+    <div class="flex flex-col items-center justify-center mb-4 sm:mb-8 md:mb-32">
       <SubTitle text="LAYER: PRIMARY PROTOCOLS" class="mb-4" />
       <Description
         content="This layer outlines the essential protocols that form the base of D-095’s architecture, supporting all higher-level operations."
@@ -48,10 +51,9 @@ const st = useSoundStore();
       />
     </div>
 
-    <div class="w-full flex flex-col gap-16 my-8 items-center justify-center">
+    <div class="w-full flex flex-col gap-8 md:gap-16 my-8 items-center justify-center">
       <SortingArray />
       <Description
-        class="col-span-2 self-center justify-self-center w-[450px] opacity-90"
         content="Core data structures used for storage, retrieval, indexing, and hierarchical organization of information."
         :duration="1.5"
         :with-sounds="false"
@@ -59,12 +61,14 @@ const st = useSoundStore();
       />
     </div>
 
-    <div class="w-full flex items-center justify-center flex-nowrap gap-y-16 gap-x-32">
-      <Tree height="325" />
-      <Graph height="325" />
+    <div
+      class="w-full flex items-center justify-center flex-nowrap gap-y-2 sm:gap-y-8 md:gap-y-16 gap-x-8 sm:gap-x-16 md:gap-x-32 px-2 md:px-0"
+    >
+      <Tree :height="width >= 768 ? 325 : 250" />
+      <Graph :height="width >= 768 ? 325 : 250" />
     </div>
 
-    <div class="w-full flex mt-10 mb-6 items-center justify-center">
+    <div class="w-full flex mb-4 mt-6 md:mt-10 md:mb-6 items-center justify-center">
       <Description
         class="col-span-2 self-center justify-self-center w-[450px] opacity-90"
         content="Essential OOP constructs, relational database fundamentals, SQL interaction methods, and core models for structured information."
@@ -74,14 +78,16 @@ const st = useSoundStore();
       />
     </div>
 
-    <div class="w-full flex items-center justify-center flex-nowrap gap-y-16 gap-x-32">
-      <Intersection height="325" />
-      <POO :height="450" />
+    <div
+      class="w-full flex items-center justify-center flex-nowrap gap-y-2 sm:gap-y-8 md:gap-y-16 gap-x-8 sm:gap-x-16 md:gap-x-32 px-2 md:px-0 mb-2 md:mb-0"
+    >
+      <Intersection :height="width >= 768 ? 325 : 250" />
+      <POO :height="width >= 768 ? 450 : 250" />
     </div>
 
     <Langs />
 
-    <div class="flex flex-col items-center justify-center my-16">
+    <div class="flex flex-col items-center justify-center mb-4 sm:mb-8 md:mb-16">
       <SubTitle class="mb-4" text="LAYER: IMPLEMENTATION ARRAY" />
       <Description
         content="This layer compiles the operational frameworks and auxiliary tools governing D-095’s applied execution across multiple environments."
@@ -99,7 +105,7 @@ const st = useSoundStore();
 
     <SoftSkills />
 
-    <div class="w-full my-16 mt-40 flex items-center justify-center">
+    <div class="w-full mb-4 mt-40 flex items-center justify-center">
       <BackToMenu :before-back="() => st.resetBackgrounds()" />
     </div>
   </main>

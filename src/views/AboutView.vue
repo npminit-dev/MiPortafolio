@@ -51,6 +51,7 @@ onMounted(async () => {
 
 onBeforeUnmount(() => {
   st.resetBackgrounds("background-2", 500);
+  st.clearFXs();
   killAnimations();
 });
 

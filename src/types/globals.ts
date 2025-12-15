@@ -8,6 +8,7 @@ export type MenuItem = {
 export type FrameworkItem = {
   toolName: string
   iconName: string,
+  color?: string
 }
 
 export type Frameworks = {

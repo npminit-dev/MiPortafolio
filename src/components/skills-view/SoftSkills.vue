@@ -6,12 +6,14 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { useSoundStore } from "../../stores/useSoundStore";
 import { useTranslation } from "i18next-vue";
+import { useWindowSize } from "@vueuse/core";
 
 const st = useSoundStore();
 const { i18next } = useTranslation();
+const { width } = useWindowSize();
 
 // Altura adicional para scrollear durante el pin (ajustable)
-const SCROLL_HEIGHT = "400%";
+const SCROLL_HEIGHT = width.value >= 768 ? "400%" : "550%";
 
 let mainTimeline: gsap.core.Timeline | null = null;
 let backgroundTween: gsap.core.Tween | null = null;
@@ -53,7 +55,7 @@ const startAnimations = () => {
 
   // Hacer las palabras invisibles inicialmente (no los párrafos padres)
   splits.forEach((split) => {
-    gsap.set(split.words, { autoAlpha: 0 });
+    gsap.set(width.value >= 768 ? split.words : split.lines, { autoAlpha: 0 });
   });
 
   // Crear la timeline principal
@@ -79,7 +81,7 @@ const startAnimations = () => {
     const isLastParagraph = index === splits.length - 1;
 
     // Revelar palabras
-    mainTimeline!.to(split.words, {
+    mainTimeline!.to(width.value >= 768 ? split.words : split.lines, {
       autoAlpha: 1,
       duration: revealDuration,
       stagger: {
@@ -94,7 +96,7 @@ const startAnimations = () => {
 
     // Ocultar palabras (excepto el último párrafo)
     if (!isLastParagraph) {
-      mainTimeline!.to(split.words, {
+      mainTimeline!.to(width.value >= 768 ? split.words : split.lines, {
         autoAlpha: 0,
         duration: hideDuration,
         stagger: {
@@ -146,6 +148,7 @@ onMounted(async () => {
 });
 
 onBeforeUnmount(() => {
+  st.clearFXs();
   killAnimations();
 });
 </script>

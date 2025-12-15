@@ -1,130 +1,176 @@
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount, useTemplateRef } from 'vue'
-import gsap from 'gsap'
-import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { onMounted, onBeforeUnmount, useTemplateRef } from "vue";
+import gsap from "gsap";
+import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useWindowSize } from "@vueuse/core";
 
-gsap.registerPlugin(DrawSVGPlugin, ScrollTrigger)
+gsap.registerPlugin(DrawSVGPlugin, ScrollTrigger);
 
 interface Props {
-  height?: number | string
+  height?: number | string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  height: 553
-})
+  height: 553,
+});
 
-const svgRef = useTemplateRef('svgRef')
-let scrollTriggerInstance: ScrollTrigger | null = null
+const svgRef = useTemplateRef("svgRef");
+const { width } = useWindowSize();
+let scrollTriggerInstance: ScrollTrigger | null = null;
 
 function startAnimation() {
   if (svgRef.value) {
     // Seleccionar elementos
-    const circuloA = svgRef.value.querySelector('#circulo-a')
-    const circuloB = svgRef.value.querySelector('#circulo-b')
-    const letraA = svgRef.value.querySelector('#letra-a')
-    const letraB = svgRef.value.querySelector('#letra-b')
-    const textoInterseccion = svgRef.value.querySelector('#texto-interseccion')
+    const circuloA = svgRef.value.querySelector("#circulo-a");
+    const circuloB = svgRef.value.querySelector("#circulo-b");
+    const letraA = svgRef.value.querySelector("#letra-a");
+    const letraB = svgRef.value.querySelector("#letra-b");
+    const textoInterseccion = svgRef.value.querySelector("#texto-interseccion");
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: svgRef.value,
-        start: 'center bottom',
-        end: 'center top',
-        toggleActions: 'play reverse play reverse',
+        start: "center bottom",
+        end: "center top",
+        toggleActions:
+          width.value >= 768 ? "play reverse play reverse" : "play none none none",
         onRefresh: (self) => {
-          scrollTriggerInstance = self
-        }
-      }
-    })
+          scrollTriggerInstance = self;
+        },
+      },
+    });
 
-    scrollTriggerInstance = tl.scrollTrigger as ScrollTrigger
+    scrollTriggerInstance = tl.scrollTrigger as ScrollTrigger;
 
     // Dibujar círculos simultáneamente convergiendo hacia el centro
-    tl.fromTo(circuloA, {
-      drawSVG: '-50% -50%'
-    }, {
-      drawSVG: '0% -100%',
-      duration: 1,
-      ease: 'power4.out',
-    })
+    tl.fromTo(
+      circuloA,
+      {
+        drawSVG: "-50% -50%",
+      },
+      {
+        drawSVG: "0% -100%",
+        duration: 1,
+        ease: "power4.out",
+      }
+    );
 
-    tl.fromTo(circuloB, {
-      drawSVG: '0% 0%'
-    }, {
-      drawSVG: '50% -50%',
-      duration: 1,
-      ease: 'power4.out'
-    }, '-=1')
+    tl.fromTo(
+      circuloB,
+      {
+        drawSVG: "0% 0%",
+      },
+      {
+        drawSVG: "50% -50%",
+        duration: 1,
+        ease: "power4.out",
+      },
+      "-=1"
+    )
       // Aparecer letras A y B simultáneamente
-      .fromTo([letraA, letraB], {
-        autoAlpha: 0
-      }, {
-        autoAlpha: 1,
-        duration: 0.65,
-        ease: 'power2.out'
-      }, '-=0.6')
-      .fromTo(textoInterseccion, {
-        autoAlpha: 0
-      }, {
-        autoAlpha: 1,
-        duration: 0.65,
-        ease: 'power2.out'
-      }, '-=.3')
+      .fromTo(
+        [letraA, letraB],
+        {
+          autoAlpha: 0,
+        },
+        {
+          autoAlpha: 1,
+          duration: 0.65,
+          ease: "power2.out",
+        },
+        "-=0.6"
+      )
+      .fromTo(
+        textoInterseccion,
+        {
+          autoAlpha: 0,
+        },
+        {
+          autoAlpha: 1,
+          duration: 0.65,
+          ease: "power2.out",
+        },
+        "-=.3"
+      );
   }
 }
 
 function killAnimations() {
   if (scrollTriggerInstance) {
-    scrollTriggerInstance.kill()
+    scrollTriggerInstance.kill();
   }
-  ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+  ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
 }
 
 onMounted(() => {
-  startAnimation()
-})
+  startAnimation();
+});
 
 onBeforeUnmount(() => {
-  killAnimations()
-})
+  killAnimations();
+});
 </script>
 
 <template>
-  <svg ref="svgRef" :height="props.height" viewBox="0 0 664 553" fill="none" style="width: auto; display: block;"
-    preserveAspectRatio="xMidYMid meet">
-    
+  <svg
+    ref="svgRef"
+    :height="props.height"
+    viewBox="0 0 664 553"
+    fill="none"
+    style="width: auto; display: block"
+    preserveAspectRatio="xMidYMid meet"
+  >
     <!-- Círculos -->
-    <circle id="circulo-a" cx="218.732" cy="276.5" r="212" stroke="var(--color-ghost-300)" stroke-width="1"
-      vector-effect="non-scaling-stroke" />
-    <circle id="circulo-b" cx="445.034" cy="276.5" r="212" stroke="var(--color-ghost-300)" stroke-width="1"
-      vector-effect="non-scaling-stroke" />
-    
+    <circle
+      id="circulo-a"
+      cx="218.732"
+      cy="276.5"
+      r="212"
+      stroke="var(--color-ghost-300)"
+      stroke-width="1"
+      vector-effect="non-scaling-stroke"
+    />
+    <circle
+      id="circulo-b"
+      cx="445.034"
+      cy="276.5"
+      r="212"
+      stroke="var(--color-ghost-300)"
+      stroke-width="1"
+      vector-effect="non-scaling-stroke"
+    />
+
     <!-- Letra A -->
     <g id="letra-a">
       <path
         d="M104.133 293C103.781 293.032 103.573 292.84 103.509 292.424C103.445 292.008 103.413 291.72 103.413 291.56L107.013 290.504L118.053 259.4H121.701L132.837 290.504L136.437 291.56C136.437 291.72 136.405 292.008 136.341 292.424C136.277 292.808 136.069 293 135.717 293C135.717 293 135.605 293 135.381 293C135.189 293 134.757 292.984 134.085 292.952C133.413 292.92 132.373 292.872 130.965 292.808C129.237 292.872 127.973 292.92 127.173 292.952C126.373 292.984 125.845 293 125.589 293C125.365 293 125.253 293 125.253 293C124.901 293 124.693 292.808 124.629 292.424C124.565 292.04 124.533 291.752 124.533 291.56L128.853 290.504L125.829 282.008L112.629 282.68L109.989 290.504L114.549 291.56C114.549 291.752 114.517 292.056 114.453 292.472C114.389 292.856 114.181 293.032 113.829 293L108.501 292.808L104.133 293ZM113.589 279.896H125.109L119.253 263.288L113.589 279.896Z"
-        fill="var(--color-ghost-300)" />
+        fill="var(--color-ghost-300)"
+      />
     </g>
-    
+
     <!-- Letra B -->
     <g id="letra-b">
       <path
         d="M530.12 293C529.768 293 529.56 292.808 529.496 292.424C529.432 292.008 529.4 291.72 529.4 291.56L533.432 290.504V261.896L529.4 260.84C529.4 260.68 529.432 260.408 529.496 260.024C529.56 259.608 529.768 259.4 530.12 259.4C530.12 259.4 530.216 259.4 530.408 259.4C530.6 259.4 531.048 259.416 531.752 259.448C532.456 259.48 533.56 259.528 535.064 259.592L541.304 259.4C543.576 259.4 545.464 259.8 546.968 260.6C548.472 261.4 549.608 262.424 550.376 263.672C551.144 264.92 551.528 266.232 551.528 267.608C551.528 269.112 551.08 270.552 550.184 271.928C549.32 273.272 548.024 274.312 546.296 275.048C548.952 275.688 550.936 276.84 552.248 278.504C553.56 280.136 554.216 281.896 554.216 283.784C554.216 285.448 553.816 286.984 553.016 288.392C552.248 289.8 551.112 290.92 549.608 291.752C548.136 292.584 546.36 293 544.28 293C544.248 293 544.152 293 543.992 293C543.832 293 543.48 292.984 542.936 292.952C542.424 292.92 541.576 292.888 540.392 292.856C539.208 292.792 537.56 292.712 535.448 292.616L530.12 293ZM537.272 274.568H541.208C542.712 274.408 543.96 273.992 544.952 273.32C545.944 272.648 546.68 271.816 547.16 270.824C547.672 269.832 547.928 268.808 547.928 267.752C547.928 266.632 547.656 265.576 547.112 264.584C546.568 263.592 545.752 262.792 544.664 262.184C543.608 261.544 542.28 261.224 540.68 261.224L536.84 261.896L537.272 274.568ZM543.032 290.888C544.728 290.888 546.12 290.552 547.208 289.88C548.296 289.176 549.096 288.296 549.608 287.24C550.12 286.152 550.376 285.016 550.376 283.832C550.376 282.584 550.072 281.384 549.464 280.232C548.888 279.08 547.992 278.136 546.776 277.4C545.56 276.664 544.024 276.296 542.168 276.296L537.272 276.872L536.84 290.216C538.12 290.44 539.32 290.616 540.44 290.744C541.592 290.84 542.456 290.888 543.032 290.888Z"
-        fill="var(--color-ghost-300)" />
+        fill="var(--color-ghost-300)"
+      />
     </g>
-    
+
     <!-- Texto intersección A ∩ B -->
     <g id="texto-interseccion">
       <path
         d="M273.908 293C273.556 293.032 273.348 292.84 273.284 292.424C273.22 292.008 273.188 291.72 273.188 291.56L276.788 290.504L287.828 259.4H291.476L302.612 290.504L306.212 291.56C306.212 291.72 306.18 292.008 306.116 292.424C306.052 292.808 305.844 293 305.492 293C305.492 293 305.38 293 305.156 293C304.964 293 304.532 292.984 303.86 292.952C303.188 292.92 302.148 292.872 300.74 292.808C299.012 292.872 297.748 292.92 296.948 292.952C296.148 292.984 295.62 293 295.364 293C295.14 293 295.028 293 295.028 293C294.676 293 294.468 292.808 294.404 292.424C294.34 292.04 294.308 291.752 294.308 291.56L298.628 290.504L295.604 282.008L282.404 282.68L279.764 290.504L284.324 291.56C284.324 291.752 284.292 292.056 284.228 292.472C284.164 292.856 283.956 293.032 283.604 293L278.276 292.808L273.908 293ZM283.364 279.896H294.884L289.028 263.288L283.364 279.896Z"
-        fill="var(--color-ghost-300)" />
+        fill="var(--color-ghost-300)"
+      />
       <path
         d="M322.648 293V282.728C322.648 275.56 325.88 271.752 331.992 271.752C338.136 271.752 341.336 275.56 341.336 282.728V293H339.032V282.632C339.032 276.808 336.728 273.928 331.992 273.928C327.256 273.928 324.952 276.776 324.952 282.632V293H322.648Z"
-        fill="var(--color-ghost-300)" />
+        fill="var(--color-ghost-300)"
+      />
       <path
         d="M361.308 293C360.956 293 360.748 292.808 360.684 292.424C360.62 292.008 360.588 291.72 360.588 291.56L364.62 290.504V261.896L360.588 260.84C360.588 260.68 360.62 260.408 360.684 260.024C360.748 259.608 360.956 259.4 361.308 259.4C361.308 259.4 361.404 259.4 361.596 259.4C361.788 259.4 362.236 259.416 362.94 259.448C363.644 259.48 364.748 259.528 366.252 259.592L372.492 259.4C374.764 259.4 376.652 259.8 378.156 260.6C379.66 261.4 380.796 262.424 381.564 263.672C382.332 264.92 382.716 266.232 382.716 267.608C382.716 269.112 382.268 270.552 381.372 271.928C380.508 273.272 379.212 274.312 377.484 275.048C380.14 275.688 382.124 276.84 383.436 278.504C384.748 280.136 385.404 281.896 385.404 283.784C385.404 285.448 385.004 286.984 384.204 288.392C383.436 289.8 382.3 290.92 380.796 291.752C379.324 292.584 377.548 293 375.468 293C375.436 293 375.34 293 375.18 293C375.02 293 374.668 292.984 374.124 292.952C373.612 292.92 372.764 292.888 371.58 292.856C370.396 292.792 368.748 292.712 366.636 292.616L361.308 293ZM368.46 274.568H372.396C373.9 274.408 375.148 273.992 376.14 273.32C377.132 272.648 377.868 271.816 378.348 270.824C378.86 269.832 379.116 268.808 379.116 267.752C379.116 266.632 378.844 265.576 378.3 264.584C377.756 263.592 376.94 262.792 375.852 262.184C374.796 261.544 373.468 261.224 371.868 261.224L368.028 261.896L368.46 274.568ZM374.22 290.888C375.916 290.888 377.308 290.552 378.396 289.88C379.484 289.176 380.284 288.296 380.796 287.24C381.308 286.152 381.564 285.016 381.564 283.832C381.564 282.584 381.26 281.384 380.652 280.232C380.076 279.08 379.18 278.136 377.964 277.4C376.748 276.664 375.212 276.296 373.356 276.296L368.46 276.872L368.028 290.216C369.308 290.44 370.508 290.616 371.628 290.744C372.78 290.84 373.644 290.888 374.22 290.888Z"
-        fill="var(--color-ghost-300)" />
+        fill="var(--color-ghost-300)"
+      />
     </g>
   </svg>
 </template>

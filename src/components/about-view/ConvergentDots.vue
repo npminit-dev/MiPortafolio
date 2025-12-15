@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useWindowSize } from "@vueuse/core";
 import gsap from "gsap";
 import { onMounted, ref } from "vue";
 
@@ -14,11 +15,12 @@ type Temp = {
 };
 
 const { height = 1180 } = defineProps<Props>();
+const { width } = useWindowSize();
 let tl: gsap.core.Timeline | null = null;
 const stars = ref<Array<Temp>>([]);
 
 // Cantidad total de estrellas
-const TOTAL_STARS = 300;
+const TOTAL_STARS = width.value >= 768 ? 300 : 100;
 
 onMounted(() => {
   const temp = [];
@@ -83,7 +85,10 @@ onMounted(() => {
         start: 0,
         end: 1,
       },
-      filter: "drop-shadow(0px 0px 10px #ffffff) drop-shadow(0px 0px 10px #ffffff)",
+      filter:
+        width.value >= 768
+          ? "drop-shadow(0px 0px 10px #ffffff) drop-shadow(0px 0px 10px #ffffff)"
+          : "none",
       stagger: -0.1,
       duration: 6,
     },
@@ -102,7 +107,10 @@ onMounted(() => {
           start: 0,
           end: 1,
         },
-        filter: "drop-shadow(0px 0px 10px #ffffff) drop-shadow(0px 0px 10px #ffffff)",
+        filter:
+          width.value >= 768
+            ? "drop-shadow(0px 0px 10px #ffffff) drop-shadow(0px 0px 10px #ffffff)"
+            : "none",
         stagger: 0.1,
         duration: 6,
       },
@@ -121,7 +129,10 @@ onMounted(() => {
           start: 0,
           end: 1,
         },
-        filter: "drop-shadow(0px 0px 10px #ffffff) drop-shadow(0px 0px 10px #ffffff)",
+        filter:
+          width.value >= 768
+            ? "drop-shadow(0px 0px 10px #ffffff) drop-shadow(0px 0px 10px #ffffff)"
+            : "none",
         stagger: 0.1,
         duration: 6,
       },

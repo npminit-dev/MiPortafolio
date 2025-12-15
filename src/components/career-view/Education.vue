@@ -16,11 +16,10 @@ const { width } = useWindowSize();
 const subtitleWrapper = useTemplateRef<HTMLElement | null>("subtitleWrapper");
 const subtitleRef = useTemplateRef<InstanceType<typeof SubTitle> | null>("subtitleRef");
 const { i18next } = useTranslation();
-const horScrollRef = ref<gsap.core.Tween | null>(null);
+const horScrollRef = ref<gsap.core.Timeline | null>(null);
 const st = useSoundStore();
 
 let splits: SplitText[] = [];
-
 let animations: Array<gsap.core.Tween | gsap.core.Timeline> = [];
 
 function calcXPercent() {
@@ -32,37 +31,35 @@ function getWidthAndMargin() {
 }
 
 function startAnimations() {
-  // Establecer todos los logos como invisibles inicialmente
   gsap.set(".education-logo-container", { autoAlpha: 0 });
 
-  // ScrollTrigger para la animación horizontal
-  const horScroll = gsap.fromTo(
-    "#education-inner-container",
-    {
-      xPercent: 0,
-    },
-    {
-      xPercent: `${-calcXPercent()}`,
-      ease: "none",
-      scrollTrigger: {
-        trigger: "#education-outer-container",
-        start: "bottom bottom",
-        end: `+=${getWidthAndMargin() / 1.3}px`,
-        pin: true,
-        pinSpacing: "margin",
-        toggleActions: "play none none none",
-        scrub: 1,
-        anticipatePin: 1,
-        onEnter: () => {
-          gsap.set(".education-logo-container", { autoAlpha: 1 });
-        },
+  // Crear Timeline para la animación horizontal
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#education-outer-container",
+      start: "bottom bottom",
+      end: `+=${getWidthAndMargin() / 1.3}px`,
+      pin: true,
+      pinSpacing: "margin",
+      toggleActions: "play none none none",
+      scrub: 1,
+      anticipatePin: 1,
+      onEnter: () => {
+        gsap.set(".education-logo-container", { autoAlpha: 1 });
       },
-    }
+    },
+  });
+
+  // Animación horizontal
+  tl.fromTo(
+    "#education-inner-container",
+    { xPercent: 0 },
+    { xPercent: -calcXPercent(), ease: "none" },
+    0
   );
 
-  horScrollRef.value = horScroll;
-
-  animations.push(horScroll);
+  horScrollRef.value = tl;
+  animations.push(tl);
 
   // ScrollTrigger para el SubTitle
   const subtitleAnim = gsap.to(subtitleWrapper.value, {
@@ -94,7 +91,7 @@ function startAnimations() {
         ease: "power4.out",
         scrollTrigger: {
           trigger: svg as SVGElement,
-          containerAnimation: horScroll,
+          containerAnimation: tl,
           start: "top bottom",
           end: "bottom top",
           toggleActions: "play reset play reset",
@@ -113,14 +110,12 @@ function startAnimations() {
     const h5 = element.querySelector("h5");
     const p = element.querySelector("p");
 
-    // SplitText para títulos (chars) y párrafo (lines)
     const splitH4 = new SplitText(h4, { type: "chars" });
     const splitH5 = new SplitText(h5, { type: "chars" });
     const splitP = new SplitText(p, { type: "lines" });
 
     splits.push(splitH4, splitH5, splitP);
 
-    // Animar títulos con desplazamiento
     const animTitles = gsap.fromTo(
       [splitH4.chars],
       {
@@ -133,7 +128,7 @@ function startAnimations() {
         ease: "power2.out",
         scrollTrigger: {
           trigger: h4,
-          containerAnimation: horScroll,
+          containerAnimation: tl,
           start: "top bottom",
           end: "bottom top",
           toggleActions: "play reverse play reverse",
@@ -143,7 +138,6 @@ function startAnimations() {
 
     animations.push(animTitles);
 
-    // animar subtitulos
     const animSubtitles = gsap.fromTo(
       [splitH5.chars],
       {
@@ -156,7 +150,7 @@ function startAnimations() {
         ease: "power2.out",
         scrollTrigger: {
           trigger: h5,
-          containerAnimation: horScroll,
+          containerAnimation: tl,
           start: "top bottom",
           end: "bottom top",
           toggleActions: "play reverse play reverse",
@@ -166,7 +160,6 @@ function startAnimations() {
 
     animations.push(animSubtitles);
 
-    // Animar párrafo línea por línea solo con opacidad
     const animP = gsap.fromTo(
       splitP.lines,
       {
@@ -179,10 +172,11 @@ function startAnimations() {
         ease: "power2.out",
         scrollTrigger: {
           trigger: p,
-          containerAnimation: horScroll,
+          containerAnimation: tl,
           start: "top bottom",
           end: "bottom top",
-          toggleActions: "play reverse play reverse",
+          toggleActions:
+            width.value >= 768 ? "play reverse play reverse" : "play none none none",
         },
       }
     );
@@ -209,7 +203,7 @@ function startAnimations() {
         ease: "power3.out",
         scrollTrigger: {
           trigger: element,
-          containerAnimation: horScroll,
+          containerAnimation: tl,
           pinnedContainer: "#education-outer-container",
           start: "top bottom",
           end: "bottom top",
@@ -219,8 +213,8 @@ function startAnimations() {
           if (!i) {
             st.play(st.sounds["hit-1"]);
             const stars = document.getElementsByClassName("hit-star");
-            let tl = gsap.timeline();
-            tl.fromTo(
+            let starsTl = gsap.timeline();
+            starsTl.fromTo(
               stars,
               {
                 autoAlpha: 1,
@@ -233,7 +227,7 @@ function startAnimations() {
                 duration: () => 2 + Math.random() * 6,
               }
             );
-            animations.push(tl);
+            animations.push(starsTl);
           }
         },
       }
@@ -251,6 +245,7 @@ function killAnimations() {
   });
   splits.forEach((split) => split.revert());
   animations = [];
+  splits = [];
 }
 
 onMounted(async () => {
@@ -273,13 +268,13 @@ onUnmounted(() => {
 <template>
   <div
     ref="subtitleWrapper"
-    class="w-full flex flex-col items-center justify-center mb-6 mt-32"
+    class="w-full flex flex-col items-center justify-center mb-2 sm:mb-4 md:mb-6 mt-8 sm:mt-16 md:mt-32"
   >
     <SubTitle
       ref="subtitleRef"
       simple
       text="MODULE: COGNITIVE DEVELOPMENT"
-      class="text-nowrap mb-4"
+      class="text-nowrap mb-2 md:mb-4"
     />
     <Description
       content="This module details the accumulated learning processes refining D-095’s mental architecture, creating the base structure that informs its interpretive capacity."
@@ -291,11 +286,11 @@ onUnmounted(() => {
   <div>
     <section
       id="education-outer-container"
-      class="relative h-[80vh] w-screen flex items-center"
+      class="relative h-[80dvh] w-[100dvw] flex items-center"
     >
       <div
         id="education-inner-container"
-        class="flex items-center justify-evenly flex-nowrap h-3/4 left-0 px-32"
+        class="flex items-center justify-evenly flex-nowrap h-[75dvh] left-0 px-0 md:px-32"
       >
         <CircuitSVGX
           v-if="horScrollRef !== null"
@@ -318,7 +313,7 @@ onUnmounted(() => {
           </div>
           <div
             id="hit-stars-container"
-            class="absolute inset-0 flex items-center justify-center -z-10"
+            class="hidden md:flex absolute inset-0 md:items-center md:justify-center -z-10"
           >
             <div
               class="absolute hit-star h-[1px] w-[1px] bg-ghost-100 rounded-full opacity-0"

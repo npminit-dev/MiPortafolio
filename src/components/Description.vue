@@ -89,6 +89,7 @@ onMounted(async () => {
 });
 
 onBeforeUnmount(() => {
+  st.clearFXs();
   killAnimations();
 });
 </script>
@@ -96,7 +97,7 @@ onBeforeUnmount(() => {
 <template>
   <p
     ref="p"
-    class="max-w-[650px] text-center text-lg font-display text-ghost-200 leading-tight break-normal"
+    class="max-w-[650px] px-1 sm:px-0 text-center text-sm sm:text-base md:text-lg font-display text-ghost-200 leading-tight break-normal"
   >
     {{ $t(content) }}
   </p>

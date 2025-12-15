@@ -99,6 +99,7 @@ onMounted(async () => {
 });
 
 onBeforeUnmount(() => {
+  st.clearFXs();
   killAnimations();
 });
 
@@ -126,7 +127,10 @@ function handleBack() {
       class="size-7 back-left"
       :class="getColorClass()"
     />
-    <span class="back-text font-display font-medium text-xl" :class="getColorClass()">
+    <span
+      class="back-text font-display font-medium text-lg md:text-xl"
+      :class="getColorClass()"
+    >
       {{ $t("Back to Central Node") }}
     </span>
     <v-icon

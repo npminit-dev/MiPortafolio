@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import GradientDark from "../components/backgrounds/GradientDark.vue";
-import SoundPrompt from "../components/start-view/SoundPrompt.vue";
-import StartButton from "../components/start-view/StartButton.vue";
+import GradientDark from "@components/backgrounds/GradientDark.vue";
+import SoundPrompt from "@components/start-view/SoundPrompt.vue";
+import StartButton from "@components/start-view/StartButton.vue";
 
 const showSoundPrompt = ref<boolean>(true);
 

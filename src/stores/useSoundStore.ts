@@ -26,7 +26,7 @@ const howlers: Howlers = {
   },
   "background-3": {
     howl: new Howl({ src: ['sound/background-3.mp3'], volume: 0, loop: true, html5: true }),
-    maxVolume: 0.6
+    maxVolume: 0.7
   },
   "background-4": {
     howl: new Howl({ src: ['sound/background-4.mp3'], volume: 0, loop: true, html5: true }),
@@ -238,6 +238,13 @@ export const useSoundStore = defineStore('soundStore', () => {
     targetBackground.value = null
   }
 
+  function clearFXs() {
+    Object.entries(sounds).forEach(([key, { howl }]) => {
+      if(!key.startsWith('transition') && !key.startsWith('background') && howl.playing())
+        howl.stop()
+    })
+  }
+
   watch(isSoundEnabled, () => {
     Object.values(sounds).forEach(sound => {
       if (!isSoundEnabled.value) {
@@ -261,6 +268,7 @@ export const useSoundStore = defineStore('soundStore', () => {
     resetBackgrounds,
     stopAllBackgrounds,
     stopAllLoadings,
+    clearFXs,
     play
   }
 })

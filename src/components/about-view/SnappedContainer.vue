@@ -24,6 +24,7 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
+  st.clearFXs();
   killAnimations();
 });
 

@@ -33,16 +33,16 @@ import CircuitSVG from "../components/backgrounds/CircuitSVG.vue";
       </template>
     </MainTitle>
 
-    <div class="flex flex-col items-center justify-center mb-16">
-      <SubTitle text="MODULE: EXPERIENCE RECORDS" class="mb-4" />
+    <div class="flex flex-col items-center justify-center mb-4 sm:mb-8 md:mb-16">
+      <SubTitle text="MODULE: EXPERIENCE RECORDS" class="mb-2 sm:mb-3 md:mb-4" />
       <Description
-        class="mb-16"
+        class="mb-8 md:mb-16"
         content="This module catalogs the formative experience logs detailing D-095’s activity, building the structural ground that influences its present profile."
         :duration="0.75"
       />
     </div>
 
-    <div class="relative w-full">
+    <div class="relative w-[100dvw]">
       <Experience
         company="- GrowForce -"
         role="Fullstack developer"
@@ -78,15 +78,15 @@ import CircuitSVG from "../components/backgrounds/CircuitSVG.vue";
           alt="Study image"
         />
       </Experience>
-      <CircuitSVG class="absolute top-0 right-0 rotate-y-180" />
-      <CircuitSVG class="absolute bottom-0 left-0" />
+      <CircuitSVG class="absolute top-0 right-0 rotate-y-180 -z-10" />
+      <CircuitSVG class="absolute bottom-0 left-0 -z-10" />
     </div>
 
     <Education />
 
     <Philosophy />
 
-    <div class="w-full my-16 flex items-center justify-center">
+    <div class="w-full mt-16 mb-4 flex items-center justify-center">
       <BackToMenu />
     </div>
   </main>

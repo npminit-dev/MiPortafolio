@@ -73,6 +73,10 @@ export const es = {
   "This layer compiles the operational frameworks and auxiliary tools governing D-095’s applied execution across multiple environments.": "Este nivel recopila los frameworks operativos y las herramientas auxiliares que regulan la ejecución aplicada de D-095 en múltiples entornos.",
   "This layer defines the behavioral parameters and adaptive patterns regulating D-095’s interpersonal and operational conduct.": "Este nivel establece los parámetros conductuales y los patrones adaptativos que regulan el comportamiento interpersonal y operativo de D-095.",
 
+  "TOOLING": "HERRAMIENTAS",
+  "Encryption": "Encriptación",
+  "AI tools": "Herramientas de IA",
+
   "[LOG: IDENTITY & CONTACT NODE — SUBJECT D-095]": "[LOG: NODO DE IDENTIDAD Y CONTACTO — SUJETO D-095]",
 
   "[ CONNECTION WITH D-095 ESTABLISHED ]": "[ CONEXIÓN CON D-095 ESTABLECIDA ]",
