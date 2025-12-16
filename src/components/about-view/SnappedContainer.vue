@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from "vue";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import AboutMe from "./AboutMe.vue";
 import Contact from "./Contact.vue";
 import Feedback from "./Feedback.vue";

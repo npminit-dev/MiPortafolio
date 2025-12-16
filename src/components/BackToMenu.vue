@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { handleError, nextTick, onBeforeUnmount, onMounted } from "vue";
+import { nextTick, onBeforeUnmount, onMounted } from "vue";
 import { usePageTransition } from "../composables/usePageTransition";
 import { useSoundStore } from "../stores/useSoundStore";
 import gsap from "gsap";
