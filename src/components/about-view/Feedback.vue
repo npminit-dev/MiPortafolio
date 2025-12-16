@@ -22,20 +22,22 @@ onMounted(async () => {
   await document.fonts.ready;
   gsap.set("#feedback-container", { autoAlpha: 1 });
   startAnimations();
-  i18next.on("languageChanged", async () => {
-    killAnimations();
-    st.clearFXs();
-    await nextTick();
-    await nextTick();
-    startAnimations();
-  });
+  i18next.on("languageChanged", handleLanguageChange);
 });
 
 onBeforeUnmount(() => {
   killAnimations();
   st.clearFXs();
-  i18next.off("languageChanged");
+  i18next.off("languageChanged", handleLanguageChange);
 });
+
+async function handleLanguageChange() {
+  killAnimations();
+  st.clearFXs();
+  await nextTick();
+  await nextTick();
+  startAnimations();
+}
 
 function startAnimations() {
   tl = gsap.timeline();

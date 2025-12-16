@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref, watchEffect } from "vue";
+import { onBeforeUnmount, onMounted, ref } from "vue";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import AboutMe from "./AboutMe.vue";
@@ -8,8 +8,6 @@ import Feedback from "./Feedback.vue";
 import SnapScrollProgress from "./SnapScrollProgress.vue";
 import { useSoundStore } from "../../stores/useSoundStore";
 import { v4 } from "uuid";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const st = useSoundStore();
 const showAboutMe = ref<boolean>(false);
@@ -110,7 +108,12 @@ function startAnimations() {
         st.play(st.sounds["transition-5"]);
       },
       onEnterBack: setLightLangAndSound,
-      onLeaveBack: revertLightLangAndSound,
+      onLeaveBack: () => {
+        revertLightLangAndSound();
+        showAboutMe.value = false;
+        showContact.value = false;
+        showFeedback.value = false;
+      },
       onUpdate: (self) => {
         const progress = self.progress;
         if (progress < 0.33) {

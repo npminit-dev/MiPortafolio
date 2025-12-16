@@ -80,19 +80,22 @@ function killAnimations() {
 onMounted(async () => {
   await document.fonts.ready;
   startAnimations();
-  i18next.on("languageChanged", async () => {
-    killAnimations();
-    st.clearFXs();
-    await nextTick();
-    await nextTick();
-    startAnimations();
-  });
+  i18next.on("languageChanged", handleLanguageChange);
 });
 
 onBeforeUnmount(() => {
+  i18next.off("languageChanged", handleLanguageChange);
   killAnimations();
   st.clearFXs();
 });
+
+async function handleLanguageChange() {
+  killAnimations();
+  st.clearFXs();
+  await nextTick();
+  await nextTick();
+  startAnimations();
+}
 </script>
 
 <template>

@@ -128,23 +128,25 @@ onMounted(async () => {
   await document.fonts.ready;
   gsap.set("#navitems-container", { autoAlpha: 1 });
   startAnimations();
-  i18next.on("languageChanged", async () => {
-    delay = 0.25;
-    prevSelected.value = null;
-    selected.value = null;
-    killAnimations();
-    st.clearFXs();
-    await nextTick();
-    await nextTick();
-    startAnimations();
-  });
+  i18next.on("languageChanged", handleLanguageChanged);
 });
 
 onBeforeUnmount(() => {
-  i18next.off("languageChanged");
+  i18next.off("languageChanged", handleLanguageChanged);
   st.clearFXs();
   killAnimations();
 });
+
+async function handleLanguageChanged() {
+  delay = 0.25;
+  prevSelected.value = null;
+  selected.value = null;
+  killAnimations();
+  st.clearFXs();
+  await nextTick();
+  await nextTick();
+  startAnimations();
+}
 </script>
 
 <template>

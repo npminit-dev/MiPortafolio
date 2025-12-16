@@ -73,20 +73,22 @@ const stopSpinner = () => {
 onMounted(async () => {
   await document.fonts.ready;
   startAnimations();
-  i18next.on("languageChanged", () => {
-    stopSounds();
-    killAnimations();
-    st.clearFXs();
-    startAnimations();
-  });
+  i18next.on("languageChanged", handleLanguageChange);
 });
 
 onBeforeUnmount(() => {
-  i18next.off("languageChanged");
+  i18next.off("languageChanged", handleLanguageChange);
   stopSounds();
   killAnimations();
   st.clearFXs();
 });
+
+async function handleLanguageChange() {
+  stopSounds();
+  killAnimations();
+  st.clearFXs();
+  startAnimations();
+}
 
 const startAnimations = () => {
   mainTl = gsap.timeline();

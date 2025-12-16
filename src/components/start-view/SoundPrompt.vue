@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, nextTick, onMounted } from "vue";
+import { ref, nextTick, onMounted, onBeforeUnmount } from "vue";
 import { gsap } from "gsap";
 import { SplitText } from "gsap/SplitText";
 import { useSoundStore } from "../../stores/useSoundStore";
@@ -25,12 +25,17 @@ onMounted(async () => {
   await document.fonts.ready;
   gsap.set("#sound-prompt-container", { autoAlpha: 1 });
   animateTextIn();
-
-  i18next.on("languageChanged", async () => {
-    await nextTick();
-    animateTextIn();
-  });
+  i18next.on("languageChanged", handleLanguageChange);
 });
+
+onBeforeUnmount(() => {
+  i18next.off("languageChanged", handleLanguageChange);
+});
+
+async function handleLanguageChange() {
+  await nextTick();
+  animateTextIn();
+}
 
 function animateTextIn() {
   nextTick(() => {

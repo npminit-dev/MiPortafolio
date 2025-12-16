@@ -42,20 +42,23 @@ onMounted(async () => {
   fadeBackgrounds();
   await document.fonts.ready;
   startAnimations();
-  i18next.on("languageChanged", async () => {
-    killAnimations();
-    st.clearFXs();
-    await nextTick();
-    startAnimations();
-  });
+  i18next.on("languageChanged", handleLanguageChanged);
 });
 
 onBeforeUnmount(() => {
-  i18next.off("changeLanguage");
+  i18next.off("changeLanguage", handleLanguageChanged);
   st.resetBackgrounds("background-2", 500);
   killAnimations();
   st.clearFXs();
 });
+
+async function handleLanguageChanged() {
+  killAnimations();
+  st.clearFXs();
+  await nextTick();
+  await nextTick();
+  startAnimations();
+}
 
 function startAnimations() {
   gsap.set("#connection-text", { opacity: 1 });

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import gsap from "gsap";
 import { useTranslation } from "i18next-vue";
-import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
+import { nextTick, onBeforeUnmount, onMounted } from "vue";
 import { SplitText } from "gsap/all";
 import { useSoundStore } from "../../stores/useSoundStore";
 
@@ -17,19 +17,21 @@ onMounted(async () => {
   gsap.set("#aboutme-container", { autoAlpha: 1 });
   startAnimations();
 
-  i18next.on("languageChanged", async () => {
-    killAnimations();
-    st.clearFXs();
-    await nextTick();
-    await nextTick();
-    startAnimations();
-  });
+  i18next.on("languageChanged", languageChangeHandler);
 });
 
 onBeforeUnmount(() => {
-  i18next.off("languageChanged");
+  i18next.off("languageChanged", languageChangeHandler);
   killAnimations();
 });
+
+async function languageChangeHandler() {
+  killAnimations();
+  st.clearFXs();
+  await nextTick();
+  await nextTick();
+  startAnimations();
+}
 
 function startAnimations() {
   tl = gsap.timeline();

@@ -2,11 +2,11 @@ import { defineStore } from 'pinia'
 import { reactive, ref, watch } from 'vue'
 import { Howl } from 'howler';
 
-type Sound = 'background-1' | 'background-2' | 'background-3' | 'background-4' | 'error-1' | 'error-2' | 'hit-1' | 'hover-1' | 'hover-2' | 'hover-3' | 'loading-1' |
+type Sound =  'background-2' | 'background-3' | 'background-4' | 'error-1' | 'error-2' | 'hit-1' | 'hover-2' | 'hover-3' | 'loading-1' |
   'loading-2' | 'loading-3' | 'loading-4' | 'loading-5' | 'select-1' | 'select-2' | 'select-3' | 'select-4' | 'select-5' | 'transition-1' | 'transition-2' | 'transition-3' | 'transition-4' | 'transition-5'
   | 'streak-1' | 'streak-2' | 'streak-3' | 'streak-4'
 
-type BackgroundSound = 'background-1' | 'background-2' | 'background-3' | 'background-4'
+type BackgroundSound =  'background-2' | 'background-3' | 'background-4'
 
 type HowlRecord = {
   howl: Howl,
@@ -16,17 +16,13 @@ type HowlRecord = {
 type Howlers = Record<Sound, HowlRecord>
 
 const howlers: Howlers = {
-  "background-1": {
-    howl: new Howl({ src: ['sound/background-1.mp3'], volume: 0, loop: true, html5: true }),
-    maxVolume: 0.4
-  },
   "background-2": {
     howl: new Howl({ src: ['sound/background-2.mp3'], volume: 0, loop: true, html5: true }),
     maxVolume: 0.4
   },
   "background-3": {
     howl: new Howl({ src: ['sound/background-3.mp3'], volume: 0, loop: true, html5: true }),
-    maxVolume: 0.7
+    maxVolume: 0.5
   },
   "background-4": {
     howl: new Howl({ src: ['sound/background-4.mp3'], volume: 0, loop: true, html5: true }),
@@ -43,10 +39,6 @@ const howlers: Howlers = {
   "hit-1": {
     howl: new Howl({ src: ['sound/hit-1.mp3'], volume: 0, }),
     maxVolume: .4
-  },
-  "hover-1": {
-    howl: new Howl({ src: ['sound/hover-1.mp3'], volume: 0, }),
-    maxVolume: 1
   },
   "hover-2": {
     howl: new Howl({ src: ['sound/hover-2.mp3'], volume: 0, }),

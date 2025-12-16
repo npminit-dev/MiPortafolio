@@ -251,18 +251,21 @@ function killAnimations() {
 onMounted(async () => {
   await document.fonts.ready;
   startAnimations();
-  i18next.on("languageChanged", async () => {
-    killAnimations();
-    await nextTick();
-    await nextTick();
-    await nextTick();
-    startAnimations();
-  });
+  i18next.on("languageChanged", handleLanguageChange);
 });
 
 onUnmounted(() => {
+  i18next.off("languageChanged", handleLanguageChange);
   killAnimations();
 });
+
+async function handleLanguageChange() {
+  killAnimations();
+  await nextTick();
+  await nextTick();
+  await nextTick();
+  startAnimations();
+}
 </script>
 
 <template>

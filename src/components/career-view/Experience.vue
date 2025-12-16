@@ -38,17 +38,19 @@ onMounted(async () => {
     }, 100);
   });
 
-  i18next.on("languageChanged", async () => {
-    killAnimations();
-    await nextTick();
-    startAnimation();
-  });
+  i18next.on("languageChanged", handleLanguageChange);
 });
 
 onBeforeUnmount(() => {
-  i18next.off("languageChanged");
+  i18next.off("languageChanged", handleLanguageChange);
   killAnimations();
 });
+
+async function handleLanguageChange() {
+  killAnimations();
+  await nextTick();
+  startAnimation();
+}
 
 function startAnimation() {
   // Crear timeline con todas las animaciones secuenciales

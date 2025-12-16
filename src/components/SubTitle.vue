@@ -16,18 +16,20 @@ const id = uuidv4();
 onMounted(async () => {
   startAnimation();
 
-  i18next.on("languageChanged", async () => {
-    killAnimation();
-    await nextTick();
-    await nextTick();
-    startAnimation();
-  });
+  i18next.on("languageChanged", handleLanguageChange);
 });
 
 onBeforeUnmount(() => {
-  i18next.off("languageChanged");
+  i18next.off("languageChanged", handleLanguageChange);
   killAnimation();
 });
+
+async function handleLanguageChange() {
+  killAnimation();
+  await nextTick();
+  await nextTick();
+  startAnimation();
+}
 
 function startAnimation() {
   gsap.fromTo(

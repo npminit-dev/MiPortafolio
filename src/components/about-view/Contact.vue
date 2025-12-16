@@ -13,18 +13,19 @@ let tl: gsap.core.Timeline | null = null;
 
 onMounted(() => {
   startAnimations();
-
-  i18next.on("languageChanged", async () => {
-    killAnimations();
-    await nextTick();
-    startAnimations();
-  });
+  i18next.on("languageChanged", languageChangeHandler);
 });
 
 onBeforeUnmount(() => {
-  i18next.off("languageChanged");
+  i18next.off("languageChanged", languageChangeHandler);
   killAnimations();
 });
+
+async function languageChangeHandler() {
+  killAnimations();
+  await nextTick();
+  startAnimations();
+}
 
 function startAnimations() {
   mm.add("(min-width: 768px)", () => {
