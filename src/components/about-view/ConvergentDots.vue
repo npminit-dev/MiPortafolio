@@ -158,8 +158,16 @@ onMounted(() => {
   <div
     id="convergent-dots-container"
     class="w-dvw relative flex items-center justify-center -mt-2 overflow-visible"
+    :style="{ height: `${height}px` }"
   >
-    <svg width="675" :height viewBox="0 0 675 1180" fill="none">
+    <svg
+      class="absolute"
+      width="675"
+      :height
+      viewBox="0 0 675 1180"
+      fill="none"
+      vector-effect="non-scaling-stroke"
+    >
       <path
         d="M321.71 4.14156C403.93 76.7261 519.038 270.717 321.71 466.001C124.381 661.286 331.987 797.949 460.456 841.869C560.019 880.704 676.284 1001.93 344.834 1176.13"
         stroke="transparent"

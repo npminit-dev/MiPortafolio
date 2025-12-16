@@ -77,11 +77,11 @@ export const es = {
   "Encryption": "Encriptación",
   "AI tools": "Herramientas de IA",
 
-  "[LOG: IDENTITY & CONTACT NODE — SUBJECT D-095]": "[LOG: NODO DE IDENTIDAD Y CONTACTO — SUJETO D-095]",
+  "[LOG: IDENTITY & CONTACT NODE — SUBJECT D-095]": "[LOG: NODO DE IDENTIDAD — SUJETO D-095]",
 
   "[ CONNECTION WITH D-095 ESTABLISHED ]": "[ CONEXIÓN CON D-095 ESTABLECIDA ]",
 
-  "This interface compiles the direct channels through which subject D-095 chooses to connect with the outside field. Beyond technical identifiers, each route reflects the subject’s intent to maintain clear communication, offer transparent collaboration and sustain meaningful professional exchange. The module highlights the human layer behind the system’s operational profile.": "Esta interfaz reúne los canales directos mediante los cuales el sujeto D-095 elige conectarse con el campo exterior. Más allá de los identificadores técnicos, cada ruta refleja la intención del sujeto de mantener una comunicación clara, ofrecer una colaboración transparente y sostener un intercambio profesional significativo. El módulo resalta la capa humana detrás del perfil operativo del sistema.",
+  "This module grants controlled access to the communication layer of subject D-095. Beyond this point, the system transitions from observable metrics to intentional interaction. Proceeding forward reveals direct contact channels and feedback loops where human intent becomes part of the signal.": "Este módulo concede acceso controlado a la capa de comunicación del sujeto D-095. Más allá de este punto, el sistema transiciona de métricas observables a interacción intencional. Avanzar revela canales de contacto directo y bucles de retroalimentación donde la intención humana pasa a formar parte de la señal.",
 
   "Hello! Thank you for visiting my website :)": "¡Hola! Gracias por visitar mi sitio web :)",
   "Let me tell you a little more about myself...": "Déjame contarte un poco más sobre mí...",

@@ -154,14 +154,16 @@ onMounted(async () => {
 
   i18next.on("languageChanged", async () => {
     killAnimations();
+    st.clearFXs();
     await nextTick();
     startAnimations();
   });
 });
 
 onBeforeUnmount(() => {
-  st.clearFXs();
+  i18next.off("languageChanged");
   killAnimations();
+  st.clearFXs();
 });
 </script>
 

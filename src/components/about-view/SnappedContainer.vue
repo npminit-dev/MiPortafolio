@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from "vue";
+import { onBeforeUnmount, onMounted, ref, watchEffect } from "vue";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import AboutMe from "./AboutMe.vue";
@@ -7,6 +7,7 @@ import Contact from "./Contact.vue";
 import Feedback from "./Feedback.vue";
 import SnapScrollProgress from "./SnapScrollProgress.vue";
 import { useSoundStore } from "../../stores/useSoundStore";
+import { v4 } from "uuid";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -86,6 +87,8 @@ function startAnimations() {
         start: "top bottom",
         end: "top top",
         scrub: true,
+        onLeave: () => gsap.set("#white-rounded", { filter: "none" }),
+        onLeaveBack: () => gsap.set("#white-rounded", { filter: "none" }),
       },
     }
   );
@@ -111,15 +114,15 @@ function startAnimations() {
       onUpdate: (self) => {
         const progress = self.progress;
         if (progress < 0.33) {
-          if (!showAboutMe.value) showAboutMe.value = true;
           if (showContact.value) showContact.value = false;
           if (showFeedback.value) showFeedback.value = false;
+          if (!showAboutMe.value) showAboutMe.value = true;
           if (scrollSection.value !== 1) st.play(st.sounds["transition-5"]);
           scrollSection.value = 1;
         } else if (progress >= 0.33 && progress < 0.66) {
           if (showAboutMe.value) showAboutMe.value = false;
-          if (!showContact.value) showContact.value = true;
           if (showFeedback.value) showFeedback.value = false;
+          if (!showContact.value) showContact.value = true;
           if (scrollSection.value !== 2) st.play(st.sounds["transition-5"]);
           scrollSection.value = 2;
         } else {
@@ -182,22 +185,22 @@ function killAnimations() {
 <template>
   <div
     id="general-container"
-    class="relative w-screen h-screen flex items-center justify-center"
+    class="relative w-[100dvw] h-[100dvh] flex items-center justify-center"
   >
     <div
       id="white-rounded"
-      class="absolute top-0 inset-x-0 bg-ghost-300 w-screen h-[100vw] flex items-center justify-center"
+      class="absolute top-0 inset-x-0 bg-ghost-300 w-[100dvw] h-[100dvh] flex items-center justify-center"
     />
-    <div id="snap-outer-container" class="absolute inset-0 w-screen h-screen">
+    <div id="snap-outer-container" class="absolute inset-0 w-[100dvw] h-[100dvh]">
       <div id="snap-inner-container" class="relative w-full h-full">
         <div id="about-me" class="absolute inset-0 w-full h-full">
-          <AboutMe v-if="showAboutMe" />
+          <AboutMe v-if="showAboutMe" :key="v4()" />
         </div>
         <div id="contact" class="absolute inset-0 w-full h-full">
-          <Contact v-if="showContact" />
+          <Contact v-if="showContact" :key="v4()" />
         </div>
         <div id="feedback" class="absolute inset-0 w-full h-full">
-          <Feedback v-if="showFeedback" />
+          <Feedback v-if="showFeedback" :key="v4()" />
         </div>
       </div>
       <SnapScrollProgress :scroll-section />

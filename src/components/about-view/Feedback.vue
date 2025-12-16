@@ -5,24 +5,26 @@ import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 import { SplitText } from "gsap/all";
 import { useSoundStore } from "../../stores/useSoundStore";
 import BackToMenu from "../BackToMenu.vue";
-import { sleep } from "../../utils";
 
 const { i18next } = useTranslation();
 const hasScored = ref<boolean | null>(null);
 const improvementSuggest = ref<string | null>(null);
 const st = useSoundStore();
+const mm = gsap.matchMedia();
 
 let tl: gsap.core.Timeline | null = null;
 let titleSplit: SplitText | null = null;
 let pSplit: SplitText | null = null;
 
 onMounted(async () => {
+  st.clearFXs();
   gsap.set("#feedback-container", { autoAlpha: 0 });
   await document.fonts.ready;
   gsap.set("#feedback-container", { autoAlpha: 1 });
   startAnimations();
   i18next.on("languageChanged", async () => {
     killAnimations();
+    st.clearFXs();
     await nextTick();
     await nextTick();
     startAnimations();
@@ -30,92 +32,138 @@ onMounted(async () => {
 });
 
 onBeforeUnmount(() => {
-  stopAllDrawingSounds();
-  st.clearFXs();
   killAnimations();
+  st.clearFXs();
+  i18next.off("languageChanged");
 });
-
-async function startDrawingSounds() {
-  await sleep(500);
-  st.play(st.sounds["streak-1"]);
-  await sleep(140);
-  st.play(st.sounds["streak-2"]);
-  await sleep(140);
-  st.play(st.sounds["streak-3"]);
-  await sleep(140);
-  st.play(st.sounds["streak-2"]);
-  await sleep(140);
-  st.play(st.sounds["streak-1"]);
-  await sleep(140);
-  st.play(st.sounds["streak-2"]);
-  await sleep(140);
-  st.play(st.sounds["streak-3"]);
-  await sleep(140);
-  st.play(st.sounds["streak-2"]);
-  await sleep(140);
-  st.play(st.sounds["streak-1"]);
-  await sleep(140);
-  st.play(st.sounds["streak-2"]);
-  await sleep(140);
-  st.play(st.sounds["streak-2"]);
-  await sleep(140);
-}
-
-function stopAllDrawingSounds() {
-  st.sounds["streak-1"].howl.stop();
-  st.sounds["streak-2"].howl.stop();
-  st.sounds["streak-3"].howl.stop();
-  st.sounds["streak-4"].howl.stop();
-}
 
 function startAnimations() {
   tl = gsap.timeline();
   titleSplit = SplitText.create("#feedback-form-title", { type: "words, chars" });
   pSplit = SplitText.create("#feedback-form-p", { type: "words, chars" });
-  startDrawingSounds();
+
+  mm.add("(min-width: 768px)", () => {
+    tl!
+      .call(
+        () => {
+          st.play(st.sounds["streak-1"]);
+        },
+        undefined,
+        0.5
+      )
+      .call(
+        () => {
+          st.play(st.sounds["streak-2"]);
+        },
+        undefined,
+        0.64
+      )
+      .call(
+        () => {
+          st.play(st.sounds["streak-3"]);
+        },
+        undefined,
+        0.78
+      )
+      .call(
+        () => {
+          st.play(st.sounds["streak-2"]);
+        },
+        undefined,
+        0.92
+      )
+      .call(
+        () => {
+          st.play(st.sounds["streak-1"]);
+        },
+        undefined,
+        1.06
+      )
+      .call(
+        () => {
+          st.play(st.sounds["streak-2"]);
+        },
+        undefined,
+        1.2
+      )
+      .call(
+        () => {
+          st.play(st.sounds["streak-3"]);
+        },
+        undefined,
+        1.34
+      )
+      .call(
+        () => {
+          st.play(st.sounds["streak-2"]);
+        },
+        undefined,
+        1.48
+      )
+      .call(
+        () => {
+          st.play(st.sounds["streak-1"]);
+        },
+        undefined,
+        1.62
+      )
+      .call(
+        () => {
+          st.play(st.sounds["streak-2"]);
+        },
+        undefined,
+        1.76
+      )
+      .call(
+        () => {
+          st.play(st.sounds["streak-2"]);
+        },
+        undefined,
+        1.9
+      );
+
+    tl!.fromTo(
+      "#feedback-picture-draw",
+      {
+        drawSVG: "0% 100%",
+      },
+      {
+        drawSVG: "0% 0%",
+        duration: 1.5,
+        ease: "linear",
+        delay: 0.5,
+      },
+      0
+    );
+  });
 
   tl.fromTo(
-    "#feedback-picture-draw",
+    titleSplit.chars,
     {
-      drawSVG: "0% 100%",
+      autoAlpha: 0,
+      y: -10,
     },
     {
-      drawSVG: "0% 0%",
-      duration: 1.5,
-      ease: "linear",
-      delay: 0.5,
-      onInterrupt: stopAllDrawingSounds,
+      autoAlpha: 1,
+      y: 0,
+      duration: 0.4,
+      stagger: () => Math.random() * 0.5,
     },
-    0
-  )
-    .fromTo(
-      titleSplit.chars,
-      {
-        autoAlpha: 0,
-        y: -10,
-      },
-      {
-        autoAlpha: 1,
-        y: 0,
-        duration: 0.4,
-        stagger: () => Math.random() * 0.5,
-      },
-      "<.1"
-    )
-    .fromTo(
-      pSplit.chars,
-      {
-        autoAlpha: 0,
-        y: -5,
-      },
-      {
-        autoAlpha: 1,
-        y: 0,
-        duration: 0.4,
-        stagger: () => Math.random() * 0.4,
-      },
-      "<.5"
-    );
+    "<.1"
+  ).fromTo(
+    pSplit.chars,
+    {
+      autoAlpha: 0,
+      y: -5,
+    },
+    {
+      autoAlpha: 1,
+      y: 0,
+      duration: 0.4,
+      stagger: () => Math.random() * 0.4,
+    },
+    "<.5"
+  );
 }
 
 function killAnimations() {
@@ -123,6 +171,7 @@ function killAnimations() {
   tl?.kill();
   titleSplit?.revert();
   pSplit?.revert();
+  mm.revert();
 }
 
 function handleSuggestSubmit(e: FormDataEvent) {
@@ -136,7 +185,7 @@ function handleSuggestSubmit(e: FormDataEvent) {
     id="feedback-container"
     class="h-screen w-screen flex items-center justify-evenly px-8"
   >
-    <div class="relative flex items-center justify-center">
+    <div class="relative hidden md:flex items-center justify-center">
       <img class="h-[500px] saturate-200" src="/image/hand-with-ideas.png" alt="" />
       <svg
         class="absolute"
@@ -153,7 +202,9 @@ function handleSuggestSubmit(e: FormDataEvent) {
         />
       </svg>
     </div>
-    <div class="flex flex-col items-center justify-center font-display text-center">
+    <div
+      class="flex flex-col items-center justify-center font-display text-center -mt-12 md:mt-0"
+    >
       <h2 id="feedback-form-title" class="text-2xl font-semibold text-void-800">
         {{ $t("Help me improve this site!") }}
       </h2>

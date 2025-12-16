@@ -6,7 +6,7 @@ import gsap from "gsap";
 const { i18next } = useTranslation();
 const interactions = ref<boolean>(false);
 let tl: gsap.core.Timeline | null = null;
-// form states
+
 const name = ref<string>();
 const email = ref<string>();
 const message = ref<string>();
@@ -130,6 +130,7 @@ onMounted(async () => {
 
 onBeforeUnmount(() => {
   killAnimations();
+  i18next.off("languageChanged");
 });
 </script>
 

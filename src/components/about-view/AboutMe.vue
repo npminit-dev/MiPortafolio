@@ -1,19 +1,17 @@
 <script setup lang="ts">
 import gsap from "gsap";
 import { useTranslation } from "i18next-vue";
-import { nextTick, onBeforeUnmount, onMounted } from "vue";
+import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 import { SplitText } from "gsap/all";
 import { useSoundStore } from "../../stores/useSoundStore";
-import { sleep } from "../../utils";
 
 const { i18next } = useTranslation();
 const st = useSoundStore();
-
+const mm = gsap.matchMedia();
 let tl: gsap.core.Timeline | null = null;
 let pSplit: SplitText | null = null;
 
 onMounted(async () => {
-  stopAllDrawingSounds();
   gsap.set("#aboutme-container", { autoAlpha: 0 });
   await document.fonts.ready;
   gsap.set("#aboutme-container", { autoAlpha: 1 });
@@ -21,6 +19,7 @@ onMounted(async () => {
 
   i18next.on("languageChanged", async () => {
     killAnimations();
+    st.clearFXs();
     await nextTick();
     await nextTick();
     startAnimations();
@@ -28,69 +27,101 @@ onMounted(async () => {
 });
 
 onBeforeUnmount(() => {
-  stopAllDrawingSounds();
+  i18next.off("languageChanged");
   killAnimations();
 });
-
-async function playDrawingSounds() {
-  await sleep(400);
-  st.play(st.sounds["streak-3"]);
-  await sleep(250);
-  st.play(st.sounds["streak-1"]);
-  await sleep(200);
-  st.play(st.sounds["streak-2"]);
-  await sleep(175);
-  st.play(st.sounds["streak-3"]);
-  await sleep(175);
-  st.play(st.sounds["streak-2"]);
-  await sleep(200);
-  st.play(st.sounds["streak-2"]);
-  await sleep(200);
-  st.play(st.sounds["streak-2"]);
-  await sleep(200);
-  st.play(st.sounds["streak-4"]);
-}
-
-function stopAllDrawingSounds() {
-  st.sounds["streak-1"].howl.stop();
-  st.sounds["streak-2"].howl.stop();
-  st.sounds["streak-3"].howl.stop();
-  st.sounds["streak-4"].howl.stop();
-}
 
 function startAnimations() {
   tl = gsap.timeline();
   pSplit = SplitText.create(".aboutme-p", { type: "lines, words" });
 
-  playDrawingSounds();
+  mm.add("(min-width: 768px)", () => {
+    tl!
+      .call(
+        function () {
+          st.play(st.sounds["streak-3"]);
+        },
+        undefined,
+        0.4
+      )
+      .call(
+        function () {
+          st.play(st.sounds["streak-1"]);
+        },
+        undefined,
+        0.65
+      )
+      .call(
+        function () {
+          st.play(st.sounds["streak-2"]);
+        },
+        undefined,
+        0.85
+      )
+      .call(
+        function () {
+          st.play(st.sounds["streak-3"]);
+        },
+        undefined,
+        1.03
+      )
+      .call(
+        function () {
+          st.play(st.sounds["streak-2"]);
+        },
+        undefined,
+        1.21
+      )
+      .call(
+        function () {
+          st.play(st.sounds["streak-2"]);
+        },
+        undefined,
+        1.41
+      )
+      .call(
+        function () {
+          st.play(st.sounds["streak-2"]);
+        },
+        undefined,
+        1.61
+      )
+      .call(
+        function () {
+          st.play(st.sounds["streak-4"]);
+        },
+        undefined,
+        1.81
+      );
+
+    tl!.fromTo(
+      "#aboutme-picture-draw",
+      {
+        drawSVG: "0% 100%",
+      },
+      {
+        drawSVG: "100% 100%",
+        duration: 1.5,
+        ease: "linear",
+        delay: 0.5,
+      },
+      0
+    );
+  });
 
   tl.fromTo(
-    "#aboutme-picture-draw",
+    "#aboutme-title",
     {
-      drawSVG: "0% 100%",
+      y: 10,
+      autoAlpha: 0,
     },
     {
-      drawSVG: "100% 100%",
-      duration: 1.5,
-      ease: "linear",
-      delay: 0.5,
-      onInterrupt: stopAllDrawingSounds,
+      y: 0,
+      autoAlpha: 1,
+      duration: 0.4,
     },
-    0
+    0.5
   )
-    .fromTo(
-      "#aboutme-title",
-      {
-        y: 10,
-        autoAlpha: 0,
-      },
-      {
-        y: 0,
-        autoAlpha: 1,
-        duration: 0.4,
-      },
-      0.5
-    )
     .fromTo(
       "#aboutme-subtitle",
       {
@@ -119,18 +150,30 @@ function startAnimations() {
 }
 
 function killAnimations() {
-  tl?.scrollTrigger?.kill();
-  tl?.kill();
-  pSplit?.revert();
+  if (tl) {
+    tl.scrollTrigger?.kill();
+    tl.kill();
+    tl = null;
+  }
+
+  if (pSplit) {
+    pSplit.revert();
+    pSplit = null;
+  }
+
+  mm.revert();
 }
 </script>
 
 <template>
   <div
     id="aboutme-container"
-    class="relative h-screen w-screen flex items-center justify-evenly px-8"
+    class="relative h-[100dvh] w-[100dvw] flex items-center justify-evenly px-8"
   >
-    <div id="aboutme-picture-container" class="flex items-center justify-center">
+    <div
+      id="aboutme-picture-container"
+      class="hidden md:flex items-center justify-center"
+    >
       <img
         id="aboutme-picture"
         class="size-96"
@@ -150,7 +193,7 @@ function killAnimations() {
       id="aboutme-text-container"
       class="flex flex-col items-center justify-center font-display text-center"
     >
-      <h2 id="aboutme-title" class="font-semibold text-2xl text-void-600">
+      <h2 id="aboutme-title" class="font-semibold text-xl md:text-2xl text-void-600">
         {{ $t("Hello! Thank you for visiting my website :)") }}
       </h2>
 
@@ -159,7 +202,7 @@ function killAnimations() {
       </p>
 
       <p
-        class="aboutme-p text-lg text-void-800 leading-tight min-w-[400px] max-w-[550px]"
+        class="aboutme-p text-lg text-void-800 leading-tight min-w-[300px] md:min-w-[400px] max-w-[550px]"
       >
         {{
           $t("My name is Jorge Balsamo, and I live in Moreno, Buenos Aires, Argentina.")
@@ -167,7 +210,7 @@ function killAnimations() {
       </p>
 
       <p
-        class="aboutme-p text-lg text-void-800 leading-tight min-w-[400px] max-w-[550px] mt-2"
+        class="aboutme-p text-lg text-void-800 leading-tight min-w-[300px] md:min-w-[400px] max-w-[550px] mt-2"
       >
         {{
           $t(
@@ -177,7 +220,7 @@ function killAnimations() {
       </p>
 
       <p
-        class="aboutme-p text-lg text-void-800 leading-tight min-w-[400px] max-w-[550px] mt-2"
+        class="aboutme-p text-lg text-void-800 leading-tight min-w-[300px] md:min-w-[400px] max-w-[550px] mt-2"
       >
         {{
           $t(
@@ -187,7 +230,7 @@ function killAnimations() {
       </p>
 
       <p
-        class="aboutme-p text-lg text-void-800 leading-tight min-w-[400px] max-w-[550px] mt-2"
+        class="aboutme-p text-lg text-void-800 leading-tight min-w-[300px] md:min-w-[400px] max-w-[550px] mt-2"
       >
         {{
           $t(

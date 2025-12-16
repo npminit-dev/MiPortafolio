@@ -25,6 +25,7 @@ onMounted(async () => {
 });
 
 onBeforeUnmount(() => {
+  i18next.off("languageChanged");
   killAnimation();
 });
 

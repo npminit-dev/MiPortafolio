@@ -44,15 +44,17 @@ onMounted(async () => {
   startAnimations();
   i18next.on("languageChanged", async () => {
     killAnimations();
+    st.clearFXs();
     await nextTick();
     startAnimations();
   });
 });
 
 onBeforeUnmount(() => {
+  i18next.off("changeLanguage");
   st.resetBackgrounds("background-2", 500);
-  st.clearFXs();
   killAnimations();
+  st.clearFXs();
 });
 
 function startAnimations() {
@@ -93,17 +95,18 @@ function killAnimations() {
 
 <template>
   <main
-    class="relative w-screen overflow-clip min-h-screen flex flex-col items-center z-10"
+    class="relative w-[100dvw] overflow-clip min-h-[100dvh] flex flex-col items-center z-10"
   >
-    <GradientDark class="fixed h-screen w-screen left-0 top-0 -z-30" />
+    <GradientDark class="fixed h-[100dvh] w-[100dvw] left-0 top-0 -z-30" />
 
     <MainTitle
       title-key="ABOUT"
       subtitle-key="[LOG: IDENTITY & CONTACT NODE — SUBJECT D-095]"
-      description-key="This interface compiles the direct channels through which subject D-095 chooses to connect with the outside field. Beyond technical identifiers, each route reflects the subject’s intent to maintain clear communication, offer transparent collaboration and sustain meaningful professional exchange. The module highlights the human layer behind the system’s operational profile."
+      description-key="This module grants controlled access to the communication layer of subject D-095. Beyond this point, the system transitions from observable metrics to intentional interaction. Proceeding forward reveals direct contact channels and feedback loops where human intent becomes part of the signal."
     >
       <template #animated-body>
         <MainTitleMorphSVG
+          class="absolute md:static"
           :paths="{
             start: 'M 169 0 L 169 0 L 169 800 L 169 800 Z',
             middle:
@@ -115,10 +118,13 @@ function killAnimations() {
       </template>
     </MainTitle>
 
-    <div id="connection-container" class="w-full flex items-center justify-center my-16">
+    <div
+      id="connection-container"
+      class="w-full flex items-center justify-center mb-16 my-8 md:my-16"
+    >
       <h3
         id="connection-text"
-        class="text-2xl font-medium font-display text-ghost-100 opacity-0"
+        class="text-lg sm:text-xl md:text-2xl font-medium font-display text-ghost-100 opacity-0"
       >
         {{ $t("[ CONNECTION WITH D-095 ESTABLISHED ]") }}
       </h3>

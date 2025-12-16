@@ -76,14 +76,16 @@ onMounted(async () => {
   i18next.on("languageChanged", () => {
     stopSounds();
     killAnimations();
+    st.clearFXs();
     startAnimations();
   });
 });
 
 onBeforeUnmount(() => {
+  i18next.off("languageChanged");
   stopSounds();
-  st.clearFXs();
   killAnimations();
+  st.clearFXs();
 });
 
 const startAnimations = () => {
@@ -221,7 +223,7 @@ const startAnimations = () => {
         <span
           ref="system"
           class="inline font-display font-normal text-ghost-100 sm:text-lg md:text-xl"
-          >{{ width <= 640 ? "" : "[SYSTEM]:" }}
+          >{{ width <= 640 ? "" : "[SYSTEM]: " }}
         </span>
         <h1
           ref="text"

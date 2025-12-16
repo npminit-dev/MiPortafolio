@@ -7,7 +7,9 @@ const { scrollSection } = defineProps<Props>();
 </script>
 
 <template>
-  <div class="absolute left-4 bottom-4 flex items-center justify-center">
+  <div
+    class="absolute left-4 bottom-4 flex items-center justify-center scale-90 md:scale-100"
+  >
     <svg
       class="z-10"
       width="60"

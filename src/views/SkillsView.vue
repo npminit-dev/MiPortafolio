@@ -62,7 +62,7 @@ const { width } = useWindowSize();
     </div>
 
     <div
-      class="w-full flex items-center justify-center flex-nowrap gap-y-2 sm:gap-y-8 md:gap-y-16 gap-x-8 sm:gap-x-16 md:gap-x-32 px-2 md:px-0"
+      class="w-full flex flex-col md:flex-row items-center justify-center flex-nowrap gap-y-2 sm:gap-y-8 md:gap-y-16 gap-x-8 sm:gap-x-16 md:gap-x-32 px-2 md:px-0"
     >
       <Tree :height="width >= 768 ? 325 : 250" />
       <Graph :height="width >= 768 ? 325 : 250" />
@@ -79,10 +79,10 @@ const { width } = useWindowSize();
     </div>
 
     <div
-      class="w-full flex items-center justify-center flex-nowrap gap-y-2 sm:gap-y-8 md:gap-y-16 gap-x-8 sm:gap-x-16 md:gap-x-32 px-2 md:px-0 mb-2 md:mb-0"
+      class="w-full flex flex-col md:flex-row items-center justify-center flex-nowrap gap-y-2 sm:gap-y-8 md:gap-y-16 gap-x-8 sm:gap-x-16 md:gap-x-32 px-2 md:px-0 mb-2 md:mb-0"
     >
       <Intersection :height="width >= 768 ? 325 : 250" />
-      <POO :height="width >= 768 ? 450 : 250" />
+      <POO :height="width >= 768 ? 450 : 325" />
     </div>
 
     <Langs />

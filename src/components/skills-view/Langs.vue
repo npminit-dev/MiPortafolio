@@ -51,8 +51,8 @@ onMounted(() => {
   gsap.to("#motion-circle", {
     motionPath: {
       path: "#motion-path",
-      alignOrigin: [0, 0],
-      autoRotate: true,
+      alignOrigin: [1, 1],
+      autoRotate: false,
       start: 0,
       end: 1,
     },
@@ -64,7 +64,7 @@ onMounted(() => {
     },
     ease: "none",
     transformOrigin: "center center",
-    rotateY: 9000,
+    rotateZ: 9000,
   });
 });
 
@@ -234,7 +234,7 @@ onBeforeUnmount(() => {
 
             <div
               id="motion-circle"
-              class="absolute h-8 w-8 rounded-full border-[1px] bg-ghost-300 border-ghost-300 transform-3d -z-10"
+              class="absolute h-8 w-8 border-[1px] border-ghost-300 transform-3d -z-10"
             ></div>
           </div>
         </div>

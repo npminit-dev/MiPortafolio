@@ -10,7 +10,6 @@ interface Props {
   titleKey: string;
   subtitleKey: string;
   descriptionKey: string;
-  showCircle?: boolean;
   descriptionWidth?: string;
   spinningImage?: string;
   imageSize?: number;
@@ -18,7 +17,6 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  showCircle: true,
   descriptionWidth: "500px",
   spinningImage: "/image/dashed-circle-hd.png",
   imageSize: 1000,
@@ -29,16 +27,16 @@ const { i18next } = useTranslation();
 const st = useSoundStore();
 const { width } = useWindowSize();
 
+let titleText: SplitText | null = null;
+let logText: SplitText | null = null;
+let pText: SplitText | null = null;
 let tl: gsap.core.Timeline | null = null;
-let splitInstances: SplitText[] = [];
 
 async function startAnimation() {
-  const titleText = new SplitText("#animated-title", { type: "chars" });
-  const logText = new SplitText("#animated-subtitle", { type: "chars" });
-  const pText = new SplitText("#animated-description", { type: "chars, lines" });
+  titleText = new SplitText("#animated-title", { type: "chars" });
+  logText = new SplitText("#animated-subtitle", { type: "chars" });
+  pText = new SplitText("#animated-description", { type: "chars, lines" });
   const circle = document.getElementById("rotating-circle");
-
-  splitInstances = [titleText, logText, pText];
 
   tl = gsap.timeline({
     scrollTrigger: {
@@ -138,17 +136,18 @@ function killAnimation() {
     st.sounds["loading-1"].howl.stop();
   }
 
-  splitInstances.forEach(function (instance) {
-    instance.revert();
-  });
-  splitInstances = [];
+  titleText?.revert();
+  pText?.revert();
+  logText?.revert();
 }
 
 onMounted(async function () {
   await document.fonts.ready;
   startAnimation();
   i18next.on("languageChanged", async () => {
+    st.clearFXs();
     killAnimation();
+    await nextTick();
     await nextTick();
     await nextTick();
     startAnimation();
@@ -156,8 +155,9 @@ onMounted(async function () {
 });
 
 onBeforeUnmount(function () {
-  st.clearFXs();
+  i18next.off("languageChanged");
   killAnimation();
+  st.clearFXs();
 });
 </script>
 
@@ -183,10 +183,6 @@ onBeforeUnmount(function () {
         class="font-display font-normal text-ghost-200 text-lg sm:text-xl my-4 text-left opacity-0"
       >
         {{ $t(props.subtitleKey) }}
-        <div
-          v-if="showCircle"
-          class="inline-block border-[1px] border-ghost-100 h-3 w-3 rounded-full opacity-0"
-        ></div>
       </h2>
       <p
         id="animated-description"
@@ -204,11 +200,16 @@ onBeforeUnmount(function () {
         id="rotating-circle"
         :src="props.spinningImage"
         :class="`absolute opacity-${props.imageOpacity}`"
-        :style="{ width: props.imageSize, height: props.imageSize }"
+        :style="{
+          width: props.imageSize,
+          height: props.imageSize,
+          minWidth: '550px',
+          minHeight: '550px',
+        }"
         alt=""
       />
       <div
-        class="absolute border-[1px] border-ghost-100 rounded-full"
+        class="absolute border-[1px] border-ghost-100 rounded-full max-w-[675px] max-h-[675px] sm:max-h-[800px] sm:max-w-[800px] md:max-h-none md:max-w-none"
         :style="{
           height: `${props.imageSize + 200}px`,
           width: `${props.imageSize + 200}px`,
@@ -230,5 +231,17 @@ onBeforeUnmount(function () {
   );
   mask-size: 100% 100%;
   mask-repeat: no-repeat;
+
+  @media screen and (max-width: 767px) {
+    mask-image: linear-gradient(
+      to right,
+      transparent 10%,
+      black 60%,
+      black 40%,
+      transparent 90%
+    );
+    mask-size: 100% 100%;
+    mask-repeat: no-repeat;
+  }
 }
 </style>

@@ -133,6 +133,7 @@ onMounted(async () => {
     prevSelected.value = null;
     selected.value = null;
     killAnimations();
+    st.clearFXs();
     await nextTick();
     await nextTick();
     startAnimations();
@@ -140,6 +141,7 @@ onMounted(async () => {
 });
 
 onBeforeUnmount(() => {
+  i18next.off("languageChanged");
   st.clearFXs();
   killAnimations();
 });

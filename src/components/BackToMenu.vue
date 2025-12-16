@@ -92,6 +92,7 @@ onMounted(async () => {
   startAnimations();
   i18next.on("languageChanged", async () => {
     killAnimations();
+    st.clearFXs();
     await nextTick();
     await nextTick();
     startAnimations();
@@ -99,8 +100,9 @@ onMounted(async () => {
 });
 
 onBeforeUnmount(() => {
-  st.clearFXs();
+  i18next.off("languageChanged");
   killAnimations();
+  st.clearFXs();
 });
 
 function handleHover() {

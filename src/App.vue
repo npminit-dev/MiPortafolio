@@ -30,10 +30,10 @@ onMounted(() => {
       </div>
     </div>
     <PageTransition />
-    <div class="fixed right-3 top-3">
+    <div class="fixed right-3 top-3 z-10">
       <LangSwitcher />
     </div>
-    <div class="fixed right-2 bottom-2">
+    <div class="fixed right-2 bottom-2 z-10">
       <SoundSwitcher />
     </div>
   </div>
